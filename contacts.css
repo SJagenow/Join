@@ -156,7 +156,7 @@
 
 #contact_overview_mail {
     color: #007CEE;
-  
+
 
 }
 
@@ -221,6 +221,16 @@
     font-weight: 700;
     line-height: 120%;
     /* 73.2px */
+}
+
+[id^="contact_list_mail"] {
+    color: #007CEE;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 19.2px */
 }
 
 .contact_overview {
