@@ -5,7 +5,7 @@ body {
 .menu {
     display: flex;
     width: 232px;
-    height: 100vh;
+    height: 88vh;
     padding: 64px 0px;
     flex-direction: column;
     justify-content: space-between;
