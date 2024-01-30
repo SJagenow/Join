@@ -44,22 +44,35 @@
     border-radius: 10px;
     border: 1px solid #2A3647;
     background: #2A3647;
+    color: white;
+    color: var(--white, #FFF);
+font-family: Inter;
+font-size: 21px;
+font-style: normal;
+font-weight: 700;
+line-height: 120%
+
 }
 
 .input_button_container {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 32px;
+padding: 8px 16px;
+justify-content: center;
+align-items: center;
+gap: 4px;
+border-radius: 10px;
+border: 1px solid #2A3647;
+
+background: #2A3647;
 }
 
-.smal_midlane {
+.smal_midlane_main_container {
     display: flex;
-    width: 1208px;
-    padding: 0px 64px;
+    width: 1168px;
+    padding: 0px 296px;
     justify-content: space-between;
     align-items: flex-start;
-    padding-left: 232px;
+    margin-bottom: 16px;
     color: var(--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
@@ -68,7 +81,7 @@
     line-height: 120%;
 }
 
-.smal_midlane button {
+.smal_midlane_main_container button {
     display: flex;
     width: 24px;
     height: 24px;
@@ -81,14 +94,16 @@
     border: 2px solid var(--Version-2-main-color, #2A3647);
 }
 
-.midlane_flex {
+.midlane_flex_button {
     display: flex;
-    width: 244px;
+    width: 276px;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-    padding-left: 72px;
+    
 }
+
+
 
 .midlane_last_no_button {
     display: flex;
@@ -111,15 +126,18 @@
     overflow-y: auto;
 }
 
-.no_todo {
+.todo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
     flex: 1 0 0;
     align-self: stretch;
-    border: 1px solid black;
+    
+    
 }
+
+
 
 .no_task_container {
     display: flex;
@@ -151,7 +169,7 @@
     align-items: flex-start;
     gap: 16px;
     align-self: stretch;
-    border: 1px solid black;
+  
 
 }
 
@@ -165,6 +183,5 @@
     gap: 10px;
     border-radius: 24px;
     background: var(--white, #FFF);
-
-    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
 }
