@@ -2,7 +2,6 @@ body {
     margin: 0;
 }
 
-/* Moin Großmeister */
 .menu {
     display: flex;
     width: 232px;
@@ -12,9 +11,7 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-
     background: #2A3647;
-
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
     color: #CDCDCD;
     font-family: Inter;
@@ -25,7 +22,6 @@ body {
 
 }
 
-/*nabend*/
 header {
     display: flex;
     width: 1208px;
@@ -48,7 +44,6 @@ header {
     flex-direction: column;
 }
 
-
 nav {
     display: flex;
     flex-direction: column;
@@ -56,7 +51,6 @@ nav {
     height: 229px;
     width: 232px;
 }
-
 
 .menu a {
     color: white;
@@ -89,8 +83,6 @@ nav {
     align-self: stretch;
 
 }
-
-
 
 .menu_link_container {
     display: flex;
