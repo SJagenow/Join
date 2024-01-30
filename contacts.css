@@ -238,10 +238,10 @@
     width: 723px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: flex-start;
     padding-left: 112px;
-    padding-bottom: 456px;
+    /* padding-bottom: 456px; */
 }
 
 .contact_overview_header {
