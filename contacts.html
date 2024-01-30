@@ -18,6 +18,43 @@
     </div>
     <div id="contact_list"> <!-- hier später kontakte nach alphabet rendern -->
     </div>
+
+    <div id="add_contact_overlay">
+        <div class="left_side_add_contact_overlay">
+            <img src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
+            <div class="add_contact_overlay_text_container">
+                <span>Edit contact</span>
+            </div>
+            <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
+        </div>
+        <div class="right_side_add_contact_overlay">
+            <div id="add_contact_close_container">
+                <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
+            </div>
+            <svg id="contact_initials_container" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <circle cx="60" cy="60" r="60" fill="#FFC700"/>
+            </svg>
+            <form action="">
+                <div class="input_container">
+                    <input type="text">
+                    <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
+                </div>
+                <div class="input_container">
+                    <input type="text">
+                    <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
+                </div>
+                <div class="input_container">
+                    <input type="text">
+                    <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
+                </div>
+            </form>
+            <button id="contact_delete_button">Delete</button>
+                <button id="contact_save_button">
+                    Save <img src="./assets/contactbook/icons_contactbook/check.svg" alt="">
+                </button>
+        </div>
+
+    </div>
 </body>
 
 </html>

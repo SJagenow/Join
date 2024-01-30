@@ -63,3 +63,125 @@
     gap: 10px;
     align-self: stretch;
 }
+
+#add_contact_overlay {
+    width: 1212px;
+    height: 592px;
+    border-radius: 30px;
+    background: #FFF;
+    margin-left: 32px;
+    display: flex;
+}
+
+#add_contact_overlay span {
+    color: var(--white, #FFF);
+    font-family: Inter;
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    /* 73.2px */
+}
+
+.left_side_add_contact_overlay {
+    display: inline-flex;
+    height: 594px;
+    padding: 66px 46px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+    background: var(--Version-2-main-color, #2A3647);
+    min-width: 453px;
+    overflow: hidden;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.add_contact_overlay_text_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+#contact_delete_button {
+    display: flex;
+    padding: 15px 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--Version-2-main-color, #2A3647);
+    color: var(--Version-2-main-color, #2A3647);
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 25.2px */
+}
+
+#contact_save_button {
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 10px;
+    background: #2A3647;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    /* 25.2px */
+}
+
+#contact_save_button img {
+    height: 24px;
+    width: 24px;
+}
+
+#add_contact_close_container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.right_side_add_contact_overlay form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.right_side_add_contact_overlay input {
+    display: flex;
+    width: 380px;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.input_container {
+    display: flex;
+    width: 422px;
+    padding: 13px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--Style, #D1D1D1);
+    /* var(--Ligth-blue, #29ABE2) when selected border goes this color */
+    background: #FFF;
+}
+
+.input_container img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
