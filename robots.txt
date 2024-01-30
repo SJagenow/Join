@@ -1,0 +1,7 @@
+# test
+
+User-agent: *
+Disallow: /img/
+Disallow: /Downloads/
+Disallow: /impressum.html
+Disallow: /datenschutz.html
