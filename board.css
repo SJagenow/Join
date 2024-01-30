@@ -87,6 +87,7 @@
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+    padding-left: 72px;
 }
 
 .midlane_last_no_button {
@@ -101,12 +102,13 @@
 .botlane {
     display: flex;
     width: 1208px;
-    height: 688px;
+    height: 600px;
     padding: 0px 64px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
-    padding-left: 232px;
+    padding-left: 296px;
+    overflow-y: auto;
 }
 
 .no_todo {
