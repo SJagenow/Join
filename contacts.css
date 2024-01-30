@@ -107,6 +107,102 @@
     align-self: stretch;
 }
 
+#contact_overview_top {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+
+.contact_overview_name_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.contact_little_icon_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: var(--Version-2-main-color, #2A3647);
+    font-family: Inter;
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 19.2px */
+}
+
+.contact_little_icon_container img {
+    height: 24px;
+    width: 24px;
+}
+
+.contact_overview_footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 19.2px */
+}
+
+#contact_overview_mail {
+    color: #007CEE;
+  
+
+}
+
+#contact_overview_phone {
+    color: #000;
+
+}
+
+#contact_information {
+    display: flex;
+    width: 207px;
+    height: 74px;
+    flex-direction: column;
+    justify-content: center;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 24px */
+}
+
+.contact_overview_footer_container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+#contact_overview_name {
+    color: #000;
+    font-family: Inter;
+    font-size: 47px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%;
+    /* 56.4px */
+}
+
+.contact_information_container {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 21px;
+}
+
 #add_contact_overlay {
     width: 1212px;
     height: 592px;
@@ -129,7 +225,11 @@
 .contact_overview {
     background-color: rgb(246, 247, 248);
     width: 50%;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-left: 112px;
 }
 
 .contact_overview_header {
@@ -149,7 +249,7 @@
     /* 73.2px */
 }
 
-.contact_overview span {
+.contact_overview_header span {
     color: #2A3647;
     font-family: Inter;
     font-size: 27px;

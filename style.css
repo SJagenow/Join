@@ -58,6 +58,10 @@ header {
     padding: 0px 32px 0px 40px;
 }
 
+.gap16{
+    gap: 16px;
+}
+
 nav {
     display: flex;
     flex-direction: column;
