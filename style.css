@@ -1,7 +1,7 @@
 body{
     margin: 0;
 }
-/* Moin */
+/* Moin Meister */
 .menu {
     display: flex;
     width: 232px;
@@ -23,7 +23,7 @@ body{
     line-height: 120%; 
   
 }
-
+/*nabend*/
 header{
     display: flex;
     width: 1208px;
