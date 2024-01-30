@@ -5,7 +5,7 @@ body{
 .menu {
     display: flex;
     width: 232px;
-    height: 1024px;
+    height: 100vh;
     padding: 64px 0px;
     flex-direction: column;
     justify-content: space-between;
@@ -88,9 +88,7 @@ nav{
     
 }
 
-.menu_footer a{
 
-}
 
 .menu_link_container{
     display: flex;
