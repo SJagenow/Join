@@ -5,15 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="board.css">
     <script src="script.js"></script>
     <title>Document</title>
 </head>
 
 <body onload="init()">
-    <div class="flex">
+    <div class="flex header_container">
         <div w3-include-html="templates/menu.html"></div>
-    <div class="header" w3-include-html="templates/header.html"></div>
+    <div w3-include-html="templates/header.html"></div>
     </div>
+    
+    <div class="board_top">
+        <div class="board_h1_button_container">
+            <h1>Board</h1>
+           <div class="input_button_container"><input  placeholder="Find Task"  type="text" >
+            <button>Add task +</button></div>
+
+
+        </div>
+      
+    </div>
+    
+    <div class="smal_midlane">
+        <div class="midlane_flex">To do <button>+</button></div>
+        <div class="midlane_flex">In progress <button>+</button></div>
+        <div class="midlane_flex">Await feedback <button>+</button></div>
+        <div class="midlane_last_no_button">Done</div>
+    </div>
+
+     <div class="botlane">
+     
+     
+       <div class="no_todo"><div class="no_task_container"> <span>no tasks Todo</span></div></div>
+
+       <div class="progress_await_done"><div class="progress_await_container">
+
+       </div></div>
+
+       <div class="progress_await_done"><div class="progress_await_container">
+
+       </div></div>
+
+       <div class="progress_await_done"><div class="progress_await_container">
+
+       </div></div>  
+
+
+
+    </div>
+
 </body>
 
 </html>
