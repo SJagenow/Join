@@ -1,5 +1,6 @@
 .body {
     margin: 0;
+    background-color: rgb(246, 247, 248);
 }
 
 #contact_list {
@@ -224,13 +225,13 @@
 
 .contact_overview {
     background-color: rgb(246, 247, 248);
-    width: 50%;
+    width: 723px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
     padding-left: 112px;
-    padding-bottom: 600px;
+    padding-bottom: 456px;
 }
 
 .contact_overview_header {
