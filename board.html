@@ -13,20 +13,21 @@
 <body onload="init()">
     <div class="flex header_container">
         <div w3-include-html="templates/menu.html"></div>
-    <div w3-include-html="templates/header.html"></div>
+        <div w3-include-html="templates/header.html"></div>
     </div>
-    
+
     <div class="board_top">
         <div class="board_h1_button_container">
             <h1>Board</h1>
-           <div class="input_button_container"><input  placeholder="Find Task"  type="text" >
-            <button>Add task +</button></div>
+            <div class="input_button_container"><input placeholder="Find Task" type="text">
+                <button>Add task +</button>
+            </div>
 
 
         </div>
-      
+
     </div>
-    
+
     <div class="smal_midlane">
         <div class="midlane_flex">To do <button>+</button></div>
         <div class="midlane_flex">In progress <button>+</button></div>
@@ -34,22 +35,36 @@
         <div class="midlane_last_no_button">Done</div>
     </div>
 
-     <div class="botlane">
-     
-     
-       <div class="no_todo"><div class="no_task_container"> <span>no tasks Todo</span></div></div>
+    <div class="botlane">
 
-       <div class="progress_await_done"><div class="progress_await_container">
 
-       </div></div>
+        <div class="no_todo">
+            <div class="no_task_container"> <span>no tasks Todo</span>
+                <div id="todo_Content"></div>
+            </div>
+        </div> // hier komm später todos rein
 
-       <div class="progress_await_done"><div class="progress_await_container">
+        <div class="progress_await_done">
+            <div class="progress_await_container">
 
-       </div></div>
+                <div id="board_Content_In_Progress"></div>
+            </div>
+        </div> /*hier muss später user Story Kochwelt rein aus der inprogress spalte*/
 
-       <div class="progress_await_done"><div class="progress_await_container">
+        <div class="progress_await_done">
+            <div class="progress_await_container">
 
-       </div></div>  
+                <div id="board_Content_Await"></div>
+            </div>
+        </div> /*hier muss später alles aus der await feedback spalte rein
+
+        <div class="progress_await_done">
+            <div class="progress_await_container">
+
+
+                <div id="board_Content_Done"></div> // hier kommt später alles aus der done spalte rein
+            </div>
+        </div>
 
 
 
