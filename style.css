@@ -48,6 +48,16 @@ header {
     flex-direction: column;
 }
 
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paddingLR64{
+    padding: 0px 32px 0px 40px;
+}
+
 nav {
     display: flex;
     flex-direction: column;

@@ -28,31 +28,49 @@
             <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
         </div>
         <div class="right_side_add_contact_overlay">
-            <div id="add_contact_close_container">
-                <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
+
+            <div class="center">
+                <div id="contact_initials_container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                        <circle id="initials" cx="60" cy="60" r="60" fill="#FF7A00" />          <!-- we have to check if you can render the initials into the svg circle -->
+                    </svg>
+                </div>
             </div>
-            <svg id="contact_initials_container" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
-                <circle cx="60" cy="60" r="60" fill="#FFC700"/>
-            </svg>
-            <form action="">
-                <div class="input_container">
-                    <input type="text">
-                    <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
+
+            <div class="center">
+                <div class="edit_formular_container">
+                    <div id="add_contact_close_container">
+                        <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
+                    </div>
+                    <form action="">
+                        <div class="input_container">
+                            <input type="text">
+                            <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
+                        </div>
+                        <div class="input_container">
+                            <input type="text">
+                            <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
+                        </div>
+                        <div class="input_container">
+                            <input type="text">
+                            <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
+                        </div>
+                    </form>
+                    <div class="edit_contact_button_container">
+                        <button id="contact_delete_button">
+                            Delete
+                        </button>
+                        <button id="contact_save_button">
+                            Save <img src="./assets/contactbook/icons_contactbook/check.svg" alt="">
+                        </button>
+                    </div>
                 </div>
-                <div class="input_container">
-                    <input type="text">
-                    <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
-                </div>
-                <div class="input_container">
-                    <input type="text">
-                    <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
-                </div>
-            </form>
-            <button id="contact_delete_button">Delete</button>
-                <button id="contact_save_button">
-                    Save <img src="./assets/contactbook/icons_contactbook/check.svg" alt="">
-                </button>
+                
+                
+            </div>
         </div>
+
+
 
     </div>
 </body>
