@@ -19,6 +19,8 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
+    z-index: 999;
+    position: relative;
 }
 
 header {
