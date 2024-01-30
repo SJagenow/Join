@@ -1,6 +1,7 @@
-body{
+body {
     margin: 0;
 }
+
 /* Moin Großmeister */
 .menu {
     display: flex;
@@ -11,7 +12,7 @@ body{
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-   
+
     background: #2A3647;
 
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
@@ -20,11 +21,12 @@ body{
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 120%; 
-  
+    line-height: 120%;
+
 }
+
 /*nabend*/
-header{
+header {
     display: flex;
     width: 1208px;
     padding: 20px 40px 20px 116px;
@@ -34,11 +36,11 @@ header{
 }
 
 .header span {
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; 
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
 }
 
 .column {
@@ -47,12 +49,12 @@ line-height: 24px;
 }
 
 
-nav{
+nav {
     display: flex;
     flex-direction: column;
     gap: 15px;
     height: 229px;
-    width: 232px; 
+    width: 232px;
 }
 
 
@@ -61,23 +63,23 @@ nav{
     text-decoration: none;
 }
 
-.menu img{
-    height:121.97px;
-    width:100.03px;
+.menu img {
+    height: 121.97px;
+    width: 100.03px;
 
 }
 
-#menu_icon{
+#menu_icon {
     height: 25px;
     width: 25px;
 
 }
 
-.flex{
+.flex {
     display: flex;
 }
 
-.menu_footer{
+.menu_footer {
     display: flex;
     padding: 243px 0px 0px 52px;
     flex-direction: column;
@@ -85,12 +87,12 @@ nav{
     align-items: flex-start;
     gap: 4px;
     align-self: stretch;
-    
+
 }
 
 
 
-.menu_link_container{
+.menu_link_container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -100,29 +102,31 @@ nav{
     gap: 8px;
 }
 
-.hw30{
+.hw30 {
     height: 30px;
     width: 30px;
 
 }
-.menu_footer_link{
+
+.menu_footer_link {
     display: flex;
-padding: 8px;
-align-items: center;
-gap: 8px;
-}
-.header_icon_container{
-    display: flex;
-align-items: center;
-gap: 16px;
+    padding: 8px;
+    align-items: center;
+    gap: 8px;
 }
 
-#help_icon{
+.header_icon_container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#help_icon {
     height: 32px;
     width: 32px;
 }
 
-#sm_icon{
+#sm_icon {
     height: 64px;
     width: 64px;
 }
