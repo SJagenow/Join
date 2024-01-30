@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="contacts.css">
+    <link rel="stylesheet" href="fonts.css">
     <script src="script.js"></script>
     <script src="contacts.js"></script>
     <title>Kanban Project Management Tool</title>
@@ -16,27 +17,40 @@
         <div w3-include-html="templates/menu.html"></div>
         <div w3-include-html="templates/header.html"></div>
     </div>
-    <div id="contact_list"> <!-- hier später kontakte nach alphabet rendern -->
+
+    <div class="flex">
+        <div id="contact_list"> <!-- hier später kontakte nach alphabet rendern -->
+        </div>
+        <div class="contact_overview">
+            <div class="contact_overview_header">
+                <h1>Contacts</h1>
+                <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_vertikal.svg" alt="">
+                <span>Better with a team</span>
+            </div>
+        </div>
     </div>
+
 
     <div id="add_contact_overlay">
         <div class="left_side_add_contact_overlay">
             <img src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
             <div class="add_contact_overlay_text_container">
-                <span>Edit contact</span>
+                <span id="add_contact_headline">Add contact</span> <!-- later you can render 'Edit contact' here -->
+                <span id="under_headline">Tasks are better with a team!</span>
+                <!-- later you can 'display: none' it to remove it for 'Edit contact overlay' -->
             </div>
             <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
         </div>
         <div class="right_side_add_contact_overlay">
-
             <div class="center">
                 <div id="contact_initials_container">
+                    <!-- later you can render 'profilepicture or initials here' here -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
-                        <circle id="initials" cx="60" cy="60" r="60" fill="#FF7A00" />          <!-- we have to check if you can render the initials into the svg circle? -->
+                        <circle id="initials" cx="60" cy="60" r="60" fill="#FF7A00" />
+                        <!-- we have to check if you can render the initials into the svg circle? -->
                     </svg>
                 </div>
             </div>
-
             <div class="center">
                 <div class="edit_formular_container">
                     <div id="add_contact_close_container">
@@ -44,15 +58,15 @@
                     </div>
                     <form action="">
                         <div class="input_container">
-                            <input type="text">
+                            <input type="text" placeholder="Name ">
                             <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
                         </div>
                         <div class="input_container">
-                            <input type="text">
+                            <input type="text" placeholder="E-Mail ">
                             <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
                         </div>
                         <div class="input_container">
-                            <input type="text">
+                            <input type="text" placeholder="Phone ">
                             <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
                         </div>
                     </form>
@@ -65,14 +79,11 @@
                         </button>
                     </div>
                 </div>
-                
-                
             </div>
         </div>
-
-
-
     </div>
 </body>
 
 </html>
+
+
