@@ -30,6 +30,10 @@ header {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
 }
 
+.header_container{
+    height: 104px;
+}
+
 
 .header span {
     font-family: Inter;
@@ -57,16 +61,14 @@ nav {
     text-decoration: none;
 }
 
-.menu img {
-    height: 121.97px;
-    width: 100.03px;
-
+.menu img{
+    height:121.97px;
+    width:100.03px;
 }
 
 #menu_icon {
     height: 25px;
     width: 25px;
-
 }
 
 .flex {
