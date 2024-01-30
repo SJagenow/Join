@@ -2,6 +2,38 @@ body {
     margin: 0;
 }
 
+/* allround classes here! */
+
+.hw30 {
+    height: 30px;
+    width: 30px;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paddingLR64{
+    padding: 0px 32px 0px 40px;
+}
+
+.gap16{
+    gap: 16px;
+}
+
+/*---------------*/
+
 .menu {
     display: flex;
     width: 232px;
@@ -45,25 +77,6 @@ header {
     line-height: 24px;
 }
 
-.column {
-    display: flex;
-    flex-direction: column;
-}
-
-.center{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.paddingLR64{
-    padding: 0px 32px 0px 40px;
-}
-
-.gap16{
-    gap: 16px;
-}
-
 nav {
     display: flex;
     flex-direction: column;
@@ -87,9 +100,6 @@ nav {
     width: 25px;
 }
 
-.flex {
-    display: flex;
-}
 
 .menu_footer {
     display: flex;
@@ -110,12 +120,6 @@ nav {
     height: 46px;
     padding: 8px 56px 8px 56px;
     gap: 8px;
-}
-
-.hw30 {
-    height: 30px;
-    width: 30px;
-
 }
 
 .menu_footer_link {

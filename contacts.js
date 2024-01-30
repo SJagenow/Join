@@ -1,6 +1,5 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
-
 function renderContactList() {
     document.getElementById('contact_list').innerHTML = ``;
     document.getElementById('contact_list').innerHTML = `
@@ -30,8 +29,6 @@ function renderContactList() {
             </div>
         </div>
     </div>
-    
     `;
     }
-
 }
