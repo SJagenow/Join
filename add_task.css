@@ -1,0 +1,19 @@
+h1 {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+}
+
+.header-add-task0 {
+    position: absolute;
+    top: 0;
+    left: 232px;
+}
+
+.main-container {
+    margin-top: 110px;
+    margin-left: 96px;
+}

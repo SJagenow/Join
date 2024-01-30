@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Task</title> 
+    <title>Add Task</title>
     <script src="script.js"></script>
     <script src="add_task.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="add_task.css">
+    <link rel="stylesheet" href="fonts.css">
 </head>
-<body>
-    <header w3-include-html="templates/header.html"></header>
-    <menu w3-include-html="templates/menu.html"></menu>
+
+<body onload="init()">
+    <div class="flex">
+        <div w3-include-html="templates/menu.html"></div>
+        <div class="main">
+            <div class="header-add-task" w3-include-html="templates/header.html"></div>
+            <main class="main-container">
+                <h1>Add Task</h1>
+            </main>
+        </div>
+    </div>
 </body>
+
 </html>
