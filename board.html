@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet" href="./assets/style/board.css">
     <link rel="stylesheet" href="fonts.css">
     <script src="script.js"></script>
     <script src="board.js"></script>
@@ -17,20 +17,22 @@
         <div w3-include-html="templates/menu.html"></div>
         <div w3-include-html="templates/header.html"></div>
     </div>
-
+   
     <div class="board_top">
         <div class="board_h1_button_container">
             <h1>Board</h1>
-            <div class="input_button_container"><div><input placeholder="Find Task "  type="text">
+            <div class="input_button_container">
+                <div class="vector">
+                    <input placeholder="Find Task" type="text" >
+                    <div>|</div>
                 </div>
-                <button>Add task  <b>+</b></button>
+
+                <button>Add task <b>+</b></button>
             </div>
-
-
         </div>
 
     </div>
-
+    <div class="postion_mid-bot-container">
     <div class="smal_midlane_main_container">
         <div class="midlane_flex_button">To do <button>+</button></div>
         <div class="midlane_flex_button">In progress <button>+</button></div>
@@ -72,6 +74,70 @@
 
 
     </div>
+
+</div>
+
+
+
+
+    <div class="user_story_dialog_background">
+        <div class="user_story_dialog">
+
+
+            <div class="user_story_label_x_contrainer">
+                <div class="user_story">User Story</div>
+                <button>X</button>
+            </div>
+            <div class="user_story_headline">
+
+                <h1>Kochwelt Page & Recipe Recommender</h1>
+            </div>
+            <div class="user_story_description">Build start page with recipe recommendation.</div>
+            <div class="user_story_date">
+                <div class="story_date">Due date:</div>
+                <div class="user_date">variable(datum)</div>
+            </div>
+            <div class="user_story_priority">
+                <div class="story_priority">Priority:</div>
+                <div class="user_priority">Variable(prio)</div>
+
+            </div>
+
+            <div class="assigned_to_members_container">
+                <div class="assigned_to">Assigned To:</div>
+                <div class="assinged_member">
+                    <div id="member_content">
+                        <div>member</div>
+                        <div>member</div>
+                        <div>member</div>
+                    </div>
+                </div>
+            </div>
+            <div class="user_story_Subtasks">
+                <div>Subtasks</div>
+                <div class="subtask_center"><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe Recommendation</span></div>
+                <div class="subtask_center"> <img src="./assets/img/Check button.png" alt=""> <span>Start Page Layout</span></div>
+            </div>
+
+            <div class="user_story_delete_edit">
+                <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt=""><div>Delete</div></button></div>
+                <div class="stripe"></div>
+                <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt=""><div>Edit</div></button></div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
 
 </body>
 
