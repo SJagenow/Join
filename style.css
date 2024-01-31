@@ -46,10 +46,10 @@ h1 {
 .menu {
     display: flex;
     width: 232px;
-    height: 88vh;
-    padding: 64px 0px;
+    height: 100vh;
+    /* padding: 64px 0px; */
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-shrink: 0;
     background: #2A3647;
@@ -65,11 +65,13 @@ h1 {
 
 header {
     display: flex;
-    width: 1208px;
+    width: 100vw;
     padding: 20px 40px 20px 116px;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
+    position: relative;
+    z-index: 999;
 }
 
 .header_container{
@@ -150,4 +152,20 @@ nav {
 #sm_icon {
     height: 64px;
     width: 64px;
+}
+
+@media(min-width:1440px){
+
+    header{
+        width: 1208px;
+    }
+
+}
+
+@media(max-width:1439px){
+
+    header{
+        
+    }
+
 }
