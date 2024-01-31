@@ -21,6 +21,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    
 }
 
 .board_h1_button_container input {
@@ -38,6 +39,8 @@
     background-repeat: no-repeat;
     background-position: right;
     background-size: 32px 32px;
+    border: 1px solid #2A3647;
+    
 
     
 }
@@ -69,9 +72,9 @@ justify-content: center;
 align-items: center;
 gap: 4px;
 border-radius: 10px;
-border: 1px solid #2A3647;
 
-background: #2A3647;
+
+
 }
 
 .smal_midlane_main_container {
