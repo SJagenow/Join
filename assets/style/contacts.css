@@ -1,16 +1,20 @@
 .body {
     margin: 0;
     background-color: rgb(246, 247, 248);
+    font-family: 'Inter', sans-serif;
 }
 
 #contact_list {
     display: flex;
-    padding: 32px 32px 0px 286px;
+    padding: 32px 0px 0px 264px;
     flex-direction: column;
     align-items: flex-start;
     overflow-y: auto;
+    overflow-x: hidden;
     height: 88vh;
+    width: 464px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
+    /* margin-left: 232px; */
 }
 
 #contact_list button {
@@ -25,7 +29,6 @@
     border: 1px solid #2A3647;
     background: #2A3647;
     color: var(--white, #FFF);
-    font-family: Inter;
     font-size: 21px;
     font-style: normal;
     font-weight: 700;
@@ -55,7 +58,6 @@
     gap: 8px;
     align-self: stretch;
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -66,7 +68,6 @@
 [id^="contact_list_names"] {
 
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -128,7 +129,6 @@
     align-items: center;
     gap: 8px;
     color: var(--Version-2-main-color, #2A3647);
-    font-family: Inter;
     font-size: 16px !important;
     font-style: normal;
     font-weight: 400;
@@ -146,7 +146,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 22px;
-    font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -156,8 +155,6 @@
 
 #contact_overview_mail {
     color: #007CEE;
-
-
 }
 
 #contact_overview_phone {
@@ -172,7 +169,6 @@
     flex-direction: column;
     justify-content: center;
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -189,7 +185,6 @@
 
 #contact_overview_name {
     color: #000;
-    font-family: Inter;
     font-size: 47px;
     font-style: normal;
     font-weight: 500;
@@ -215,7 +210,7 @@
 
 #add_contact_headline {
     color: var(--white, #FFF);
-    font-family: Inter;
+
     font-size: 61px;
     font-style: normal;
     font-weight: 700;
@@ -225,7 +220,7 @@
 
 [id^="contact_list_mail"] {
     color: #007CEE;
-    font-family: Inter;
+ 
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -234,16 +229,14 @@
 }
 
 .contact_overview {
-    background-color: rgb(246, 247, 248);
-    width: 723px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
-    padding-left: 112px;
     /* padding-bottom: 456px; */
+    padding: 72px 0px 0px 56px;
+    height: 720px;
 }
-
 .contact_overview_header {
     display: inline-flex;
     justify-content: flex-end;
@@ -253,7 +246,7 @@
 
 .contact_overview h1 {
     color: #000;
-    font-family: Inter;
+
     font-size: 61px;
     font-style: normal;
     font-weight: 700;
@@ -263,7 +256,7 @@
 
 .contact_overview_header span {
     color: #2A3647;
-    font-family: Inter;
+ 
     font-size: 27px;
     font-style: normal;
     font-weight: 400;
@@ -294,7 +287,7 @@
     text-align: center;
 
     /* Version 2/t2 */
-    font-family: Inter;
+  
     font-size: 47px;
     font-style: normal;
     font-weight: 500;
@@ -323,7 +316,7 @@
     color: var(--white, #FFF);
 
     /* Version 2/t5 */
-    font-family: Inter;
+
     font-size: 27px;
     font-style: normal;
     font-weight: 400;
@@ -348,7 +341,7 @@
     border-radius: 8px;
     border: 1px solid var(--Version-2-main-color, #2A3647);
     color: var(--Version-2-main-color, #2A3647);
-    font-family: Inter;
+   
     font-size: 21px;
     font-style: normal;
     font-weight: 400;
@@ -366,7 +359,7 @@
     background: #2A3647;
     color: #FFF;
     text-align: center;
-    font-family: Inter;
+ 
     font-size: 21px;
     font-style: normal;
     font-weight: 700;
