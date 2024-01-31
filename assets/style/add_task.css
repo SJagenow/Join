@@ -1,9 +1,16 @@
-h1 {
-    color: #000;
-    font-size: 61px;
+.form-input-titel {
+    color: #2A3647;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+    font-weight: 400;
+    line-height: 120%; /* 24px */
+}
+
+.asterisk::after {
+    content: "*";
+    color: #FF8190;
+    font-size: 20px;
+    vertical-align: middle;
 }
 
 .header-add-task0 {
@@ -15,15 +22,32 @@ h1 {
 .main-container {
     margin-top: 110px;
     margin-left: 96px;
+    margin-right: 135.75px;
 }
 
-.flex-column {
+.add-task-form {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-task-input {
+    height: 48px;
+    width: 440px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    padding: 0 0 0 21px;
+}
+
+.add-task-textarea {
+    height: 120px;
+    width: 440px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    padding: 0 0 0 21px;
 }
 
 .seperator {
-    width: 1px;
+    width: 1.1px;
     height: 424px;
     flex-shrink: 0;
     background-color: #D1D1D1;

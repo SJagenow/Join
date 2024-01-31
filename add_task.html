@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
     <script src="script.js"></script>
-    <script src="./javascript/add_task.js"></script>
+    <script src="add_task.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/style/add_task.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
@@ -19,38 +19,38 @@
             <div class="header-add-task" w3-include-html="templates/header.html"></div>
             <main class="main-container">
                 <h1>Add Task</h1>
-                <form action="" class="flex">
+                <form action="" class="add-task-form">
                     <div>
-                        <div class="flex-column">
-                            <span>Title*</span>
-                            <input type="text">
+                        <div class="column">
+                            <h2 class="form-input-titel asterisk">Title</h2>
+                            <input id="add-task-title" class="add-task-input" type="text" name="Title" placeholder="Enter a title">
                         </div>
-                        <div class="flex-column">
-                            <span>Description</span>
-                            <input type="text" name="description" id="add-task-description">
+                        <div class="column">
+                            <h2 class="form-input-titel">Description</h2>
+                            <textarea id="add-task-description" class="add-task-textarea" type="text" name="Description" placeholder="Enter a Description"></textarea>
                         </div>
-                        <div class="flex-column">
-                            <span>Assignet to</span>
-                            <input type="text">
+                        <div class="column">
+                            <h2 class="form-input-titel">Assignet to</h2>
+                            <input id="add-task-assignet" class="add-task-input" type="text" name="Assignet">
                         </div>
                     </div>
                     <div class="seperator"></div>
                     <div>
-                        <div class="flex-column">
-                            <span>Due date*</span>
-                            <input type="text">
+                        <div class="column">
+                            <h2 class="form-input-titel asterisk">Due date</h2>
+                            <input id="add-task-date" class="add-task-input" type="text" name="Due date" placeholder="dd//mm//yyyy">
                         </div>
-                        <div class="flex-column">
-                            <span>Prio</span>
-                            <input type="text" name="description" id="add-task-description">
+                        <div class="column">
+                            <h2 class="form-input-titel">Prio</h2>
+                            <input id="add-task-prio" class="add-task-input" type="text" name="Prio">
                         </div>
-                        <div class="flex-column">
-                            <span>Category*</span>
-                            <input type="text">
+                        <div class="column">
+                            <h2 class="form-input-titel asterisk">Category</h2>
+                            <input id="add-task-category" class="add-task-input" type="text" name="Category">
                         </div>
-                        <div class="flex-column">
-                            <span>Subtasks</span>
-                            <input type="text">
+                        <div class="column">
+                            <h2 class="form-input-titel">Subtasks</h2>
+                            <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks" placeholder="Add new subtask">
                         </div>
                     </div>
                 </form>
