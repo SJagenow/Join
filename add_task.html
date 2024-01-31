@@ -13,44 +13,58 @@
 </head>
 
 <body onload="init()">
-    <div class="flex">
-        <div w3-include-html="templates/menu.html"></div>
-        <div class="main">
+    <div class="flex max-h">
+        <div class="include-menu" w3-include-html="templates/menu.html"></div>
+        <div class="main max-h">
             <div class="header-add-task" w3-include-html="templates/header.html"></div>
             <main class="main-container">
                 <h1>Add Task</h1>
-                <form action="" class="add-task-form">
-                    <div>
-                        <div class="column">
-                            <h2 class="form-input-titel asterisk">Title</h2>
-                            <input id="add-task-title" class="add-task-input" type="text" name="Title" placeholder="Enter a title">
+                <form action="" class="column-space-between">
+                    <div class="space-between">
+                        <div>
+                            <div class="column">
+                                <h2 class="form-input-titel asterisk">Title</h2>
+                                <input id="add-task-title" class="add-task-input" type="text" name="Title" placeholder="Enter a title">
+                            </div>
+                            <div class="column">
+                                <h2 class="form-input-titel">Description</h2>
+                                <textarea id="add-task-description" class="add-task-textarea" type="text" name="Description" placeholder="Enter a Description"></textarea>
+                            </div>
+                            <div class="column">
+                                <h2 class="form-input-titel">Assignet to</h2>
+                                <input id="add-task-assignet" class="add-task-input" type="text" name="Assignet">
+                            </div>
                         </div>
-                        <div class="column">
-                            <h2 class="form-input-titel">Description</h2>
-                            <textarea id="add-task-description" class="add-task-textarea" type="text" name="Description" placeholder="Enter a Description"></textarea>
-                        </div>
-                        <div class="column">
-                            <h2 class="form-input-titel">Assignet to</h2>
-                            <input id="add-task-assignet" class="add-task-input" type="text" name="Assignet">
+                        <div class="seperator"></div>
+                        <div>
+                            <div class="column">
+                                <h2 class="form-input-titel asterisk">Due date</h2>
+                                <input id="add-task-date" class="add-task-input" type="text" name="Due date" placeholder="dd//mm//yyyy">
+                            </div>
+                            <div class="column">
+                                <h2 class="form-input-titel">Prio</h2>
+                                <div>
+                                    <button>Urgent</button>
+                                    <button>Medium</button>
+                                    <button>Low</button>
+                                </div>
+                                <input id="add-task-prio" class="add-task-input" type="text" name="Prio">
+                            </div>
+                            <div class="column">
+                                <h2 class="form-input-titel asterisk">Category</h2>
+                                <input id="add-task-category" class="add-task-input" type="text" name="Category">
+                            </div>
+                            <div class="column">
+                                <h2 class="form-input-titel">Subtasks</h2>
+                                <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks" placeholder="Add new subtask">
+                            </div>
                         </div>
                     </div>
-                    <div class="seperator"></div>
-                    <div>
-                        <div class="column">
-                            <h2 class="form-input-titel asterisk">Due date</h2>
-                            <input id="add-task-date" class="add-task-input" type="text" name="Due date" placeholder="dd//mm//yyyy">
-                        </div>
-                        <div class="column">
-                            <h2 class="form-input-titel">Prio</h2>
-                            <input id="add-task-prio" class="add-task-input" type="text" name="Prio">
-                        </div>
-                        <div class="column">
-                            <h2 class="form-input-titel asterisk">Category</h2>
-                            <input id="add-task-category" class="add-task-input" type="text" name="Category">
-                        </div>
-                        <div class="column">
-                            <h2 class="form-input-titel">Subtasks</h2>
-                            <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks" placeholder="Add new subtask">
+                    <div class="space-between">
+                        <div>*This field is required</div>
+                        <div>
+                            <button>Clear</button>
+                            <button>Create Task</button>
                         </div>
                     </div>
                 </form>
