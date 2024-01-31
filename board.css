@@ -1,5 +1,5 @@
 .board_top {
-    width: 1208px;
+    width: 1364px;
     height: 232px;
     flex-shrink: 0;
     background: #F6F7F8;
@@ -32,6 +32,7 @@
     border-radius: 10px;
     border: 1px solid var(--icon, #A8A8A8);
     background: #FFF;
+    border: 0;
 }
 
 
@@ -72,13 +73,14 @@ background: #2A3647;
     padding: 0px 296px;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 16px;
+ 
     color: var(--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    background: #F6F7F8;
 }
 
 .smal_midlane_main_container button {
@@ -124,6 +126,7 @@ background: #2A3647;
     flex-shrink: 0;
     padding-left: 296px;
     overflow-y: auto;
+    background: #F6F7F8;
 }
 
 .todo {
@@ -133,7 +136,7 @@ background: #2A3647;
     gap: 24px;
     flex: 1 0 0;
     align-self: stretch;
-    
+    margin-top: 16px;
     
 }
 
@@ -184,4 +187,4 @@ background: #2A3647;
     border-radius: 24px;
     background: var(--white, #FFF);
     box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
-}
+margin-top: 16px;}
