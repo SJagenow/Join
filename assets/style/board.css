@@ -1,3 +1,8 @@
+body button{
+    cursor: pointer;
+
+}
+
 .board_top {
     width: 1364px;
     height: 232px;
@@ -79,7 +84,7 @@ border-radius: 10px;
 
 .smal_midlane_main_container {
     display: flex;
-    width: 1168px;
+    width: 1175px;
     padding: 0px 296px;
     justify-content: space-between;
     align-items: flex-start;
@@ -198,6 +203,215 @@ border-radius: 10px;
     background: var(--white, #FFF);
     box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
 margin-top: 16px;}
+
+
+.vector{
+    display: flex;
+justify-content: space-between;
+align-items: center;
+flex: 1 0 0;
+}
+
+.user_story{
+    display: flex;
+    padding: 4px 24px;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 8px;
+    background: #0038FF;
+    
+}
+
+.user_story_dialog
+{
+display: flex;
+width: 525px;
+padding: 48px 272px;
+flex-direction: column;
+
+gap: 24px;
+border-radius: 30px;
+background: #FFF;
+
+/* nuevo */
+box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.user_story_label_x_contrainer{
+    display: flex;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+}
+
+
+.user_story_label_x_container button{
+    display: flex;
+width: 32px;
+height: 32px;
+padding: 4px;
+justify-content: center;
+align-items: center;
+
+border-radius: 56px;
+cursor: pointer;
+}
+
+
+.user_story_headline{
+
+
+align-self: stretch;
+
+color: var(--black, #000);
+/* Version 2/t1 */
+font-family: Inter;
+font-size: 61px;
+font-style: normal;
+font-weight: 700;
+line-height: 120%; /* 73.2px */
+}
+
+.user_story_description{
+    align-self: stretch;
+color: var(--black, #000);
+
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; 
+}
+
+.user_story_date{
+    display: flex;
+align-items: flex-start;
+gap: 25px;
+align-self: stretch;
+}
+
+.story_date {
+    color: var(--Version-2-main-color, #2A3647);
+/* Version 2/t6 */
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%;
+}
+
+.user_date{
+    color: var(--black, #000);
+/* Version 2/t6 */
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%;
+}
+.user_story_priority{
+    display: flex;
+align-items: center;
+gap: 25px;
+align-self: stretch;
+}
+
+.story_priority{
+
+    color: var(--Version-2-main-color, #2A3647);
+/* Version 2/t6 */
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 24px */
+}
+
+.user_priority{
+    color: var(--black, #000);
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; 
+
+}
+
+.assigned_to{
+align-self: stretch;
+color: var(--Version-2-main-color, #2A3647);
+font-family: Inter;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%;
+}
+
+
+.user_story_delete_edit{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  
+}
+
+.user_story_delete_edit img {
+    width: 24px;
+height: 24px;
+}
+
+.user_story_delete_edit_one{
+    display: flex;
+    align-items: center;
+    
+}
+
+.user_story_delete_edit_one button{
+    border: 0px;
+    align-items: center;
+    display: flex;
+align-items: center;
+gap: 8px;
+cursor: pointer;
+}
+
+.user_story_delete_edit_two{
+    display: flex;
+
+  
+}
+.user_story_delete_edit_two button{
+    border: 0px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+cursor: pointer;
+}
+
+
+
+.stripe
+{
+    height: 20px;
+    width: 1px;
+    box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.192);
+}
+
+.subtask_center{
+    display: flex;
+    align-items: center;
+  gap: 12px;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.postion_mid-bot-container{
+    padding-left: 90px;
+}
+
 
 
 /* inter-200 - latin */
