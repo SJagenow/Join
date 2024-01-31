@@ -24,9 +24,8 @@ h1 {
 }
 
 .seperator {
-    width: 0.001px;
+    width: 1px;
     height: 424px;
     flex-shrink: 0;
-    stroke-width: 1px;
-    stroke: var(--Style, #D1D1D1);
+    background-color: #D1D1D1;
 }
