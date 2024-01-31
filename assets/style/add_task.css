@@ -25,11 +25,6 @@
     margin-right: 135.75px;
 }
 
-.add-task-form {
-    display: flex;
-    justify-content: space-between;
-}
-
 .add-task-input {
     height: 48px;
     width: 440px;
@@ -51,4 +46,8 @@
     height: 424px;
     flex-shrink: 0;
     background-color: #D1D1D1;
+}
+
+.ht80 {
+    height: 80%;
 }
