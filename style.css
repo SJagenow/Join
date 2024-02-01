@@ -188,23 +188,23 @@ nav {
 
 /* Customize website's scrollbar like Mac OS
 Not supports in Firefox and IE */
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     background-color: #fff;
     width: 14x;
     height: 0px;
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #c3c3c3;
     border-radius: 16px;
     border: 4px solid #fff;
 }
 
-body::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background-color: #b0b0b0;
 }
 
-body::-webkit-scrollbar-thumb:active {
+::-webkit-scrollbar-thumb:active {
     background-color: #a0a0a0;
 }
 
@@ -213,6 +213,7 @@ body::-webkit-scrollbar-thumb:active {
     height: 10px;
 }
 
+/* Up */
 ::-webkit-scrollbar-button:single-button:vertical:decrement {
     border-width: 0px 8px 6px 8px;
     border-color: white white #c3c3c3 white;
@@ -220,6 +221,10 @@ body::-webkit-scrollbar-thumb:active {
 
 ::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
     border-color: white white #b0b0b0 white;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+    border-color: white white #a0a0a0 white;
 }
 
 /* Down */
@@ -230,4 +235,8 @@ body::-webkit-scrollbar-thumb:active {
 
 ::-webkit-scrollbar-button:vertical:single-button:increment:hover {
     border-color: #b0b0b0 white white white;
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:active {
+    border-color: #a0a0a0 white white white;
 }
