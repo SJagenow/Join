@@ -4,7 +4,7 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-body button{
+body button {
     cursor: pointer;
 }
 
@@ -15,7 +15,8 @@ body button{
     align-items: flex-start;
     overflow-y: auto;
     overflow-x: hidden;
-    height: calc(100vh - 104px);  /* 104px is the height from header*/
+    height: calc(100vh - 104px);
+    /* 104px is the height from header*/
     width: 400px;
     margin: 0px 0px 0px 259px;
 }
@@ -47,12 +48,11 @@ body button{
 }
 
 .contactlist_button_container button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-.contact_little_icon_container:hover{
+.contact_little_icon_container:hover {
     cursor: pointer;
-
 }
 
 #contactlist_button_container img {
@@ -92,24 +92,21 @@ body button{
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 24px */
 }
 
 [id^="contact_list_names"] {
-
     color: #000;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 24px */
 }
 
 .contact_list_container {
     display: flex;
     width: 352px;
     padding: 15px 24px;
-    align-items: flex-start;
+    align-items: center;
     gap: 35px;
     border-radius: 10px;
     background: #FFF;
@@ -163,7 +160,6 @@ body button{
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 19.2px */
 }
 
 .contact_little_icon_container img {
@@ -180,16 +176,16 @@ body button{
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 19.2px */
 }
 
 #contact_overview_mail {
     color: #007CEE;
+    text-decoration: none;
 }
 
 #contact_overview_phone {
     color: #000;
-
+    text-decoration: none;
 }
 
 #contact_information {
@@ -203,7 +199,6 @@ body button{
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 24px */
 }
 
 .contact_overview_footer_container {
@@ -219,7 +214,6 @@ body button{
     font-style: normal;
     font-weight: 500;
     line-height: 120%;
-    /* 56.4px */
 }
 
 .contact_information_container {
@@ -234,28 +228,27 @@ body button{
     height: 592px;
     border-radius: 30px;
     background: #FFF;
-    margin-left: 32px;
     display: flex;
 }
 
 #add_contact_headline {
     color: var(--white, #FFF);
-
     font-size: 61px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-    /* 73.2px */
+
 }
 
 [id^="contact_list_mail"] {
     color: #007CEE;
- 
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 19.2px */
+    text-decoration: none;
+
+
 }
 
 .contact_overview {
@@ -263,11 +256,10 @@ body button{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
-    /* padding-bottom: 456px; */
-    /* padding: 0px 0px 0px 56px; */
     margin-left: 56px;
     height: 720px;
 }
+
 .contact_overview_header {
     display: inline-flex;
     justify-content: flex-end;
@@ -277,7 +269,6 @@ body button{
 
 .contact_overview h1 {
     color: #000;
-
     font-size: 61px;
     font-style: normal;
     font-weight: 700;
@@ -287,12 +278,11 @@ body button{
 
 .contact_overview_header span {
     color: #2A3647;
- 
     font-size: 27px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 32.4px */
+
 }
 
 #contact_initials_container {
@@ -303,7 +293,6 @@ body button{
     border-radius: 70px;
     border: 3px solid var(--white, #FFF);
     background: #FFF;
-    /* nuevo */
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
 }
 
@@ -316,21 +305,17 @@ body button{
     flex-shrink: 0;
     color: #FFF;
     text-align: center;
-
-    /* Version 2/t2 */
-  
     font-size: 47px;
     font-style: normal;
     font-weight: 500;
     line-height: 120%;
-    /* 56.4px */
+
 }
 
 .left_side_add_contact_overlay {
     display: inline-flex;
     height: 594px;
     padding: 0px 46px;
-    /* in figma 66px 46px*/
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -345,9 +330,6 @@ body button{
 
 #under_headline {
     color: var(--white, #FFF);
-
-    /* Version 2/t5 */
-
     font-size: 27px;
     font-style: normal;
     font-weight: 400;
@@ -372,7 +354,6 @@ body button{
     border-radius: 8px;
     border: 1px solid var(--Version-2-main-color, #2A3647);
     color: var(--Version-2-main-color, #2A3647);
-   
     font-size: 21px;
     font-style: normal;
     font-weight: 400;
@@ -390,7 +371,6 @@ body button{
     background: #2A3647;
     color: #FFF;
     text-align: center;
- 
     font-size: 21px;
     font-style: normal;
     font-weight: 700;
@@ -416,9 +396,8 @@ body button{
 }
 
 .right_side_add_contact_overlay form {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 32px;
 }
 
@@ -459,6 +438,7 @@ body button{
     justify-content: center;
     align-items: flex-end;
     gap: 25px;
+    margin-top: 16px;
 }
 
 .edit_formular_container {
@@ -466,4 +446,38 @@ body button{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+/* .divide_container svg{
+    width: calc(100vw - 232px);
+} */
+
+@media(max-width:1210px) {
+
+    .contact_overview {
+        display: none;
+    }
+
+    #contact_list {
+        width: calc(100vw - 232px);
+        align-items: unset;
+    }
+
+    .divide_container {
+        width: calc(100vw - 232px);
+    }
+
+    .contact_list_container {
+        width: calc(100vw - 232px);
+    }
+
+    #add_contact_overlay {
+        width: unset;
+        height: unset;
+        border-radius: 30px;
+        background: #FFF;
+        display: flex;
+        flex-direction: column;
+    }
+
 }
