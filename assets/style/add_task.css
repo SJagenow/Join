@@ -1,3 +1,14 @@
+.main-container {
+    margin-top: 110px;
+    margin-left: 96px;
+    margin-right: 135.75px;
+    width: 976.25px;
+}
+
+.ad-task-form {
+    gap: 110px;
+}
+
 .form-input-titel {
     color: #2A3647;
     font-size: 20px;
@@ -5,6 +16,19 @@
     font-weight: 400;
     line-height: 120%;
     margin-top: 2px;
+    margin-bottom: 8px;
+}
+
+.conditions-text {
+        display: flex;
+        align-items: end;
+}
+
+.conditions-text::before {
+    content: "*";
+    color: #FF8190;
+    font-size: 20px;
+    vertical-align: middle;
 }
 
 .asterisk::after {
@@ -14,54 +38,48 @@
     vertical-align: middle;
 }
 
-.header-add-task0 {
-    position: absolute;
-    top: 0;
-    left: 232px;
-}
-
-.main-container {
-    margin-top: 110px;
-    margin-left: 96px;
-    margin-right: 135.75px;
-    width: 976.25px;
-}
-
 .add-task-input {
     height: 48px;
-    width: 440px;
+    width: 419px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
+    margin-bottom: 28px;
+    font-size: 20px;
+    padding-left: 21px;
 }
 
 .add-task-input::placeholder {
-    padding-left: 21px;
-    font-size: 20px;
     color: #D1D1D1;
 }
 
 .add-task-textarea {
     height: 120px;
-    width: 440px;
+    width: 419px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
+    margin-bottom: 28px;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    padding-left: 21px;
+    padding-top: 19px;
 }
 
 .add-task-textarea::placeholder {
-    padding-left: 21px;
-    font-size: 20px;
     color: #D1D1D1;
 }
 
 .add-task-select {
     height: 48px;
-    width: 440px;
+    /* width: 444px; */
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
+    font-size: 20px;
+    margin-bottom: 28px;
+    padding-left: 21px;
 }
 
-.add-task-select option {
-padding: 21px;
+#add-task-date::-webkit-calendar-picker-indicator{
+    margin-right: 16px;
 }
 
 .seperator {
@@ -71,6 +89,10 @@ padding: 21px;
     background-color: #D1D1D1;
 }
 
+.form-end {
+
+}
+
 .add-task-prio-button {
     font-size: 20px;
     height: 56px;
@@ -78,11 +100,22 @@ padding: 21px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     background-color: white;
+    margin-bottom: 28px;
+}
+
+.add-task-prio-button div {
+    display: flex;
+    align-items: center;
 }
 
 .add-task-prio-button img {
     height: 14.51px;
     width: 20px;
+}
+
+.add-task-buttons-div {
+    display: flex;
+    gap: 16px;
 }
 
 .ht80 {
