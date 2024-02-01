@@ -84,6 +84,16 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+.w100{
+    width: calc(100vw - 232px);
+}
+
+.ml-36{
+    margin-left: -36px;
+}
+.ml36{
+    margin-left: 36px;
+}
 
 .space-between {
     display: flex;

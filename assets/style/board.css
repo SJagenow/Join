@@ -82,12 +82,13 @@ border-radius: 10px;
 
 }
 
+
+
 .smal_midlane_main_container {
     display: flex;
     width: calc(100vw - 232px);
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
- 
     color: var(--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
@@ -95,6 +96,8 @@ border-radius: 10px;
     font-weight: 700;
     line-height: 120%;
     background: #F6F7F8;
+    margin-left: 232px;
+    gap: 24px;
 }
 
 .smal_midlane_main_container button {
@@ -108,14 +111,16 @@ border-radius: 10px;
     flex-shrink: 0;
     border-radius: 8px;
     border: 2px solid var(--Version-2-main-color, #2A3647);
+    margin-right: 8px;
 }
 
 .midlane_flex_button {
     display: flex;
-    width: 276px;
+    width: 252px;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+    gap: 24px;
     
 }
 
@@ -139,6 +144,8 @@ border-radius: 10px;
     flex-shrink: 0;
     overflow-y: auto;
     background: #F6F7F8;
+    margin-left: 232px;
+    justify-content: center;
 }
 
 .todo {
@@ -407,7 +414,7 @@ cursor: pointer;
 
 .postion_mid-bot-container{
     width: calc(100vw - 232px);
-    margin-left: 0px;
+    margin-left: 117px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -430,6 +437,7 @@ width: 220px;
 #done_content{
  width: 220px;   
 }
+
 
 
 
