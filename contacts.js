@@ -4,7 +4,7 @@ function renderContactList() {
     document.getElementById('contact_list').innerHTML = ``;
     document.getElementById('contact_list').innerHTML = `
     <div class="contactlist_button_container">
-        <button>
+        <button onclick="showAddContactDialog()">
             Add new contact <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
         </button>
     </div>
@@ -32,3 +32,15 @@ function renderContactList() {
     `;
     }
 }
+
+function showAddContactDialog(){
+    document.getElementById('contactlist_overlay_container').style.display = 'unset';
+}
+
+function closeAddContactDialog(){
+    document.getElementById('contactlist_overlay_container').style.display = 'none';
+}
+
+function noClose(event) {
+    event.stopPropagation();
+  }
