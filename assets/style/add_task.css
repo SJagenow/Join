@@ -3,7 +3,8 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 120%; /* 24px */
+    line-height: 120%;
+    margin-top: 2px;
 }
 
 .asterisk::after {
@@ -23,6 +24,7 @@
     margin-top: 110px;
     margin-left: 96px;
     margin-right: 135.75px;
+    width: 976.25px;
 }
 
 .add-task-input {
@@ -30,7 +32,12 @@
     width: 440px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
-    padding: 0 0 0 21px;
+}
+
+.add-task-input::placeholder {
+    padding-left: 21px;
+    font-size: 20px;
+    color: #D1D1D1;
 }
 
 .add-task-textarea {
@@ -38,7 +45,12 @@
     width: 440px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
-    padding: 0 0 0 21px;
+}
+
+.add-task-textarea::placeholder {
+    padding-left: 21px;
+    font-size: 20px;
+    color: #D1D1D1;
 }
 
 .seperator {
@@ -48,6 +60,25 @@
     background-color: #D1D1D1;
 }
 
+.add-task-prio-button {
+    font-size: 20px;
+    height: 56px;
+    width: 136px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    background-color: white;
+}
+
+.add-task-prio-button img {
+    height: 14.51px;
+    width: 20px;
+}
+
 .ht80 {
     height: 80%;
+}
+
+.gap48 {
+    display: flex;
+    gap: 48px;
 }
