@@ -53,6 +53,17 @@
     color: #D1D1D1;
 }
 
+.add-task-select {
+    height: 48px;
+    width: 440px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+}
+
+.add-task-select option {
+padding: 21px;
+}
+
 .seperator {
     width: 1.1px;
     height: 424px;
