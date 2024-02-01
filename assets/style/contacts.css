@@ -1,7 +1,10 @@
-.body {
+body {
     margin: 0;
-    background-color: rgb(246, 247, 248);
+    /* background-color: rgb(246, 247, 248); */
     font-family: 'Inter', sans-serif;
+}
+
+body button{
     cursor: pointer;
 }
 
@@ -41,6 +44,15 @@
     padding: 22.5px 0px;
     justify-content: center;
     align-items: center;
+}
+
+.contactlist_button_container button:hover {
+  cursor: pointer;
+}
+
+.contact_little_icon_container:hover{
+    cursor: pointer;
+
 }
 
 #contactlist_button_container img {

@@ -23,7 +23,7 @@ function renderContactList() {
         <div id="contact_list_names${i}">
         <div class="contact_list_container">
             <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
-            <div class="column">
+            <div class="column gap8">
                 <div id="contact_list_name${i}">Testing Tim</div>
                 <div id="contact_list_mail${i}">testingtim@test.de</div>
             </div>
