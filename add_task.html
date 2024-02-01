@@ -17,10 +17,10 @@
         <div class="include-menu" w3-include-html="templates/menu.html"></div>
         <div class="main max-h">
             <div class="header-add-task" w3-include-html="templates/header.html"></div>
-            <main class="main-container">
+            <main class="main-container ht100">
                 <h1>Add Task</h1>
                 <form action="" class="column-space-between">
-                    <div class="space-between">
+                    <div class="gap48">
                         <div>
                             <div class="column">
                                 <h2 class="form-input-titel asterisk">Title</h2>
@@ -43,12 +43,11 @@
                             </div>
                             <div class="column">
                                 <h2 class="form-input-titel">Prio</h2>
-                                <div>
-                                    <button>Urgent</button>
-                                    <button>Medium</button>
-                                    <button>Low</button>
+                                <div class="space-between">
+                                    <button class="add-task-prio-button">Urgent <img src="./assets/img/prio_alta.png" alt=""></button>
+                                    <button class="add-task-prio-button">Medium <img src="./assets/img/prio_media.png" alt=""></button>
+                                    <button class="add-task-prio-button">Low <img src="./assets/img/prio_baja.png" alt=""></button>
                                 </div>
-                                <input id="add-task-prio" class="add-task-input" type="text" name="Prio">
                             </div>
                             <div class="column">
                                 <h2 class="form-input-titel asterisk">Category</h2>
