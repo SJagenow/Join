@@ -16,15 +16,15 @@
     <div class="flex max-h">
         <div class="include-menu" w3-include-html="templates/menu.html"></div>
         <div class="main max-h">
-            <div class="header-add-task" w3-include-html="templates/header.html"></div>
-            <main class="main-container ht100">
+            <div class="" w3-include-html="templates/header.html"></div>
+            <main class="main-container">
                 <h1>Add Task</h1>
-                <form action="" class="column-space-between">
+                <form action="" class="ad-task-form column-space-between">
                     <div class="gap48">
                         <div>
                             <div class="column">
                                 <h2 class="form-input-titel asterisk">Title</h2>
-                                <input id="add-task-title" class="add-task-input" type="text" name="Title" placeholder="Enter a title">
+                                <input id="add-task-title" class="add-task-input" type="text" name="Title" required placeholder="Enter a title">
                             </div>
                             <div class="column">
                                 <h2 class="form-input-titel">Description</h2>
@@ -44,7 +44,7 @@
                         <div>
                             <div class="column">
                                 <h2 class="form-input-titel asterisk">Due date</h2>
-                                <input id="add-task-date" class="add-task-input" type="text" name="Due date" placeholder="dd//mm//yyyy">
+                                <input id="add-task-date" class="add-task-input" type="date" name="Due date" required placeholder="dd//mm//yyyy">
                             </div>
                             <div class="column">
                                 <h2 class="form-input-titel">Prio</h2>
@@ -56,7 +56,12 @@
                             </div>
                             <div class="column">
                                 <h2 class="form-input-titel asterisk">Category</h2>
-                                <input id="add-task-category" class="add-task-input" type="text" name="Category">
+                                <select id="add-task-assignet-to" class="add-task-select" required name="cars">
+                                    <option value="" selected disabled hidden>Select task category</option>
+                                    <option value="saab">Saab</option>
+                                    <option value="fiat">Fiat</option>
+                                    <option value="audi">Audi</option>
+                                </select>
                             </div>
                             <div class="column">
                                 <h2 class="form-input-titel">Subtasks</h2>
@@ -64,11 +69,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="space-between">
-                        <div>*This field is required</div>
-                        <div>
-                            <button>Clear</button>
-                            <button>Create Task</button>
+                    <div class="form-end space-between">
+                        <div class="conditions-text">This field is required</div>
+                        <div class="add-task-buttons-div">
+                            <button class="parrent-button-light">Clear &#10006;</button>
+                            <button class="parrent-button-dark">Create Task &#10004;</button>
                         </div>
                     </div>
                 </form>

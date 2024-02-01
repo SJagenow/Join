@@ -1,6 +1,7 @@
 let todo = [{
+    'id':'1',
     'label':'User Story',
-    'headline':'Kochwelt Page & Recipe Recommender',
+    'titel':'Kochwelt Page & Recipe Recommender',
     'description':'Build start page with recipe recommendation...',
 }];
 
