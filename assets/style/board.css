@@ -1,16 +1,15 @@
 body button{
     cursor: pointer;
-
 }
 
 .board_top {
-    width: 1364px;
+    width: calc(100vw - 232px);
     height: 232px;
     flex-shrink: 0;
     background: #F6F7F8;
-    padding-left: 232px;
+   margin-left: 232px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 .board_h1_button_container {
@@ -18,6 +17,7 @@ body button{
     width: 1056px;
     justify-content: space-between;
     align-items: center;
+    margin-right: 90px;
 }
 
 .board_h1_button_container h1 {
@@ -84,8 +84,7 @@ border-radius: 10px;
 
 .smal_midlane_main_container {
     display: flex;
-    width: 1175px;
-    padding: 0px 296px;
+    width: calc(100vw - 232px);
     justify-content: space-between;
     align-items: flex-start;
  
@@ -131,15 +130,13 @@ border-radius: 10px;
     flex-shrink: 0;
 }
 
-.botlane {
+.botlane_main_container {
     display: flex;
-    width: 1208px;
+    width: calc(100vw - 232px);
     height: 600px;
-    padding: 0px 64px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
-    padding-left: 296px;
     overflow-y: auto;
     background: #F6F7F8;
 }
@@ -202,7 +199,7 @@ border-radius: 10px;
     border-radius: 24px;
     background: var(--white, #FFF);
     box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
-margin-top: 16px;}
+    margin-top: 16px;}
 
 
 .vector{
@@ -409,8 +406,27 @@ cursor: pointer;
 }
 
 .postion_mid-bot-container{
-    padding-left: 90px;
+    width: calc(100vw - 232px);
+    margin-left: 232px;
+
 }
+
+#todo_Content{
+width: 220px;
+}
+
+#in_progress_content{
+width: 220px;
+}
+
+#await_content{
+width: 220px;
+}
+
+#done_content{
+ width: 220px;   
+}
+
 
 
 
@@ -470,3 +486,24 @@ cursor: pointer;
     font-weight: 900;
     src: url('../fonts/inter-v13-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
+
+  @media(min-width:1440px) {
+    .botlane_main_container,
+    .smal_midlane_main_container,
+    .board_top  {
+        width: 1208px;
+    }
+
+
+    {
+
+    }
+
+
+}
+
+@media(max-width:1439px) {
+
+    header {}
+
+}
