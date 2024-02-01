@@ -11,6 +11,50 @@ h1 {
     line-height: 120%;
 }
 
+.parrent-button-dark {
+    height: 56px;
+    font-size: 21px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+    padding: 16px;
+    border: #2A3647 solid 1px;
+    display: flex;
+    align-items: center;
+}
+
+.parrent-button-light {
+    height: 56px;
+    font-size: 21px;
+    background-color: transparent;
+    border-radius: 10px;
+    color: #2A3647;
+    padding: 16px;
+    border: #2A3647 solid 1px;
+    display: flex;
+    align-items: center;
+}
+
+.parrent-button-dark:hover {
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+}
+
+.parrent-button-light:hover {
+    color: #29ABE2;
+    border-color: #29ABE2;
+}
+
+.parrent-button-dark:active {
+    background-color: #091931;
+    border-color: #091931;
+}
+
+.parrent-button-light:active {
+    color: #091931;
+    border-color: #091931;
+}
+
 /* allround classes here! */
 
 .ht100 {
@@ -68,6 +112,7 @@ h1 {
     /* width: 15vw; */
     height: 100vh;
     /* padding: 64px 0px; */
+    max-height: 1024px;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
