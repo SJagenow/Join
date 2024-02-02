@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="./assets/style/fonts.css" />
     <title>Join</title>
     <link rel="stylesheet" type="text/css" href="./assets/style/logIn.css" />
+    <script>
+      function btnGuestLog(){
+        window.location.href = `summary.html`;
+      }
+    </script>
 
   </head>
 
@@ -52,7 +57,7 @@
         </div>
         <div class="btnLogGuest">
           <button class="btnLogIn">Log in</button>
-          <button class="btnGuestLog">Guest Log in</button>
+          <button class="btnGuestLog" onclick="btnGuestLog()">Guest Log in</button>
         </div>
       </div>
     </section>
