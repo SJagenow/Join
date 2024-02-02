@@ -2,7 +2,7 @@
     margin-top: 110px;
     margin-left: 96px;
     margin-right: 135.75px;
-    width: 976.25px;
+    width: fit-content;
     height: 100pc;
     max-height: calc(100vh - 230px);
     overflow: auto;
