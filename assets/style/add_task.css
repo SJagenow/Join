@@ -154,7 +154,7 @@
     gap: 48px;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1340px) {
     .main-container {
         margin-top: 70px;
         margin-left: 0;
@@ -165,15 +165,7 @@
     }
 }
 
-@media (max-width: 1300px) {
-    /* .add-task-input {
-        width: 396px;
-    }
-
-    .add-task-textarea {
-        width: 396px;
-    } */
-
+@media (max-width: 1250px) {
     .add-task-input-div {
         width: 396px;
         min-width: 396px;
@@ -182,14 +174,39 @@
     .add-task-prio-button {
         height: 41px;
         width: 121.33px;
+        font-size: 16px;
     }
 
     .gap48 {
         gap: 33px;
     }
+
+    .form-input-titel {
+        font-size: 16px;
+    }
+
+    .conditions-text::before {
+        font-size: 16px;
+    }
+
+    .asterisk::after {
+        font-size: 16px;
+    }
+
+    .add-task-input {
+        font-size: 16px;
+    }
+
+    .add-task-textarea {
+        font-size: 16px;
+    }
+
+    .add-task-select {
+        font-size: 16px;
+    }
 }
 
-@media (max-width: 1170px) {
+@media (max-width: 1150px) {
     .gap48 {
         flex-direction: column;
     }
@@ -206,5 +223,86 @@
         margin-top: 0;
         max-height: 870px;
         overflow: auto;
+    }
+
+    .add-task-input-div {
+        width: 50vw;
+        /* min-width: 419px; */
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+    }
+
+    .gap48 {
+        gap: 0;
+    }
+
+    .form-input-titel {
+        font-size: 20px;
+    }
+
+    .conditions-text::before {
+        font-size: 20px;
+    }
+
+    .asterisk::after {
+        font-size: 20px;
+    }
+
+    .add-task-input {
+        font-size: 20px;
+    }
+
+    .add-task-textarea {
+        font-size: 20px;
+    }
+
+    .add-task-select {
+        font-size: 20px;
+    }
+
+    .add-task-prio-button {
+        font-size: 20px;
+        height: 56px;
+        width: 136px;
+    }
+}
+
+@media (max-width: 850px) {
+    .add-task-input-div {
+        width: 50vw;
+        /* min-width: 419px; */
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+        font-size: 16px;
+    }
+
+    .form-input-titel {
+        font-size: 16px;
+    }
+
+    .conditions-text::before {
+        font-size: 16px;
+    }
+
+    .asterisk::after {
+        font-size: 16px;
+    }
+
+    .add-task-input {
+        font-size: 16px;
+    }
+
+    .add-task-textarea {
+        font-size: 16px;
+    }
+
+    .add-task-select {
+        font-size: 16px;
     }
 }
