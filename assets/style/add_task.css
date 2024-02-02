@@ -38,9 +38,12 @@
     vertical-align: middle;
 }
 
+.add-task-input-div {
+    min-width: 419px;
+}
+
 .add-task-input {
     height: 48px;
-    width: 419px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     margin-bottom: 28px;
@@ -54,7 +57,6 @@
 
 .add-task-textarea {
     height: 120px;
-    width: 419px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     margin-bottom: 28px;
@@ -70,7 +72,6 @@
 
 .add-task-select {
     height: 48px;
-    /* width: 444px; */
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     font-size: 20px;
@@ -89,10 +90,6 @@
     background-color: #D1D1D1;
 }
 
-.form-end {
-
-}
-
 .add-task-prio-button {
     font-size: 20px;
     height: 56px;
@@ -103,13 +100,9 @@
     margin-bottom: 28px;
 }
 
-.add-task-prio-button div {
-    display: flex;
-    align-items: center;
-}
-
 .add-task-prio-button svg {
     width: 20px;
+    margin-left: 4px;
 }
 
 #prio-button-urgent svg {
@@ -129,6 +122,24 @@
     gap: 16px;
 }
 
+#prio-button-urgent:hover, #prio-button-urgent:hover svg {
+    background-color: #FF3D00;
+    color: white;
+    fill: white;
+}
+
+#prio-button-medium:hover, #prio-button-medium:hover svg {
+    background-color: #FFA800;
+    color: white;
+    fill: white;
+}
+
+#prio-button-low:hover, #prio-button-low:hover svg {
+    background-color: #7AE229;
+    color: white;
+    fill: white;
+}
+
 #task-create-button svg {
     width: 18px;
     margin-left: 6px;
@@ -141,4 +152,59 @@
 .gap48 {
     display: flex;
     gap: 48px;
+}
+
+@media (max-width: 1440px) {
+    .main-container {
+        margin-top: 70px;
+        margin-left: 0;
+        margin-right: 0;
+        width: calc(100vw - 232px);
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1300px) {
+    /* .add-task-input {
+        width: 396px;
+    }
+
+    .add-task-textarea {
+        width: 396px;
+    } */
+
+    .add-task-input-div {
+        width: 396px;
+        min-width: 396px;
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+    }
+
+    .gap48 {
+        gap: 33px;
+    }
+}
+
+@media (max-width: 1170px) {
+    .gap48 {
+        flex-direction: column;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .media-column {
+        flex-direction: column;
+    }
+
+    .main-container {
+        margin-top: 0;
+        max-height: 870px;
+        overflow: auto;
+    }
 }
