@@ -34,7 +34,7 @@
     /* or 73px */
     color: #000000;
     flex: none;
-    order: 0;
+    /* order: 0; */
     flex-grow: 0;
 }
 .summary-line{
@@ -43,7 +43,7 @@
     border: 3px solid #29ABE2;
     /* Inside auto layout */
     flex: none;
-    order: 1;
+    /* order: 1; */
     flex-grow: 0;
 }
 .summary-titelText{
@@ -60,7 +60,7 @@
     color: #2A3647;
     /* Inside auto layout */
     flex: none;
-    order: 2;
+    /* order: 2; */
     flex-grow: 0;
 }
 .summary-left{
@@ -98,7 +98,7 @@
     height: 170px;
     /* Inside auto layout */
     flex: none;
-    order: 0;
+    /* order: 0; */
     flex-grow: 0;
 }
 .task-type{
@@ -119,7 +119,7 @@
     border-radius: 30px;
     /* Inside auto layout */
     flex: none;
-    order: 0;
+    /* order: 0; */
     flex-grow: 0;
     color: #000000;
     text-align: center;
@@ -186,7 +186,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
     flex: none;
-    order: 1;
+    /* order: 1; */
     flex-grow: 0;
     color: #000000;
     font-family: 'Inter';
@@ -231,7 +231,7 @@
     height: 60px;
     /* Inside auto layout */
     flex: none;
-    order: 0;
+    /* order: 0; */
     flex-grow: 0;
 }
 .urgent-counter{
@@ -264,7 +264,7 @@
     height: 75px;
     /* Inside auto layout */
     flex: none;
-    order: 1;
+    /* order: 1; */
     flex-grow: 0;
 }
 .urgent-line{
@@ -274,7 +274,7 @@
     border: 2px solid #D1D1D1;
     /* Inside auto layout */
     flex: none;
-    order: 1;
+    /* order: 1; */
     flex-grow: 0;
 }
 .deadline{
@@ -287,7 +287,7 @@
     height: 57px;
     /* Inside auto layout */
     flex: none;
-    order: 2;
+    /* order: 2; */
     flex-grow: 0;
 }
 .deadline-day{
@@ -319,7 +319,7 @@
     height: 150px;
     /* Inside auto layout */
     flex: none;
-    order: 2;
+    /* order: 1; */
     flex-grow: 0;
 }
 
@@ -340,7 +340,7 @@
     border-radius: 30px; 
     /* Inside auto layout */ 
     flex: none;
-    order: 1;
+    /* order: 1; */
     flex-grow: 0;
 }
 .summary-todo-right{
@@ -351,7 +351,7 @@
     width: 66px;
     height: 102px;
     flex: none;
-    order: 1;
+    /* order: 1; */
     flex-grow: 0;
 }
 
@@ -383,12 +383,16 @@
     color: #FFFFFF;
     cursor: pointer;
 }
-.task-todo .pencil{
-    filter: invert(1);
-    
+
+.task-todo:hover .pencil {
+    background: url('/assets/img/summary-pencil-white.png');
+    filter: invert(0); 
+    background-size: cover;
 }
-.task-todo:hover .pencil{
-    filter: invert(0);  
+
+.task-todo:hover .done {
+    background: url('/rgbf6zmbhns assets/img/summary-done-white.png');
+    background-size: cover;
 }
 .task-todo:active{
     background: #FFFFFF;
@@ -418,7 +422,7 @@
     color: #2A3647;
     /* Inside auto layout */
     flex: none;
-    order: 0;
+    /* order: 0; */
     flex-grow: 0;
 }
 .good-morning{

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/style/fonts.css">
+    <script src="script.js"></script>
+    <title>Join Help</title>
+     <!-- <link rel="stylesheet" href="./src/style/style-help.css"> -->
+    <script src="script.js"></script> 
+
+    <style>
+    .help {
+        width: calc(100vw - 232px);;
+    }
+    .help-header {
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        padding: 50px;
+        gap: 30px;
+        /* position: absolute; */
+        
+        height: 73px;
+        left: 355px;
+        top: 171px;
+    }
+    h1{
+        width: 138px;
+        height: 73px;
+        padding-left: 150px;
+        /* padding:50px; */
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 61px;
+        line-height: 120%;
+        color: #000000;
+    }
+    .help-arrow {
+        /* position: absolute; */
+        width: 37px;
+        height: 37px;
+        left: 1281px;
+        top: 165px;
+        /* position: absolute;
+        left: 16.67%;
+        right: 16.67%;
+        top: 17.59%;
+        bottom: 17.59%;
+
+        background: #000000; */
+    }
+    .help-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 10px;
+        padding-left: 190px;
+        width: 969px;
+        height: 137px;
+    }
+    .help-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 10px;
+
+        width: 969px;
+        height: 137px;
+     }
+    .help-info-titel{
+        width: 346px;
+        height: 32px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 120%;
+        /* or 32px */
+
+
+        color: #000000;
+    }
+    .help-info-text{
+        width: 969px;
+        height: 95px;
+
+        /* body */
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 120%;
+            }
+    .help-use-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        padding-top: 20px;
+        gap: 10px;
+
+        width: 969px;
+        height: 137px;
+    }
+    .help-use-titel {
+        width: 346px;
+        height: 32px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 120%;
+        color: #000000;
+    }
+    .help-info-text {
+        width: 915px;
+        height: 57px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 120%;
+        color: #000000;
+    }
+    .use-text {
+        display: flex;
+    }
+    .number {
+        width: 21px;
+        height: 32px;
+        display: flex;
+        padding-right: 20px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 120%;
+        color: #000000;
+    }
+    </style>
+
+    <!-- <script>
+    async function includeHTML() {
+    let includeElements = document.querySelectorAll('[w3-include-html]');
+    for (let i = 0; i < includeElements.length; i++) {
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html"); // "includes/header.html"
+      let resp = await fetch(file);
+      if (resp.ok) {
+        element.innerHTML = await resp.text();
+      } else {
+        element.innerHTML = 'Page not found';
+      }
+    }
+  }
+    </script> -->
+</head>
+
+
+
+<body onload="init()">
+    <div class="flex header_container">
+        <div w3-include-html="templates/menu.html"></div>
+        <div w3-include-html="templates/header.html"></div>
+    </div>
+    <div class="help">
+        <div class="help-header">
+            <h1 class="help-headline">Help</h1>
+            <div class="help-arrow">
+                <img  src="./assets/img/arrow-left-line.png">
+            </div>            
+        </div>
+        <div class="help-content">
+            <div class="help-info">
+                <span class="help-info-titel">What is Join?</span>
+                <span class="help-info-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores quos mollitia magni enim, neque molestias sequi voluptate assumenda ad. Quod ut quae, itaque libero aspernatur consequuntur deserunt autem ipsa tenetur. 
+                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur aliquid perspiciatis asperiores consequuntur quisquam iusto architecto natus sapiente quod aut consectetur quidem corporis deserunt quos, at, provident mollitia veniam! Dicta!  </span>
+            </div>
+            <div class="help-use-info">
+                <span class="help-info-titel">How to use it</span>
+                <div class="help-info-text">
+                    <div class="use-text">
+                        <div class="number">
+                            <b>1.</b> 
+                        </div>
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum doloremque cupiditate corrupti similique quibusdam laboriosam aliquam iure dignissimos officiis atque! Assumenda vitae sapiente quos adipisci eius exercitationem et placeat quaerat.</span><br>
+                    </div>
+                    <div class="use-text">
+                        <div class="number">
+                            <b>2.</b>
+                        </div> 
+                        <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure nesciunt doloremque saepe.</span><br>
+                    </div>
+                    <div class="use-text">
+                        <div class="number">
+                            <b>3.</b>
+                        </div> 
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur labore vero ad eius, commodi mollitia eos obcaecati optio ex tenetur voluptatum iusto voluptas at, ipsum alias. Doloremque numquam sed odio?</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

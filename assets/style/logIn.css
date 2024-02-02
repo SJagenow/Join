@@ -1,0 +1,333 @@
+* {
+    font-family: "Inter";
+    font-style: normal;
+    margin: 0;
+  }
+  
+  .HeaderLogin {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .headiconJoin {
+    position: absolute;
+    left: 5.35%;
+    right: 87.71%;
+    top: 7.81%;
+    bottom: 80.28%;
+    height: 122px;
+    width: 100px;
+  }
+  
+  .UserSignUp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 35px;
+    position: absolute;
+    width: 287px;
+    height: 51px;
+    right: 10%;
+    top: 67px;
+  }
+  
+  .NotJoinUser {
+    width: 161px;
+    height: 25px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    color: #000000;
+  }
+  
+  .btnSignUp {
+    /* Button wo icon v1 */
+  
+    /* Auto layout */
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    gap: 10px;
+    background: #2a3647;
+    border-radius: 8px;
+    /* Button */
+    width: 91px;
+    height: 51px;
+  
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    /* or 19px */
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btnSignUp:hover {
+    background: #29abe2;
+    cursor: pointer;
+  }
+  
+  section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    height: 100vh;
+  }
+  
+  .contentBox {
+    /* Auto layout */
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px 0px;
+    gap: 35px;
+  
+    width: 652px;
+    height: 513px;
+  
+    /* white */
+  
+    background: #ffffff;
+    /* shadoe backlog box */
+  
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+  }
+  
+  .headlineBox {
+    /* Auto layout */
+  
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+  
+    width: 315px;
+    height: 97px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  .headlineBox p {
+    width: 627px;
+    height: 73px;
+  
+    /* Version 2/t1 */
+  
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+    /* or 73px */
+  
+    text-align: center;
+  
+    color: #000000;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  
+  .emailPasswordField {
+    /* Auto layout */
+  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 29px;
+  
+    width: 422px;
+    height: 171px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  .mailPasswordInputField {
+    /* Auto layout */
+  
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 13px 21px;
+    gap: 10px;
+  
+    width: 422px;
+    height: 51px;
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+  }
+  
+  .mailPasswordInputField input {
+    border: none;
+    width: 90%;
+    height: 100%;
+  
+    /* Version 2/t6 */
+    color: black;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 120%;
+    /* or 25px */
+  
+    /* Style */
+  
+    /* Inside auto layout */
+  
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    outline: none;
+  }
+  
+  .mailPasswordInputField img {
+    width: 20px;
+    height: 18px;
+    /* icon */
+  
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  .RememberMe {
+    display: flex;
+    gap: 20px;
+  
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    /* or 19px */
+  
+    color: #000000;
+    width: 335px;
+    height: 19px;
+  }
+  
+  .ForgotPassword {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    /* or 19px */
+  
+    /* Ligth blue */
+  
+    color: #29abe2;
+  }
+  .btnLogGuest {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 35px;
+    width: 341px;
+    height: 51px;
+  }
+  .btnLogIn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+    gap: 10px;
+  
+    width: 145px;
+    height: 51px;
+  
+    background: #2a3647;
+    border-radius: 8px;
+    border: 0;
+    color: #ffffff;
+  
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    /* or 25px */
+  
+    color: #ffffff;
+  }
+  .btnLogIn:hover {
+    background: #29abe2;
+    cursor: pointer;
+  }
+  
+  .btnGuestLog {
+    box-sizing: border-box;
+    border: 0;
+  
+    /* Auto layout */
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    gap: 10px;
+  
+    width: 161px;
+    height: 51px;
+  
+    /* Version 2/ main color */
+  
+    border: 1px solid #2a3647;
+    border-radius: 8px;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    /* or 25px */
+  
+    /* Version 2/ main color */
+  
+    color: #2a3647;
+    cursor: pointer;
+    background-color: white;
+  }
+  .btnGuestLog:hover {
+    cursor: pointer;
+    /* Ligth blue */
+  
+    border: 2px solid #29abe2;
+    color: #29abe2;
+    /* stronger */
+  
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 8px;
+  }
+  
+  .checkBox {
+    background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
+    border: 1px solid #000000;
+    border-radius: 3px;
+  }
+  

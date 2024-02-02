@@ -222,6 +222,9 @@ nav {
     align-items: center;
     gap: 16px;
 }
+.header_icon_container img{
+    cursor: pointer;
+}
 
 #help_icon {
     height: 32px;

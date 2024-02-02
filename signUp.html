@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/style/signUp.css" />
+
+    <script
+      language="JavaScript"
+      type="text/javascript"
+      src="./mini_backend.js"
+    ></script>
+    <script src="../js/signUp.js"></script>
+    <title>Sign up</title>
+    
+  </head>
+  <body onload="init()">
+    <section>
+      <div class="headIcon">
+        <img src="./assets/img/join_logo-dark.png" alt="" />
+      </div>
+      <div class="contentBox">
+        <div class="backArrow">
+          <a href="../../index.html"
+            ><img src="./assets/img/arrow-left-line.png" alt=""
+          /></a>
+        </div>
+        <div class="headlineBox">
+          <p class="headline">Sign up</p>
+          <img src="./assets/img/blueUnderline.png">
+        </div>
+        <form onsubmit="addUser(); return false">
+          <div class="inputFieldBox">
+            <div class="nameMailPasswordInputField">
+              <input required type="text" placeholder="Name" id="names" />
+              <img src="./assets/img/person.png" alt="" />
+            </div>
+            <div class="nameMailPasswordInputField">
+              <input required type="email" placeholder="Email" id="emails" />
+              <img src="./assets/img/mail.png" alt="" />
+            </div>
+            <div class="nameMailPasswordInputField">
+              <input required type="password" placeholder="Password" id="passwords" />
+              <img src="./assets/img/password_input.svg" alt="" />
+            </div>
+            <div class="nameMailPasswordInputField">
+                <input required type="password" placeholder="Confirm Password" id="confirmPW" />
+                <img src="./assets/img/password_input.svg" alt="" />
+              </div>
+              <div class="form-checkbox">
+                <input type="checkbox" id="checkbox" name="checkbox" required>
+                I accept the 
+                <a href="./privacy_policy.html">Privacy policy</a>
+            </div>
+          </div>
+        </form>
+        <button class="signUpBtn">Sign up</button>
+      </div>
+    </section>
+  </body>
+</html>

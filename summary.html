@@ -1,44 +1,50 @@
 <!DOCTYPE html>
-<htmllang="de">
+<html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title></title>
-        <link rel="stylesheet" type="text/css" href="style/summary.css">
-        <script type="text/javascript" src="script.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/style/summary.css">
+    <link rel="stylesheet" href="./assets/style/fonts.css">
+    <script src="script.js"></script>
+    <title>Kanban Project Management Tool</title>
+</head>
 
-    <body onload="includeHTML()">
+    <body onload="init()">
+      <div class="flex header_container">
+        <div w3-include-html="templates/menu.html"></div>
+        <div w3-include-html="templates/header.html"></div>
+      </div>
         <!-- <header class="header" w3-include-html="src/templates/header.html"></header> -->
-        <div class="summary">
-            <div class="summary-header">
+      <div class="summary">
+          <div class="summary-header">
                 <span class="summary-headline">Join 360</span>
                 <span class="summary-line"> </span>
                 <span class="summary-titelText">Key Metrics at a Glance</span>
-            </div>
-            <div class="summary-content">
+          </div>
+          <div class="summary-content">
+            <div class="summary-left">
                 <div class="summary-todo">
-                  <div href="src/templates/board.html" class="task-todo">
-                      <img src="assets/img/summary-pencil-dark.png" class="todo-img">
+                  <div href="./board.html" class="task-todo">
+                      <img src="./assets/img/summary-pencil-dark.png" class="todo-img pencil">
                       <div class="summary-todo-right">
                           <div class="task-counter-todo" id="task-counter-todo">1</div>
                           <span class="todo-description">To-do</span>
                       </div>
                   </div>
-                  <div class="summary-left"> 
-                    <div href="src/templates/board.html" class="task-todo">
-                      <img src="assets/img/summary-done.png" class="todo-img">
+                   
+                    <div href="board.html" class="task-todo">
+                      <img src="./assets/img/summary-done-dark.png" class="todo-img done">
                       <div class="summary-todo-right">
                           <div class="task-counter-todo" id="task-counter-done">1</div>
                           <span class="todo-description">Done</span>
                       </div>
                     </div> 
-                  </div>
                 </div>
-                <div href="src/board.html" class="summary-task-deadline">
+                <div href="./board.html" class="summary-task-deadline">
                     <div class="urgent">
-                      <img class="urgent-img" src="assets/img/summary-urgent.png">
+                      <img class="urgent-img" src="./assets/img/summary-urgent.png">
                       <div class="task-urgent">
                         <div class="urgent-counter">1</div>
                         <span class="urgent-description">Urgent</span>
@@ -51,11 +57,11 @@
                     </div>
                 </div>
                 <div class="summary-task">
-                    <div class="task-type" href="/board.html">
+                    <div class="task-type" href="board.html">
                       <div class=task-counter id="task-counter-all">1</div>
                       <span class="task-description">Tasks in Board</span>
                     </div>
-                    <div href="src/board.html" class="task-type">
+                    <div href="board.html" class="task-type">
                       <div class=task-counter id="task-counter-Inprogress">2</div>
                       <span class="task-description">Tasks In Progress</span>
                     </div>
@@ -65,8 +71,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+            <div class="summary-welcome-user"> 
+              <span class="good-morning">Good Morning,</span>
+              <span class="user-name">Sofia Müller</span>
+            </div>
+          </div>
+      </div>
     </body>
 
     </html>

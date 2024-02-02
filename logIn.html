@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style/fonts.css" />
+    <title>Join</title>
+    <link rel="stylesheet" type="text/css" href="./assets/style/logIn.css" />
+
+  </head>
+
+  <body onload="init()">
+    <header class="HeaderLogin">
+      <img class="headiconJoin" src="./assets/img/join_logo-dark.png" alt="" />
+      <div class="UserSignUp">
+        <p class="NotJoinUser">Not a Join user?</p>
+        <a href="./signUp.html">
+          <button class="btnSignUp">Sign up</button>
+        </a>
+      </div>
+    </header>
+
+    <section>
+      <div class="contentBox">
+        <div class="headlineBox">
+          <p>Log in</p>
+          <img src="./assets/img/blueUnderline.png">
+        </div>
+
+        <form onsubmit="logIn()">
+          <div class="emailPasswordField">
+            <div class="mailPasswordInputField">
+              <input required type="email" placeholder="Email" />
+              <img src="./assets/img/mail.png" alt="" />
+            </div>
+
+            <div class="mailPasswordInputField">
+              <input required type="password" placeholder="Password" />
+              <img src="./assets/img/password_input.svg" alt="" />
+            </div>
+          </div>
+        </form>
+
+        <div class="RememberMe">
+          <input class="checkBox" type="checkbox" />
+          <div>Remember me</div>
+          <!-- <div>
+            <a class="ForgotPassword" href="src/templates/forgotPassword.html"
+              >Forgot my password
+            </a>
+          </div> -->
+        </div>
+        <div class="btnLogGuest">
+          <button class="btnLogIn">Log in</button>
+          <button class="btnGuestLog">Guest Log in</button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
