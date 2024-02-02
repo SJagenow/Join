@@ -182,7 +182,6 @@
 
 @media (max-width: 1340px) {
     .main-container {
-        margin-top: 70px;
         margin-left: 0;
         margin-right: 0;
         max-height: calc(100vh - 190px);
@@ -248,7 +247,7 @@
     }
 
     .main-container {
-        margin-top: 0;
+        margin-top: 50px;
         max-height: calc(100vh - 120px);
     }
 
@@ -333,16 +332,6 @@
         font-size: 16px;
     }
 }
-
-
-
-
-.add-task-input-div {}
-
-.form-input-titel {}
-
-.add-task-select {}
-
 
 
 
