@@ -49,9 +49,22 @@
                             <div class="column">
                                 <label class="form-input-titel" for="prio-div">Prio</label>
                                 <div class="space-between" id="prio-div">
-                                    <button class="add-task-prio-button">Urgent <img src="./assets/img/prio_alta.png" alt=""></button>
-                                    <button class="add-task-prio-button">Medium <img src="./assets/img/prio_media.png" alt=""></button>
-                                    <button class="add-task-prio-button">Low <img src="./assets/img/prio_baja.png" alt=""></button>
+                                    <button id="prio-button-urgent" class="add-task-prio-button">
+                                        Urgent 
+                                        <svg viewBox="0 0 21 16">
+                                            <use href="assets/img/icons.svg#urgentprio-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <button id="prio-button-medium" class="add-task-prio-button">Medium 
+                                        <svg viewBox="0 0 21 16">
+                                            <use href="assets/img/icons.svg#mediumprio-icon"></use>
+                                        </svg>
+                                    </button>
+                                    <button id="prio-button-low" class="add-task-prio-button">Low 
+                                        <svg viewBox="0 0 21 16">
+                                            <use href="assets/img/icons.svg#lowprio-icon"></use>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                             <div class="column">
@@ -71,14 +84,19 @@
                     <div class="form-end space-between">
                         <div class="conditions-text">This field is required</div>
                         <div class="add-task-buttons-div">
-                            <button class="parrent-button-light">Clear &#10006;</button>
-                            <button class="parrent-button-dark">Create Task &#10004;</button>
+                            <button id="task-clear-button" class="parrent-button-light">Clear &#10006;</button>
+                            <button id="task-create-button" class="parrent-button-dark">Create Task
+                                <svg>
+                                    <use href="assets/img/icons.svg#check-icon"></use>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </form>
             </main>
         </div>
     </div>
+    <div>
 </body>
 
 </html>

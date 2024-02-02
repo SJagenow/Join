@@ -108,14 +108,30 @@
     align-items: center;
 }
 
-.add-task-prio-button img {
-    height: 14.51px;
+.add-task-prio-button svg {
     width: 20px;
+}
+
+#prio-button-urgent svg {
+    fill: #FF3D00;
+}
+
+#prio-button-medium svg {
+    fill: #FFA800;
+}
+
+#prio-button-low svg {
+    fill: #7AE229;
 }
 
 .add-task-buttons-div {
     display: flex;
     gap: 16px;
+}
+
+#task-create-button svg {
+    width: 18px;
+    margin-left: 6px;
 }
 
 .ht80 {
