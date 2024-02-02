@@ -23,15 +23,15 @@
                     <div class="gap48">
                         <div>
                             <div class="column">
-                                <h2 class="form-input-titel asterisk">Title</h2>
+                                <label class="form-input-titel asterisk" for="add-task-title">Title</label>
                                 <input id="add-task-title" class="add-task-input" type="text" name="Title" required placeholder="Enter a title">
                             </div>
                             <div class="column">
-                                <h2 class="form-input-titel">Description</h2>
+                                <label class="form-input-titel" for="add-task-description">Description</label>
                                 <textarea id="add-task-description" class="add-task-textarea" type="text" name="Description" placeholder="Enter a Description"></textarea>
                             </div>
                             <div class="column">
-                                <h2 class="form-input-titel">Assignet to</h2>
+                                <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
                                 <select id="add-task-assignet-to" class="add-task-select" name="cars">
                                     <option value="" selected disabled hidden>Select contacts to assign</option>
                                     <option value="saab">Saab</option>
@@ -43,28 +43,27 @@
                         <div class="seperator"></div>
                         <div>
                             <div class="column">
-                                <h2 class="form-input-titel asterisk">Due date</h2>
+                                <label class="form-input-titel asterisk" for="add-task-date">Due date</label>
                                 <input id="add-task-date" class="add-task-input" type="date" name="Due date" required placeholder="dd//mm//yyyy">
                             </div>
                             <div class="column">
-                                <h2 class="form-input-titel">Prio</h2>
-                                <div class="space-between">
+                                <label class="form-input-titel" for="prio-div">Prio</label>
+                                <div class="space-between" id="prio-div">
                                     <button class="add-task-prio-button">Urgent <img src="./assets/img/prio_alta.png" alt=""></button>
                                     <button class="add-task-prio-button">Medium <img src="./assets/img/prio_media.png" alt=""></button>
                                     <button class="add-task-prio-button">Low <img src="./assets/img/prio_baja.png" alt=""></button>
                                 </div>
                             </div>
                             <div class="column">
-                                <h2 class="form-input-titel asterisk">Category</h2>
-                                <select id="add-task-assignet-to" class="add-task-select" required name="cars">
+                                <label class="form-input-titel asterisk" for="add-task-category">Category</label>
+                                <select id="add-task-category" class="add-task-select" required name="cars">
                                     <option value="" selected disabled hidden>Select task category</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="fiat">Fiat</option>
-                                    <option value="audi">Audi</option>
+                                    <option value="technical task">Technical Task</option>
+                                    <option value="user story">User Story</option>
                                 </select>
                             </div>
                             <div class="column">
-                                <h2 class="form-input-titel">Subtasks</h2>
+                                <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
                                 <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks" placeholder="Add new subtask">
                             </div>
                         </div>
