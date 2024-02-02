@@ -3,10 +3,13 @@
     margin-left: 96px;
     margin-right: 135.75px;
     width: 976.25px;
+    height: 100pc;
+    max-height: calc(100vh - 230px);
+    overflow: auto;
 }
 
 .ad-task-form {
-    gap: 110px;
+    gap: 50px;
 }
 
 .form-input-titel {
@@ -20,8 +23,8 @@
 }
 
 .conditions-text {
-        display: flex;
-        align-items: end;
+    display: flex;
+    align-items: end;
 }
 
 .conditions-text::before {
@@ -79,7 +82,15 @@
     padding-left: 21px;
 }
 
-#add-task-date::-webkit-calendar-picker-indicator{
+.add-task-select option {
+    height: 48px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    margin-bottom: 28px;
+    padding-left: 21px;
+}
+
+#add-task-date::-webkit-calendar-picker-indicator {
     margin-right: 16px;
 }
 
@@ -98,6 +109,11 @@
     border: #D1D1D1 solid 1px;
     background-color: white;
     margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: box-shadow 80ms ease-in;
 }
 
 .add-task-prio-button svg {
@@ -122,19 +138,29 @@
     gap: 16px;
 }
 
-#prio-button-urgent:hover, #prio-button-urgent:hover svg {
+#prio-button-urgent:hover,
+#prio-button-medium:hover,
+#prio-button-low:hover {
+    transition: box-shadow 80ms ease-out;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#prio-button-urgent:active,
+#prio-button-urgent:active svg {
     background-color: #FF3D00;
     color: white;
     fill: white;
 }
 
-#prio-button-medium:hover, #prio-button-medium:hover svg {
+#prio-button-medium:active,
+#prio-button-medium:active svg {
     background-color: #FFA800;
     color: white;
     fill: white;
 }
 
-#prio-button-low:hover, #prio-button-low:hover svg {
+#prio-button-low:active,
+#prio-button-low:active svg {
     background-color: #7AE229;
     color: white;
     fill: white;
@@ -159,9 +185,10 @@
         margin-top: 70px;
         margin-left: 0;
         margin-right: 0;
-        width: calc(100vw - 232px);
+        max-height: calc(100vh - 190px);
         display: flex;
         justify-content: center;
+        width: auto;
     }
 }
 
@@ -217,12 +244,12 @@
 
     .media-column {
         flex-direction: column;
+        max-height: calc(100vh - 10px);
     }
 
     .main-container {
         margin-top: 0;
-        max-height: 870px;
-        overflow: auto;
+        max-height: calc(100vh - 120px);
     }
 
     .add-task-input-div {
@@ -305,4 +332,87 @@
     .add-task-select {
         font-size: 16px;
     }
+}
+
+
+
+
+.add-task-input-div {}
+
+.form-input-titel {}
+
+.add-task-select {}
+
+
+
+
+
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+#myInput {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    min-width: 390px;
+}
+
+#myInput:focus {
+    outline: 3px solid #ddd;
+    min-width: 390px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 390px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    /* max-height: 300px; */
+}
+
+.add-task-contact-list {
+    overflow: auto;
+}
+
+.dropdown-content a, .dropdown-content div {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: #D1D1D1 solid 1px;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+body {
+    overflow: hidden;
 }

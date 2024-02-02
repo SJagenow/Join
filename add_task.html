@@ -25,11 +25,41 @@
                             <div class="add-task-input-div">
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel asterisk" for="add-task-title">Title</label>
-                                    <input id="add-task-title" class="add-task-input" type="text" name="Title" required placeholder="Enter a title">
+                                    <input id="add-task-title" class="add-task-input" type="text" name="Title" required
+                                        placeholder="Enter a title">
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="add-task-description">Description</label>
-                                    <textarea id="add-task-description" class="add-task-textarea" type="text" name="Description" placeholder="Enter a Description"></textarea>
+                                    <textarea id="add-task-description" class="add-task-textarea" type="text"
+                                        name="Description" placeholder="Enter a Description"></textarea>
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <button onclick="myFunction()" class="dropdown add-task-select">Dropdown</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <input type="text" placeholder="Search.." id="myInput"
+                                            onkeyup="filterFunction()">
+                                        <a href="#about">About</a>
+                                        <a href="#base">Base</a>
+                                        <a href="#blog">Blog</a>
+                                        <a href="#contact">Contact</a>
+                                        <a href="#custom">Custom</a>
+                                        <a href="#support">Support</a>
+                                        <a href="#tools">Tools</a>
+                                        <div class="add-task-contact-list">
+                                            <div>
+                                                <label for="vehicle1"> I have a bike</label>
+                                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                            </div>
+                                            <div>
+                                                <label for="vehicle2"> I have a car</label>
+                                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                            </div>
+                                            <div>
+                                                <label for="vehicle3"> I have a boat</label>
+                                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
@@ -45,23 +75,24 @@
                             <div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel asterisk" for="add-task-date">Due date</label>
-                                    <input id="add-task-date" class="add-task-input" type="date" name="Due date" required placeholder="dd//mm//yyyy">
+                                    <input id="add-task-date" class="add-task-input" type="date" name="Due date"
+                                        required placeholder="dd//mm//yyyy">
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="prio-div">Prio</label>
                                     <div class="space-between" id="prio-div">
                                         <button id="prio-button-urgent" class="add-task-prio-button">
-                                            Urgent 
+                                            Urgent
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#urgentprio-icon"></use>
                                             </svg>
                                         </button>
-                                        <button id="prio-button-medium" class="add-task-prio-button">Medium 
+                                        <button id="prio-button-medium" class="add-task-prio-button">Medium
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#mediumprio-icon"></use>
                                             </svg>
                                         </button>
-                                        <button id="prio-button-low" class="add-task-prio-button">Low 
+                                        <button id="prio-button-low" class="add-task-prio-button">Low
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#lowprio-icon"></use>
                                             </svg>
@@ -78,7 +109,8 @@
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
-                                    <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks" placeholder="Add new subtask">
+                                    <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks"
+                                        placeholder="Add new subtask">
                                 </div>
                             </div>
                         </div>
