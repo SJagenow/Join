@@ -471,12 +471,12 @@ body button {
     height: 24px;
     width: 24px;
     background-image: url(../contactbook/icons_contactbook/delete.svg);
-    background-size: 20px 20px;
+    /* background-size: 20px 20px; */
     /* background-size: contain; */
-    background-position: left;
+    background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    padding-left: 32px;
+    padding-left: 56px;
     align-items: center;
     color: var(--Version-2-main-color, #2A3647);
     font-size: 16px !important;
@@ -489,12 +489,12 @@ body button {
     height: 24px;
     width: 24px;
     background-image: url(../contactbook/icons_contactbook/edit.svg);
-    background-size: 24px 24px;
+    /* background-size: 24px 24px; */
     /* background-size: contain; */
-    background-position: left;
+    background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    padding-left: 32px;
+    padding-left: 56px;
     align-items: center;
     color: var(--Version-2-main-color, #2A3647);
     font-size: 16px !important;
@@ -530,6 +530,9 @@ body button {
     align-items: center;
 }
 
+.marginL-24{
+    margin-left: -24px;
+}
 
 /* .divide_container svg{
     width: calc(100vw - 232px);
