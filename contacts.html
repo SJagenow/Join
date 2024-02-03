@@ -36,12 +36,10 @@
                             Testing Tim
                         </div>
                         <div class="flex gap16">
-                            <div class="contact_little_icon_container">
-                                <img src="./assets/contactbook/icons_contactbook/edit.svg" alt="">
+                            <div id="contactlist_edit_icon_container">
                                 <span>Edit</span>
                             </div>
-                            <div class="contact_little_icon_container">
-                                <img src="./assets/contactbook/icons_contactbook/delete.svg" alt="">
+                            <div id="contactlist_delete_icon_container">
                                 <span>Delete</span>
                             </div>
 
@@ -69,17 +67,21 @@
         <div class="contactlist_mid_layer">
             <div onclick="noClose(event)" id="add_contact_overlay">
                 <div class="left_side_add_contact_overlay">
-                    <img src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
+                    <div onclick="closeAddContactDialog()" class="add_contact_close_container_handy">
+                        <img src="./assets/contactbook/icons_contactbook/close_white.svg" alt="">
+                    </div>
+                    <img id="contact_list_logo_handy" src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
                     <div class="add_contact_overlay_text_container">
                         <span id="add_contact_headline">Add contact</span>
                         <!-- later you can render 'Edit contact' here -->
                         <span id="under_headline">Tasks are better with a team!</span>
                         <!-- later you can 'display: none' it to remove it for 'Edit contact overlay' -->
+                        <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
                     </div>
-                    <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
+                   
                 </div>
                 <div class="right_side_add_contact_overlay">
-                    <div class="center">
+                    <div class="center_up">
                         <div id="contact_initials_container">
                             <!-- later you can render 'profilepicture or initials here' here -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"
@@ -89,9 +91,9 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="center">
+                    <div class="center_up">
                         <div class="edit_formular_container">
-                            <div onclick="closeAddContactDialog()" id="add_contact_close_container">
+                            <div onclick="closeAddContactDialog()" class="add_contact_close_container">
                                 <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
                             </div>
                             <form onsubmit="addToContacts(); return false;">

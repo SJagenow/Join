@@ -2,7 +2,7 @@ body {
     margin: 0;
     /* background-color: rgb(246, 247, 248); */
     font-family: 'Inter', sans-serif;
-    background-color: rgb(246,247,248);
+    background-color: rgb(246, 247, 248);
 }
 
 body button {
@@ -69,7 +69,7 @@ body button {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.8);
     display: none;
     z-index: 999;
 }
@@ -114,9 +114,9 @@ body button {
     background: #FFF;
 }
 
-.contact_list_container:hover{
+.contact_list_container:hover {
     color: white;
-    background-color:#2A3647;
+    background-color: #2A3647;
     cursor: pointer;
 }
 
@@ -234,7 +234,7 @@ body button {
 #add_contact_overlay {
     width: 1212px;
     height: 592px;
-    border-radius: 30px;
+    border-radius: 36px;
     background: #FFF;
     display: flex;
 }
@@ -391,10 +391,21 @@ body button {
     width: 24px;
 }
 
-#add_contact_close_container {
+.add_contact_close_container {
     width: 100%;
     display: flex;
     justify-content: end;
+}
+
+.add_contact_close_container_handy {
+    width: 100%;
+    display: none;
+    justify-content: end;
+}
+
+.add_contact_close_container:hover,
+.add_contact_close_container_handy:hover {
+    cursor: pointer;
 }
 
 .right_side_add_contact_overlay {
@@ -456,6 +467,70 @@ body button {
     justify-content: space-evenly;
 }
 
+#contactlist_delete_icon_container {
+    height: 24px;
+    width: 24px;
+    background-image: url(../contactbook/icons_contactbook/delete.svg);
+    background-size: 20px 20px;
+    /* background-size: contain; */
+    background-position: left;
+    background-repeat: no-repeat;
+    display: flex;
+    padding-left: 32px;
+    align-items: center;
+    color: var(--Version-2-main-color, #2A3647);
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+#contactlist_edit_icon_container {
+    height: 24px;
+    width: 24px;
+    background-image: url(../contactbook/icons_contactbook/edit.svg);
+    background-size: 24px 24px;
+    /* background-size: contain; */
+    background-position: left;
+    background-repeat: no-repeat;
+    display: flex;
+    padding-left: 32px;
+    align-items: center;
+    color: var(--Version-2-main-color, #2A3647);
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+#contactlist_delete_icon_container:hover {
+    height: 24px;
+    width: 24px;
+    background-image: url(../contactbook/icons_contactbook/delete_blue.svg);
+    color: #29ABE2;
+    cursor: pointer;
+    scale: 1.0;
+    font-weight: 700;
+}
+
+#contactlist_edit_icon_container:hover {
+    height: 24px;
+    width: 24px;
+    background-image: url(../contactbook/icons_contactbook/edit_blue.svg);
+    color: #29ABE2;
+    cursor: pointer;
+    scale: 1.0;
+    font-weight: 700;
+
+}
+
+.center_up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 /* .divide_container svg{
     width: calc(100vw - 232px);
 } */
@@ -465,7 +540,7 @@ body button {
         width: 1208px;
     }
 
-    #contact_list{
+    #contact_list {
         padding: 0px 0px 0px 100px !important;
     }
 }
@@ -483,13 +558,13 @@ body button {
 
     .divide_container {
         width: calc(100vw - 232px);
-        
+
     }
 
     .divide_container img {
         width: calc(100vw - 232px);
-        
-        
+
+
     }
 
     /* .contact_list_container {
@@ -499,10 +574,98 @@ body button {
     #add_contact_overlay {
         width: unset;
         height: unset;
-        border-radius: 30px;
+        border-radius: 36px;
         background: #FFF;
         display: flex;
         flex-direction: column;
+    }
+
+    .add_contact_close_container_handy {
+        display: flex;
+    }
+
+    .add_contact_close_container {
+        display: none;
+    }
+
+    .left_side_add_contact_overlay {
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px;
+        height: 352px;
+        width: 396px;
+        padding: 0px;
+        justify-content: flex-start;
+        align-items: center;
+        min-width: 396px;
+    }
+
+    .right_side_add_contact_overlay {
+        height: 400px;
+        width: 396px;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 0px;
+    }
+
+    .right_side_add_contact_overlay input {
+        width: 310px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .input_container {
+        height: 41px;
+        width: 364px;
+        padding: 0px;
+    }
+
+    .add_contact_close_container_handy {
+        width: 90%;
+        margin-top: 32px;
+        padding-bottom: 64px;
+ 
+    }
+
+    #contact_list_logo_handy{
+        display: none;
+    }
+
+    #add_contact_headline{
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    #under_headline{
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .add_contact_overlay_text_container{
+        gap: 8px;
+        width: 332px;
+    }
+
+    .center_up{
+        width: 396px;
+        margin-bottom: 34px;
+    }
+
+    #contact_save_button{
+        padding: 0px;
+        width: 82px;
+        height: 51px;
+      
+    }
+
+    #contact_delete_button{
+        padding: 0px;
+        width: 82px;
+        height: 51px;
+    }
+
+    .right_side_add_contact_overlay form {
+       
+        gap: 24px;
     }
 
 }

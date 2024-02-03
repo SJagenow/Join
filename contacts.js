@@ -53,6 +53,12 @@ function renderContactList() {
     </div>
     `;
     }
+    renderContactToList();
+}
+
+function renderContactToList(){
+    // render into the contact_list_names[i]  
+
 }
 
 /**
@@ -79,7 +85,7 @@ function noClose(event) {
   }
 
 /**
- * This function creates a json from the inputs of the 'add contact' overlay and pushes it into the contactlist Array.
+ * This function creates a json from the inputs of the 'add contact' overlay and pushes it into the contactlist Array and saves it in the backend.
  * 
  * @param {string} contact - This is the json with all informations from the inputfield. It will be pushed into contactlist.
  */
