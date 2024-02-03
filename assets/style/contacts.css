@@ -2,6 +2,7 @@ body {
     margin: 0;
     /* background-color: rgb(246, 247, 248); */
     font-family: 'Inter', sans-serif;
+    background-color: rgb(246,247,248);
 }
 
 body button {
@@ -18,7 +19,8 @@ body button {
     height: calc(100vh - 104px);
     /* 104px is the height from header*/
     width: 400px;
-    margin: 0px 0px 0px 259px;
+    padding: 0px 0px 0px 259px;
+    background-color: white;
 }
 
 #contact_list button {
@@ -458,6 +460,16 @@ body button {
     width: calc(100vw - 232px);
 } */
 
+@media(min-width:1440px) {
+    header {
+        width: 1208px;
+    }
+
+    #contact_list{
+        padding: 0px 0px 0px 100px !important;
+    }
+}
+
 @media(max-width:1210px) {
 
     .contact_overview {
@@ -471,11 +483,18 @@ body button {
 
     .divide_container {
         width: calc(100vw - 232px);
+        
     }
 
-    .contact_list_container {
+    .divide_container img {
         width: calc(100vw - 232px);
+        
+        
     }
+
+    /* .contact_list_container {
+        width: calc(100vw - 232px);
+    } */
 
     #add_contact_overlay {
         width: unset;

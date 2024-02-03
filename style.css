@@ -163,6 +163,7 @@ header {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
     position: relative;
     z-index: 999;
+    background-color: #FFF;
 }
 
 .header_container {
@@ -257,10 +258,6 @@ nav {
 @media(min-width:1440px) {
     header {
         width: 1208px;
-    }
-
-    #contact_list{
-        margin: 0px 0px 0px 100px !important;
     }
 }
 

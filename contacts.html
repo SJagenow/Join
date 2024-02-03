@@ -94,19 +94,19 @@
                             <div onclick="closeAddContactDialog()" id="add_contact_close_container">
                                 <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
                             </div>
-                            <form action="" onsubmit="addToContacts()">
+                            <form onsubmit="addToContacts()">
                                 <div class="input_container">
-                                    <input required minlength="3" type="text" placeholder="Name " id="contactlist_name_input">
+                                    <input required minlength="3" type="text" placeholder="Name" id="contactlist_name_input" title="Please enter a name with at least 3 characters">
                                     <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
                                 </div>
                                 <div class="input_container">
-                                    <input required type="email" placeholder="E-Mail " id="contactlist_mail_input">
+                                    <input required type="email" placeholder="E-Mail" id="contactlist_mail_input" title="Please enter a valid email address">
                                     <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
-                                </div>
+                                </div>                                
                                 <div class="input_container">
-                                    <input required type="number" placeholder="Phone " id="contactlist_phone_input">
+                                    <input required type="text" placeholder="Phone" id="contactlist_phone_input" pattern="[+]?[0-9]+" title="Please enter a valid phone number">
                                     <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
-                                </div>
+                                </div>                                
                                 <div class="edit_contact_button_container">
                                     <button id="contact_delete_button">
                                         Delete
