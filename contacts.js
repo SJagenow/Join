@@ -1,6 +1,20 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let contactList = [];
 
+async function init() {
+    await includeHTML();
+    renderContactList();
+    loadContactList();
+}
+
+async function loadContactList(){
+    try {
+        contactList = JSON.parse(await getItem('contactList'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+}
+
 /**
  *  This function is used to render an empty contactlist with alphabethical rows.
  * 
@@ -69,7 +83,9 @@ function noClose(event) {
  * 
  * @param {string} contact - This is the json with all informations from the inputfield. It will be pushed into contactlist.
  */
-function addToContacts(){
+async function addToContacts(){
+    let saveContactButton = document.getElementById('contact_save_button');
+    saveContactButton.disabled = true;
     let name = document.getElementById('contactlist_name_input');
     let mail = document.getElementById('contactlist_mail_input');
     let phone = document.getElementById('contactlist_phone_input');
@@ -80,6 +96,7 @@ function addToContacts(){
     };
     contactList.push(contact);
     console.log('updated contactlist:' ,contactList);
+    await setItem('contactList', JSON.stringify(contactList)); // key = contactlist ,value = contactlistArray as text
     resetAddContactForm(name, mail, phone);
 } 
 

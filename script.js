@@ -1,6 +1,6 @@
 async function init() {
     await includeHTML();
-    renderContactList()
+
 }
 
 async function includeHTML() {
