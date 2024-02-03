@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <script src="script.js"></script>
     <script src="contacts.js"></script>
+    <script src="storage.js"></script>
     <title>Kanban Project Management Tool</title>
 </head>
 
@@ -93,17 +94,17 @@
                             <div onclick="closeAddContactDialog()" id="add_contact_close_container">
                                 <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
                             </div>
-                            <form action="">
+                            <form action="" onsubmit="addToContacts()">
                                 <div class="input_container">
-                                    <input type="text" placeholder="Name ">
+                                    <input required minlength="3" type="text" placeholder="Name " id="contactlist_name_input">
                                     <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
                                 </div>
                                 <div class="input_container">
-                                    <input type="text" placeholder="E-Mail ">
+                                    <input required type="email" placeholder="E-Mail " id="contactlist_mail_input">
                                     <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
                                 </div>
                                 <div class="input_container">
-                                    <input type="text" placeholder="Phone ">
+                                    <input required type="number" placeholder="Phone " id="contactlist_phone_input">
                                     <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
                                 </div>
                                 <div class="edit_contact_button_container">

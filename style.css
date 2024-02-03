@@ -258,9 +258,13 @@ nav {
     header {
         width: 1208px;
     }
+
+    #contact_list{
+        margin: 0px 0px 0px 100px !important;
+    }
 }
 
-@media(max-width:1440px) {
+@media(max-width:1439px) {
     body {
         display: block
     };
