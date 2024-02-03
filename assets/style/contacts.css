@@ -39,7 +39,7 @@ body button {
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-    /* 25.2px */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
 }
 
 .contactlist_button_container {
@@ -49,8 +49,10 @@ body button {
     align-items: center;
 }
 
-.contactlist_button_container button:hover {
+#contact_list button:hover {
     cursor: pointer;
+    background-color: #29ABE2;
+    border-color: #29ABE2;
 }
 
 .contact_little_icon_container:hover {
@@ -115,8 +117,8 @@ body button {
 }
 
 .contact_list_container:hover {
-    color: white;
-    background-color: #2A3647;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-blend-mode: darken;
     cursor: pointer;
 }
 
@@ -430,26 +432,27 @@ body button {
 
 .input_container {
     display: flex;
-    width: 422px;
-    padding: 13px 21px;
     align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--Style, #D1D1D1);
-    /* var(--Ligth-blue, #29ABE2) when selected border goes this color */
-    background: #FFF;
+
 }
 
 .input_container img {
     width: 24px;
     height: 24px;
-    flex-shrink: 0;
+    margin-left: -40px;
 }
 
 .input_container input {
-    border-width: 0;
+    /* border-width: 0; */
+    display: flex;
+    width: 422px;
+    padding: 13px 21px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    background: #FFF;
     line-height: 120%;
-    /* 24px  did this take influence?*/
 }
 
 .edit_contact_button_container {
