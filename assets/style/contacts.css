@@ -605,14 +605,9 @@ body button {
         width: calc(100vw - 232px);
         align-items: unset;
     }
-
-    .divide_container {
-        width: calc(100vw - 232px);
-
-    }
-
+    
     .divide_container img {
-        width: calc(100vw - 232px);
+        width: calc(90vw - 232px);
 
 
     }
