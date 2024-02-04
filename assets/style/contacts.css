@@ -71,7 +71,7 @@ body button {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     display: none;
     z-index: 999;
 }
@@ -472,7 +472,8 @@ body button {
     justify-content: center;
     align-items: flex-end;
     gap: 25px;
-    margin-top: 16px;
+    margin-top: 4px;
+    margin-bottom: 24px;
 }
 
 .edit_formular_container {
@@ -675,7 +676,7 @@ body button {
 
     #contact_save_button{
         padding: 0px;
-        width: 82px;
+        width: 202px;
         height: 51px;
         gap: 0px;
       
@@ -685,6 +686,7 @@ body button {
         padding: 0px;
         width: 82px;
         height: 51px;
+        display: none;
     }
 
     .right_side_add_contact_overlay form {
