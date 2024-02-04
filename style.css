@@ -154,6 +154,12 @@ h1 {
     position: relative;
 }
 
+#header_handy_image{
+    display: none;
+    height: 39.02px;
+    width: 32px;
+}
+
 header {
     display: flex;
     width: calc(100vw - 232px);
@@ -266,6 +272,17 @@ nav {
     body {
         display: block
     };
+}
+
+@media(max-width:650px){
+    header span{
+        display: none;
+    }
+
+    #header_handy_image{ 
+        display: unset;
+    }
+
 }
 
 /* Customize website's scrollbar like Mac OS
