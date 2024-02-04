@@ -283,6 +283,10 @@ nav {
         display: unset;
     }
 
+    #help_icon {
+        display: none;
+    }
+
 }
 
 /* Customize website's scrollbar like Mac OS
