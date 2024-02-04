@@ -98,6 +98,10 @@ body button {
     
 }
 
+#contactlist_add_contact_button:hover{
+    cursor: pointer;
+}
+
 .contactlist_mid_layer {
     height: 100%;
     display: flex;

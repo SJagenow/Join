@@ -66,6 +66,7 @@ function renderContactToList(){
  */
 function showAddContactDialog(){
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
+    document.getElementById('contactlist_add_contact_button').style.display = 'none';
 }
 
 /**
@@ -73,6 +74,7 @@ function showAddContactDialog(){
  */
 function closeAddContactDialog(){
     document.getElementById('contactlist_overlay_container').style.display = 'none';
+    document.getElementById('contactlist_add_contact_button').style.display = 'flex';
 }
 
 /**
