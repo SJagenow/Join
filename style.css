@@ -1,6 +1,9 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -9,6 +12,8 @@ h1 {
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .parrent-button-dark {
@@ -21,6 +26,7 @@ h1 {
     border: #2A3647 solid 1px;
     display: flex;
     align-items: center;
+    transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
 }
 
 .parrent-button-light {
@@ -33,16 +39,22 @@ h1 {
     border: #2A3647 solid 1px;
     display: flex;
     align-items: center;
+    transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
 }
 
 .parrent-button-dark:hover {
     background-color: #29ABE2;
     border-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: background-color 80ms ease-out, border-color 80ms ease-out, box-shadow 80ms ease-out;
 }
 
 .parrent-button-light:hover {
     color: #29ABE2;
     border-color: #29ABE2;
+    transition: color, border-color, box-shadow 8000ms ease-out;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: background-color 80ms ease-out, border-color 80ms ease-out, box-shadow 80ms ease-out;
 }
 
 .parrent-button-dark:active {
@@ -142,6 +154,12 @@ h1 {
     position: relative;
 }
 
+#header_handy_image{
+    display: none;
+    height: 39.02px;
+    width: 32px;
+}
+
 header {
     display: flex;
     width: calc(100vw - 232px);
@@ -152,6 +170,7 @@ header {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
     position: relative;
     z-index: 999;
+    background-color: #FFF;
 }
 
 .header_container {
@@ -244,11 +263,9 @@ nav {
 }
 
 @media(min-width:1440px) {
-
     header {
         width: 1208px;
     }
-
 }
 
 @media(max-width: 1000px) {
@@ -257,11 +274,31 @@ nav {
     }
 }
 
-/* @media(max-width:1439px) {
+@media(max-width:1439px) {
+    body {
+        display: block
+    };
+}
 
-    header {}
+@media(max-width:650px){
+    header span{
+        display: none;
+    }
 
-} */
+    #header_handy_image{ 
+        display: unset;
+    }
+
+    #help_icon {
+        display: none;
+    }
+
+    #sm_icon {
+        height: 40px;
+        width: 40px;
+    }
+
+}
 
 /* Customize website's scrollbar like Mac OS
 Not supports in Firefox and IE */

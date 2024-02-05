@@ -2,11 +2,14 @@
     margin-top: 110px;
     margin-left: 96px;
     margin-right: 135.75px;
-    width: 976.25px;
+    width: fit-content;
+    height: 100pc;
+    max-height: calc(100vh - 230px);
+    overflow: auto;
 }
 
 .ad-task-form {
-    gap: 110px;
+    gap: 50px;
 }
 
 .form-input-titel {
@@ -20,8 +23,8 @@
 }
 
 .conditions-text {
-        display: flex;
-        align-items: end;
+    display: flex;
+    align-items: end;
 }
 
 .conditions-text::before {
@@ -38,9 +41,12 @@
     vertical-align: middle;
 }
 
+.add-task-input-div {
+    min-width: 419px;
+}
+
 .add-task-input {
     height: 48px;
-    width: 419px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     margin-bottom: 28px;
@@ -54,7 +60,6 @@
 
 .add-task-textarea {
     height: 120px;
-    width: 419px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     margin-bottom: 28px;
@@ -70,7 +75,6 @@
 
 .add-task-select {
     height: 48px;
-    /* width: 444px; */
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     font-size: 20px;
@@ -78,7 +82,15 @@
     padding-left: 21px;
 }
 
-#add-task-date::-webkit-calendar-picker-indicator{
+.add-task-select option {
+    height: 48px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    margin-bottom: 28px;
+    padding-left: 21px;
+}
+
+#add-task-date::-webkit-calendar-picker-indicator {
     margin-right: 16px;
 }
 
@@ -89,10 +101,6 @@
     background-color: #D1D1D1;
 }
 
-.form-end {
-
-}
-
 .add-task-prio-button {
     font-size: 20px;
     height: 56px;
@@ -101,15 +109,16 @@
     border: #D1D1D1 solid 1px;
     background-color: white;
     margin-bottom: 28px;
-}
-
-.add-task-prio-button div {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: box-shadow 80ms ease-in;
 }
 
 .add-task-prio-button svg {
     width: 20px;
+    margin-left: 4px;
 }
 
 #prio-button-urgent svg {
@@ -129,6 +138,34 @@
     gap: 16px;
 }
 
+#prio-button-urgent:hover,
+#prio-button-medium:hover,
+#prio-button-low:hover {
+    transition: box-shadow 80ms ease-out;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#prio-button-urgent:active,
+#prio-button-urgent:active svg {
+    background-color: #FF3D00;
+    color: white;
+    fill: white;
+}
+
+#prio-button-medium:active,
+#prio-button-medium:active svg {
+    background-color: #FFA800;
+    color: white;
+    fill: white;
+}
+
+#prio-button-low:active,
+#prio-button-low:active svg {
+    background-color: #7AE229;
+    color: white;
+    fill: white;
+}
+
 #task-create-button svg {
     width: 18px;
     margin-left: 6px;
@@ -141,4 +178,230 @@
 .gap48 {
     display: flex;
     gap: 48px;
+}
+
+@media (max-width: 1340px) {
+    .main-container {
+        margin-left: 0;
+        margin-right: 0;
+        max-height: calc(100vh - 190px);
+        display: flex;
+        justify-content: center;
+        width: auto;
+    }
+}
+
+@media (max-width: 1250px) {
+    .add-task-input-div {
+        width: 396px;
+        min-width: 396px;
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+        font-size: 16px;
+    }
+
+    .gap48 {
+        gap: 33px;
+    }
+
+    .form-input-titel {
+        font-size: 16px;
+    }
+
+    .conditions-text::before {
+        font-size: 16px;
+    }
+
+    .asterisk::after {
+        font-size: 16px;
+    }
+
+    .add-task-input {
+        font-size: 16px;
+    }
+
+    .add-task-textarea {
+        font-size: 16px;
+    }
+
+    .add-task-select {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .gap48 {
+        flex-direction: column;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .media-column {
+        flex-direction: column;
+        max-height: calc(100vh - 10px);
+    }
+
+    .main-container {
+        margin-top: 50px;
+        max-height: calc(100vh - 160px);
+    }
+
+    .add-task-input-div {
+        width: 50vw;
+        /* min-width: 419px; */
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+    }
+
+    .gap48 {
+        gap: 0;
+    }
+
+    .form-input-titel {
+        font-size: 20px;
+    }
+
+    .conditions-text::before {
+        font-size: 20px;
+    }
+
+    .asterisk::after {
+        font-size: 20px;
+    }
+
+    .add-task-input {
+        font-size: 20px;
+    }
+
+    .add-task-textarea {
+        font-size: 20px;
+    }
+
+    .add-task-select {
+        font-size: 20px;
+    }
+
+    .add-task-prio-button {
+        font-size: 20px;
+        height: 56px;
+        width: 136px;
+    }
+}
+
+@media (max-width: 850px) {
+    .add-task-input-div {
+        width: 50vw;
+        /* min-width: 419px; */
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+        font-size: 16px;
+    }
+
+    .form-input-titel {
+        font-size: 16px;
+    }
+
+    .conditions-text::before {
+        font-size: 16px;
+    }
+
+    .asterisk::after {
+        font-size: 16px;
+    }
+
+    .add-task-input {
+        font-size: 16px;
+    }
+
+    .add-task-textarea {
+        font-size: 16px;
+    }
+
+    .add-task-select {
+        font-size: 16px;
+    }
+}
+
+
+
+
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+#myInput {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    min-width: 390px;
+}
+
+#myInput:focus {
+    outline: 3px solid #ddd;
+    min-width: 390px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 390px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    /* max-height: 300px; */
+}
+
+.add-task-contact-list {
+    overflow: auto;
+}
+
+.dropdown-content a, .dropdown-content div {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: #D1D1D1 solid 1px;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+body {
+    overflow: hidden;
 }

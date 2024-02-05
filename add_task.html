@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Task</title>
-    <script src="script.js"></script>
-    <script src="add_task.js"></script>
+    <title>Kanban Project Management Tool</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/style/add_task.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
+    <script src="script.js"></script>
+    <script src="add_task.js"></script>
+    <script src="storage.js"></script>
 </head>
 
 <body onload="init()">
@@ -18,81 +20,115 @@
         <div class="main max-h">
             <div class="" w3-include-html="templates/header.html"></div>
             <main class="main-container">
-                <h1>Add Task</h1>
-                <form action="" class="ad-task-form column-space-between">
-                    <div class="gap48">
-                        <div>
-                            <div class="column">
-                                <label class="form-input-titel asterisk" for="add-task-title">Title</label>
-                                <input id="add-task-title" class="add-task-input" type="text" name="Title" required placeholder="Enter a title">
-                            </div>
-                            <div class="column">
-                                <label class="form-input-titel" for="add-task-description">Description</label>
-                                <textarea id="add-task-description" class="add-task-textarea" type="text" name="Description" placeholder="Enter a Description"></textarea>
-                            </div>
-                            <div class="column">
-                                <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
-                                <select id="add-task-assignet-to" class="add-task-select" name="cars">
-                                    <option value="" selected disabled hidden>Select contacts to assign</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="fiat">Fiat</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="seperator"></div>
-                        <div>
-                            <div class="column">
-                                <label class="form-input-titel asterisk" for="add-task-date">Due date</label>
-                                <input id="add-task-date" class="add-task-input" type="date" name="Due date" required placeholder="dd//mm//yyyy">
-                            </div>
-                            <div class="column">
-                                <label class="form-input-titel" for="prio-div">Prio</label>
-                                <div class="space-between" id="prio-div">
-                                    <button id="prio-button-urgent" class="add-task-prio-button">
-                                        Urgent 
-                                        <svg viewBox="0 0 21 16">
-                                            <use href="assets/img/icons.svg#urgentprio-icon"></use>
-                                        </svg>
-                                    </button>
-                                    <button id="prio-button-medium" class="add-task-prio-button">Medium 
-                                        <svg viewBox="0 0 21 16">
-                                            <use href="assets/img/icons.svg#mediumprio-icon"></use>
-                                        </svg>
-                                    </button>
-                                    <button id="prio-button-low" class="add-task-prio-button">Low 
-                                        <svg viewBox="0 0 21 16">
-                                            <use href="assets/img/icons.svg#lowprio-icon"></use>
-                                        </svg>
-                                    </button>
+                <div class="overflow">
+                    <h1>Add Task</h1>
+                    <form action="" class="ad-task-form column-space-between">
+                        <div class="gap48">
+                            <div class="add-task-input-div">
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel asterisk" for="add-task-title">Title</label>
+                                    <input id="add-task-title" class="add-task-input" type="text" name="Title" required
+                                        placeholder="Enter a title">
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel" for="add-task-description">Description</label>
+                                    <textarea id="add-task-description" class="add-task-textarea" type="text"
+                                        name="Description" placeholder="Enter a Description"></textarea>
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <button onclick="myFunction()" class="dropdown add-task-select">Dropdown</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <input type="text" placeholder="Search.." id="myInput"
+                                            onkeyup="filterFunction()">
+                                        <a href="#about">About</a>
+                                        <a href="#base">Base</a>
+                                        <a href="#blog">Blog</a>
+                                        <a href="#contact">Contact</a>
+                                        <a href="#custom">Custom</a>
+                                        <a href="#support">Support</a>
+                                        <a href="#tools">Tools</a>
+                                        <div class="add-task-contact-list">
+                                            <div>
+                                                <label for="vehicle1"> I have a bike</label>
+                                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                            </div>
+                                            <div>
+                                                <label for="vehicle2"> I have a car</label>
+                                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                            </div>
+                                            <div>
+                                                <label for="vehicle3"> I have a boat</label>
+                                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
+                                    <select id="add-task-assignet-to" class="add-task-select" name="cars">
+                                        <option value="" selected disabled hidden>Select contacts to assign</option>
+                                        <option value="saab">Saab</option>
+                                        <option value="fiat">Fiat</option>
+                                        <option value="audi">Audi</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="column">
-                                <label class="form-input-titel asterisk" for="add-task-category">Category</label>
-                                <select id="add-task-category" class="add-task-select" required name="cars">
-                                    <option value="" selected disabled hidden>Select task category</option>
-                                    <option value="technical task">Technical Task</option>
-                                    <option value="user story">User Story</option>
-                                </select>
-                            </div>
-                            <div class="column">
-                                <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
-                                <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks" placeholder="Add new subtask">
+                            <div class="seperator"></div>
+                            <div>
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel asterisk" for="add-task-date">Due date</label>
+                                    <input id="add-task-date" class="add-task-input" type="date" name="Due date"
+                                        required placeholder="dd//mm//yyyy">
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel" for="prio-div">Prio</label>
+                                    <div class="space-between" id="prio-div">
+                                        <button id="prio-button-urgent" class="add-task-prio-button">
+                                            Urgent
+                                            <svg viewBox="0 0 21 16">
+                                                <use href="assets/img/icons.svg#urgentprio-icon"></use>
+                                            </svg>
+                                        </button>
+                                        <button id="prio-button-medium" class="add-task-prio-button">Medium
+                                            <svg viewBox="0 0 21 16">
+                                                <use href="assets/img/icons.svg#mediumprio-icon"></use>
+                                            </svg>
+                                        </button>
+                                        <button id="prio-button-low" class="add-task-prio-button">Low
+                                            <svg viewBox="0 0 21 16">
+                                                <use href="assets/img/icons.svg#lowprio-icon"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel asterisk" for="add-task-category">Category</label>
+                                    <select id="add-task-category" class="add-task-select" required name="cars">
+                                        <option value="" selected disabled hidden>Select task category</option>
+                                        <option value="technical task">Technical Task</option>
+                                        <option value="user story">User Story</option>
+                                    </select>
+                                </div>
+                                <div class="column add-task-input-div">
+                                    <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
+                                    <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks"
+                                        placeholder="Add new subtask">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-end space-between">
-                        <div class="conditions-text">This field is required</div>
-                        <div class="add-task-buttons-div">
-                            <button id="task-clear-button" class="parrent-button-light">Clear &#10006;</button>
-                            <button id="task-create-button" class="parrent-button-dark">Create Task
-                                <svg>
-                                    <use href="assets/img/icons.svg#check-icon"></use>
-                                </svg>
-                            </button>
+                        <div class="space-between media-column">
+                            <div class="conditions-text">This field is required</div>
+                            <div class="add-task-buttons-div">
+                                <button id="task-clear-button" class="parrent-button-light">Clear &#10006;</button>
+                                <button id="task-create-button" class="parrent-button-dark">Create Task
+                                    <svg>
+                                        <use href="assets/img/icons.svg#check-icon"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </main>
         </div>
     </div>
