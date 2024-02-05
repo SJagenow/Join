@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    /* background-color: rgb(246, 247, 248); */
     font-family: 'Inter', sans-serif;
     background-color: rgb(246, 247, 248);
 }
@@ -11,7 +10,6 @@ body button {
 
 #contact_list {
     display: flex;
-    /* padding: 32px 0px 0px 264px; */
     flex-direction: column;
     align-items: flex-start;
     overflow-y: auto;
@@ -89,13 +87,11 @@ body button {
     justify-content: center;
     border-radius: 46px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10);
-
 }
 
 #contactlist_add_contact_button img{
     height: 32px;
     width: 32px;
-    
 }
 
 #contactlist_add_contact_button:hover{
@@ -273,7 +269,6 @@ body button {
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-
 }
 
 [id^="contact_list_mail"] {
@@ -283,8 +278,6 @@ body button {
     font-weight: 400;
     line-height: 120%;
     text-decoration: none;
-
-
 }
 
 .contact_overview {
@@ -309,7 +302,6 @@ body button {
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-    /* 73.2px */
 }
 
 .contact_overview_header span {
@@ -318,7 +310,6 @@ body button {
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-
 }
 
 #contact_initials_container {
@@ -345,7 +336,6 @@ body button {
     font-style: normal;
     font-weight: 500;
     line-height: 120%;
-
 }
 
 .left_side_add_contact_overlay {
@@ -370,7 +360,6 @@ body button {
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 32.4px */
 }
 
 .add_contact_overlay_text_container {
@@ -412,7 +401,6 @@ body button {
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-    /* 25.2px */
 }
 
 #contact_save_button img {
@@ -469,7 +457,6 @@ body button {
 }
 
 .input_container input {
-    /* border-width: 0; */
     display: flex;
     width: 422px;
     padding: 13px 21px;
@@ -509,8 +496,6 @@ body button {
     height: 24px;
     width: 24px;
     background-image: url(../contactbook/icons_contactbook/delete.svg);
-    /* background-size: 20px 20px; */
-    /* background-size: contain; */
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -527,8 +512,6 @@ body button {
     height: 24px;
     width: 24px;
     background-image: url(../contactbook/icons_contactbook/edit.svg);
-    /* background-size: 24px 24px; */
-    /* background-size: contain; */
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -564,7 +547,6 @@ body button {
     cursor: pointer;
     scale: 1.0;
     font-weight: 700;
-
 }
 
 .center_up {
@@ -576,10 +558,6 @@ body button {
 .marginL-24{
     margin-left: -24px;
 }
-
-/* .divide_container svg{
-    width: calc(100vw - 232px);
-} */
 
 @media(min-width:1440px) {
     header {
@@ -603,14 +581,9 @@ body button {
     }
 
     .divide_container img {
-        width: 90vw;
-
-
+        width: 72vw;
+    
     }
-
-    /* .contact_list_container {
-        width: calc(100vw - 232px);
-    } */
 
     #add_contact_overlay {
         width: unset;
@@ -664,7 +637,6 @@ body button {
         width: 90%;
         margin-top: 32px;
         padding-bottom: 64px;
- 
     }
 
     #contact_list_logo_handy{
@@ -696,7 +668,6 @@ body button {
         width: 202px;
         height: 51px;
         gap: 0px;
-      
     }
 
     #contact_cancel_button{
@@ -707,13 +678,12 @@ body button {
     }
 
     .right_side_add_contact_overlay form {
-       
         gap: 24px;
     }
 
 }
 
-@media(max-width:650px){
+@media(max-width:720px){
     #contact_list button{
         display: none;
     }
@@ -729,6 +699,11 @@ body button {
 
     header{
         width: 100vw;
+    }
+
+    .divide_container img {
+        width: 90vw;
+        align-self: center;
     }
 
 }
