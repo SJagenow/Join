@@ -62,6 +62,25 @@ function updateBoard() {
         document.getElementById('close_one').innerHTML += generateTodo(clean);
     }
 
+    
+    let awaitList = todo.filter(t => t['category'] == 'await');
+
+    document.getElementById('await_content').innerHTML = '';
+
+    for (let index = 0; index < awaitList.length; index++) {
+        const clean = awaitList[index];
+        document.getElementById('await_content').innerHTML += generateTodo(clean);
+    }
+
+    let doneList = todo.filter(t => t['category'] == 'done');
+
+    document.getElementById('done_content').innerHTML = '';
+
+    for (let index = 0; index < doneList.length; index++) {
+        const clean = doneList[index];
+        document.getElementById('done_content').innerHTML += generateTodo(clean);
+    }
+
 }
 
 function startDragging(id) {

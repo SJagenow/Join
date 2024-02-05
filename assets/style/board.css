@@ -282,6 +282,20 @@ border-radius: 56px;
 cursor: pointer;
 }
 
+#done_content,
+#close_one {
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px dashed black;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: flex-start;
+}
+
+#done_content.drag-area-highlight,
+#close_one.drag-area-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
+}
 
 .user_story_headline{
 
@@ -452,7 +466,7 @@ cursor: pointer;
 width: 220px;
 }
 
-#in_progress_content{
+#close_one{
 width: 220px;
 }
 
