@@ -251,6 +251,12 @@ nav {
 
 }
 
+@media(max-width: 1000px) {
+    .menu {
+        display: none;
+    }
+}
+
 /* @media(max-width:1439px) {
 
     header {}
