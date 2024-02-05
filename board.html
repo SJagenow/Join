@@ -20,13 +20,13 @@
         <div w3-include-html="templates/menu.html"></div>
         <div w3-include-html="templates/header.html"></div>
     </div>
-   
+
     <div class="board_top">
         <div class="board_h1_button_container">
             <h1>Board</h1>
             <div class="input_button_container">
                 <div class="vector">
-                    <input placeholder="Find Task" type="text" >
+                    <input placeholder="Find Task" type="text">
                     <div class="ml-36">|</div>
                 </div>
 
@@ -35,7 +35,7 @@
         </div>
 
     </div>
-    
+
     <div class="smal_midlane_main_container">
         <div class="midlane_flex_button">To do <button>+</button></div>
         <div class="midlane_flex_button">In progress <button>+</button></div>
@@ -46,100 +46,112 @@
     <div class="botlane_main_container">
 
 
-        <div class="todo">
-            <div class="no_task_container"> <span>no tasks Todo</span>
+        <div class="todofield">
+            <div class="no_task_container, d-none"> <span class="d_none">no tasks Todo</span>
 
             </div>
-            <div class="drag-area"  id="todo_content_open" ondrop="moveTo('open')" ondragover="allowDrop(event); highlight('todo_content_open')"> <span>test</span>hier kommen später die todos rein</div>
-        </div>
-
-        <div class="progress_await_done">
             <div class="progress_await_container">
-
-                <div class="drag-area"  id="close_one"  ondrop="moveTo('closed')" ondragover="allowDrop(event); highlight('close_one')"> hier kommen später die inprogress sachen rein</div>
-            </div>
-        </div>
-        <div class="progress_await_done">
-            <div class="progress_await_container">
-
-                <div id="close_two"> hier kommen später die await sachen rein </div>
+                <div class="drag-area" id="todo_content_open" ondrop="moveTo('open')"
+                    ondragover="allowDrop(event); highlight('todo_content_open')"></div>
             </div>
         </div>
 
         <div class="progress_await_done">
             <div class="progress_await_container">
 
-
-                <div id="close_thre"> hier kommen später die abgeschlossenen sachen rein</div>
+                <div class="drag-area" id="close_one" ondrop="moveTo('closed')"
+                    ondragover="allowDrop(event); highlight('close_one')"></div>
             </div>
         </div>
+        <div class="progress_await_done">
+            <div class="progress_await_container">
 
-
-
-    </div>
-
-
-
-
-
-
-    <div class="user_story_dialog_background">
-        <div class="user_story_dialog">
-
-
-            <div class="user_story_label_x_contrainer">
-                <div class="user_story">User Story</div>
-                <button>X</button>
-            </div>
-            <div class="user_story_headline">
-
-                <h1>Kochwelt Page & Recipe Recommender</h1>
-            </div>
-            <div class="user_story_description">Build start page with recipe recommendation.</div>
-            <div class="user_story_date">
-                <div class="story_date">Due date:</div>
-                <div class="user_date">variable(datum)</div>
-            </div>
-            <div class="user_story_priority">
-                <div class="story_priority">Priority:</div>
-                <div class="user_priority">Variable(prio)</div>
-
-            </div>
-
-            <div class="assigned_to_members_container">
-                <div class="assigned_to">Assigned To:</div>
-                <div class="assinged_member">
-                    <div id="member_content">
-                        <div>member</div>
-                        <div>member</div>
-                        <div>member</div>
-                    </div>
+                <div class="drag-area" id="await_content" ondrop="moveTo('await')"
+                    ondragover="allowDrop(event); highlight('await_content')">
                 </div>
             </div>
-            <div class="user_story_Subtasks">
-                <div>Subtasks</div>
-                <div class="subtask_center"><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe Recommendation</span></div>
-                <div class="subtask_center"> <img src="./assets/img/checkbox.png" alt=""> <span>Start Page Layout</span></div>
-            </div>
-
-            <div class="user_story_delete_edit">
-                <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt=""><div>Delete</div></button></div>
-                <div class="stripe"></div>
-                <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt=""><div>Edit</div></button></div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
         </div>
-    </div>
+
+            <div class="progress_await_done">
+                <div class="progress_await_container">
+
+
+                    <div class="drag-area" id="done_content" ondrop="moveTo('done')"
+                        ondragover="allowDrop(event); highlight('done_content')">
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+       
+
+
+            <div class="user_story_dialog_background">
+                <div class="user_story_dialog">
+
+
+                    <div class="user_story_label_x_contrainer">
+                        <div class="user_story">User Story</div>
+                        <button>X</button>
+                    </div>
+                    <div class="user_story_headline">
+
+                        <h1>Kochwelt Page & Recipe Recommender</h1>
+                    </div>
+                    <div class="user_story_description">Build start page with recipe recommendation.</div>
+                    <div class="user_story_date">
+                        <div class="story_date">Due date:</div>
+                        <div class="user_date">variable(datum)</div>
+                    </div>
+                    <div class="user_story_priority">
+                        <div class="story_priority">Priority:</div>
+                        <div class="user_priority">Variable(prio)</div>
+
+                    </div>
+
+                    <div class="assigned_to_members_container">
+                        <div class="assigned_to">Assigned To:</div>
+                        <div class="assinged_member">
+                            <div id="member_content">
+                                <div>member</div>
+                                <div>member</div>
+                                <div>member</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user_story_Subtasks">
+                        <div>Subtasks</div>
+                        <div class="subtask_center"><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe
+                                Recommendation</span></div>
+                        <div class="subtask_center"> <img src="./assets/img/checkbox.png" alt=""> <span>Start Page
+                                Layout</span></div>
+                    </div>
+
+                    <div class="user_story_delete_edit">
+                        <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
+                                <div>Delete</div>
+                            </button></div>
+                        <div class="stripe"></div>
+                        <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt="">
+                                <div>Edit</div>
+                            </button></div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
 
 
 </body>

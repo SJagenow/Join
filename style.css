@@ -96,6 +96,11 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+.d-none {
+    display: none;
+}
+
 .w100{
     width: calc(100vw - 232px);
 }

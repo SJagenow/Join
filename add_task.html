@@ -36,41 +36,53 @@
                                         name="Description" placeholder="Enter a Description"></textarea>
                                 </div>
                                 <div class="column add-task-input-div">
-                                    <button onclick="myFunction()" class="dropdown add-task-select">Dropdown</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <input type="text" placeholder="Search.." id="myInput"
-                                            onkeyup="filterFunction()">
-                                        <a href="#about">About</a>
-                                        <a href="#base">Base</a>
-                                        <a href="#blog">Blog</a>
-                                        <a href="#contact">Contact</a>
-                                        <a href="#custom">Custom</a>
-                                        <a href="#support">Support</a>
-                                        <a href="#tools">Tools</a>
-                                        <div class="add-task-contact-list">
+                                    <svg class="input-icon">
+                                        <use href="assets/img/icons.svg#arrow-icon"></use>
+                                    </svg>
+                                    <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
+                                    <input id="add-task-assignet-to" class="add-task-select arrow-icon" onclick="dropdownMenu()" type="text" placeholder="Select contacts to assign">
+                                    <div id="add-task-contact-div" class="d-none">
+                                        <div class="space-between add-task-contact" onclick="selectContact(0)">
                                             <div>
-                                                <label for="vehicle1"> I have a bike</label>
-                                                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                                                Hanane Sabil
                                             </div>
                                             <div>
-                                                <label for="vehicle2"> I have a car</label>
-                                                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                                                <svg id="add-task-assignet-checkbox0" class="add-task-assignet-checkbox">
+                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="space-between add-task-contact" onclick="selectContact(1)">
+                                            <div>
+                                                Stephan Jagenow
                                             </div>
                                             <div>
-                                                <label for="vehicle3"> I have a boat</label>
-                                                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                                                <svg id="add-task-assignet-checkbox1" class="add-task-assignet-checkbox">
+                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="space-between add-task-contact" onclick="selectContact(2)">
+                                            <div>
+                                                Pascal Jagenow
+                                            </div>
+                                            <div>
+                                                <svg id="add-task-assignet-checkbox2" class="add-task-assignet-checkbox">
+                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="space-between add-task-contact" onclick="selectContact(3)">
+                                            <div>
+                                                Kutup Cevik
+                                            </div>
+                                            <div>
+                                                <svg id="add-task-assignet-checkbox3" class="add-task-assignet-checkbox">
+                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
+                                                </svg>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="column add-task-input-div">
-                                    <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
-                                    <select id="add-task-assignet-to" class="add-task-select" name="cars">
-                                        <option value="" selected disabled hidden>Select contacts to assign</option>
-                                        <option value="saab">Saab</option>
-                                        <option value="fiat">Fiat</option>
-                                        <option value="audi">Audi</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="seperator"></div>
@@ -132,7 +144,6 @@
             </main>
         </div>
     </div>
-    <div>
 </body>
 
 </html>

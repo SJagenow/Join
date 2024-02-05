@@ -12,7 +12,7 @@ let todo = [{
     'label': 'User',
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
-    'category': 'open'
+    'category': 'done'
 },
 
 {
@@ -21,17 +21,19 @@ let todo = [{
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
     'category': 'closed'
-},];
+},
+
+{
+    'id': 3,
+    'label': 'User',
+    'title': 'Kochwelt Recommender',
+    'description': 'Build start ..',
+    'category': 'await'
+},
+];
 
 
 let currentDraggedElement;
-
-
-let progress = [];
-let feedback = [];
-let done = [];
-
-
 
 function updateBoard() {
     let open = todo.filter(t => t['category'] == 'open');
@@ -53,6 +55,25 @@ function updateBoard() {
         document.getElementById('close_one').innerHTML += generateTodo(clean);
     }
 
+    
+    let awaitList = todo.filter(t => t['category'] == 'await');
+
+    document.getElementById('await_content').innerHTML = '';
+
+    for (let index = 0; index < awaitList.length; index++) {
+        const clean = awaitList[index];
+        document.getElementById('await_content').innerHTML += generateTodo(clean);
+    }
+
+    let doneList = todo.filter(t => t['category'] == 'done');
+
+    document.getElementById('done_content').innerHTML = '';
+
+    for (let index = 0; index < doneList.length; index++) {
+        const clean = doneList[index];
+        document.getElementById('done_content').innerHTML += generateTodo(clean);
+    }
+
 }
 
 function startDragging(id) {
@@ -63,7 +84,7 @@ function startDragging(id) {
 
 
 function generateTodo(clean) {
-    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo">${clean['title']}</div>`;
+    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo"><div>${clean['label']}</div> <div>${clean['title']}</div><div>${clean['description']}</div></div>`;
 }
 
 function allowDrop(ev) {
