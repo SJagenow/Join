@@ -140,12 +140,12 @@ body button {
     gap: 35px;
     border-radius: 10px;
     background: #FFF;
+    transition: 0.3s ease;
 }
 
 .contact_list_container:hover {
-    background-color:#2A3647;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
     cursor: pointer;
-    color: white;
 }
 
 .contact_list_picture {
@@ -603,7 +603,7 @@ body button {
     }
 
     .divide_container img {
-        width: calc(90vw - 232px);
+        width: 90vw;
 
 
     }

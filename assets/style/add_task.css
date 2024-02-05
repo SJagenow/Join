@@ -53,6 +53,7 @@
     margin-bottom: 28px;
     font-size: 20px;
     padding-left: 21px;
+    outline-width: 0px;
 }
 
 .add-task-input::placeholder {
@@ -68,6 +69,13 @@
     font-family: 'Inter', sans-serif;
     padding-left: 21px;
     padding-top: 19px;
+    outline-width: 0px;
+}
+
+.add-task-select:focus,
+.add-task-input:focus,
+.add-task-textarea:focus{
+    border-color: #29ABE2;
 }
 
 .add-task-textarea::placeholder {
@@ -81,6 +89,7 @@
     font-size: 20px;
     margin-bottom: 28px;
     padding-left: 21px;
+    outline-width: 0px;
 }
 
 .add-task-select option {
