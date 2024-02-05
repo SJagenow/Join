@@ -248,7 +248,7 @@
 
     .main-container {
         margin-top: 50px;
-        max-height: calc(100vh - 120px);
+        max-height: calc(100vh - 160px);
     }
 
     .add-task-input-div {
