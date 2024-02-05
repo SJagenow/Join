@@ -43,6 +43,7 @@
 
 .add-task-input-div {
     min-width: 419px;
+    position: relative;
 }
 
 .add-task-input {
@@ -171,6 +172,52 @@
     margin-left: 6px;
 }
 
+#add-task-contact-div {
+    padding-left: 21px;
+    padding-right: 21px;
+    max-height: 600px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: #D1D1D1 solid 1px;
+    border-right: #D1D1D1 solid 1px;
+    border-bottom: #D1D1D1 solid 1px;
+    overflow: auto;
+}
+
+.add-task-assignet-checkbox {
+    height: 20px;
+    width: 20px;
+}
+
+.add-task-contact {
+    padding: 0px 0px 16px 21px;
+}
+
+.input-icon {
+    position: absolute;
+    z-index: 10;
+    display: inline-block;
+    right: 20px;
+    top: 54px;
+    height: 8px;
+    width: 8px;
+    fill: #2A3647;
+    width: 22px;
+    /* padding: 0px 6px 3px 6px; */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.fill {
+    fill: rgb(29, 13, 205);
+}
+
 .ht80 {
     height: 80%;
 }
@@ -229,6 +276,10 @@
 
     .add-task-select {
         font-size: 16px;
+    }
+
+    .input-icon {
+        top: 50px;
     }
 }
 
@@ -294,6 +345,10 @@
         height: 56px;
         width: 136px;
     }
+
+    .input-icon {
+        top: 54px;
+    }
 }
 
 @media (max-width: 850px) {
@@ -330,6 +385,10 @@
 
     .add-task-select {
         font-size: 16px;
+    }
+
+    .input-icon {
+        top: 50px;
     }
 }
 
