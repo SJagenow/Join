@@ -80,7 +80,7 @@ body button {
     position: fixed;
     bottom: 32px;
     right: 16px;
-    z-index: 9999;
+    z-index: 999;
     background-color:#2A3647;
     height: 56px;
     width: 56px;
@@ -143,9 +143,9 @@ body button {
 }
 
 .contact_list_container:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-    background-blend-mode: darken;
+    background-color:#2A3647;
     cursor: pointer;
+    color: white;
 }
 
 .contact_list_picture {
@@ -394,12 +394,8 @@ body button {
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
+    background-color: transparent;
     
-}
-
-#contact_cancel_button:hover::before {
-    color: #29ABE2;
-    border-color: #29ABE2;
 }
 
 #contact_save_button {
@@ -605,7 +601,7 @@ body button {
         width: calc(100vw - 232px);
         align-items: unset;
     }
-    
+
     .divide_container img {
         width: calc(90vw - 232px);
 
@@ -724,6 +720,15 @@ body button {
 
     #contactlist_add_contact_button{
         display: flex;
+    }
+
+    #contact_list{
+        padding: 0;
+        width: 100vw;
+    }
+
+    header{
+        width: 100vw;
     }
 
 }
