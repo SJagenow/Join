@@ -35,13 +35,6 @@ let todo = [{
 
 let currentDraggedElement;
 
-
-let progress = [];
-let feedback = [];
-let done = [];
-
-
-
 function updateBoard() {
     let open = todo.filter(t => t['category'] == 'open');
 
@@ -91,7 +84,7 @@ function startDragging(id) {
 
 
 function generateTodo(clean) {
-    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo">${clean['label']} <div>${clean['title']}</div><div>${clean['description']}</div></div>`;
+    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo"><div>${clean['label']}</div> <div>${clean['title']}</div><div>${clean['description']}</div></div>`;
 }
 
 function allowDrop(ev) {
