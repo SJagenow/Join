@@ -62,7 +62,7 @@
         <div class="progress_await_done">
             <div class="progress_await_container">
 
-                <div id="close_two"> hier kommen später die await sachen rein </div>
+                <div class="drag-area" id="await_content" ondrop="moveTo('await')" ondragover="allowDrop(event); highlight('await_content')">
             </div>
         </div>
 
@@ -70,7 +70,7 @@
             <div class="progress_await_container">
 
 
-                <div id="close_thre"> hier kommen später die abgeschlossenen sachen rein</div>
+                <div class="drag-area" id="done_content" ondrop="moveTo('done')" ondragover="allowDrop(event); highlight('done_content')">
             </div>
         </div>
 

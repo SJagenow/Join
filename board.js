@@ -12,7 +12,7 @@ let todo = [{
     'label': 'User',
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
-    'category': 'open'
+    'category': 'done'
 },
 
 {
@@ -21,7 +21,16 @@ let todo = [{
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
     'category': 'closed'
-},];
+},
+
+{
+    'id': 3,
+    'label': 'User',
+    'title': 'Kochwelt Recommender',
+    'description': 'Build start ..',
+    'category': 'await'
+},
+];
 
 
 let currentDraggedElement;
@@ -63,7 +72,7 @@ function startDragging(id) {
 
 
 function generateTodo(clean) {
-    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo">${clean['title']}</div>`;
+    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo">${clean['label']} <div>${clean['title']}</div><div>${clean['description']}</div></div>`;
 }
 
 function allowDrop(ev) {
