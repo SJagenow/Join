@@ -2,23 +2,26 @@
 
 let todo = [{
     'id': 0,
-    'label':'User Story',
-    'title':'Kochwelt Page & Recipe Recommender',
-    'description':'Build start page with recipe recommendation...',
-    'category': 'open',
-
+    'label': 'User Story',
+    'title': 'Kochwelt Page & Recipe Recommender',
+    'description': 'Build start page with recipe recommendation...',
+    'category': 'open'
+},
+{
     'id': 1,
-    'label':'User',
-    'title':'Kochwelt Recommender',
-    'description':'Build start ..',
-    'category': 'open',
-    
+    'label': 'User',
+    'title': 'Kochwelt Recommender',
+    'description': 'Build start ..',
+    'category': 'open'
+},
+
+{
     'id': 2,
-    'label':'User',
-    'title':'Kochwelt Recommender',
-    'description':'Build start ..',
+    'label': 'User',
+    'title': 'Kochwelt Recommender',
+    'description': 'Build start ..',
     'category': 'closed'
-}];
+},];
 
 
 let currentDraggedElement;
@@ -32,27 +35,27 @@ let done = [];
 
 function updateBoard() {
     let open = todo.filter(t => t['category'] == 'open');
-  
+
     document.getElementById('todo_content_open').innerHTML = '';
 
-    for (let index = 0; index < open.length; index++){
+    for (let index = 0; index < open.length; index++) {
         const clean = open[index];
-        document.getElementById('todo_content_open').innerHTML += generateTodoHTML(clean);
+        document.getElementById('todo_content_open').innerHTML += generateTodo(clean);
     }
 
 
     let closed = todo.filter(t => t['category'] == 'closed');
-  
+
     document.getElementById('close_one').innerHTML = '';
 
-    for (let index = 0; index < closed.length; index++){
+    for (let index = 0; index < closed.length; index++) {
         const clean = closed[index];
-        document.getElementById('close_one').innerHTML += generateTodoHTML(clean);
+        document.getElementById('close_one').innerHTML += generateTodo(clean);
     }
 
 }
 
-function startDragging(id){
+function startDragging(id) {
     currentDraggedElement = id;
 }
 
@@ -69,7 +72,7 @@ function allowDrop(ev) {
 
 function moveTo(category) {
     todo[currentDraggedElement]['category'] = category;
-    updateBoard()
+    updateBoard();
 }
 
 function highlight(id) {
