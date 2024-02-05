@@ -145,10 +145,10 @@ border-radius: 10px;
     overflow-y: auto;
     background: #F6F7F8;
     margin-left: 232px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
-.todo {
+.todofield {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -290,6 +290,7 @@ cursor: pointer;
     margin-bottom: 50px;
     display: flex;
     align-items: flex-start;
+    width: 100%;
 }
 
 #done_content.drag-area-highlight,
