@@ -289,12 +289,18 @@ nav {
 }
 
 @media(max-width: 1000px) {
+    header{
+        width: 100vw;
+    }
+
     .menu {
         display: none;
     }
+
     .mobile-sideMenu {
         display: flex;
     } 
+
     .mobile-navbar {
         display: flex;
         flex-direction: row;
@@ -309,7 +315,9 @@ nav {
         left: 0;
         right: 0;
         background: #2A3647;
+        z-index: 999;
     }
+    
     .mobile-menu_link_container {
         display: flex;
         flex-direction: column;
