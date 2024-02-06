@@ -3,8 +3,8 @@ let contactList = [];
 
 async function init() {
     await includeHTML();
+    await loadContactList();
     renderContactList();
-    loadContactList();
 }
 
 async function loadContactList(){
@@ -35,7 +35,7 @@ function renderContactList() {
         <div id="contactlist_alphabet_sorting_container${i}"> 
         ${singleLetter}  
         </div>
-        <div class="divide_container">
+        <div class="divide_container" id="divide_container_${i}">
         <img src="./assets/contactbook/icons_contactbook/Vector 10.svg" alt="">
         </div>
         <div id="contact_list_names${i}">
@@ -43,7 +43,7 @@ function renderContactList() {
             <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
             <div class="column gap8">
                 <div id="contact_list_name${i}">
-                    Testing Tim
+                    Max Mustermann
                 </div>
                 <a id="contact_list_mail${i}" href="mailto:testingtim@test.de">
                     testingtim@test.de
@@ -53,20 +53,54 @@ function renderContactList() {
     </div>
     `;
     }
-    renderContactToList();
+    renderContactsToList();
 }
 
-function renderContactToList(){
-    // render into the contact_list_names[i]  
-
+function renderContactsToList() {
+    for (let i = 0; i < alphabet.length; i++) {
+        const letter = alphabet[i];
+        const contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === letter);
+        const namesContainer = document.getElementById(`contact_list_names${i}`);
+        const alphabetContainer = document.getElementById(`contactlist_alphabet_sorting_container${i}`);
+        const divideContainer = document.getElementById(`divide_container_${i}`);
+        if (contactsStartingWithLetter.length === 0) {
+            // Keine Kontakte mit diesem Anfangsbuchstaben, daher Container ausblenden
+            namesContainer.style.display = 'none';
+            alphabetContainer.style.display = 'none';
+            divideContainer.style.display = 'none';
+        } else {
+            // Kontakte vorhanden, Container anzeigen
+            namesContainer.innerHTML = '';
+            alphabetContainer.style.display = 'block';
+            contactsStartingWithLetter.forEach(contact => {
+                namesContainer.innerHTML += `
+                <div class="contact_list_container">
+                    <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
+                    <div class="column gap8">
+                        <div id="contact_list_name${i}">
+                            ${contact.name}
+                        </div>
+                        <a id="contact_list_mail${i}" href="mailto:${contact.mail}">
+                            ${contact.mail}
+                        </a>
+                    </div>
+                </div>
+                `;
+            });
+        }
+    }
 }
+
+
+
+
 
 /**
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
  */
 function showAddContactDialog(){
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
-    document.getElementById('contactlist_add_contact_button').style.display = 'none';
+   
 }
 
 /**
@@ -74,7 +108,7 @@ function showAddContactDialog(){
  */
 function closeAddContactDialog(){
     document.getElementById('contactlist_overlay_container').style.display = 'none';
-    document.getElementById('contactlist_add_contact_button').style.display = 'flex';
+    renderContactList();
 }
 
 /**
