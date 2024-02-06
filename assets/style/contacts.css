@@ -76,7 +76,7 @@ body button {
 
 #contactlist_add_contact_button{
     position: fixed;
-    bottom: 32px;
+    bottom: 100px;
     right: 16px;
     z-index: 999;
     background-color:#2A3647;
@@ -708,7 +708,7 @@ body button {
 
 }
 
-@media(max-width:720px){
+@media(max-width:1000px){
     #contact_list button{
         display: none;
     }
@@ -720,6 +720,7 @@ body button {
     #contact_list{
         padding: 0;
         width: 100vw;
+        height: 78vh;
     }
 
     header{
@@ -739,6 +740,40 @@ body button {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    header{
+        width: 100vw;
+    }
+
+}
+
+@media(max-width:420px){
+    .left_side_add_contact_overlay{
+        min-width: 320px;
+        width: 320px;
+        align-items: flex-start;
+    }
+
+    #add_contact_overlay{
+        width: 320px;
+    }
+
+    .center_up {
+        width: 336px
+    }
+
+    .right_side_add_contact_overlay input{
+        width: 246px;
+    }
+
+    .input_container {
+        width: 308px;
+    }
+
+    .add_contact_overlay_text_container {
+        width: 320px;
+        margin-left: 20px;
     }
 
 }

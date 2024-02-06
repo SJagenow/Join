@@ -204,6 +204,10 @@
     flex-grow: 0;
     outline: none;
   }
+
+  .mailPasswordInputField input:focus{
+    border-color: #29abe2;
+  }
   
   .mailPasswordInputField img {
     width: 20px;
