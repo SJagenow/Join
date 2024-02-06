@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="./assets/style/contacts.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <script src="script.js"></script>
-    <script src="contacts.js"></script>
-    <script src="storage.js"></script>
+    <script src="./assets/js/contacts.js"></script>
+    <script src="./assets/js/storage.js"></script>
     <title>Kanban Project Management Tool</title>
 </head>
 
@@ -22,7 +22,7 @@
         <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
     </div>
     <div class="flex">
-        <div id="contact_list"> <!-- hier später kontakte nach alphabet rendern -->
+        <div id="contact_list">
         </div>
         <div class="contact_overview">
             <div class="contact_overview_header">
@@ -69,8 +69,8 @@
         <div class="contactlist_mid_layer">
             <div onclick="noClose(event)" id="add_contact_overlay">
                 <div class="left_side_add_contact_overlay">
-                    <div onclick="closeAddContactDialog()" class="add_contact_close_container_handy">
-                        <img src="./assets/contactbook/icons_contactbook/close_white.svg" alt="">
+                    <div class="add_contact_close_container_handy">
+                        <img onclick="closeAddContactDialog()" src="./assets/contactbook/icons_contactbook/close_white.svg" alt="">
                     </div>
                     <img id="contact_list_logo_handy" src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
                     <div class="add_contact_overlay_text_container">
@@ -95,8 +95,8 @@
                     </div>
                     <div class="center_up mb50">
                         <div class="edit_formular_container">
-                            <div onclick="closeAddContactDialog()" class="add_contact_close_container">
-                                <img src="./assets/contactbook/icons_contactbook/close.svg" alt="">
+                            <div class="add_contact_close_container">
+                                <img onclick="closeAddContactDialog()" src="./assets/contactbook/icons_contactbook/close.svg" alt="">
                             </div>
                             <form onsubmit="addToContacts(); return false;">
                                 <div class="input_container">
