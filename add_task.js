@@ -1,3 +1,7 @@
+let contact = []
+let selectedUser = [];
+
+
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
@@ -18,4 +22,19 @@ function filterFunction() {
             a[i].style.display = "none";
         }
     }
+}
+
+
+function loadContact() {
+    document.getElementById('add-task-contact-div').innerHTML;
+    getItem('contactList');
+}
+
+
+function selectContact(id) {
+    document.getElementById(`add-task-assignet-checkbox${id}`).innerHTML = `<use href="assets/img/icons.svg#checkbox-checked"></use>`;
+}
+
+function dropdownMenu() {
+    document.getElementById('add-task-contact-div').classList.remove('d-none');
 }

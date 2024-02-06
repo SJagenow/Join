@@ -96,6 +96,11 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+.d-none {
+    display: none;
+}
+
 .w100{
     width: calc(100vw - 232px);
 }
@@ -128,6 +133,10 @@ h1 {
 
 .gap8 {
     gap: 8px;
+}
+
+.mb50{
+    margin-bottom: 50px;
 }
 
 /*---------------*/
@@ -252,9 +261,17 @@ nav {
     width: 32px;
 }
 
+#help_icon:hover{
+    scale: 1.2;
+}
+
 #sm_icon {
     height: 64px;
     width: 64px;
+}
+
+#sm_icon:hover{
+    filter: brightness(80%);
 }
 
 .header_flex_container {
