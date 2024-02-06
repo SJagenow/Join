@@ -24,17 +24,63 @@ function filterFunction() {
     }
 }
 
+function initAddTask() {
+    loadContactList();
+}
 
-function loadContact() {
-    document.getElementById('add-task-contact-div').innerHTML;
-    getItem('contactList');
+async function loadContactList() {
+    try {
+        let contactList = JSON.parse(await getItem('contactList'));
+        console.log(contactList);
+        renderContactList(contactList)
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+}
+
+function renderContactList(contactList) {
+    for (let i = 0; i < contactList.length; i++) {
+        let contact = contactList[i].name;
+        
+
+        document.getElementById('add-task-contact').innerHTML += /*html*/`
+        <div class="space-between add-task-contact" onclick="selectContact(${i})">
+            <div>
+                <span>${contact}</span>
+            </div>
+            <div>
+                <svg id="add-task-assignet-checkbox${i}" class="add-task-assignet-checkbox">
+                    <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+                </svg>
+            </div>
+        </div>
+    `;
+    }
 }
 
 
 function selectContact(id) {
-    document.getElementById(`add-task-assignet-checkbox${id}`).innerHTML = `<use href="assets/img/icons.svg#checkbox-checked"></use>`;
+    document.getElementById(`add-task-assignet-checkbox${id}`).innerHTML = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
 }
 
-function dropdownMenu() {
+
+function  dropdownMenuToggle() {
+    let dNone = document.getElementById('add-task-contact-div').classList.contains('d-none');
+    document.getElementById('assignet-arrow')
+
+    if (dNone) {
+        openDropdownMenu()
+    } else {
+        closeDropdownMenu()
+    }
+}
+
+function openDropdownMenu() {
     document.getElementById('add-task-contact-div').classList.remove('d-none');
+    document.getElementById('assignet-arrow').style="transform: rotate(180deg);"
+}
+
+function closeDropdownMenu() {
+    document.getElementById('add-task-contact-div').classList.add('d-none');
+    document.getElementById('assignet-arrow').style="transform: rotate(0);"
 }
