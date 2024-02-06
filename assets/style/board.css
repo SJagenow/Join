@@ -1,4 +1,4 @@
-body button{
+body button {
     cursor: pointer;
 }
 
@@ -7,7 +7,7 @@ body button{
     height: 232px;
     flex-shrink: 0;
     background: #F6F7F8;
-   margin-left: 232px;
+    margin-left: 232px;
     display: flex;
     justify-content: flex-end;
 }
@@ -26,7 +26,7 @@ body button{
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-    
+
 }
 
 .board_h1_button_container input {
@@ -45,9 +45,9 @@ body button{
     background-position: right;
     background-size: 32px 32px;
     border: 1px solid #2A3647;
-    
 
-    
+
+
 }
 
 
@@ -62,21 +62,20 @@ body button{
     background: #2A3647;
     color: white;
     color: var(--white, #FFF);
-font-family: Inter;
-font-size: 21px;
-font-style: normal;
-font-weight: 700;
-line-height: 120%
-
+    font-family: Inter;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%
 }
 
 .input_button_container {
     display: flex;
-padding: 8px 16px;
-justify-content: center;
-align-items: center;
-gap: 4px;
-border-radius: 10px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 10px;
 
 
 
@@ -121,7 +120,7 @@ border-radius: 10px;
     align-items: center;
     flex-shrink: 0;
     gap: 24px;
-    
+
 }
 
 
@@ -153,8 +152,8 @@ border-radius: 10px;
     flex-direction: column;
     align-items: flex-start;
     width: 246px;
-    
-    
+
+
 }
 
 
@@ -188,277 +187,268 @@ border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
-  
+    
+
 
 }
 
 .progress_await_container {
-    display: flex;
- width: 80%;
-    padding: 16px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 24px;
-    background: var(--white, #FFF);
-    box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
-    margin-top: 16px;
-    margin-left: 16px;
+
+   
 }
-   .d_none{
+
+.d_none {
     display: none;
-   } 
-
-.vector{
-    display: flex;
-justify-content: space-between;
-align-items: center;
-flex: 1 0 0;
 }
 
-.user_story{
+.vector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 0 0;
+}
+
+.user_story {
     display: flex;
     padding: 4px 24px;
     align-items: flex-start;
     gap: 10px;
     border-radius: 8px;
     background: #0038FF;
-    
-}
-.user_story_dialog_background{
-    position:fixed;
-top: 100px;
-right: 0;
-left: 0;
-bottom: 0;
-background-color: rgba(211, 211, 211, 0.796);
-width: 100vw;
-height: 100vh;
-display: flex;
-justify-content: center;
-display: none;
-z-index: 8;
+    justify-content: space-between;
+
 }
 
-.user_story_dialog
-{
-display: flex;
-justify-content: center;
-align-items: center;
-height: 80%;
-width: 200px;
-padding: 48px 180px;
-flex-direction: column;
-gap: 24px;
-border-radius: 30px;
-background: #FFF;
-z-index: 9;
-/* nuevo */
-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+.user_story_dialog_background {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(211, 211, 211, 0.796);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    display: none;
+    z-index: 999;
+
+}
+
+.user_story_dialog {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 80%;
+    width:  420px;
+   padding: 42px;
+    flex-direction: column;
+    gap: 40px;
+    border-radius: 30px;
+    background: #FFF;
+    z-index: 9;
+    /* nuevo */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    margin-top: 45px;
+
+
+
 
 }
 
 .user_story_dialog h1 {
-font-size: 44px;
+    font-size: 44px;
 }
 
-.user_story_label_x_contrainer{
+.user_story_label_x_contrainer {
     display: flex;
-justify-content: space-between;
-align-items: center;
-align-self: stretch;
+    justify-content: space-between;
+    align-items: center;
+   
 }
 
 
-.user_story_label_x_container button{
+.user_story_label_x_container button {
     display: flex;
-width: 32px;
-height: 32px;
-padding: 4px;
-justify-content: center;
-align-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    border: 0px;
 
-border-radius: 56px;
-cursor: pointer;
+    cursor: pointer;
 }
 
-#done_content,
-#close_one {
-    height: 200px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 1px dashed black;
-    margin-bottom: 50px;
+
+
+
+
+.user_story_headline {
+
+
+    
+    color: var(--black, #000);
+    /* Version 2/t1 */
+    font-family: Inter;
+    font-size: 61px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    /* 73.2px */
+}
+
+.user_story_description {
+ 
+    color: var(--black, #000);
+
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.user_story_date {
     display: flex;
     align-items: flex-start;
-    width: 100%;
+    gap: 25px;
+  
 }
 
-#done_content.drag-area-highlight,
-#close_one.drag-area-highlight {
-    background-color: rgba(0, 0, 0, 0.2);
-}
 
-.user_story_headline{
-
-
-align-self: stretch;
-
-color: var(--black, #000);
-/* Version 2/t1 */
-font-family: Inter;
-font-size: 61px;
-font-style: normal;
-font-weight: 700;
-line-height: 120%; /* 73.2px */
-}
-
-.user_story_description{
-    align-self: stretch;
-color: var(--black, #000);
-
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; 
-}
-
-.user_story_date{
-    display: flex;
-align-items: flex-start;
-gap: 25px;
-align-self: stretch;
+.user_story_button {
+    
 }
 
 .story_date {
     color: var(--Version-2-main-color, #2A3647);
-/* Version 2/t6 */
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
 }
 
-.user_date{
-    color: var(--black, #000);
-/* Version 2/t6 */
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
-}
-.user_story_priority{
-    display: flex;
-align-items: center;
-gap: 25px;
-align-self: stretch;
-}
-
-.story_priority{
-
-    color: var(--Version-2-main-color, #2A3647);
-/* Version 2/t6 */
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 24px */
-}
-
-.user_priority{
+.user_date {
     color: var(--black, #000);
     /* Version 2/t6 */
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
-    line-height: 120%; 
+    line-height: 120%;
+}
+
+.user_story_priority {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+ 
+}
+
+.story_priority {
+
+    color: var(--Version-2-main-color, #2A3647);
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 24px */
+}
+
+.user_priority {
+    color: var(--black, #000);
+    /* Version 2/t6 */
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
 
 }
 
-.assigned_to{
-align-self: stretch;
-color: var(--Version-2-main-color, #2A3647);
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%;
+.assigned_to {
+ 
+    color: var(--Version-2-main-color, #2A3647);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
 }
 
 
-.user_story_delete_edit{
+.user_story_delete_edit {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
-  
+
 }
 
 .user_story_delete_edit img {
     width: 24px;
-height: 24px;
+    height: 24px;
 }
 
 
 
-.user_story_delete_edit_one{
+.user_story_delete_edit_one {
     display: flex;
     align-items: center;
-    
+
 }
 
-.user_story_delete_edit_one button{
+.user_story_delete_edit_one button {
     border: 0px;
     align-items: center;
     display: flex;
-align-items: center;
-gap: 8px;
-cursor: pointer;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
 }
 
-.user_story_delete_edit_two{
+.user_story_delete_edit_two {
     display: flex;
 
-  
+
 }
-.user_story_delete_edit_two button{
+
+.user_story_delete_edit_two button {
     border: 0px;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 8px;
-cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
 }
 
 
 
-.stripe
-{
+.stripe {
     height: 20px;
     width: 1px;
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.192);
 }
 
-.subtask_center{
+.subtask_center {
     display: flex;
     align-items: center;
-  gap: 12px;
-  padding-left: 15px;
-  padding-top: 15px;
+    gap: 12px;
+    padding-left: 15px;
+    padding-top: 15px;
 }
 
 .subtask_center img {
-  object-fit: cover;
-  width: 18px;
+    object-fit: cover;
+    width: 18px;
 }
 
-.postion_mid-bot-container{
+.postion_mid-bot-container {
     width: calc(100vw - 232px);
     margin-left: 117px;
     display: flex;
@@ -468,125 +458,125 @@ cursor: pointer;
 
 }
 
-#todo_content{
-width: 220px;
-}
 
-#close_one{
-width: 220px;
-}
-
-#await_content{
-width: 220px;
-}
-
-#done_content{
- width: 220px;   
-}
-
-#todo_content_open {
-    width: 100%;
-}
 
 
 
 /* inter-200 - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 200;
-    src: url('../fonts/inter-v13-latin-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* inter-300 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    src: url('../fonts/inter-v13-latin-200.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-300 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 300;
-    src: url('../fonts/inter-v13-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* inter-regular - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    src: url('../fonts/inter-v13-latin-300.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    src: url('../fonts/inter-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* inter-500 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    src: url('../fonts/inter-v13-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-500 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    src: url('../fonts/inter-v13-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* inter-600 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    src: url('../fonts/inter-v13-latin-500.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-600 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
-    src: url('../fonts/inter-v13-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* inter-800 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    src: url('../fonts/inter-v13-latin-600.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-800 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
-    src: url('../fonts/inter-v13-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
-  /* inter-900 - latin */
-  @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    src: url('../fonts/inter-v13-latin-800.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-900 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
     font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
-    src: url('../fonts/inter-v13-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-  }
+    src: url('../fonts/inter-v13-latin-900.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
-  @media(min-width:1440px) {
+@media(min-width:1440px) {
+
     .botlane_main_container,
     .smal_midlane_main_container,
-    .board_top  {
+    .board_top {
         width: 1208px;
     }
 
 
 }
 
-@media(max-width:1439px) {
-
-
-
-}
+@media(max-width:1439px) {}
 
 .drag-area {
-    height: 200px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 1px dashed black;
+    height:50vh;
+    background-color: rgba(247, 247, 247, 0.1);
+    width: 246px;
     margin-bottom: 50px;
     display: flex;
     align-items: flex-start;
+    flex-direction: column;
 }
 
-.drag-area-highlight {
-    background-color: rgba(0, 0, 0, 0.2);
-}
+
 
 .todo {
+    display: flex;
+    height: auto;
+    width: 200px;
+    padding: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 24px;
     background-color: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    cursor: grab;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: space-evenly;
-   
+    box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
+    margin-top: 16px;
+
 
 }

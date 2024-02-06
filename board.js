@@ -5,14 +5,14 @@ let todo = [{
     'label': 'User Story',
     'title': 'Kochwelt Page & Recipe Recommender',
     'description': 'Build start page with recipe recommendation...',
-    'category': 'open'
+    'category': 'todos'
 },
 {
     'id': 1,
     'label': 'User',
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
-    'category': 'done'
+    'category': 'todos'
 },
 
 {
@@ -20,7 +20,7 @@ let todo = [{
     'label': 'User',
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
-    'category': 'closed'
+    'category': 'todos'
 },
 
 {
@@ -36,26 +36,26 @@ let todo = [{
 let currentDraggedElement;
 
 function updateBoard() {
-    let open = todo.filter(t => t['category'] == 'open');
+    let todos = todo.filter(t => t['category'] == 'todos');
 
     document.getElementById('todo_content_open').innerHTML = '';
 
-    for (let index = 0; index < open.length; index++) {
-        const clean = open[index];
+    for (let index = 0; index < todos.length; index++) {
+        const clean = todos[index];
         document.getElementById('todo_content_open').innerHTML += generateTodo(clean);
     }
 
 
-    let closed = todo.filter(t => t['category'] == 'closed');
+    let inprogress = todo.filter(t => t['category'] == 'inprogress');
 
     document.getElementById('close_one').innerHTML = '';
 
-    for (let index = 0; index < closed.length; index++) {
-        const clean = closed[index];
+    for (let index = 0; index < inprogress.length; index++) {
+        const clean = inprogress[index];
         document.getElementById('close_one').innerHTML += generateTodo(clean);
     }
 
-    
+
     let awaitList = todo.filter(t => t['category'] == 'await');
 
     document.getElementById('await_content').innerHTML = '';
@@ -81,10 +81,8 @@ function startDragging(id) {
 }
 
 
-
-
 function generateTodo(clean) {
-    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo"><div>${clean['label']}</div> <div>${clean['title']}</div><div>${clean['description']}</div></div>`;
+    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo"><div class"card_label">${clean['label']}</div> <div class"card_title">${clean['title']}</div><div class"card_description">${clean['description']}</div></div>`;
 }
 
 function allowDrop(ev) {
