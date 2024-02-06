@@ -194,10 +194,8 @@ body button {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
-
-
 }
+
 
 .progress_await_container {
 
@@ -616,7 +614,7 @@ body button {
     width: 12%;
     height: 30px;
     background-color: #4589FF;
-    height: 12px;
+    height: 8px;
     border-radius: 28px;
 
   }
