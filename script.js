@@ -18,3 +18,31 @@ async function includeHTML() {
         }
     }
 }
+
+function changeColor(clickedLink) {
+    var links = document.querySelectorAll('.mobile-menu_link_container');
+
+    // Setze die Hintergrundfarbe aller Links zurück
+    links.forEach(function (resetLink) {
+        resetLink.style.backgroundColor = '#2A3647';
+    });
+
+    // Setze die Hintergrundfarbe des geklickten Links
+    clickedLink.style.backgroundColor = '#091931';
+}
+
+// Aktualisiere die Farbe basierend auf der aktuellen Seite
+function updateColorOnLoad() {
+    var currentPath = window.location.pathname;
+    var links = document.querySelectorAll('.mobile-menu_link_container');
+
+    links.forEach(function (link) {
+        if (link.getAttribute('href') === currentPath) {
+            changeColor(link);
+        }
+    });
+}
+
+// Rufe die Funktion bei Seitenaufruf auf
+window.onload = updateColorOnLoad;
+
