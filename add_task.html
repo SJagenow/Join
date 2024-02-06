@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="./assets/style/add_task.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <script src="script.js"></script>
-    <script src="add_task.js"></script>
-    <script src="storage.js"></script>
+    <script src="./assets/js/add_task.js"></script>
+    <script src="./assets/js/storage.js"></script>
 </head>
 
-<body onload="init()">
+<body onload="init(), initAddTask()">
     <div class="flex max-h">
         <div class="include-menu" w3-include-html="templates/menu.html"></div>
         <div class="main max-h">
@@ -36,52 +36,17 @@
                                         name="Description" placeholder="Enter a Description"></textarea>
                                 </div>
                                 <div class="column add-task-input-div">
-                                    <svg class="input-icon">
-                                        <use href="assets/img/icons.svg#arrow-icon"></use>
-                                    </svg>
-                                    <label class="form-input-titel" for="add-task-assignet-to">Assignet to</label>
-                                    <input id="add-task-assignet-to" class="add-task-select arrow-icon" onclick="dropdownMenu()" type="text" placeholder="Select contacts to assign">
+                                    <div onclick="dropdownMenuToggle()">
+                                        <svg id="assignet-arrow" class="input-icon">
+                                            <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
+                                        </svg>
+                                    </div>
+                                    <label class="form-input-titel" for="add-task-assignet-to"  onclick="dropdownMenuToggle()">Assignet to</label>
+                                    <input id="add-task-assignet-to" class="add-task-select arrow-icon"  onclick="dropdownMenuToggle()" type="text" placeholder="Select contacts to assign">
                                     <div id="add-task-contact-div" class="d-none">
-                                        <div class="space-between add-task-contact" onclick="selectContact(0)">
-                                            <div>
-                                                Hanane Sabil
-                                            </div>
-                                            <div>
-                                                <svg id="add-task-assignet-checkbox0" class="add-task-assignet-checkbox">
-                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="space-between add-task-contact" onclick="selectContact(1)">
-                                            <div>
-                                                Stephan Jagenow
-                                            </div>
-                                            <div>
-                                                <svg id="add-task-assignet-checkbox1" class="add-task-assignet-checkbox">
-                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="space-between add-task-contact" onclick="selectContact(2)">
-                                            <div>
-                                                Pascal Jagenow
-                                            </div>
-                                            <div>
-                                                <svg id="add-task-assignet-checkbox2" class="add-task-assignet-checkbox">
-                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                        <div class="space-between add-task-contact" onclick="selectContact(3)">
-                                            <div>
-                                                Kutup Cevik
-                                            </div>
-                                            <div>
-                                                <svg id="add-task-assignet-checkbox3" class="add-task-assignet-checkbox">
-                                                    <use href="assets/img/icons.svg#checkbox-unchecked"></use>
-                                                </svg>
-                                            </div>
-                                        </div>
+                                        <div style="height: 7px;"></div>
+                                        <div id="add-task-contact" class="add-task-contact-div"></div>
+                                        <div style="height: 7px;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -98,17 +63,17 @@
                                         <button id="prio-button-urgent" class="add-task-prio-button">
                                             Urgent
                                             <svg viewBox="0 0 21 16">
-                                                <use href="assets/img/icons.svg#urgentprio-icon"></use>
+                                                <use href="assets/img/icons.svg#height-prio-icon"></use>
                                             </svg>
                                         </button>
                                         <button id="prio-button-medium" class="add-task-prio-button">Medium
                                             <svg viewBox="0 0 21 16">
-                                                <use href="assets/img/icons.svg#mediumprio-icon"></use>
+                                                <use href="assets/img/icons.svg#medium-prio-icon"></use>
                                             </svg>
                                         </button>
                                         <button id="prio-button-low" class="add-task-prio-button">Low
                                             <svg viewBox="0 0 21 16">
-                                                <use href="assets/img/icons.svg#lowprio-icon"></use>
+                                                <use href="assets/img/icons.svg#low-prio-icon"></use>
                                             </svg>
                                         </button>
                                     </div>

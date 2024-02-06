@@ -7,10 +7,10 @@ async function init() {
     renderContactList();
 }
 
-async function loadContactList(){
+async function loadContactList() {
     try {
         contactList = JSON.parse(await getItem('contactList'));
-    } catch(e){
+    } catch (e) {
         console.error('Loading error:', e);
     }
 }
@@ -70,43 +70,43 @@ function renderContactsToList() {
             divideContainer.style.display = 'none';
         } else {
             // Kontakte vorhanden, Container anzeigen
-            namesContainer.innerHTML = '';
-            alphabetContainer.style.display = 'block';
-            contactsStartingWithLetter.forEach(contact => {
-                namesContainer.innerHTML += `
-                <div class="contact_list_container">
-                    <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
-                    <div class="column gap8">
-                        <div id="contact_list_name${i}">
-                            ${contact.name}
-                        </div>
-                        <a id="contact_list_mail${i}" href="mailto:${contact.mail}">
-                            ${contact.mail}
-                        </a>
-                    </div>
-                </div>
-                `;
-            });
+            renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, i);
         }
     }
 }
 
-
-
-
+function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, i) {
+    namesContainer.innerHTML = '';
+    alphabetContainer.style.display = 'flex';
+    contactsStartingWithLetter.forEach(contact => {
+        namesContainer.innerHTML += `
+        <div class="contact_list_container">
+            <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
+            <div class="column gap8">
+                <div id="contact_list_name${i}">
+                    ${contact.name}
+                </div>
+                <a id="contact_list_mail${i}" href="mailto:${contact.mail}">
+                    ${contact.mail}
+                </a>
+            </div>
+        </div>
+        `;
+    });
+}
 
 /**
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
  */
-function showAddContactDialog(){
+function showAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
-   
+
 }
 
 /**
  * This function is given the backgorundcontainer of the overlay to close it by clicking in the background of the overlay.
  */
-function closeAddContactDialog(){
+function closeAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'none';
     renderContactList();
 }
@@ -118,29 +118,29 @@ function closeAddContactDialog(){
  */
 function noClose(event) {
     event.stopPropagation();
-  }
+}
 
 /**
  * This function creates a json from the inputs of the 'add contact' overlay and pushes it into the contactlist Array and saves it in the backend.
  * 
  * @param {string} contact - This is the json with all informations from the inputfield. It will be pushed into contactlist.
  */
-async function addToContacts(){
+async function addToContacts() {
     let saveContactButton = document.getElementById('contact_save_button');
     saveContactButton.disabled = true;
     let name = document.getElementById('contactlist_name_input');
     let mail = document.getElementById('contactlist_mail_input');
     let phone = document.getElementById('contactlist_phone_input');
     let contact = {
-            "name": name.value,
-            "mail": mail.value,
-            "phone": phone.value
+        "name": name.value,
+        "mail": mail.value,
+        "phone": phone.value
     };
     contactList.push(contact);
-    console.log('updated contactlist:' ,contactList);
+    console.log('updated contactlist:', contactList);
     await setItem('contactList', JSON.stringify(contactList)); // key = contactlist ,value = contactlistArray as text
     resetAddContactForm(name, mail, phone);
-} 
+}
 
 /**
  * This function is just to reset the inputfields of the 'add contact' overlay.
@@ -150,7 +150,7 @@ async function addToContacts(){
  * @param {string} phone - It's the inputfield where the phonenumber is written in.
  */
 
-function resetAddContactForm(name, mail, phone){
+function resetAddContactForm(name, mail, phone) {
     name.value = '';
     mail.value = '';
     phone.value = '';
