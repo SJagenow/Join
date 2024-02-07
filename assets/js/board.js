@@ -87,27 +87,32 @@ function generateTodo(clean) {
     let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
 
     return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo">
-        <div class="card_label">${clean['label']}</div>
-        <div class="card_title">${clean['title']}</div>
-        <div class="card_description">${clean['description']}</div>
-        <div id="myProgress">
-            <div id="myBar" style="width: ${progressWidth}%;"></div><div><span>Subtask 1/2</span></div>
+    <div class="card_label">${clean['label']}</div>
+    <div class="card_title">${clean['title']}</div>
+    <div class="card_description">${clean['description']}</div>
+    <div id="myProgress">
+        <div id="myBar" style="width: ${progressWidth}%;"></div>
+        <div><span>Subtask 1/2</span></div>
+    </div>
+    <div class="member_flex">
+    <div class="circle_flex">
+        <div class="circle">FF</div>
+        <div class="circle_two">GG</div>
+        <div class="circle_three">WP</div>
+        <div class="circle_four">CU</div>
+        <div class="circle_five">CU</div>
+  </div>
+        <div class="prio_icon_containers">
+            <svg width="22" height="20">
+                <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red">
+                </use>
+            </svg>
         </div>
-        <div class="member_flex">
-            <div class="circle">FF</div>
-            <div class="circle_two">GG</div>
-            <div class="circle_three">WP</div>
-            <div class="circle_four">CU</div>
-            <div class="circle_five">CU</div>
-
-            <div class="prio_icon_containers">
-                <svg width="22" height="20">
-                  <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
-                </svg>
-              </div>
-        </div>
-    </div>`;
+    </div>
+</div>`;
 }
+
+
 function allowDrop(ev) {
     ev.preventDefault();
 }

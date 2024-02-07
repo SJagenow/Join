@@ -689,11 +689,15 @@ body button {
   .member_flex{
    display: flex;
   justify-content: space-between;
-   
+   width: 200px;
+  }
+
+  .circle_flex{
+    display: flex;
   }
   
   .prio_icon_containers{
-   margin: 6px 64px;
+ margin-top: 6px;
   
 
   }
