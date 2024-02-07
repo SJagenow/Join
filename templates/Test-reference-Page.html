@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <title>Default Page Join</title>
+        <link rel="stylesheet" type="text/css" href="../assets/fonts.css/">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="stylesheet" type="text/css" href="../assets/style/summary.css">
+        <script src="assets/js/menu.js"></script>
+        <script src="./assets/js/storage.js"></script>
+        <script language="JavaScript" type="text/javascript" src="../script.js"></script>
+        
+        
+    </head>
+
+    <body onload="init(), includeHTML()">
+        <!-- NOTE -- Master Container  -->
+        <div class="MasterContainerDefaultPage header_container">
+
+            
+            <!-- NOTE -- Master Container Header -->
+            <div class="MasterContainerHeader" w3-include-html="./header.html">
+                
+            </div>
+
+            <!-- NOTE -- Master Container Menu  -->
+            <div class="MasterContainerMenu" w3-include-html = "./menu.html">
+               
+            </div>
+        </div>
+
+            <!-- NOTE -- Master Container Inside -->
+            <div  class="MasterContainerInside" > 
+                <div class="summary">
+                    <div class="summary-header">
+                          <span class="summary-headline">Join 360</span>
+                          <span class="summary-line"> </span>
+                          <span class="summary-titelText">Key Metrics at a Glance</span>
+                    </div>
+                    <div class="mobile-summary-header">   
+                      <span class="summary-headline">Join 360</span>
+                      <span class="summary-titelText">Key Metrics at a Glance</span>
+                      <span class="summary-line"> </span>
+                              
+                  </div>
+                    <div class="summary-content">
+                      <div class="summary-left">
+                          <div class="summary-todo">
+                            <div href="./board.html" class="task-todo">
+                                <img src="./assets/img/summary-pencil-dark.png" class="todo-img pencil">
+                                <div class="summary-todo-right">
+                                    <div class="task-counter-todo" id="task-counter-todo">1</div>
+                                    <span class="todo-description">To-do</span>
+                                </div>
+                            </div>
+                             
+                              <div href="board.html" class="task-todo">
+                                <img src="./assets/img/summary-done-dark.png" class="todo-img done">
+                                <div class="summary-todo-right">
+                                    <div class="task-counter-todo" id="task-counter-done">1</div>
+                                    <span class="todo-description">Done</span>
+                                </div>
+                              </div> 
+                          </div>
+                          <div href="./board.html" class="summary-task-deadline">
+                              <div class="urgent">
+                                <img class="urgent-img" src="./assets/img/summary-urgent.png">
+                                <div class="task-urgent">
+                                  <div class="urgent-counter">1</div>
+                                  <span class="urgent-description">Urgent</span>
+                                </div>
+                              </div>
+                              <div class="urgent-line"> </div>
+                              <div class="deadline">
+                                  <div class="deadline-day">October 16, 2022</div>
+                                  <span class="deadline-description">Upcoming Deadline</span>
+                              </div>
+                          </div>
+                          <div class="summary-task">
+                              <div class="task-type" href="board.html">
+                                <div class=task-counter id="task-counter-all">1</div>
+                                <span class="task-description">Tasks in Board</span>
+                              </div>
+                              <div href="board.html" class="task-type">
+                                <div class=task-counter id="task-counter-Inprogress">2</div>
+                                <span class="task-description">Tasks In Progress</span>
+                              </div>
+                              <div href="board.html" class="task-type">
+                                <div class=task-counter id="task-counter-awaiting">2</div>
+                                <span class="task-description">Awaiting Feedback</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="summary-welcome-user"> 
+                        <span class="good-morning">Good Morning,</span>
+                        <span class="user-name">Sofia Müller</span>
+                      </div>
+                    </div>
+                </div>               
+            </div>
+
+        </div>
+
+    </body>
+
+</html>
