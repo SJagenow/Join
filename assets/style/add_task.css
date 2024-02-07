@@ -1,15 +1,23 @@
 .main-container {
-    margin-top: 110px;
-    margin-left: 96px;
-    margin-right: 135.75px;
-    width: fit-content;
-    height: 100pc;
-    max-height: calc(100vh - 230px);
+    padding-top: 110px;
+    padding-left: 96px;
+    width: calc(100vw - 232px);
+    max-width: calc(1440px - 232px);
+    height: calc(100vh - 104px);
+    max-height: calc(1024px - 104px);
     overflow: auto;
 }
 
+.main-div {
+    max-width: 982px;
+}
+
+.add-task-title {
+    margin-bottom: 38px;
+}
+
 .ad-task-form {
-    gap: 50px;
+    gap: 92px;
 }
 
 .form-input-titel {
@@ -181,21 +189,20 @@
     margin-left: 6px;
 }
 
-#add-task-contact-div {
+.dropdown-menu-div {
     padding-top: 0px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-left: #D1D1D1 solid 1px;
     border-right: #D1D1D1 solid 1px;
     border-bottom: #D1D1D1 solid 1px;
-    margin-top: -35px;
+    margin-top: -36px;
 }
 
-#add-task-contact {
+.dropdown-menu {
     overflow: auto;
     max-height: 194px;
-    padding-left: 21px;
-    padding-right: 8px;
+    position: relative;
 }
 
 .add-task-assignet-checkbox {
@@ -203,8 +210,23 @@
     width: 20px;
 }
 
-.add-task-contact {
-    padding: 8px 0px 8px 0px;
+.add-task-single {
+    padding: 8px 8px 8px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.add-task-single:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+}
+
+.name-div {
+    display: flex;
+    gap: 11px;
+    align-items: center;
 }
 
 .input-icon {
@@ -212,7 +234,7 @@
     z-index: 10;
     display: inline-block;
     right: 16px;
-    top: 49px;
+    top: 47px;
     height: 24px;
     width: 24px;
     cursor: pointer;
@@ -245,9 +267,8 @@
 
 @media (max-width: 1340px) {
     .main-container {
-        margin-left: 0;
-        margin-right: 0;
-        max-height: calc(100vh - 190px);
+        padding-left: 0;
+        padding-right: 0;
         display: flex;
         justify-content: center;
         width: auto;
@@ -255,6 +276,7 @@
 }
 
 @media (max-width: 1250px) {
+
     .add-task-input-div {
         width: 396px;
         min-width: 396px;
@@ -308,16 +330,6 @@
         display: none;
     }
 
-    .media-column {
-        flex-direction: column;
-        max-height: calc(100vh - 10px);
-    }
-
-    .main-container {
-        margin-top: 50px;
-        max-height: 72vh;
-    }
-
     .add-task-input-div {
         width: 50vw;
         /* min-width: 419px; */
@@ -330,6 +342,21 @@
 
     .gap48 {
         gap: 0;
+    }
+
+    .add-task-buttons-div {
+        justify-content: flex-end;
+    }
+
+    .media-column {
+        flex-direction: column;
+        max-height: calc(1024px - 10px);
+        gap: 20px;
+    }
+
+    .conditions-text {
+        display: flex;
+        align-items: end;
     }
 
     .form-input-titel {
@@ -363,7 +390,19 @@
     }
 
     .input-icon {
-        top: 48px;
+        top: 47px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .main-container {
+        height: calc(100vh - 184px);
+        max-height: 1024px;
+        width: calc(100vw);
+    }
+
+    .main-container {
+        padding-top: 48px;
     }
 }
 
@@ -404,7 +443,7 @@
     }
 
     .input-icon {
-        top: 44px;
+        top: 42px;
     }
 }
 

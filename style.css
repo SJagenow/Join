@@ -314,9 +314,24 @@ nav {
     justify-content: space-between;
     width: 80%;
 }
+
 .mobile-sideMenu {
     display: none;
 }
+
+.initials {
+    font-size: 12px;
+    font-weight: 300;
+    color: white;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2px;
+    text-align: center;
+    line-height: 34px;
+}
+
 @media(min-width:1440px) {
     header {
         width: 1208px;
@@ -451,4 +466,129 @@ Not supports in Firefox and IE */
 
 ::-webkit-scrollbar-button:vertical:single-button:increment:active {
     border-color: #a0a0a0 white white white;
+}
+
+
+
+/* Poppige Farben */
+.letter-a {
+    background-color: #FF1493; /* Pink */
+}
+
+.letter-b {
+    background-color: #FFD700; /* Gold */
+}
+
+.letter-c {
+    background-color: #32CD32; /* Limettengrün */
+}
+
+.letter-d {
+    background-color: #00BFFF; /* Himmelblau */
+}
+
+.letter-e {
+    background-color: #9370DB; /* Mittellila */
+}
+
+.letter-f {
+    background-color: #FF6347; /* Tomatenrot */
+}
+
+.letter-g {
+    background-color: #FF4500; /* Orangerot */
+}
+
+.letter-h {
+    background-color: #FF69B4; /* Pink */
+}
+
+.letter-i {
+    background-color: #FF8C00; /* Dunkelorangen */
+}
+
+.letter-j {
+    background-color: #00CED1; /* Dunkeltürkis */
+}
+
+.letter-k {
+    background-color: #9400D3; /* Dunkellila */
+}
+
+.letter-l {
+    background-color: #6A5ACD; /* Mittelblau */
+}
+
+.letter-m {
+    background-color: #CD5C5C; /* Indisches Rot */
+}
+
+.letter-n {
+    background-color: #4682B4; /* Stahlblau */
+}
+
+.letter-o {
+    background-color: #00FF7F; /* Smaragdgrün */
+}
+
+.letter-p {
+    background-color: #FF00FF; /* Magenta */
+}
+
+.letter-q {
+    background-color: #8A2BE2; /* Indigo */
+}
+
+.letter-r {
+    background-color: #B22222; /* Ziegelrot */
+}
+
+.letter-s {
+    background-color: #20B2AA; /* Türkis */
+}
+
+.letter-t {
+    background-color: #8B008B; /* Dunkelmagenta */
+}
+
+.letter-u {
+    background-color: #FF69B4; /* Pink */
+}
+
+.letter-v {
+    background-color: #1E90FF; /* Himmelblau */
+}
+
+.letter-w {
+    background-color: #FF1493; /* Pink */
+}
+
+.letter-x {
+    background-color: #B22222; /* Ziegelrot */
+}
+
+.letter-y {
+    background-color: #FFD700; /* Gold */
+}
+
+.letter-z {
+    background-color: #FF8C00; /* Dunkelorangen */
+}
+
+/* Umlaute */
+.letter-ä {
+    background-color: #FF1493; /* Pink */
+}
+
+.letter-ö {
+    background-color: #00CED1; /* Dunkeltürkis */
+}
+
+.letter-ü {
+    background-color: #FF69B4; /* Pink */
+}
+
+/* Eszett */
+.letter-ß {
+    background-color: #FF4500; /* Orangerot */
 }

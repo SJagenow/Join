@@ -43,53 +43,43 @@
         <div class="midlane_last_no_button">Done</div>
     </div>
 
+
+
     <div class="botlane_main_container">
-
-
         <div class="todofield ml68">
-            <div class="no_task_container, d-none"> <span class="d_none">no tasks Todo</span>
-
+            <div class="no_task_container, d-none"> <span>no tasks Todo</span>
             </div>
             <div class="progress_await_container ">
-                <div class="drag-area" id="todo_content_open" ondrop="moveTo('todos')"
-                    ondragover="allowDrop(event); highlight('todo_content_open')"></div>
+                <div class="drag-area" id="task_content_open" ondrop="moveTo('todos')"
+                    ondragover="allowDrop(event)"></div>
             </div>
         </div>
-
         <div class="progress_await_done">
             <div class="progress_await_container">
-
                 <div class="drag-area" id="close_one" ondrop="moveTo('inprogress')"
-                    ondragover="allowDrop(event); highlight('close_one')"></div>
+                    ondragover="allowDrop(event)"></div>
             </div>
         </div>
         <div class="progress_await_done">
             <div class="progress_await_container">
-
                 <div class="drag-area" id="await_content" ondrop="moveTo('await')"
-                    ondragover="allowDrop(event); highlight('await_content')">
+                    ondragover="allowDrop(event)">
                 </div>
             </div>
         </div>
-
         <div class="progress_await_done">
             <div class="progress_await_container">
-
-
                 <div class="drag-area" id="done_content" ondrop="moveTo('done')"
-                    ondragover="allowDrop(event); highlight('done_content')">
+                    ondragover="allowDrop(event)">
                 </div>
             </div>
-
-
-
         </div>
 
 
 
 
 
-        <div class="user_story_dialog_background">
+        <div id="dialog_bg" class="user_story_dialog_background">
             <div class="user_story_dialog">
 
 
@@ -141,7 +131,7 @@
                         </button></div>
                 </div>
 
-
+              
 
 
 

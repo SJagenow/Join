@@ -20,8 +20,8 @@
         <div class="main max-h">
             <div class="" w3-include-html="templates/header.html"></div>
             <main class="main-container">
-                <div class="overflow">
-                    <h1>Add Task</h1>
+                <div class="main-div overflow">
+                    <h1 class="add-task-title">Add Task</h1>
                     <form action="" class="ad-task-form column-space-between">
                         <div class="gap48">
                             <div class="add-task-input-div">
@@ -36,16 +36,16 @@
                                         name="Description" placeholder="Enter a Description"></textarea>
                                 </div>
                                 <div class="column add-task-input-div">
-                                    <div onclick="dropdownMenuToggle()">
+                                    <div onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">
                                         <svg id="assignet-arrow" class="input-icon">
                                             <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
                                         </svg>
                                     </div>
-                                    <label class="form-input-titel" for="add-task-assignet-to"  onclick="dropdownMenuToggle()">Assignet to</label>
-                                    <input id="add-task-assignet-to" class="add-task-select arrow-icon"  onclick="dropdownMenuToggle()" type="text" placeholder="Select contacts to assign">
-                                    <div id="add-task-contact-div" class="d-none">
-                                        <div style="height: 7px;"></div>
-                                        <div id="add-task-contact" class="add-task-contact-div"></div>
+                                    <label class="form-input-titel" for="add-task-assignet-to"  onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">Assignet to</label>
+                                    <input id="add-task-assignet-to" class="add-task-select arrow-icon"  onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')" type="text" placeholder="Select contacts to assign">
+                                    <div id="add-task-contact-div" class="dropdown-menu-div d-none">
+                                        <div style="height: 9px;"></div>
+                                        <div id="add-task-contact" class="dropdown-menu"></div>
                                         <div style="height: 7px;"></div>
                                     </div>
                                 </div>
@@ -60,31 +60,41 @@
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="prio-div">Prio</label>
                                     <div class="space-between" id="prio-div">
-                                        <button id="prio-button-urgent" class="add-task-prio-button">
+                                        <div id="prio-button-urgent" class="add-task-prio-button">
                                             Urgent
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#height-prio-icon"></use>
                                             </svg>
-                                        </button>
-                                        <button id="prio-button-medium" class="add-task-prio-button">Medium
+                                        </div>
+                                        <div id="prio-button-medium" class="add-task-prio-button">Medium
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#medium-prio-icon"></use>
                                             </svg>
-                                        </button>
-                                        <button id="prio-button-low" class="add-task-prio-button">Low
+                                        </div>
+                                        <div id="prio-button-low" class="add-task-prio-button">Low
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#low-prio-icon"></use>
                                             </svg>
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="column add-task-input-div">
-                                    <label class="form-input-titel asterisk" for="add-task-category">Category</label>
-                                    <select id="add-task-category" class="add-task-select" required name="cars">
-                                        <option value="" selected disabled hidden>Select task category</option>
-                                        <option value="technical task">Technical Task</option>
-                                        <option value="user story">User Story</option>
-                                    </select>
+                                    <div onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">
+                                        <svg id="category-arrow" class="input-icon">
+                                            <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
+                                        </svg>
+                                    </div>
+                                    <label class="form-input-titel" for="add-task-category"  onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Category</label>
+                                    <input id="add-task-category" class="add-task-select arrow-icon"  onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')" type="text" placeholder="Select task category">
+                                    <div id="add-task-category-list-div" class="dropdown-menu-div d-none">
+                                        <div style="height: 9px;"></div>
+                                        <div id="add-task-category-list" class="dropdown-menu">
+                                            <div class="add-task-single">Select task category</div>
+                                            <div class="add-task-single">Technical Task</div>
+                                            <div class="add-task-single">User Story</div>
+                                        </div>
+                                        <div style="height: 7px;"></div>
+                                    </div>
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>

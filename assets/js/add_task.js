@@ -41,11 +41,17 @@ async function loadContactList() {
 function renderContactList(contactList) {
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i].name;
-        
+
+        const words = contact.split(" ");
+        const firstName = words[0][0];
+        const secondName = words[1] ? words[1][0] : '';
+        let initials = firstName + secondName;
+
 
         document.getElementById('add-task-contact').innerHTML += /*html*/`
-        <div class="space-between add-task-contact" onclick="selectContact(${i})">
-            <div>
+        <div class="add-task-single" onclick="selectContact(${i})">
+            <div class="name-div">
+                <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
                 <span>${contact}</span>
             </div>
             <div>
@@ -60,27 +66,35 @@ function renderContactList(contactList) {
 
 
 function selectContact(id) {
-    document.getElementById(`add-task-assignet-checkbox${id}`).innerHTML = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
-}
+    let get = document.getElementById(`add-task-assignet-checkbox${id}`);
+    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
+    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
 
-
-function  dropdownMenuToggle() {
-    let dNone = document.getElementById('add-task-contact-div').classList.contains('d-none');
-    document.getElementById('assignet-arrow')
-
-    if (dNone) {
-        openDropdownMenu()
+    if (get.innerHTML == checked) {
+        get.innerHTML = unchecked;
     } else {
-        closeDropdownMenu()
+        get.innerHTML = checked;
     }
 }
 
-function openDropdownMenu() {
-    document.getElementById('add-task-contact-div').classList.remove('d-none');
-    document.getElementById('assignet-arrow').style="transform: rotate(180deg);"
+
+function  dropdownMenuToggle(id, arrow) {
+    let dNone = document.getElementById(`${id}`).classList.contains('d-none');
+    document.getElementById(`${arrow}`);
+
+    if (dNone) {
+        openDropdownMenu(id, arrow)
+    } else {
+        closeDropdownMenu(id, arrow)
+    }
 }
 
-function closeDropdownMenu() {
-    document.getElementById('add-task-contact-div').classList.add('d-none');
-    document.getElementById('assignet-arrow').style="transform: rotate(0);"
+function openDropdownMenu(id, arrow) {
+    document.getElementById(`${id}`).classList.remove('d-none');
+    document.getElementById(`${arrow}`).style="transform: rotate(180deg);"
+}
+
+function closeDropdownMenu(id, arrow) {
+    document.getElementById(`${id}`).classList.add('d-none');
+    document.getElementById(`${arrow}`).style="transform: rotate(0);"
 }
