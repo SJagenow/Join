@@ -19,6 +19,16 @@ async function includeHTML() {
     }
 }
 
+function toggleDropDown() {
+    let dropdownElement = document.getElementById('dropdown-links').classList;
+
+    if (dropdownElement.contains('d-none')) {
+        dropdownElement.remove('d-none');
+    } else {
+        dropdownElement.add('d-none');
+    }
+}
+
 function changeColor(clickedLink) {
     var links = document.querySelectorAll('.mobile-menu_link_container');
 
