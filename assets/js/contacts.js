@@ -7,10 +7,18 @@ async function init() {
     renderContactList();
 }
 
+/**
+ * Asynchronously loads the contact list from the backend storage.
+ * If successful, updates the global variable 'contactList' with the parsed JSON data.
+ * 
+ * @param {Array} contactList - This variable receives the parsed JSON data from the backend.
+ */
 async function loadContactList() {
     try {
+        // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
         contactList = JSON.parse(await getItem('contactList'));
     } catch (e) {
+        // If an error occurs during parsing or retrieval, log the error to the console
         console.error('Loading error:', e);
     }
 }
@@ -33,29 +41,29 @@ function renderContactList() {
         const singleLetter = alphabet[i]; // id's to render alphabet and for every letter and id to render it in.
         document.getElementById('contact_list').innerHTML += `
         <div id="contactlist_alphabet_sorting_container${i}"> 
-        ${singleLetter}  
+            ${singleLetter}  
         </div>
         <div class="divide_container" id="divide_container_${i}">
-        <img src="./assets/contactbook/icons_contactbook/Vector 10.svg" alt="">
+            <img src="./assets/contactbook/icons_contactbook/Vector 10.svg" alt="">
         </div>
-        <div id="contact_list_names${i}">
-        <div class="contact_list_container">
-            <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
-            <div class="column gap8">
-                <div id="contact_list_name${i}">
-                    Max Mustermann
-                </div>
-                <a id="contact_list_mail${i}" href="mailto:testingtim@test.de">
-                    testingtim@test.de
-                </a>
-            </div>
+            <div id="contact_list_names${i}">
         </div>
-    </div>
     `;
     }
     renderContactsToList();
 }
 
+
+/**
+ * Renders contacts into their corresponding alphabetical rows within the contact list.
+ * If no contacts start with a certain letter, hides the corresponding containers.
+ * 
+ * @param {Array} contactList - The array containing all contacts.
+ * @param {Array} alphabet - The array containing all alphabets.
+ * @param {HTMLElement[]} namesContainers - An array of HTML elements representing containers for displaying contact names.
+ * @param {HTMLElement[]} alphabetContainers - An array of HTML elements representing containers for displaying alphabetical sorting.
+ * @param {HTMLElement[]} divideContainers - An array of HTML elements representing containers for dividing sections.
+ */
 function renderContactsToList() {
     for (let i = 0; i < alphabet.length; i++) {
         const letter = alphabet[i];
@@ -75,18 +83,28 @@ function renderContactsToList() {
     }
 }
 
-function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, i) {
+/**
+ * This function renders contacts into their corresponding alphabetical container within the contact list.
+ * 
+ * @param {HTMLElement} namesContainer - Container for displaying contact names.
+ * @param {HTMLElement} alphabetContainer - Container for displaying the corresponding letter.
+ * @param {Array} contactsStartingWithLetter - Array of contacts starting with the same letter.
+ * @param {number} alphabetIndex - Index of the current alphabet letter.
+ */
+function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, alphabetIndex) {
     namesContainer.innerHTML = '';
     alphabetContainer.style.display = 'flex';
-    contactsStartingWithLetter.forEach(contact => {
+    contactsStartingWithLetter.forEach((contact, contactIndex) => {
         namesContainer.innerHTML += `
-        <div class="contact_list_container">
-            <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
+        <div class="contact_list_container" onclick="renderContact(${alphabetIndex},${contactIndex})">
+            <div id="contact_list_initals${alphabetIndex}">
+                <img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+            </div>
             <div class="column gap8">
-                <div id="contact_list_name${i}">
+                <div id="contact_list_name${alphabetIndex}">
                     ${contact.name}
                 </div>
-                <a id="contact_list_mail${i}" href="mailto:${contact.mail}">
+                <a id="contact_list_mail${alphabetIndex}" href="mailto:${contact.mail}">
                     ${contact.mail}
                 </a>
             </div>
@@ -96,11 +114,61 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
 }
 
 /**
+ * This function renders detailed information about a contact when selected from the contact list.
+ * 
+ * @param {number} alphabetIndex - Index of the corresponding alphabetical row.
+ * @param {number} contactIndex - Index of the selected contact.
+ */
+function renderContact(alphabetIndex, contactIndex) {
+    const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
+    let contactoverview = document.getElementById('contact_overview');
+    contactoverview.innerHTML = ``;
+    contactoverview.innerHTML = `
+    <div class="contact_overview_header">
+        <h1>Contacts</h1>
+        <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_vertikal.svg" alt="">
+        <span>Better with a team</span>
+    </div>
+    <div class="contact_information_container">
+        <div id="contact_overview_top">
+            <img src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+            <div class="contact_overview_name_container column">
+                <div id="contact_overview_name">
+                ${contact.name}
+            </div>
+            <div class="flex marginL-24">
+                <div id="contactlist_edit_icon_container">
+                    <span>Edit</span>
+                </div>
+                <div id="contactlist_delete_icon_container">
+                    <span>Delete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact_information">
+    </div>
+    <div class="contact_overview_footer">
+        <div class="contact_overview_footer_container">
+            <b>Email</b>
+            <a href="mailto:${contact.mail}" id="contact_overview_mail">
+                ${contact.mail}
+            </a>
+        </div>
+        <div class="contact_overview_footer_container">
+            <b>Phone</b>
+            <a href="tel:${contact.phone}" id="contact_overview_phone">${contact.phone}</a>
+        </div>
+    </div>
+</div>
+    `;
+}
+
+/**
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
  */
 function showAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
-
 }
 
 /**
@@ -149,7 +217,6 @@ async function addToContacts() {
  * @param {string} mail - It's the inputfield where the e-mail is written in.
  * @param {string} phone - It's the inputfield where the phonenumber is written in.
  */
-
 function resetAddContactForm(name, mail, phone) {
     name.value = '';
     mail.value = '';

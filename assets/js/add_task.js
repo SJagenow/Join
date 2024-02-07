@@ -32,13 +32,13 @@ async function loadContactList() {
     try {
         let contactList = JSON.parse(await getItem('contactList'));
         console.log(contactList);
-        renderContactList(contactList)
+        renderContactListForTask(contactList)
     } catch(e){
         console.error('Loading error:', e);
     }
 }
 
-function renderContactList(contactList) {
+function renderContactListForTask(contactList) {  // habe nur den Namen etwas anpassen müssen, weil ich auch eine renderContactlist-Funktion habe und sich das nicht vertrragen hat, dass du dich nicht wunderst warum ich hier deine funktionen umbenennen -pascal
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i].name;
 

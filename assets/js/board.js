@@ -84,40 +84,37 @@ function startDragging(id) {
 function generateTodo(clean) {
     let subtaskCount = 2; // Anzahl der Subtasks
     let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
-
-    for (let i = 0; i < todo.length; i++) {
-    currentTask = todo[i];
-        return `<div draggable="true" ondragstart="startDragging(${clean['id']})"  ondragover="highlight('task_content_open')" id="todo${i}" onclick="openDialog(${clean['id']})">
-    <div class="card_label">${clean['label']}</div>
-    <div class="card_title">${clean['title']}</div>
-    <div class="card_description">${clean['description']}</div>
-    <div id="myProgress">
-        <div id="myBar" style="width: ${progressWidth}%;"></div>
-        <div><span>Subtask 1/2</span></div>
-    </div>
-    <div class="member_flex">
-    <div class="circle_flex">
-        <div class="circle">FF</div>
-        <div class="circle_two">GG</div>
-        <div class="circle_three">WP</div>
-        <div class="circle_four">CU</div>
-        <div class="circle_five">CU</div>
-  </div>
-        <div class="prio_icon_containers">
-            <svg width="22" height="20">
-                <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red">
-                </use>
-            </svg>
+    const todoId = `todo_${clean['id']}`;
+    
+    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog(${clean['id']})">
+        <div class="card_label">${clean['label']}</div>
+        <div class="card_title">${clean['title']}</div>
+        <div class="card_description">${clean['description']}</div>
+        <div id="myProgress">
+            <div id="myBar" style="width: ${progressWidth}%;"></div>
+            <div><span>Subtask 1/2</span></div>
         </div>
-    </div>
-</div>`;
-        
-    }
+        <div class="member_flex">
+            <div class="circle_flex">
+                <div class="circle">FF</div>
+                <div class="circle_two">GG</div>
+                <div class="circle_three">WP</div>
+                <div class="circle_four">CU</div>
+                <div class="circle_five">CU</div>
+            </div>
+            <div class="prio_icon_containers">
+                <svg width="22" height="20">
+                    <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
+                </svg>
+            </div>
+        </div>
+    </div>`;
+}
 
     
 
 
-}
+
 
 
 function allowDrop(ev) {
@@ -125,7 +122,8 @@ function allowDrop(ev) {
 }
 
 function moveTo(category) {
-    todo[currentDraggedElement]['category'] = category;
+  
+    todo[currentDraggedElement.split('_')[1]]['category'] = category;
     updateBoard();
 }
 
