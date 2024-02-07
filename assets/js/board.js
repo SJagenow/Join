@@ -1,5 +1,4 @@
-
-
+let currentTask;
 let todo = [{
     'id': 0,
     'label': 'User Story',
@@ -38,11 +37,11 @@ let currentDraggedElement;
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
 
-    document.getElementById('todo_content_open').innerHTML = '';
+    document.getElementById('task_content_open').innerHTML = '';
 
     for (let index = 0; index < todos.length; index++) {
         const clean = todos[index];
-        document.getElementById('todo_content_open').innerHTML += generateTodo(clean);
+        document.getElementById('task_content_open').innerHTML += generateTodo(clean);
     }
 
 
@@ -86,7 +85,9 @@ function generateTodo(clean) {
     let subtaskCount = 2; // Anzahl der Subtasks
     let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
 
-    return `<div draggable="true" ondragstart="startDragging(${clean['id']})" class="todo">
+    for (let i = 0; i < todo.length; i++) {
+    currentTask = todo[i];
+        return `<div draggable="true" ondragstart="startDragging(${clean['id']})"  ondragover="highlight('task_content_open')" id="todo${i}" onclick="openDialog(${clean['id']})">
     <div class="card_label">${clean['label']}</div>
     <div class="card_title">${clean['title']}</div>
     <div class="card_description">${clean['description']}</div>
@@ -110,6 +111,12 @@ function generateTodo(clean) {
         </div>
     </div>
 </div>`;
+        
+    }
+
+    
+
+
 }
 
 
@@ -122,13 +129,17 @@ function moveTo(category) {
     updateBoard();
 }
 
-function highlight(id) {
-    document.getElementById(id).classList.add('drag-area-highlight');
+function highlight(currentTask) {
+    document.getElementById(currentTask).classList.add('drag-area-highlight');
 }
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight');
 }
+
+
+
+
 
 
 
