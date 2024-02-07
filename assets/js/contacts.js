@@ -1,6 +1,7 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let contactList = [];
 
+
 async function init() {
     await includeHTML();
     await loadContactList();
@@ -39,18 +40,7 @@ function renderContactList() {
         <img src="./assets/contactbook/icons_contactbook/Vector 10.svg" alt="">
         </div>
         <div id="contact_list_names${i}">
-        <div class="contact_list_container">
-            <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
-            <div class="column gap8">
-                <div id="contact_list_name${i}">
-                    Max Mustermann
-                </div>
-                <a id="contact_list_mail${i}" href="mailto:testingtim@test.de">
-                    testingtim@test.de
-                </a>
-            </div>
         </div>
-    </div>
     `;
     }
     renderContactsToList();
@@ -75,18 +65,20 @@ function renderContactsToList() {
     }
 }
 
-function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, i) {
+function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, alphabetIndex) {
     namesContainer.innerHTML = '';
     alphabetContainer.style.display = 'flex';
-    contactsStartingWithLetter.forEach(contact => {
+    contactsStartingWithLetter.forEach((contact, contactIndex) => {
         namesContainer.innerHTML += `
-        <div class="contact_list_container">
-            <div id="contact_list_initals${i}"><img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt=""></div>
+        <div class="contact_list_container" onclick="renderContact(${alphabetIndex},${contactIndex})">
+            <div id="contact_list_initals${alphabetIndex}">
+                <img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+            </div>
             <div class="column gap8">
-                <div id="contact_list_name${i}">
+                <div id="contact_list_name${alphabetIndex}">
                     ${contact.name}
                 </div>
-                <a id="contact_list_mail${i}" href="mailto:${contact.mail}">
+                <a id="contact_list_mail${alphabetIndex}" href="mailto:${contact.mail}">
                     ${contact.mail}
                 </a>
             </div>
@@ -94,6 +86,54 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
         `;
     });
 }
+
+function renderContact(alphabetIndex, contactIndex) {
+    const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
+    let contactoverview = document.getElementById('contact_overview');
+    contactoverview.innerHTML = ``;
+    contactoverview.innerHTML = `
+    <div class="contact_overview_header">
+        <h1>Contacts</h1>
+        <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_vertikal.svg" alt="">
+        <span>Better with a team</span>
+    </div>
+    <div class="contact_information_container">
+        <div id="contact_overview_top">
+            <img src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+            <div class="contact_overview_name_container column">
+                <div id="contact_overview_name">
+                ${contact.name}
+            </div>
+            <div class="flex marginL-24">
+                <div id="contactlist_edit_icon_container">
+                    <span>Edit</span>
+                </div>
+                <div id="contactlist_delete_icon_container">
+                    <span>Delete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="contact_information">
+    </div>
+    <div class="contact_overview_footer">
+        <div class="contact_overview_footer_container">
+            <b>Email</b>
+            <a href="mailto:${contact.mail}" id="contact_overview_mail">
+                ${contact.mail}
+            </a>
+        </div>
+        <div class="contact_overview_footer_container">
+            <b>Phone</b>
+            <a href="tel:${contact.phone}" id="contact_overview_phone">${contact.phone}</a>
+        </div>
+    </div>
+</div>
+    `;
+}
+
+
+
 
 /**
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
