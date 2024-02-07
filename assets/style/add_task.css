@@ -189,7 +189,7 @@
     margin-left: 6px;
 }
 
-#add-task-contact-div {
+.dropdown-menu-div {
     padding-top: 0px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -199,11 +199,9 @@
     margin-top: -36px;
 }
 
-#add-task-contact {
+.dropdown-menu {
     overflow: auto;
     max-height: 194px;
-    padding-left: 21px;
-    padding-right: 8px;
     position: relative;
 }
 
@@ -212,8 +210,23 @@
     width: 20px;
 }
 
-.add-task-contact {
-    padding: 8px 0px 8px 0px;
+.add-task-single {
+    padding: 8px 8px 8px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.add-task-single:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+}
+
+.name-div {
+    display: flex;
+    gap: 11px;
+    align-items: center;
 }
 
 .input-icon {
@@ -221,7 +234,7 @@
     z-index: 10;
     display: inline-block;
     right: 16px;
-    top: 49px;
+    top: 47px;
     height: 24px;
     width: 24px;
     cursor: pointer;
@@ -377,7 +390,7 @@
     }
 
     .input-icon {
-        top: 48px;
+        top: 47px;
     }
 }
 
@@ -430,7 +443,7 @@
     }
 
     .input-icon {
-        top: 44px;
+        top: 42px;
     }
 }
 
