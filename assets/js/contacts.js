@@ -1,17 +1,24 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let contactList = [];
 
-
 async function init() {
     await includeHTML();
     await loadContactList();
     renderContactList();
 }
 
+/**
+ * Asynchronously loads the contact list from the backend storage.
+ * If successful, updates the global variable 'contactList' with the parsed JSON data.
+ * 
+ * @param {Array} contactList - This variable receives the parsed JSON data from the backend.
+ */
 async function loadContactList() {
     try {
+        // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
         contactList = JSON.parse(await getItem('contactList'));
     } catch (e) {
+        // If an error occurs during parsing or retrieval, log the error to the console
         console.error('Loading error:', e);
     }
 }
@@ -34,18 +41,29 @@ function renderContactList() {
         const singleLetter = alphabet[i]; // id's to render alphabet and for every letter and id to render it in.
         document.getElementById('contact_list').innerHTML += `
         <div id="contactlist_alphabet_sorting_container${i}"> 
-        ${singleLetter}  
+            ${singleLetter}  
         </div>
         <div class="divide_container" id="divide_container_${i}">
-        <img src="./assets/contactbook/icons_contactbook/Vector 10.svg" alt="">
+            <img src="./assets/contactbook/icons_contactbook/Vector 10.svg" alt="">
         </div>
-        <div id="contact_list_names${i}">
+            <div id="contact_list_names${i}">
         </div>
     `;
     }
     renderContactsToList();
 }
 
+
+/**
+ * Renders contacts into their corresponding alphabetical rows within the contact list.
+ * If no contacts start with a certain letter, hides the corresponding containers.
+ * 
+ * @param {Array} contactList - The array containing all contacts.
+ * @param {Array} alphabet - The array containing all alphabets.
+ * @param {HTMLElement[]} namesContainers - An array of HTML elements representing containers for displaying contact names.
+ * @param {HTMLElement[]} alphabetContainers - An array of HTML elements representing containers for displaying alphabetical sorting.
+ * @param {HTMLElement[]} divideContainers - An array of HTML elements representing containers for dividing sections.
+ */
 function renderContactsToList() {
     for (let i = 0; i < alphabet.length; i++) {
         const letter = alphabet[i];
@@ -65,6 +83,14 @@ function renderContactsToList() {
     }
 }
 
+/**
+ * This function renders contacts into their corresponding alphabetical container within the contact list.
+ * 
+ * @param {HTMLElement} namesContainer - Container for displaying contact names.
+ * @param {HTMLElement} alphabetContainer - Container for displaying the corresponding letter.
+ * @param {Array} contactsStartingWithLetter - Array of contacts starting with the same letter.
+ * @param {number} alphabetIndex - Index of the current alphabet letter.
+ */
 function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, alphabetIndex) {
     namesContainer.innerHTML = '';
     alphabetContainer.style.display = 'flex';
@@ -87,6 +113,12 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     });
 }
 
+/**
+ * This function renders detailed information about a contact when selected from the contact list.
+ * 
+ * @param {number} alphabetIndex - Index of the corresponding alphabetical row.
+ * @param {number} contactIndex - Index of the selected contact.
+ */
 function renderContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     let contactoverview = document.getElementById('contact_overview');
@@ -132,15 +164,11 @@ function renderContact(alphabetIndex, contactIndex) {
     `;
 }
 
-
-
-
 /**
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
  */
 function showAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
-
 }
 
 /**
@@ -189,7 +217,6 @@ async function addToContacts() {
  * @param {string} mail - It's the inputfield where the e-mail is written in.
  * @param {string} phone - It's the inputfield where the phonenumber is written in.
  */
-
 function resetAddContactForm(name, mail, phone) {
     name.value = '';
     mail.value = '';
