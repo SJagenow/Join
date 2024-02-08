@@ -48,7 +48,11 @@ async function loadContactList() {
     }
 }
 
+<<<<<<< HEAD
+function renderContactListForTask(contactList) {
+=======
 function renderContactListForTask() {
+>>>>>>> cb32dc9ca216bf7569dd9797b10f7f0f4d1579d9
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i].name;
 
