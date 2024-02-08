@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .main-container {
     padding-top: 110px;
     padding-left: 96px;
@@ -184,9 +188,28 @@
     fill: white;
 }
 
-#task-create-button svg {
+.urgent {
+    background-color: #FF3D00 !important;
+    color: white !important;
+    fill: white !important;
+}
+
+.medium {
+    background-color: #FFA800 !important;
+    color: white !important;
+    fill: white !important;
+}
+
+.low {
+    background-color: #7AE229 !important;
+    color: white !important;
+    fill: white !important;
+}
+
+#add-task-button svg {
     width: 18px;
     margin-left: 6px;
+    fill: white;
 }
 
 .dropdown-menu-div {
@@ -248,8 +271,13 @@
     background-color: rgba(199, 199, 199, 0.644);
 }
 
-* {
-    box-sizing: border-box;
+#contacts-div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selected-initials {
+    margin-bottom: 24px;
 }
 
 .fill {
