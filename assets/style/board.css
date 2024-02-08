@@ -235,12 +235,11 @@ body button {
     height: 100vh;
     display: flex;
     justify-content: center;
-    display:none;
     z-index: 999;
 
 }
 
-.user_story_dialog {
+.users_story_dialog {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;

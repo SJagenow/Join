@@ -122,61 +122,85 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
 function renderContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     let contactoverview = document.getElementById('contact_overview');
-    contactoverview.innerHTML = ``;
-    contactoverview.innerHTML = `
-    <div class="contact_overview_header">
-        <h1>Contacts</h1>
-        <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_vertikal.svg" alt="">
-        <span>Better with a team</span>
-    </div>
-    <div class="contact_information_container">
-        <div id="contact_overview_top">
-            <img src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
-            <div class="contact_overview_name_container column">
-                <div id="contact_overview_name">
-                ${contact.name}
-            </div>
-            <div class="flex marginL-24">
-                <div id="contactlist_edit_icon_container">
-                    <span>Edit</span>
+    contactoverview.style.transform = 'translateX(200%)';
+    setTimeout(() => {
+        contactoverview.innerHTML = ` 
+            <div class="contact_information_container">
+                <div id="contact_overview_top">
+                    <img src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+                    <div class="contact_overview_name_container column">
+                        <div id="contact_overview_name">
+                            ${contact.name}
+                        </div>
+                        <div class="flex marginL-24">
+                            <div id="contactlist_edit_icon_container">
+                                <span>Edit</span>
+                            </div>
+                            <div id="contactlist_delete_icon_container" onclick="deleteContact()">
+                                <span>Delete</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="contactlist_delete_icon_container">
-                    <span>Delete</span>
+                <div id="contact_information">
+                </div>
+                <div class="contact_overview_footer">
+                    <div class="contact_overview_footer_container">
+                        <b>Email</b>
+                        <a href="mailto:${contact.mail}" id="contact_overview_mail">
+                            ${contact.mail}
+                        </a>
+                    </div>
+                    <div class="contact_overview_footer_container">
+                        <b>Phone</b>
+                        <a href="tel:${contact.phone}" id="contact_overview_phone">${contact.phone}</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="contact_information">
-    </div>
-    <div class="contact_overview_footer">
-        <div class="contact_overview_footer_container">
-            <b>Email</b>
-            <a href="mailto:${contact.mail}" id="contact_overview_mail">
-                ${contact.mail}
-            </a>
-        </div>
-        <div class="contact_overview_footer_container">
-            <b>Phone</b>
-            <a href="tel:${contact.phone}" id="contact_overview_phone">${contact.phone}</a>
-        </div>
-    </div>
-</div>
-    `;
+        `;
+        contactoverview.style.transform = 'translateX(0%)';
+    }, 200); 
 }
+
+
 
 /**
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
  */
 function showAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
+    setTimeout(() => {
+        document.getElementById('add_contact_overlay').style = 'transform: translateX(0%)';
+    }, 100); 
 }
+
+function showAddContactDialogLowRes(){
+    document.getElementById('contactlist_overlay_container').style.display = 'unset';
+    setTimeout(() => {
+        document.getElementById('add_contact_overlay').style = 'transform: translateY(0%)';
+    }, 100); 
+}
+
 
 /**
  * This function is given the backgorundcontainer of the overlay to close it by clicking in the background of the overlay.
  */
 function closeAddContactDialog() {
-    document.getElementById('contactlist_overlay_container').style.display = 'none';
-    renderContactList();
+    const addContactOverlay = document.getElementById('add_contact_overlay');
+    const contactListOverlayContainer = document.getElementById('contactlist_overlay_container');
+    // Überprüfen, ob die Media Query wirksam ist
+    if (window.matchMedia("(max-width: 1210px)").matches) {
+        // Falls Media Query für max-width: 1210px wirksam ist, translate Y setzen
+        addContactOverlay.style.transform = 'translateY(200%)';
+    } else {
+        // Ansonsten translate X setzen
+        addContactOverlay.style.transform = 'translateX(200%)';
+    }
+    setTimeout(() => {
+        // Verzögerung vor dem Ausblenden des Overlays und dem erneuten Rendern der Kontaktliste
+        contactListOverlayContainer.style.display = 'none';
+        renderContactList();
+    }, 100);
 }
 
 /**
@@ -206,8 +230,14 @@ async function addToContacts() {
     };
     contactList.push(contact);
     console.log('updated contactlist:', contactList);
-    await setItem('contactList', JSON.stringify(contactList)); // key = contactlist ,value = contactlistArray as text
+    await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
+    renderContactList();
+    const firstLetter = contact.name.charAt(0).toUpperCase();
+    const alphabetIndex = alphabet.indexOf(firstLetter);
+    contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === firstLetter);
+    const contactIndex = contactsStartingWithLetter.indexOf(contact);
+    renderContact(alphabetIndex, contactIndex);
 }
 
 /**
@@ -222,4 +252,26 @@ function resetAddContactForm(name, mail, phone) {
     mail.value = '';
     phone.value = '';
     closeAddContactDialog();
+}
+
+// Füge dieser Funktion die logik zum löschen eines Kontakts hinzu
+async function deleteContact() {
+    const contactName = document.getElementById('contact_overview_name').innerText.trim();
+    const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
+
+    // Durchsuche das contactList-Array nach dem zu löschenden Kontakt
+    const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
+
+    if (indexToDelete !== -1) {
+        // Entferne den Kontakt aus dem Array, falls gefunden
+        contactList.splice(indexToDelete, 1);
+        // Aktualisiere die Ansicht oder führe andere erforderliche Aktionen aus
+        // Zum Beispiel: renderContactList(); oder ähnliches
+        console.log('Kontakt wurde erfolgreich gelöscht.');
+    } else {
+        console.log('Kontakt nicht gefunden.');
+    }
+    await setItem('contactList', JSON.stringify(contactList));
+    renderContactList();
+    document.getElementById('contact_overview').style.transform = 'translateX(200%)';
 }
