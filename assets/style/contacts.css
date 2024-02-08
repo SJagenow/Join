@@ -261,6 +261,8 @@ body button {
     border-radius: 36px;
     background: #FFF;
     display: flex;
+    transform: translateX(200%);
+    transition: transform 225ms ease-in-out;
 }
 
 #add_contact_headline {
@@ -283,11 +285,12 @@ body button {
 #contact_overview {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: flex-start;
     margin-left: 56px;
-    height: 720px;
+    margin-top: 40px;
     min-width: 572px;
+    transition: transform 225ms ease-in-out;
+    transform: translateX(200%);
 }
 
 .contact_overview_header {
@@ -295,6 +298,8 @@ body button {
     justify-content: flex-end;
     align-items: center;
     gap: 30px;
+    margin-top: 72px;
+    margin-left: 56px;
 }
 
 #contact_overview h1 {
@@ -594,6 +599,7 @@ body button {
 
 @media(max-width:1210px) {
 
+    .contact_overview_header,
     #contact_overview {
         display: none;
     }
@@ -615,6 +621,7 @@ body button {
         background: #FFF;
         display: flex;
         flex-direction: column;
+        transform: translateY(200%);
     }
 
     .add_contact_close_container_handy {
@@ -723,6 +730,15 @@ body button {
         display: flex;
     }
 
+    #contactlist_add_contact_button:hover{
+        background-color: #29ABE2;
+    }
+
+
+    #contactlist_add_contact_button:active{
+        background-color: #29ABE2;
+    }
+
     #contact_list{
         padding: 0;
         width: 100vw;
@@ -755,6 +771,7 @@ body button {
     .left_side_add_contact_overlay{
         min-width: 320px;
         width: 320px;
+        height: 320px;
         align-items: flex-start;
     }
 
@@ -763,11 +780,17 @@ body button {
     }
 
     .center_up {
-        width: 336px
+        width: 336px;
+        margin-bottom: 18px;
     }
 
     .right_side_add_contact_overlay input{
         width: 246px;
+       
+    }
+
+    .right_side_add_contact_overlay{
+        height: 370px;
     }
 
     .input_container {
