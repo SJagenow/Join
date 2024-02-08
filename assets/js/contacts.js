@@ -1,7 +1,7 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let contactList = [];
 
-async function init() {
+async function initContactList() {
     await includeHTML();
     await loadContactList();
     renderContactList();
@@ -104,7 +104,7 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
                 <div id="contact_list_name${alphabetIndex}">
                     ${contact.name}
                 </div>
-                <a id="contact_list_mail${alphabetIndex}" href="mailto:${contact.mail}">
+                <a id="contact_list_mail${alphabetIndex}">
                     ${contact.mail}
                 </a>
             </div>
