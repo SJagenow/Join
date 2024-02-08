@@ -32,8 +32,8 @@ function btnGuestLog(){
     let emailInput = document.getElementById("email");
     let passwordInput = document.getElementById("password");
     // Suchen eines Benutzers mit der eingegebenen E-Mail-Adresse und dem eingegebenen Passwort in der Benutzerliste.
-    let user = users.find(function(elem) {
-        return elem.email === emailInput.value && elem.password === passwordInput.value;
+    let user = users.find(function(u) {
+        return u.email === emailInput.value && elem.password === passwordInput.value;
       });
   
     // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
