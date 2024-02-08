@@ -22,7 +22,7 @@
             <main class="main-container">
                 <div class="main-div overflow">
                     <h1 class="add-task-title">Add Task</h1>
-                    <form action="" class="ad-task-form column-space-between">
+                    <form action="" class="ad-task-form column-space-between" onsubmit="createTask()">
                         <div class="gap48">
                             <div class="add-task-input-div">
                                 <div class="column add-task-input-div">
@@ -49,6 +49,7 @@
                                         <div style="height: 7px;"></div>
                                     </div>
                                 </div>
+                                <div id="contacts-div"></div>
                             </div>
                             <div class="seperator"></div>
                             <div>
@@ -60,18 +61,18 @@
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="prio-div">Prio</label>
                                     <div class="space-between" id="prio-div">
-                                        <div id="prio-button-urgent" class="add-task-prio-button">
+                                        <div id="prio-button-urgent" class="add-task-prio-button" onclick="changePriority('urgent')">
                                             Urgent
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#height-prio-icon"></use>
                                             </svg>
                                         </div>
-                                        <div id="prio-button-medium" class="add-task-prio-button">Medium
+                                        <div id="prio-button-medium" class="add-task-prio-button" onclick="changePriority('medium')">Medium
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#medium-prio-icon"></use>
                                             </svg>
                                         </div>
-                                        <div id="prio-button-low" class="add-task-prio-button">Low
+                                        <div id="prio-button-low" class="add-task-prio-button" onclick="changePriority('low')">Low
                                             <svg viewBox="0 0 21 16">
                                                 <use href="assets/img/icons.svg#low-prio-icon"></use>
                                             </svg>
@@ -106,10 +107,10 @@
                         <div class="space-between media-column">
                             <div class="conditions-text">This field is required</div>
                             <div class="add-task-buttons-div">
-                                <button id="task-clear-button" class="parrent-button-light">Clear &#10006;</button>
-                                <button id="task-create-button" class="parrent-button-dark">Create Task
+                                <button id="clear-task-button" class="parrent-button-light" onclick="clearTask()">Clear &#10006;</button>
+                                <button id="add-task-button" class="parrent-button-dark" type="submit">Create Task
                                     <svg>
-                                        <use href="assets/img/icons.svg#check-icon"></use>
+                                        <use href="assets/img/icons.svg#hook-icon"></use>
                                     </svg>
                                 </button>
                             </div>
