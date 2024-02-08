@@ -1,8 +1,5 @@
 async function init() {
     await includeHTML();
-    renderContactList();
-    
-
 }
 
 async function includeHTML() {
@@ -55,4 +52,3 @@ function updateColorOnLoad() {
 
 // Rufe die Funktion bei Seitenaufruf auf
 window.onload = updateColorOnLoad;
-
