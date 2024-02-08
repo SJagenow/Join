@@ -49,5 +49,27 @@ function btnGuestLog(){
       shakeInput();
     }
   }
-
-  
+/*
+  function moveElement() {
+    let mailShake = document.getElementById("emailShake");
+    let passwordShake = document.getElementById("passwordShake");
+    let position = 0;
+    let speed = 5; // Geschwindigkeit der Animation in Pixel pro Schritt
+    
+    // Funktion zur Animation des Elements
+    function animate() {
+      // Bewege das Element um einen Schritt
+      position += speed;
+      mailShake.style.left = position + "px";
+      passwordShake.style.left = position + "px";
+      
+      // Wenn das Element noch nicht die gewünschte Position erreicht hat, führe die nächste Animationsschleife aus
+      if (position < 200) { // Ändere die Bedingung entsprechend der gewünschten Endposition
+        requestAnimationFrame(animate);
+      }
+    }
+    
+    // Starte die Animation
+    animate();
+  }
+  */
