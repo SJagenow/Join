@@ -1,4 +1,5 @@
-let currentTask;
+let todoId;
+let clean;
 let todo = [{
     'id': 0,
     'label': 'User Story',
@@ -26,7 +27,7 @@ let todo = [{
     'id': 3,
     'label': 'User',
     'title': 'Kochwelt Recommender',
-    'description': 'Build start ..',
+    'description': 'Build start .. test dialog',
     'category': 'await'
 },
 ];
@@ -40,7 +41,7 @@ function updateBoard() {
     document.getElementById('task_content_open').innerHTML = '';
 
     for (let index = 0; index < todos.length; index++) {
-        const clean = todos[index];
+         clean = todos[index];
         document.getElementById('task_content_open').innerHTML += generateTodo(clean);
     }
 
@@ -50,7 +51,7 @@ function updateBoard() {
     document.getElementById('close_one').innerHTML = '';
 
     for (let index = 0; index < inprogress.length; index++) {
-        const clean = inprogress[index];
+         clean = inprogress[index];
         document.getElementById('close_one').innerHTML += generateTodo(clean);
     }
 
@@ -60,7 +61,7 @@ function updateBoard() {
     document.getElementById('await_content').innerHTML = '';
 
     for (let index = 0; index < awaitList.length; index++) {
-        const clean = awaitList[index];
+         clean = awaitList[index];
         document.getElementById('await_content').innerHTML += generateTodo(clean);
     }
 
@@ -69,24 +70,24 @@ function updateBoard() {
     document.getElementById('done_content').innerHTML = '';
 
     for (let index = 0; index < doneList.length; index++) {
-        const clean = doneList[index];
+         clean = doneList[index];
         document.getElementById('done_content').innerHTML += generateTodo(clean);
     }
 
 }
 
-function startDragging(id) {
-    currentDraggedElement = id;
+function startDragging(todoid) {
+    currentDraggedElement = todoid;
 }
 
 
 
-function generateTodo(clean) {
+function generateTodo() {
     let subtaskCount = 2; // Anzahl der Subtasks
     let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
     const todoId = `todo_${clean['id']}`;
     
-    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog(${clean['id']})">
+    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog()">
         <div class="card_label">${clean['label']}</div>
         <div class="card_title">${clean['title']}</div>
         <div class="card_description">${clean['description']}</div>
@@ -111,7 +112,6 @@ function generateTodo(clean) {
     </div>`;
 }
 
-    
 
 
 
@@ -127,14 +127,83 @@ function moveTo(category) {
     updateBoard();
 }
 
-function highlight(currentTask) {
-    document.getElementById(currentTask).classList.add('drag-area-highlight');
+function highlight(todoId) {
+    document.getElementById(todoId).classList.add('drag-area-highlight');
 }
 
-function removeHighlight(id) {
-    document.getElementById(id).classList.remove('drag-area-highlight');
+function removeHighlight(todoId) {
+    document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
+
+
+function renderDialog(){
+ document.getElementById('user_story_dialog').innerHTML = `
+ <div class="user_story_label_x_contrainer">
+                    <div  class="user_story">User Story <div><button onclick="closeDialog()">X</button></div>
+                    </div>
+
+                </div>
+                <div class="user_story_headline">
+
+                  <div> ${clean['title']} </div> 
+                </div>
+                <div  class="user_story_description">${clean['description']}</div>
+                <div class="user_story_date">
+                    <div class="story_date">Due date:</div>
+                    <div  class="user_date">variable(datum)</div>
+                </div>
+                <div class="user_story_priority">
+                    <div class="story_priority">Priority:</div>
+                    <div class="user_priority">Variable(prio)</div>
+
+                </div>
+
+                <div class="assigned_to_members_container">
+                    <div class="assigned_to">Assigned To:</div>
+                    <div class="assinged_member">
+                    <div class="member_flex">
+                    <div class="circle_flex">
+                        <div class="circle">FF</div>
+                        <div class="circle_two">GG</div>
+                        <div class="circle_three">WP</div>
+                        <div class="circle_four">CU</div>
+                        <div class="circle_five">CU</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="user_story_Subtasks">
+                    <div>Subtasks</div>
+                    <div class="subtask_center"><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe
+                            Recommendation</span></div>
+                    <div class="subtask_center"> <img src="./assets/img/checkbox.png" alt=""> <span>Start Page
+                            Layout</span></div>
+                </div>
+
+                <div class="user_story_delete_edit">
+                    <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
+                            <div>Delete</div>
+                        </button></div>
+                    <div class="stripe"></div>
+                    <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt="">
+                            <div>Edit</div>
+                        </button></div>
+                </div>
+ 
+ 
+ 
+ `
+}
+
+function openDialog(){
+    document.getElementById('dialog_bg').classList.remove('d-none');
+    renderDialog()
+}
+
+function closeDialog(){
+    document.getElementById('dialog_bg').classList.add('d-none');
+   
+}
 
 
 
