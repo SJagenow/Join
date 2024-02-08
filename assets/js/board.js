@@ -2,14 +2,14 @@ let todoId;
 let clean;
 let todo = [{
     'id': 0,
-    'label': 'User Story',
+    'label': 'JS',
     'title': 'Kochwelt Page & Recipe Recommender',
     'description': 'Build start page with recipe recommendation...',
     'category': 'todos'
 },
 {
     'id': 1,
-    'label': 'User',
+    'label': 'HTML',
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
     'category': 'todos'
@@ -17,7 +17,7 @@ let todo = [{
 
 {
     'id': 2,
-    'label': 'User',
+    'label': 'CSS',
     'title': 'Kochwelt Recommender',
     'description': 'Build start ..',
     'category': 'todos'
@@ -25,7 +25,7 @@ let todo = [{
 
 {
     'id': 3,
-    'label': 'User',
+    'label': 'Testing',
     'title': 'Kochwelt Recommender',
     'description': 'Build start .. test dialog',
     'category': 'await'
@@ -76,8 +76,8 @@ function updateBoard() {
 
 }
 
-function startDragging(todoid) {
-    currentDraggedElement = todoid;
+function startDragging(todoId) {
+    currentDraggedElement = todoId;
 }
 
 
@@ -87,7 +87,7 @@ function generateTodo() {
     let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
     const todoId = `todo_${clean['id']}`;
     
-    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog()">
+    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog(${todoId})">
         <div class="card_label">${clean['label']}</div>
         <div class="card_title">${clean['title']}</div>
         <div class="card_description">${clean['description']}</div>
