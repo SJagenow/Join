@@ -230,9 +230,14 @@ async function addToContacts() {
     };
     contactList.push(contact);
     console.log('updated contactlist:', contactList);
-    await setItem('contactList', JSON.stringify(contactList)); // key = contactlist ,value = contactlistArray as text
+    await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
     renderContactList();
+    const firstLetter = contact.name.charAt(0).toUpperCase();
+    const alphabetIndex = alphabet.indexOf(firstLetter);
+    contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === firstLetter);
+    const contactIndex = contactsStartingWithLetter.indexOf(contact);
+    renderContact(alphabetIndex, contactIndex);
 }
 
 /**
