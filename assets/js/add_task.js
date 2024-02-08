@@ -38,7 +38,7 @@ async function loadContactList() {
     }
 }
 
-function renderContactListForTask(contactList) {  // habe nur den Namen etwas anpassen müssen, weil ich auch eine renderContactlist-Funktion habe und sich das nicht vertrragen hat, dass du dich nicht wunderst warum ich hier deine funktionen umbenennen -pascal
+function renderContactListForTask(contactList) {
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i].name;
 

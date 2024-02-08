@@ -95,10 +95,11 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     namesContainer.innerHTML = '';
     alphabetContainer.style.display = 'flex';
     contactsStartingWithLetter.forEach((contact, contactIndex) => {
+        const { profileinitials, secondName } = getInitials(contact);
         namesContainer.innerHTML += `
         <div class="contact_list_container" onclick="renderContact(${alphabetIndex},${contactIndex})">
-            <div id="contact_list_initals${alphabetIndex}">
-                <img class="contact_list_picture" src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+            <div id="contact_list_initals${alphabetIndex}" class="letter-${secondName.toLowerCase()}">
+                ${profileinitials}
             </div>
             <div class="column gap8">
                 <div id="contact_list_name${alphabetIndex}">
@@ -113,6 +114,15 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     });
 }
 
+function getInitials(contact) {
+    const words = contact.name.split(" ");
+    const firstName = words[0][0];
+    const secondName = words[1] ? words[1][0] : '';
+    const profileinitials = firstName + secondName;
+    return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
+}
+
+
 /**
  * This function renders detailed information about a contact when selected from the contact list.
  * 
@@ -121,13 +131,16 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
  */
 function renderContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
+    const { profileinitials, secondName } = getInitials(contact);
     let contactoverview = document.getElementById('contact_overview');
     contactoverview.style.transform = 'translateX(200%)';
     setTimeout(() => {
         contactoverview.innerHTML = ` 
             <div class="contact_information_container">
                 <div id="contact_overview_top">
-                    <img src="./assets/contactbook/img_contactbook/Ellipse 5.svg" alt="">
+                <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
+                ${profileinitials}
+            </div>
                     <div class="contact_overview_name_container column">
                         <div id="contact_overview_name">
                             ${contact.name}
@@ -161,7 +174,6 @@ function renderContact(alphabetIndex, contactIndex) {
         contactoverview.style.transform = 'translateX(0%)';
     }, 200); 
 }
-
 
 
 /**
@@ -233,6 +245,10 @@ async function addToContacts() {
     await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
     renderContactList();
+    findAlphabetIndex(contact);
+}
+
+function findAlphabetIndex(contact){
     const firstLetter = contact.name.charAt(0).toUpperCase();
     const alphabetIndex = alphabet.indexOf(firstLetter);
     contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === firstLetter);

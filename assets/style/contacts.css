@@ -156,7 +156,26 @@ body button {
     align-items: center;
     gap: 10px;
     border-radius: 45px;
-    background: var(--white, #FFF);
+    height: 42px;
+    width: 42px;
+    color: white;
+    border-color: white;
+}
+
+.contact_list_overview_initals{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 64px;
+    height: 120px;
+    width: 120px;
+    color: white;
+    border-color: white;
+    border: 2px;
+    font-family: Inter;
+    font-weight: 500;
+    font-size: 47px;
 }
 
 .divide_container {
@@ -187,7 +206,7 @@ body button {
     justify-content: center;
     align-items: center;
     gap: 8px;
-    color: var(--Version-2-main-color, #2A3647);
+    color: #2A3647;
     font-size: 16px !important;
     font-style: normal;
     font-weight: 400;
@@ -266,7 +285,7 @@ body button {
 }
 
 #add_contact_headline {
-    color: var(--white, #FFF);
+    color: #FFF;
     font-size: 61px;
     font-style: normal;
     font-weight: 700;
