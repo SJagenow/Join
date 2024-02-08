@@ -51,7 +51,7 @@ function btnGuestLog(){
   }
 /*
   function moveElement() {
-    let mailShake = document.getElementById("emailShake");
+    let mailShake = document.getElementById("moveEmail");
     let passwordShake = document.getElementById("passwordShake");
     let position = 0;
     let speed = 5; // Geschwindigkeit der Animation in Pixel pro Schritt
