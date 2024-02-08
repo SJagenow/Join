@@ -7,6 +7,17 @@ async function init() {
     // Wenn keine Daten vorhanden sind, wird ein leeres Array als Standardwert verwendet
     users = JSON.parse(userData) || [];
     // Jetzt sind die Benutzerdaten initialisiert und können in der Anwendung verwendet werden.
+    await loadUsers();
+}
+
+async function loadUsers() {
+    try {
+        // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
+        users = JSON.parse(await getItem('users'));
+    } catch (e) {
+        // If an error occurs during parsing or retrieval, log the error to the console
+        console.error('Loading error:', e);
+    }
 }
 
 function btnGuestLog(){
@@ -28,7 +39,7 @@ function btnGuestLog(){
     // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
     if (user) {
       // Weiterleiten des Benutzers zur Zusammenfassungsseite.
-      window.location.href = "summary.html";
+      window.location.href = "../../summary.html";
 
       // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
       getCurrentUser();
@@ -38,4 +49,5 @@ function btnGuestLog(){
       shakeInput();
     }
   }
+
   
