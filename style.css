@@ -331,7 +331,9 @@ nav {
     text-align: center;
     line-height: 34px;
 }
-
+.dnone {
+    display: none;
+}
 @media(min-width:1440px) {
     header {
         width: 1208px;
@@ -342,7 +344,9 @@ nav {
     header{
         width: 100vw;
     }
-
+    .dnone{
+        display: block;
+    }
     .menu {
         display: none;
     }
@@ -383,7 +387,9 @@ nav {
         width: 32px;
         object-fit: fill;
     }
-
+    .d-none {
+        display: flex;
+    }
 
 }
 
