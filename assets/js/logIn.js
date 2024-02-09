@@ -49,7 +49,7 @@ function btnGuestLog(){
     } else {
       // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
       // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
-    //   moveElement();
+      moveElement();
     }
   }
 /*
