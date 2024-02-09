@@ -1,3 +1,6 @@
+
+let  contactlist = [];
+
 async function init() {
     // Die Funktion init() wird verwendet, um die Anwendung zu initialisieren, indem sie Benutzerdaten aus dem lokalen Speicher abruft und in das Array "users" einfügt.
     // Benutzerdaten aus dem lokalen Speicher abrufen
