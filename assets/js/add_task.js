@@ -179,18 +179,24 @@ function changePriority(prio) {
             urgent.classList.remove('urgent');
         } else {
             urgent.classList.add('urgent');
+            medium.classList.remove('medium');
+            low.classList.remove('low');
         }
     } else if (prio == 'medium') {
         if (medium.classList.contains('medium')) {
             medium.classList.remove('medium');
         } else {
             medium.classList.add('medium');
+            urgent.classList.remove('urgent');
+            low.classList.remove('low');
         }
     } else if (prio == 'low') {
         if (low.classList.contains('low')) {
             low.classList.remove('low');
         } else {
             low.classList.add('low');
+            urgent.classList.remove('urgent');
+            medium.classList.remove('medium');
         }
     }
 }
