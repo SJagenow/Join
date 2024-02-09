@@ -53,7 +53,6 @@ function renderContactList() {
     renderContactsToList();
 }
 
-
 /**
  * Renders contacts into their corresponding alphabetical rows within the contact list.
  * If no contacts start with a certain letter, hides the corresponding containers.
@@ -122,7 +121,6 @@ function getInitials(contact) {
     return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
 }
 
-
 /**
  * This function renders detailed information about a contact when selected from the contact list.
  * 
@@ -172,7 +170,7 @@ function renderContact(alphabetIndex, contactIndex) {
             </div>
         `;
         contactoverview.style.transform = 'translateX(0%)';
-    }, 200); 
+    }, 200);
 }
 
 
@@ -183,14 +181,14 @@ function showAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
     setTimeout(() => {
         document.getElementById('add_contact_overlay').style = 'transform: translateX(0%)';
-    }, 100); 
+    }, 100);
 }
 
-function showAddContactDialogLowRes(){
+function showAddContactDialogLowRes() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
     setTimeout(() => {
         document.getElementById('add_contact_overlay').style = 'transform: translateY(0%)';
-    }, 100); 
+    }, 100);
 }
 
 
@@ -248,7 +246,7 @@ async function addToContacts() {
     findAlphabetIndex(contact);
 }
 
-function findAlphabetIndex(contact){
+function findAlphabetIndex(contact) {
     const firstLetter = contact.name.charAt(0).toUpperCase();
     const alphabetIndex = alphabet.indexOf(firstLetter);
     contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === firstLetter);
@@ -270,24 +268,20 @@ function resetAddContactForm(name, mail, phone) {
     closeAddContactDialog();
 }
 
-// Füge dieser Funktion die logik zum löschen eines Kontakts hinzu
 async function deleteContact() {
     const contactName = document.getElementById('contact_overview_name').innerText.trim();
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
-
-    // Durchsuche das contactList-Array nach dem zu löschenden Kontakt
     const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
-
     if (indexToDelete !== -1) {
-        // Entferne den Kontakt aus dem Array, falls gefunden
-        contactList.splice(indexToDelete, 1);
-        // Aktualisiere die Ansicht oder führe andere erforderliche Aktionen aus
-        // Zum Beispiel: renderContactList(); oder ähnliches
-        console.log('Kontakt wurde erfolgreich gelöscht.');
-    } else {
-        console.log('Kontakt nicht gefunden.');
+        const confirmDelete = confirm('Are you sure you want to delete this contact?');
+        if (confirmDelete) {
+            contactList.splice(indexToDelete, 1);
+            console.log('Contact deleted successfully.');
+        } else {
+            console.log('Deletion of contact canceled.');
+        }
+        await setItem('contactList', JSON.stringify(contactList));
+        renderContactList();
+        document.getElementById('contact_overview').style.transform = 'translateX(200%)';
     }
-    await setItem('contactList', JSON.stringify(contactList));
-    renderContactList();
-    document.getElementById('contact_overview').style.transform = 'translateX(200%)';
 }
