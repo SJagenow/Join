@@ -270,23 +270,32 @@ function resetAddContactForm(name, mail, phone) {
     closeAddContactDialog();
 }
 
-// Füge dieser Funktion die logik zum löschen eines Kontakts hinzu
 async function deleteContact() {
     const contactName = document.getElementById('contact_overview_name').innerText.trim();
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
 
-    // Durchsuche das contactList-Array nach dem zu löschenden Kontakt
+    // Search the contactList array for the contact to delete
     const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
 
     if (indexToDelete !== -1) {
-        // Entferne den Kontakt aus dem Array, falls gefunden
-        contactList.splice(indexToDelete, 1);
-        // Aktualisiere die Ansicht oder führe andere erforderliche Aktionen aus
-        // Zum Beispiel: renderContactList(); oder ähnliches
-        console.log('Kontakt wurde erfolgreich gelöscht.');
+        // Show a confirmation dialog
+        const confirmDelete = confirm('Are you sure you want to delete this contact?');
+
+        if (confirmDelete) {
+            // Remove the contact from the array if the user confirms deletion
+            contactList.splice(indexToDelete, 1);
+            // Update the view or perform other necessary actions
+            // For example: renderContactList(); or similar
+            console.log('Contact deleted successfully.');
+        } else {
+            console.log('Deletion of contact canceled.');
+            return; // Exit the function if the user cancels deletion
+        }
     } else {
-        console.log('Kontakt nicht gefunden.');
+        console.log('Contact not found.');
+        return; // Exit the function if the contact is not found
     }
+
     await setItem('contactList', JSON.stringify(contactList));
     renderContactList();
     document.getElementById('contact_overview').style.transform = 'translateX(200%)';
