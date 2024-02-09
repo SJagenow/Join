@@ -81,6 +81,11 @@
     height: 100vh;
   }
   
+  .login {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
   .contentBox {
     /* Auto layout */
   
