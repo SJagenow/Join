@@ -812,7 +812,7 @@ body button {
     }
 
     .contact_list_container{
-        width: 70vw;
+        width: 90vw;
     }
 
     [id^="contact_list_names"] {
