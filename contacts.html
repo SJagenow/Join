@@ -67,9 +67,9 @@
                             </div>
                             <form onsubmit="handleSubmit(); return false;">
                                 <div class="input_container">
-                                    <input required minlength="3" type="text" placeholder="Name"
-                                        id="contactlist_name_input"
-                                        title="Please enter a name with at least 3 characters">
+                                    <input required type="text" placeholder="Name" id="contactlist_name_input"
+                                        title="Please enter a name with at least 2 characters, a space, and the last name with at least 3 characters"
+                                        pattern="[^\s]+\s[^\s]{3,}">
                                     <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
                                 </div>
                                 <div class="input_container">

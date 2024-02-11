@@ -323,6 +323,7 @@ async function deleteContact() {
             console.log('Contact deleted successfully.');
         } else {
             console.log('Deletion of contact canceled.');
+            return;
         }
         await setItem('contactList', JSON.stringify(contactList));
         renderContactList();
