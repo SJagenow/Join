@@ -600,6 +600,10 @@ body button {
     display: none;
 }
 
+#contact_edit_button{
+    display: none;
+}
+
 .center_up {
     display: flex;
     justify-content: center;

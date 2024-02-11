@@ -45,9 +45,7 @@
                     <img id="contact_list_logo_handy" src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
                     <div class="add_contact_overlay_text_container">
                         <span id="add_contact_headline">Add contact</span>
-                        <!-- later you can render 'Edit contact' here -->
                         <span id="under_headline">Tasks are better with a team!</span>
-                        <!-- later you can 'display: none' it to remove it for 'Edit contact overlay' -->
                         <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
                     </div>
 
@@ -55,11 +53,9 @@
                 <div class="right_side_add_contact_overlay">
                     <div class="center_up mb50">
                         <div id="contact_initials_container">
-                            <!-- later you can render 'profilepicture or initials here' here -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"
                                 fill="none">
                                 <circle id="initials" cx="60" cy="60" r="60" fill="#FF7A00" />
-                                <!-- we have to check if you can render the initials into the svg circle? -->
                             </svg>
                         </div>
                     </div>
@@ -69,7 +65,7 @@
                                 <img onclick="closeAddContactDialog()"
                                     src="./assets/contactbook/icons_contactbook/close.svg" alt="">
                             </div>
-                            <form onsubmit="addToContacts(); return false;">
+                            <form onsubmit="handleSubmit(); return false;">
                                 <div class="input_container">
                                     <input required minlength="3" type="text" placeholder="Name"
                                         id="contactlist_name_input"
@@ -95,6 +91,9 @@
                                         Create contact <img src="./assets/contactbook/icons_contactbook/check.svg"
                                             alt="">
                                     </button>
+                                    <button id="contact_edit_button">
+                                        Edit contact
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -106,4 +105,3 @@
 </body>
 
 </html>
-
