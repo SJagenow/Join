@@ -131,10 +131,12 @@ function renderContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     const { profileinitials, secondName } = getInitials(contact);
     let contactoverview = document.getElementById('contact_overview');
+    contactoverview.style.display = "flex";
     contactoverview.style.transform = 'translateX(200%)';
     setTimeout(() => {
         contactoverview.innerHTML = ` 
             <div class="contact_information_container">
+            <img onclick="closeContact()" src="./assets/img/arrow-left-line.png" alt="">
                 <div id="contact_overview_top">
                 <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
                 ${profileinitials}
@@ -171,6 +173,14 @@ function renderContact(alphabetIndex, contactIndex) {
         `;
         contactoverview.style.transform = 'translateX(0%)';
     }, 200);
+}
+
+function closeContact() {
+    setTimeout(() => {
+        document.getElementById('contact_overview').style.display = "none";
+    }, 200);
+    document.getElementById('contact_overview').style.transform = 'translateX(200%)';
+    
 }
 
 

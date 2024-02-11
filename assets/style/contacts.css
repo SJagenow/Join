@@ -596,6 +596,10 @@ body button {
     font-weight: 700;
 }
 
+.contact_information_container img{
+    display: none;
+}
+
 .center_up {
     display: flex;
     justify-content: center;
@@ -618,9 +622,28 @@ body button {
 
 @media(max-width:1210px) {
 
-    .contact_overview_header,
-    #contact_overview {
+    .contact_overview_header, #contact_overview {
+        /* display: none; */
+        position: absolute;
+        top: 108px;
+        bottom: 80px;
+        left: 0px;
+        right: 0px;
+        background-color: white;
+        z-index: 999;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0px;
+        margin-top: 0px;
+        min-width: 300px;
+    }
+
+    .contact_overview_header{
         display: none;
+    }
+
+    #contact_overview_top {
+        flex-direction: column;
     }
 
     #contact_list {
@@ -733,6 +756,20 @@ body button {
     .contact_list_container {
         width: 72vw;
     }
+
+    .contact_information_container img{
+        display: flex;
+        cursor: pointer;
+        border-radius: 56px;
+        align-self: flex-end;
+    }
+
+    .contact_information_container img:hover{
+       scale: 1.1;
+       background-color: rgba(0, 0, 0, 0.1);
+       
+    }
+    
 
 }
 
