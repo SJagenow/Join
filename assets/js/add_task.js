@@ -169,15 +169,15 @@ function renderSubtask() {
         subtasks.innerHTML += /*html*/`
         <li id="single-subtask${i}" class="subbtask" contenteditable="true">
             ${subtask}
-            <div>
+        </li>
+        <div>
                 <svg class="subtask-icons" onclick="deleteSubtask(${i})">
                     <use href="assets/img/icons.svg#x-icon"></use>
                 </svg>
                 <svg class="subtask-icons" onclick="editSubtask(${i})">
                     <use href="assets/img/icons.svg#hook-icon"></use>
                 </svg>
-            </div>
-        </li>
+        </div>
     `;
     }
 }
