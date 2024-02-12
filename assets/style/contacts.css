@@ -601,6 +601,21 @@ body {
 
 #contact_edit_button {
     display: none;
+    height: 56px;
+    font-size: 21px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+    padding: 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
+}
+
+#contact_edit_button:hover{
+    background-color: #29ABE2;
 }
 
 .center_up {
