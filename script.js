@@ -1,6 +1,7 @@
 async function init() {
     await includeHTML();
-
+    document.getElementById('searchInput').addEventListener('input', filterTodos);
+    filterTodos()
 }
 
 async function includeHTML() {

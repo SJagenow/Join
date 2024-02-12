@@ -1,5 +1,10 @@
 body button {
     cursor: pointer;
+    border: unset;
+}
+
+body input {
+    border: unset;
 }
 
 
