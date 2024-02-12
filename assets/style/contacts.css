@@ -19,11 +19,12 @@ body button {
     width: 400px;
     padding: 0px 0px 0px 259px;
     background-color: white;
+    
 }
 
 #contact_list button {
     display: flex;
-    width: 352px;
+    width: 302px;
     padding: 12px 0px;
     justify-content: center;
     align-items: center;
@@ -45,6 +46,7 @@ body button {
     padding: 22.5px 0px;
     justify-content: center;
     align-items: center;
+    width: 302px;
 }
 
 #contact_list button:hover {
