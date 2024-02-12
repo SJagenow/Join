@@ -272,9 +272,15 @@ nav {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 156px;
+    padding-left: 64px;
+    width: 164px;
     height: 46px;
     gap: 8px;
+    overflow: hidden;
+}
+
+.menu_link_container:hover{
+    background-color: #091931;
 }
 
 .menu_footer_link {
