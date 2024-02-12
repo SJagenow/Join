@@ -2,6 +2,7 @@ body button {
     cursor: pointer;
 }
 
+
 .board_top {
     width: calc(100vw - 232px);
     height: 232px;
@@ -221,6 +222,7 @@ body button {
     border-radius: 8px;
     background: #0038FF;
     justify-content: space-between;
+    color: white;
 
 }
 
@@ -734,5 +736,6 @@ body button {
 
 
 .drag-area-highlight {
-    rotate: 357deg;
+        transform: rotate(357deg);
+    
 }

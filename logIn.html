@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/style/logIn.css" />
     <script src="./assets/js/storage.js"></script>
     <script src="./assets/js/logIn.js"></script>
+    <script src="./assets/js/signUp.js"></script>
     <script src="./assets/js/signUpmsg.js"></script>
     
 
@@ -31,7 +32,7 @@
           <img src="./assets/img/blueUnderline.png">
         </div>
 
-        <form onsubmit="logIn(); return false;" >
+        <form class="login" onsubmit="logIn(); return false;" >
           <div class="emailPasswordField">
             <div class="mailPasswordInputField" id="moveEmail">
               <input required type="email" placeholder="Email" />
@@ -42,23 +43,26 @@
               <input required type="password" placeholder="Password" />
               <img src="./assets/img/password_input.svg" alt="" />
             </div>
+            <div class="RememberMe">
+              <input class="checkBox" type="checkbox" />
+              <div>Remember me</div>
+              <!-- <div>
+                <a class="ForgotPassword" href="src/templates/forgotPassword.html"
+                  >Forgot my password
+                </a>
+              </div> -->
+            </div>
           </div>
+          <div class="btnLogGuest">
+          
+            <button class="btnLogIn">Log in</button>
+            <button class="btnGuestLog" onclick="btnGuestLog()">Guest Log in</button>
+          </div>
+          
         </form>
 
-        <div class="RememberMe">
-          <input class="checkBox" type="checkbox" />
-          <div>Remember me</div>
-          <!-- <div>
-            <a class="ForgotPassword" href="src/templates/forgotPassword.html"
-              >Forgot my password
-            </a>
-          </div> -->
-        </div>
-        <div class="btnLogGuest">
-          
-          <button class="btnLogIn">Log in</button>
-          <button class="btnGuestLog" onclick="btnGuestLog()">Guest Log in</button>
-        </div>
+        
+        
       </div>
     </section>
   </body>

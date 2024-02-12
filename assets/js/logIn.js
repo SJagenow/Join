@@ -30,7 +30,7 @@ function btnGuestLog(){
 
  function logIn(event) {
     // Die Funktion logIn() wird aufgerufen, wenn der Benutzer versucht, sich anzumelden. Sie verhindert das Standardverhalten des Formulars (Neuladen der Seite).
-    event.preventDefault();
+    // event.preventDefault();
     // Eingabe der E-Mail-Adresse und des Passworts aus den entsprechenden HTML-Elementen des Anmeldeformulars.
     let emailInput = document.getElementById("email");
     let passwordInput = document.getElementById("password");
@@ -42,14 +42,14 @@ function btnGuestLog(){
     // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
     if (user) {
       // Weiterleiten des Benutzers zur Zusammenfassungsseite.
-      window.location.href = "../../summary.html";
+      window.location.href = `summary.html`;
 
       // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
-      getCurrentUser();
+      // getCurrentUser();
     } else {
       // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
       // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
-    //   moveElement();
+      moveElement();
     }
   }
 /*

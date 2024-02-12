@@ -3,31 +3,31 @@ let clean;
 let todo = [{
     'id': 0,
     'label': 'JS',
-    'title': 'Kochwelt Page & Recipe Recommender',
-    'description': 'Build start page with recipe recommendation...',
+    'title': 'Drag and Drop Area',
+    'description': 'hops von todo nach inprogress await oder done hop hop function drag and drop basteln',
     'category': 'todos'
 },
 {
     'id': 1,
     'label': 'HTML',
-    'title': 'Kochwelt Recommender',
-    'description': 'Build start ..',
+    'title': 'Verschachteln und dann Spachteln',
+    'description': 'header menu html erstellen',
     'category': 'todos'
 },
 
 {
     'id': 2,
     'label': 'CSS',
-    'title': 'Kochwelt Recommender',
-    'description': 'Build start ..',
+    'title': 'Alles an falsche Position ist Abstrakte Kunst',
+    'description': 'margin: -1000px 200px -500px 200px',
     'category': 'todos'
 },
 
 {
     'id': 3,
     'label': 'Testing',
-    'title': 'Kochwelt Recommender',
-    'description': 'Build start .. test dialog',
+    'title': 'Open Dialog',
+    'description': 'test dialog',
     'category': 'await'
 },
 ];
@@ -73,6 +73,7 @@ function updateBoard() {
 
 function startDragging(todoId) {
     currentDraggedElement = todoId;
+
 }
 
 
@@ -115,6 +116,7 @@ function allowDrop(ev) {
 function moveTo(category) {
   
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
+   
     updateBoard();
 }
 
@@ -137,9 +139,10 @@ function renderDialog(){
 function returnDialog(){
     return   `
     <div class="user_story_label_x_contrainer">
-        <div class="user_story">User Story <div><button onclick="closeDialog()">X</button></div>
+        <div class="user_story">${clean['label']}<div></div>
+       
         </div>
-
+        <button onclick="closeDialog()">X</button>
     </div>
     <div class="user_story_headline">
 
@@ -195,6 +198,8 @@ function closeDialog(){
     document.getElementById('dialog_bg').classList.add('d-none');
    
 }
+
+
 
 
 let subtaskCount = 2; // Anzahl der Subtasks

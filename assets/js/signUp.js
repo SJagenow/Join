@@ -1,5 +1,8 @@
 let users = [];
 // setURL('https://remote-storage.developerakademie.org/item');
+// Exportieren der users-Variable
+export { users };
+
 let newID = 0;
 
 async function init() {
