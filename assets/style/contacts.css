@@ -4,10 +4,6 @@ body {
     background-color: rgb(246, 247, 248);
 }
 
-body button {
-    cursor: pointer;
-}
-
 #contact_list {
     display: flex;
     flex-direction: column;
@@ -19,7 +15,6 @@ body button {
     width: 400px;
     padding: 0px 0px 0px 259px;
     background-color: white;
-    
 }
 
 #contact_list button {

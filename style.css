@@ -244,7 +244,7 @@ nav {
 }
 
 .menu a {
-    color: white;
+    color: rgb(205,205,205);
     text-decoration: none;
 }
 
@@ -272,11 +272,17 @@ nav {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 64px;
-    width: 164px;
+    padding-left: 48px;
+    width: 184px;
     height: 46px;
     gap: 8px;
     overflow: hidden;
+}
+
+.menu_link_container a{
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .menu_link_container:hover{
