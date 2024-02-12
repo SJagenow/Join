@@ -59,15 +59,16 @@ function btnGuestLog(){
   }
 
 
-  function savedLogin() {
-    let currentUserAsText = localStorage.getItem("currentUser"); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher abrufen
-    let email = document.getElementById('email');         // E-Mail- und Passwortfelder im Anmeldeformular abrufen
-    let password = document.getElementById('password');
-     if (currentUserAsText) {                            // Überprüfen, ob Anmeldeinformationen vorhanden sind
-        let currentUser = JSON.parse(currentUserAsText);  // Wenn Anmeldeinformationen vorhanden sind, diese als JSON parsen
-        email.value = currentUser[0].email;               // E-Mail und Passwortfelder im Anmeldeformular mit den gespeicherten Anmeldeinformationen ausfüllen
-        password.value = currentUser[0].password;
-        logIn();                                      // Den Benutzer automatisch anmelden
+  function autoFillLoginForm() {
+    let currentUserData = localStorage.getItem("currentUser"); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher abrufen
+    let emailInputField = document.getElementById('email'); // E-Mail-Eingabefeld im Anmeldeformular abrufen
+    let passwordInputField = document.getElementById('password'); // Passwort-Eingabefeld im Anmeldeformular abrufen
+
+    if (currentUserData) {
+        let currentUser = JSON.parse(currentUserData); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher parsen
+        emailInputField.value = currentUser.email; // E-Mail-Eingabefeld mit der E-Mail-Adresse des Benutzers füllen
+        passwordInputField.value = currentUser.password; // Passwort-Eingabefeld mit dem Passwort des Benutzers füllen
+        logIn(); // Benutzer automatisch anmelden
     }
 }
 /*
