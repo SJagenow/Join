@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="./assets/style/add_task.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <script src="script.js"></script>
-    <script src="./assets/js/add_task.js"></script>
     <script src="./assets/js/storage.js"></script>
 </head>
 
@@ -55,11 +54,11 @@
                             <div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel asterisk" for="add-task-date">Due date</label>
-                                    <input id="add-task-date" class="add-task-input" type="date" name="Due date"
+                                    <input id="add-task-date" class="add-task-input" type="date" name="Due date" min=""
                                         required placeholder="dd//mm//yyyy">
                                 </div>
                                 <div class="column add-task-input-div">
-                                    <label class="form-input-titel" for="prio-div">Prio</label>
+                                    <h2 class="form-input-titel">Prio</h2>
                                     <div class="space-between" id="prio-div">
                                         <div id="prio-button-urgent" class="add-task-prio-button" onclick="changePriority('urgent')">
                                             Urgent
@@ -85,7 +84,7 @@
                                             <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
                                         </svg>
                                     </div>
-                                    <label class="form-input-titel" for="add-task-category"  onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Category</label>
+                                    <h2 class="form-input-titel" onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Category</h2>
                                     <div id="add-task-category" class="add-task-select arrow-icon"  onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Select task category</div>
                                     <div id="add-task-category-list-div" class="dropdown-menu-div d-none">
                                         <div style="height: 9px;"></div>
@@ -155,6 +154,7 @@
             </main>
         </div>
     </div>
+    <script src="./assets/js/add_task.js"></script>
 </body>
 
 </html>

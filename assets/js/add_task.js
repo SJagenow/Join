@@ -1,5 +1,6 @@
 let contactList = [];
 let selectedUsers = [];
+let subtasksArray = ['das ist ein subtask', 'das hier ist auch ein subtask wer weis denn sowas moin moin'];
 let tasks = [
     {
         'id': 1,
@@ -10,6 +11,13 @@ let tasks = [
         'priority': 'height'
     },
 ];
+
+
+// Holen des heutigen Datums im Format "YYYY-MM-DD"
+const today = new Date().toISOString().split('T')[0];
+
+// Setzen des min-Attributs des Input-Feldes auf das heutige Datum
+document.getElementById('add-task-date').setAttribute('min', today);
 
 
 function initAddTask() {
@@ -156,9 +164,6 @@ function selectLabel(label) {
 }
 
 
-let subtasksArray = ['das ist ein subtask', 'das hier ist auch ein subtask wer weis denn sowas moin moin'];
-
-
 function renderSubtask() {
     let subtasks = document.getElementById('subtask-container');
     subtasks.innerHTML = '';
@@ -216,12 +221,14 @@ function clearTask() {
 function createTask() {
     let task = {
         'id': 1,
-        'label': '',
         'title': '',
         'description': '',
-        'category': '',
+        'contacts': '',
+        'dueDate':'',
         'priority': '',
-        'date':''
+        'category': '',
+        'label': '',
+        'subtasks': '',
     }
     document.getElementById('add-task-button')
 }
