@@ -11,10 +11,13 @@
     padding-left: 20px;
 }
 
+h2,
 h3{
     margin-block-start: 24px;
     margin-block-end: 0;
 }
+
+
 
 a {
     color: #29ABE2;
