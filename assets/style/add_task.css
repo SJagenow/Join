@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.menu_link_container{
+    width: 232px;
+}
+
 .main-container {
     padding-top: 110px;
     padding-left: 96px;
