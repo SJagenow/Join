@@ -150,7 +150,7 @@ body input {
 .botlane_main_container {
     display: flex;
     width: calc(100vw - 232px);
-    height: 370px;
+    height:580px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
