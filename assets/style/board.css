@@ -91,10 +91,7 @@ body input {
 
 
 .smal_midlane_main_container {
-    display: flex;
-    width: calc(100vw - 232px);
-    justify-content: center;
-    align-items: flex-start;
+   
     color: var(--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
@@ -131,11 +128,9 @@ body input {
     width: 252px;
     justify-content: space-between;
     align-items: center;
-    flex-shrink: 0;
     gap: 24px;
 
 }
-
 
 
 .midlane_last_no_button {
@@ -165,9 +160,13 @@ body input {
     flex-direction: column;
     align-items: flex-start;
     width: 246px;
-
-
 }
+
+.board_flex {
+    display: flex;
+    
+}
+
 
 
 
