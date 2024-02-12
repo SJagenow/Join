@@ -26,6 +26,7 @@ h1 {
     border: #2A3647 solid 1px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
 }
 
@@ -39,6 +40,7 @@ h1 {
     border: #2A3647 solid 1px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
 }
 
