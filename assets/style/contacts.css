@@ -134,7 +134,7 @@ body {
     gap: 35px;
     border-radius: 10px;
     background: #FFF;
-    transition: 0.3s ease;
+    transition: 0.08s ease;
 }
 
 .contact_list_container:hover {
@@ -279,7 +279,7 @@ body {
     background: #FFF;
     display: flex;
     transform: translateX(200%);
-    transition: transform 225ms ease-in-out;
+    transition: transform 125ms ease-in-out;
 }
 
 #add_contact_headline {
@@ -306,7 +306,7 @@ body {
     margin-left: 56px;
     margin-top: 40px;
     min-width: 572px;
-    transition: transform 225ms ease-in-out;
+    transition: transform 125ms ease-in-out;
     transform: translateX(200%);
 }
 

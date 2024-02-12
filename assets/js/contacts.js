@@ -178,7 +178,7 @@ function renderContact(alphabetIndex, contactIndex) {
         `;
         addHighlightsToContact(alphabetIndex, contactIndex);
         contactoverview.style.transform = 'translateX(0%)';
-    }, 200);
+    }, 125);
 }
 
 
@@ -216,7 +216,7 @@ function updateContact() {
 function closeContact() {
     setTimeout(() => {
         document.getElementById('contact_overview').style.display = "none";
-    }, 200);
+    }, 125);
     document.getElementById('contact_overview').style.transform = 'translateX(200%)';
 }
 
