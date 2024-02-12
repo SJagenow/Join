@@ -2,8 +2,9 @@
     display: flex;
     flex-direction: column;
     margin-left: 240px;
-    padding: 64px 32px 16px 64px;
-    height: calc(91vh - 104px);
+    max-width: calc(1440px - 232px);
+    height: calc(100vh - 104px);
+    max-height: calc(1024px - 104px);
     overflow-y: auto;
 }
 .legal_list {
@@ -11,10 +12,13 @@
     padding-left: 20px;
 }
 
+h2,
 h3{
     margin-block-start: 24px;
     margin-block-end: 0;
 }
+
+
 
 a {
     color: #29ABE2;
@@ -33,10 +37,14 @@ a {
         padding-left: 4px;
         padding-right: 4px;
     }
+
+    h1{
+        font-size: 48px;
+    }
 }
 
 @media(min-width:1440px){
     .legal_container{
-        width: 66vw;
+
     }
 }

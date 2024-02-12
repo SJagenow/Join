@@ -15,15 +15,16 @@ body button {
     overflow-y: auto;
     overflow-x: hidden;
     height: calc(100vh - 104px);
-    /* 104px is the height from header*/
+    max-height: calc(1024px - 104px);
     width: 400px;
     padding: 0px 0px 0px 259px;
     background-color: white;
+    
 }
 
 #contact_list button {
     display: flex;
-    width: 352px;
+    width: 302px;
     padding: 12px 0px;
     justify-content: center;
     align-items: center;
@@ -45,6 +46,8 @@ body button {
     padding: 22.5px 0px;
     justify-content: center;
     align-items: center;
+    align-self: center;
+    width: 302px;
 }
 
 #contact_list button:hover {
@@ -159,7 +162,7 @@ body button {
     height: 42px;
     width: 42px;
     color: white;
-    border-color: white;
+    border: 2px solid white;
 }
 
 .contact_list_overview_initals {
@@ -171,8 +174,7 @@ body button {
     height: 120px;
     width: 120px;
     color: white;
-    border-color: white;
-    border: 2px;
+    border: 2px solid white;
     font-family: Inter;
     font-weight: 500;
     font-size: 47px;
@@ -616,6 +618,11 @@ body button {
     margin-left: -24px;
 }
 
+.selected{
+    background-color: #091931;
+    color: white;
+}
+
 @media(min-width:1440px) {
     header {
         width: 1208px;
@@ -683,7 +690,7 @@ body button {
     #contact_overview {
         /* display: none; */
         position: absolute;
-        top: 108px;
+        top: 104px;
         bottom: 80px;
         left: 0px;
         right: 0px;

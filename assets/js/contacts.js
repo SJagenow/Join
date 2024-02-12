@@ -98,7 +98,7 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     contactsStartingWithLetter.forEach((contact, contactIndex) => {
         const { profileinitials, secondName } = getInitials(contact);
         namesContainer.innerHTML += `
-        <div class="contact_list_container" onclick="renderContact(${alphabetIndex},${contactIndex})">
+        <div class="contact_list_container" id="contact_${alphabetIndex}_${contactIndex}" onclick="renderContact(${alphabetIndex},${contactIndex})">
             <div id="contact_list_initals${alphabetIndex}" class="letter-${secondName.toLowerCase()}">
                 ${profileinitials}
             </div>
@@ -175,8 +175,19 @@ function renderContact(alphabetIndex, contactIndex) {
                 </div>
             </div>
         `;
+        addHighlightsToContact(alphabetIndex, contactIndex);
         contactoverview.style.transform = 'translateX(0%)';
     }, 200);
+}
+
+
+function addHighlightsToContact(alphabetIndex, contactIndex) {
+    const allContactContainers = document.querySelectorAll('.contact_list_container');
+    allContactContainers.forEach(container => {
+        container.classList.remove('selected');
+    });
+    const selectedContainer = document.getElementById(`contact_${alphabetIndex}_${contactIndex}`);
+    selectedContainer.classList.add('selected');
 }
 
 
