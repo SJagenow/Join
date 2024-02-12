@@ -90,9 +90,9 @@ body input {
 
 
 
-.smal_midlane_main_container {
-   
-    color: var(--menu-color, #42526E);
+.board_midlane_main_container {
+display: flex;
+    color: (--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
@@ -164,7 +164,7 @@ body input {
 
 .board_flex {
     display: flex;
-    
+
 }
 
 
