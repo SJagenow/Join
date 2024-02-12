@@ -150,7 +150,7 @@ body input {
 .botlane_main_container {
     display: flex;
     width: calc(100vw - 232px);
-    height: 600px;
+    height: 370px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
@@ -742,5 +742,11 @@ body input {
 
 .drag-area-highlight {
         transform: rotate(357deg);
-    
+        background-color: rgba(0, 255, 8, 0.1); 
+}
+
+.drag-area:hover {
+   
+
+   
 }
