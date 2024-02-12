@@ -36,6 +36,10 @@ a {
         padding-left: 4px;
         padding-right: 4px;
     }
+
+    h1{
+        font-size: 48px;
+    }
 }
 
 @media(min-width:1440px){
