@@ -3,6 +3,7 @@ let contactList = [];
 
 async function initContactList() {
     await includeHTML();
+    highlightMenuLink();
     await loadContactList();
     renderContactList();
 }
