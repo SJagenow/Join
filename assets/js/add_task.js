@@ -12,31 +12,11 @@ let tasks = [
 ];
 
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-function filterFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    div = document.getElementById("myDropdown");
-    a = div.getElementsByTagName("a");
-    for (i = 0; i < a.length; i++) {
-        txtValue = a[i].textContent || a[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            a[i].style.display = "";
-        } else {
-            a[i].style.display = "none";
-        }
-    }
-}
-
 function initAddTask() {
     loadContactList();
+    renderSubtask();
 }
+
 
 async function loadContactList() {
     try {
@@ -47,6 +27,7 @@ async function loadContactList() {
         console.error('Loading error:', e);
     }
 }
+
 
 function renderContactListForTask() {
     for (let i = 0; i < contactList.length; i++) {
@@ -59,7 +40,7 @@ function renderContactListForTask() {
 
 
         document.getElementById('add-task-contact').innerHTML += /*html*/`
-        <div class="add-task-single" onclick="selectContact(${i})">
+        <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
             <div class="name-div">
                 <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
                 <span>${contact}</span>
@@ -86,50 +67,16 @@ function  dropdownMenuToggle(divID, arrow) {
     }
 }
 
+
 function openDropdownMenu(divID, arrow) {
     document.getElementById(`${divID}`).classList.remove('d-none');
     document.getElementById(`${arrow}`).style="transform: rotate(180deg);"
 }
 
+
 function closeDropdownMenu(divID, arrow) {
     document.getElementById(`${divID}`).classList.add('d-none');
     document.getElementById(`${arrow}`).style="transform: rotate(0);"
-}
-
-
-function selectContact0(i) {
-    let get = document.getElementById(`add-task-assignet-checkbox${i}`);
-    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
-    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
-    let user = contactList[i].name;
-
-    if (get.innerHTML == checked) {
-        get.innerHTML = unchecked;
-        selectedUsers = selectedUsers.filter(selectedUser => selectedUser !== user);
-    } else {
-        get.innerHTML = checked;
-        if (!selectedUsers.includes(user)) {
-            selectedUsers.push(user);
-        }
-    }
-
-    console.log(selectedUsers);
-    for (let j = 0; j < selectedUsers.length; j++) {
-        let selectedUserCache = selectedUsers[j].user;
-
-        let name = selectedUserCache.split(" ");
-        const firstName = name[0][0];
-        const secondName = name[1] ? name[1][0] : '';
-        let initials = firstName + secondName;
-
-        document.getElementById('contacts-div').innerHTML += /*html*/`
-        <div class="add-task-single" onclick="selectContact(${i})">
-            <div class="name-div">
-                <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
-            </div>
-        </div>
-        ` ;
-    }
 }
 
 
@@ -140,9 +87,11 @@ function selectContact(i) {
     let user = contactList[i].name;
     if (get.innerHTML == checked) {
         get.innerHTML = unchecked;
+        document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
         selectedUsers = selectedUsers.filter(selectedUser => selectedUser !== user);
     } else {
         get.innerHTML = checked;
+        document.getElementById(`task-contakt${i}`).classList.add('dark-background');
         if (!selectedUsers.includes(user)) {
             selectedUsers.push(user);
         }
@@ -202,6 +151,68 @@ function changePriority(prio) {
 }
 
 
+function selectLabel(label) {
+    document.getElementById('add-task-category').innerHTML = `${label}`;
+}
+
+
+let subtasksArray = ['das ist ein subtask', 'das hier ist auch ein subtask wer weis denn sowas moin moin'];
+
+
+function renderSubtask() {
+    let subtasks = document.getElementById('subtask-container');
+    subtasks.innerHTML = '';
+
+    for (let i = 0; i < subtasksArray.length; i++) {
+        const subtask = subtasksArray[i];
+
+        subtasks.innerHTML += /*html*/`
+        <li id="single-subtask${i}" class="subbtask" contenteditable="true">
+            ${subtask}
+            <div>
+                <svg class="subtask-icons" onclick="deleteSubtask(${i})">
+                    <use href="assets/img/icons.svg#x-icon"></use>
+                </svg>
+                <svg class="subtask-icons" onclick="editSubtask(${i})">
+                    <use href="assets/img/icons.svg#hook-icon"></use>
+                </svg>
+            </div>
+        </li>
+    `;
+    }
+}
+
+
+function addSubtask() {
+    let newSubtask = document.getElementById('add-task-subtasks');
+    subtasksArray.push(newSubtask.value);
+
+    initAddTask()
+}
+
+
+function editSubtask(i) {
+    subtasksArray.splice(i, 1, document.getElementById('single-subtask'+[i]).innerHTML);
+
+    initAddTask();
+}
+
+
+function deleteSubtask(i) {
+    subtasksArray.splice(i, 1);
+
+    initAddTask();
+}
+
+
+function clearTask() {
+    document.getElementById('add-task-title');
+    document.getElementById('add-task-description');
+    get
+    document.getElementById('add-task-date');
+}
+
+
 function createTask() {
     let task = {
         'id': 1,
@@ -213,11 +224,4 @@ function createTask() {
         'date':''
     }
     document.getElementById('add-task-button')
-}
-
-function clearTask() {
-    document.getElementById('add-task-title');
-    document.getElementById('add-task-description');
-    get
-    document.getElementById('add-task-date');
 }
