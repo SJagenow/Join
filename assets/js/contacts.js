@@ -352,9 +352,7 @@ async function handleSubmit() {
     cancelButton.disabled = true;
     saveButton.disabled = true;
     editButton.disabled = true;
-    if (event.submitter === cancelButton) {
-        resetAddContactForm();
-    } else if (event.submitter === saveButton) {
+    if (event.submitter === saveButton) {
         await addToContacts();
     } else if (event.submitter === editButton) {
         updateContact();
