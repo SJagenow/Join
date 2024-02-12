@@ -1,7 +1,7 @@
 let users = [];
-// setURL('https://remote-storage.developerakademie.org/item');
+
 // Exportieren der users-Variable
-export { users };
+// export { users };
 
 let newID = 0;
 
@@ -19,5 +19,6 @@ async function addUser() {
   newID += newID + 1;
   console.log(newID);
   //weiterleitung zu Login-Seite
-  window.location.href = "../../logIn.html?msg=Du hast dich erfolgreich registriert";
+  window.location.href = "../logIn.html";
+  // window.location.href = "../../logIn.html?msg=Du hast dich erfolgreich registriert";
 }

@@ -1,10 +1,10 @@
-
+// import { users } from './signUp.js';
+let currentUser = [];
+let currentUserName = [];
 let  contactlist = [];
 
-async function init() {
-    // Die Funktion init() wird verwendet, um die Anwendung zu initialisieren, indem sie Benutzerdaten aus dem lokalen Speicher abruft und in das Array "users" einfügt.
-    // Benutzerdaten aus dem lokalen Speicher abrufen
-    let userData = await getItem("users");
+async function init() {                             // Die Funktion init() wird verwendet, um die Anwendung zu initialisieren, indem sie Benutzerdaten aus dem lokalen Speicher abruft und in das Array "users" einfügt.
+    let userData = await getItem("users");      // Benutzerdaten aus dem lokalen Speicher abrufen
     // Überprüfen, ob Benutzerdaten vorhanden sind
     // Wenn Daten vorhanden sind, werden sie als JSON-Parsen und in das Array "users" einfügen
     // Wenn keine Daten vorhanden sind, wird ein leeres Array als Standardwert verwendet
@@ -14,44 +14,63 @@ async function init() {
 }
 
 async function loadUsers() {
-    try {
-        // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
-        users = JSON.parse(await getItem('users'));
+    try {                                               // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
+       users = JSON.parse(await getItem('users'));
     } catch (e) {
-        // If an error occurs during parsing or retrieval, log the error to the console
-        console.error('Loading error:', e);
+       console.error('Loading error:', e);   // If an error occurs during parsing or retrieval, log the error to the console
     }
 }
 
 function btnGuestLog(){
-    window.location.href = `summary.html`;
-    // greetGuest()
+    localStorage.clear();
+    window.location.href = "../summary.html";
+      greetGuest()
   }
 
- function logIn(event) {
-    // Die Funktion logIn() wird aufgerufen, wenn der Benutzer versucht, sich anzumelden. Sie verhindert das Standardverhalten des Formulars (Neuladen der Seite).
-    // event.preventDefault();
-    // Eingabe der E-Mail-Adresse und des Passworts aus den entsprechenden HTML-Elementen des Anmeldeformulars.
-    let emailInput = document.getElementById("email");
+  function checkLoginStatus() {
+    const urlParams = new URLSearchParams(window.location.search);      // Die URL-Parameter analysieren, um die Nachricht abzurufen
+    const msg = urlParams.get('msg');
+    if (msg === "Du hast dich erfolgreich ausgeloggt!") {     // Überprüfen, ob die Nachricht besagt, dass der Benutzer erfolgreich ausgeloggt wurde
+      } 
+      else {                                                  // Wenn ja, geschieht nichts (keine Aktion erforderlich)
+         savedLogin();                                      // Wenn nicht, rufe die Funktion savedLogin() auf, um den Benutzer automatisch anzumelden (falls vorhanden)
+    }
+}
+
+
+ function logIn(event) {    // Die Funktion logIn() wird aufgerufen, wenn der Benutzer versucht, sich anzumelden. Sie verhindert das Standardverhalten des Formulars (Neuladen der Seite).
+      event.preventDefault();
+      console.log('event');
+    let emailInput = document.getElementById("email");      // Eingabe der E-Mail-Adresse und des Passworts aus den entsprechenden HTML-Elementen des Anmeldeformulars.
     let passwordInput = document.getElementById("password");
-    // Suchen eines Benutzers mit der eingegebenen E-Mail-Adresse und dem eingegebenen Passwort in der Benutzerliste.
-    let user = users.find(function(u) {
+     let user = users.find(function(u) {                 // Suchen eines Benutzers mit der eingegebenen E-Mail-Adresse und dem eingegebenen Passwort in der Benutzerliste.
         return u.email === emailInput.value && u.password === passwordInput.value;
       });
-  
-    // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
-    if (user) {
-      // Weiterleiten des Benutzers zur Zusammenfassungsseite.
-      window.location.href = `summary.html`;
-
-      // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
-      // getCurrentUser();
-    } else {
-      // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
-      // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
-      moveElement();
-    }
+    if (user) { 
+      console.log('1 User gefunden');                                          // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
+       window.location.href = "../summary.html";         // Weiterleiten des Benutzers zur Zusammenfassungsseite.
+       
+       getCurrentUser();                                // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
+       console.log('2 muss weitergeleitet werden');
+      } else {                                              // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
+        // moveElement();                                   // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
+        console.log('3 else');
+      }
   }
+
+
+  function autoFillLoginForm() {
+    let currentUserData = localStorage.getItem("currentUser"); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher abrufen
+    let emailInputField = document.getElementById('email'); // E-Mail-Eingabefeld im Anmeldeformular abrufen
+    let passwordInputField = document.getElementById('password'); // Passwort-Eingabefeld im Anmeldeformular abrufen
+
+    if (currentUserData) {
+        let currentUser = JSON.parse(currentUserData); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher parsen
+        emailInputField.value = currentUser.email; // E-Mail-Eingabefeld mit der E-Mail-Adresse des Benutzers füllen
+        passwordInputField.value = currentUser.password; // Passwort-Eingabefeld mit dem Passwort des Benutzers füllen
+        logIn(); // Benutzer automatisch anmelden
+    }
+}
 /*
   function moveElement() {
     let mailShake = document.getElementById("moveEmail");

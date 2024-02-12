@@ -33,15 +33,15 @@
           <img src="./assets/img/blueUnderline.png">
         </div>
 
-        <form class="login" onsubmit="logIn(); return false;" >
+        <form class="login" onsubmit="logIn(event); return false;" >
           <div class="emailPasswordField">
             <div class="mailPasswordInputField" id="moveEmail">
-              <input required type="email" placeholder="Email" />
+              <input required type="email" placeholder="Email" id="email"/>
               <img src="./assets/img/mail.png" alt="" />
             </div>
 
             <div class="mailPasswordInputField">
-              <input required type="password" placeholder="Password" />
+              <input required type="password" placeholder="Password" id="password"/>
               <img src="./assets/img/password_input.svg" alt="" />
             </div>
             <div class="RememberMe">

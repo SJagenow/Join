@@ -391,7 +391,7 @@
 }
 
 .task-todo:hover .done {
-    background: url('/rgbf6zmbhns assets/img/summary-done-white.png');
+    background: url('/assets/img/summary-done-white.png');
     background-size: cover;
 }
 .task-todo:active{
