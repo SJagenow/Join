@@ -32,6 +32,10 @@ let todo = [{
 },
 ];
 
+/*function backendTodoArray() {
+todo = value[0].
+}*/
+
 let currentDraggedElement;
 
 function updateBoard() {
@@ -189,6 +193,7 @@ function closeDialog(){
 }
 
 
+
 let subtaskCount = 2; // Anzahl der Subtasks
 let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
 document.getElementById('myBar').style.width = progressWidth + '%';
@@ -207,7 +212,9 @@ setProgress(50);
 
 
 
-// Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
+
+
+/* Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
 if (window.screen.orientation) {
     // Sperren der Bildschirmausrichtung auf "Portrait" (vertikale Ausrichtung)
     window.screen.orientation.lock('portrait').then(function() {
@@ -217,4 +224,5 @@ if (window.screen.orientation) {
     });
 } else {
     console.error('Die Bildschirmorientierungs-API wird auf diesem Gerät nicht unterstützt.');
-}
+}*/
+
