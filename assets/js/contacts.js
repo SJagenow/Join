@@ -3,9 +3,11 @@ let contactList = [];
 
 async function initContactList() {
     await includeHTML();
+    highlightMenuLink();
     await loadContactList();
     renderContactList();
 }
+
 
 /**
  * Asynchronously loads the contact list from the backend storage.
@@ -23,6 +25,7 @@ async function loadContactList() {
     }
 }
 
+
 /**
  *  This function is used to render an empty contactlist with alphabethical rows.
  * 
@@ -38,7 +41,7 @@ function renderContactList() {
     </div>
     `;
     for (let i = 0; i < alphabet.length; i++) {
-        const singleLetter = alphabet[i]; // id's to render alphabet and for every letter and id to render it in.
+        const singleLetter = alphabet[i];
         document.getElementById('contact_list').innerHTML += `
         <div id="contactlist_alphabet_sorting_container${i}"> 
             ${singleLetter}  
@@ -52,6 +55,7 @@ function renderContactList() {
     }
     renderContactsToList();
 }
+
 
 /**
  * Renders contacts into their corresponding alphabetical rows within the contact list.
@@ -71,16 +75,15 @@ function renderContactsToList() {
         const alphabetContainer = document.getElementById(`contactlist_alphabet_sorting_container${i}`);
         const divideContainer = document.getElementById(`divide_container_${i}`);
         if (contactsStartingWithLetter.length === 0) {
-            // Keine Kontakte mit diesem Anfangsbuchstaben, daher Container ausblenden
             namesContainer.style.display = 'none';
             alphabetContainer.style.display = 'none';
             divideContainer.style.display = 'none';
         } else {
-            // Kontakte vorhanden, Container anzeigen
             renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, i);
         }
     }
 }
+
 
 /**
  * This function renders contacts into their corresponding alphabetical container within the contact list.
@@ -96,7 +99,7 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     contactsStartingWithLetter.forEach((contact, contactIndex) => {
         const { profileinitials, secondName } = getInitials(contact);
         namesContainer.innerHTML += `
-        <div class="contact_list_container" onclick="renderContact(${alphabetIndex},${contactIndex})">
+        <div class="contact_list_container" id="contact_${alphabetIndex}_${contactIndex}" onclick="renderContact(${alphabetIndex},${contactIndex})">
             <div id="contact_list_initals${alphabetIndex}" class="letter-${secondName.toLowerCase()}">
                 ${profileinitials}
             </div>
@@ -113,6 +116,7 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     });
 }
 
+
 function getInitials(contact) {
     const words = contact.name.split(" ");
     const firstName = words[0][0];
@@ -120,6 +124,7 @@ function getInitials(contact) {
     const profileinitials = firstName + secondName;
     return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
 }
+
 
 /**
  * This function renders detailed information about a contact when selected from the contact list.
@@ -131,10 +136,12 @@ function renderContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     const { profileinitials, secondName } = getInitials(contact);
     let contactoverview = document.getElementById('contact_overview');
+    contactoverview.style.display = "flex";
     contactoverview.style.transform = 'translateX(200%)';
     setTimeout(() => {
         contactoverview.innerHTML = ` 
             <div class="contact_information_container">
+            <img onclick="closeContact()" src="./assets/img/arrow-left-line.png" alt="">
                 <div id="contact_overview_top">
                 <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
                 ${profileinitials}
@@ -144,7 +151,7 @@ function renderContact(alphabetIndex, contactIndex) {
                             ${contact.name}
                         </div>
                         <div class="flex marginL-24">
-                            <div id="contactlist_edit_icon_container">
+                            <div id="contactlist_edit_icon_container" onclick="openEditContact(${alphabetIndex}, ${contactIndex})">
                                 <span>Edit</span>
                             </div>
                             <div id="contactlist_delete_icon_container" onclick="deleteContact()">
@@ -169,8 +176,48 @@ function renderContact(alphabetIndex, contactIndex) {
                 </div>
             </div>
         `;
+        addHighlightsToContact(alphabetIndex, contactIndex);
         contactoverview.style.transform = 'translateX(0%)';
-    }, 200);
+    }, 125);
+}
+
+
+function addHighlightsToContact(alphabetIndex, contactIndex) {
+    const allContactContainers = document.querySelectorAll('.contact_list_container');
+    allContactContainers.forEach(container => {
+        container.classList.remove('selected');
+    });
+    const selectedContainer = document.getElementById(`contact_${alphabetIndex}_${contactIndex}`);
+    selectedContainer.classList.add('selected');
+}
+
+
+function openEditContact(alphabetIndex, contactIndex) {
+    const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
+    showAddContactDialog();
+    document.getElementById('contact_edit_button').style.display = "unset";
+    document.getElementById('under_headline').style.display = "none";
+    document.getElementById('contact_save_button').style.display = "none";
+    document.getElementById('contact_cancel_button').style.display = "none";
+    document.getElementById('add_contact_headline').innerHTML = `Edit contact`;
+    document.getElementById('contactlist_name_input').value = contact.name;
+    document.getElementById('contactlist_mail_input').value = contact.mail;
+    document.getElementById('contactlist_phone_input').value = contact.phone;
+
+}
+
+
+function updateContact() {
+    deleteContact();
+    addToContacts();
+}
+
+
+function closeContact() {
+    setTimeout(() => {
+        document.getElementById('contact_overview').style.display = "none";
+    }, 125);
+    document.getElementById('contact_overview').style.transform = 'translateX(200%)';
 }
 
 
@@ -179,10 +226,19 @@ function renderContact(alphabetIndex, contactIndex) {
  */
 function showAddContactDialog() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
+    document.getElementById('contact_edit_button').style.display = 'none';
+    document.getElementById('under_headline').style.display = 'flex';
+    document.getElementById('contact_save_button').style.display = 'flex';
+    document.getElementById('contact_cancel_button').style.display = 'flex';
+    document.getElementById('add_contact_headline').innerHTML = 'Add contact';
+    document.getElementById('contactlist_name_input').value = '';
+    document.getElementById('contactlist_mail_input').value = '';
+    document.getElementById('contactlist_phone_input').value = '';
     setTimeout(() => {
         document.getElementById('add_contact_overlay').style = 'transform: translateX(0%)';
     }, 100);
 }
+
 
 function showAddContactDialogLowRes() {
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
@@ -198,20 +254,17 @@ function showAddContactDialogLowRes() {
 function closeAddContactDialog() {
     const addContactOverlay = document.getElementById('add_contact_overlay');
     const contactListOverlayContainer = document.getElementById('contactlist_overlay_container');
-    // Überprüfen, ob die Media Query wirksam ist
     if (window.matchMedia("(max-width: 1210px)").matches) {
-        // Falls Media Query für max-width: 1210px wirksam ist, translate Y setzen
         addContactOverlay.style.transform = 'translateY(200%)';
     } else {
-        // Ansonsten translate X setzen
         addContactOverlay.style.transform = 'translateX(200%)';
     }
     setTimeout(() => {
-        // Verzögerung vor dem Ausblenden des Overlays und dem erneuten Rendern der Kontaktliste
         contactListOverlayContainer.style.display = 'none';
         renderContactList();
     }, 100);
 }
+
 
 /**
  * This function is used to stop the overlay from closing by clicking in it, because its a childcontainer of the clickable 'to close' container in the background.
@@ -221,6 +274,7 @@ function closeAddContactDialog() {
 function noClose(event) {
     event.stopPropagation();
 }
+
 
 /**
  * This function creates a json from the inputs of the 'add contact' overlay and pushes it into the contactlist Array and saves it in the backend.
@@ -244,7 +298,9 @@ async function addToContacts() {
     resetAddContactForm(name, mail, phone);
     renderContactList();
     findAlphabetIndex(contact);
+    saveContactButton.disabled = false;
 }
+
 
 function findAlphabetIndex(contact) {
     const firstLetter = contact.name.charAt(0).toUpperCase();
@@ -253,6 +309,7 @@ function findAlphabetIndex(contact) {
     const contactIndex = contactsStartingWithLetter.indexOf(contact);
     renderContact(alphabetIndex, contactIndex);
 }
+
 
 /**
  * This function is just to reset the inputfields of the 'add contact' overlay.
@@ -273,15 +330,30 @@ async function deleteContact() {
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
     const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
     if (indexToDelete !== -1) {
-        const confirmDelete = confirm('Are you sure you want to delete this contact?');
+        const confirmDelete = confirm('Are you sure you want to edit/delete this contact?');
         if (confirmDelete) {
             contactList.splice(indexToDelete, 1);
             console.log('Contact deleted successfully.');
         } else {
             console.log('Deletion of contact canceled.');
+            return;
         }
         await setItem('contactList', JSON.stringify(contactList));
         renderContactList();
         document.getElementById('contact_overview').style.transform = 'translateX(200%)';
+    }
+}
+
+async function handleSubmit() {
+    const cancelButton = document.getElementById("contact_cancel_button");
+    const saveButton = document.getElementById("contact_save_button");
+    const editButton = document.getElementById("contact_edit_button");
+
+    if (event.submitter === cancelButton) {
+        console.log("Cancel button clicked");
+    } else if (event.submitter === saveButton) {
+        await addToContacts();
+    } else if (event.submitter === editButton) {
+        updateContact();
     }
 }

@@ -18,7 +18,7 @@ let todo = [{
 {
     'id': 2,
     'label': 'CSS',
-    'title': 'Alles an falsche Position ist Abstrakte Kunst',
+    'title': 'Alles an falsche Posi ist Abstrakte Kunst',
     'description': 'margin: -1000px 200px -500px 200px',
     'category': 'todos'
 },
@@ -32,6 +32,9 @@ let todo = [{
 },
 ];
 
+/*function backendTodoArray() {
+todo = value[0].
+}*/
 
 let currentDraggedElement;
 
@@ -70,19 +73,16 @@ function updateBoard() {
     }
 }
 
-
 function startDragging(todoId) {
     currentDraggedElement = todoId;
-
 }
-
 
 function generateTodo() {
     let subtaskCount = 2; // Anzahl der Subtasks
     let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
     const todoId = `todo_${clean['id']}`;
     
-    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog(${todoId})">
+    return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
         <div class="card_label">${clean['label']}</div>
         <div class="card_title">${clean['title']}</div>
         <div class="card_description">${clean['description']}</div>
@@ -107,34 +107,26 @@ function generateTodo() {
     </div>`;
 }
 
-
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-
 function moveTo(category) {
-  
-    todo[currentDraggedElement.split('_')[1]]['category'] = category;
-   
+    todo[currentDraggedElement.split('_')[1]]['category'] = category;   
     updateBoard();
 }
-
 
 function highlight(todoId) {
     document.getElementById(todoId).classList.add('drag-area-highlight');
 }
 
-
 function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
-
 function renderDialog(){
  document.getElementById('user_story_dialog').innerHTML = returnDialog();
 }
-
 
 function returnDialog(){
     return   `
@@ -189,16 +181,16 @@ function returnDialog(){
       `
      }
 
+
 function openDialog(){
     document.getElementById('dialog_bg').classList.remove('d-none');
     renderDialog()
 }
 
+
 function closeDialog(){
     document.getElementById('dialog_bg').classList.add('d-none');
-   
 }
-
 
 
 
@@ -217,3 +209,20 @@ function setProgress(value) {
 
 // Setze die Fortschrittsanzeige auf 50% (1/2)
 setProgress(50);
+
+
+
+
+
+/* Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
+if (window.screen.orientation) {
+    // Sperren der Bildschirmausrichtung auf "Portrait" (vertikale Ausrichtung)
+    window.screen.orientation.lock('portrait').then(function() {
+        console.log('Bildschirmausrichtung auf Portrait gesperrt');
+    }).catch(function(error) {
+        console.error('Fehler beim Sperren der Bildschirmausrichtung:', error);
+    });
+} else {
+    console.error('Die Bildschirmorientierungs-API wird auf diesem Gerät nicht unterstützt.');
+}*/
+

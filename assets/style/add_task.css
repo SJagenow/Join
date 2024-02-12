@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.menu_link_container{
+    width: 232px;
+}
+
 .main-container {
     padding-top: 110px;
     padding-left: 96px;
@@ -13,7 +17,7 @@
 }
 
 .main-div {
-    max-width: 982px;
+    max-width: 976px;
 }
 
 .add-task-title {
@@ -54,7 +58,7 @@
 }
 
 .add-task-input-div {
-    min-width: 419px;
+    min-width: 440px;
     position: relative;
 }
 
@@ -102,6 +106,10 @@
     margin-bottom: 28px;
     padding-left: 21px;
     outline-width: 0px;
+}
+
+.add-task-select::placeholder {
+    color: black;
 }
 
 .add-task-select option {
@@ -235,11 +243,13 @@
 }
 
 .add-task-single {
-    padding: 8px 8px 8px 21px;
+    padding: 7px 8px 7px 21px;
+    margin: 1px 0px 1px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 48px;
+    border-radius: 10px;
 }
 
 .add-task-single:hover {
@@ -281,8 +291,54 @@
     margin-bottom: 24px;
 }
 
-.fill {
-    fill: rgb(29, 13, 205);
+#add-task-category {
+    display: flex;
+    align-items: center;
+}
+
+#subbtask-input-icon {
+    position: absolute;
+    right: 20px;
+    transform: translateY(165%);
+}
+
+#subbtask-input-icon svg {
+    height: 24px;
+    width: 24px;
+    transition: all 0.15s ease-in-out;
+}
+
+.subtask-icons:hover {
+    background-color: rgba(199, 199, 199, 0.644);
+}
+
+.subtask-icons {
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50px;
+    height: 24px;
+    width: 24px;
+}
+
+.mini-seperator {
+    background-color: D1D1D1;
+    width: 10px;
+    height: 10px;
+}
+
+.subbtask0 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dark-background {
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: white;
+}
+
+.dark-background:hover {
+    background-color: #091931;
 }
 
 .ht80 {

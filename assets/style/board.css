@@ -1,5 +1,10 @@
 body button {
     cursor: pointer;
+    border: unset;
+}
+
+body input {
+    border: unset;
 }
 
 
@@ -85,12 +90,9 @@ body button {
 
 
 
-.smal_midlane_main_container {
-    display: flex;
-    width: calc(100vw - 232px);
-    justify-content: center;
-    align-items: flex-start;
-    color: var(--menu-color, #42526E);
+.board_midlane_main_container {
+display: flex;
+    color: (--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
@@ -126,11 +128,9 @@ body button {
     width: 252px;
     justify-content: space-between;
     align-items: center;
-    flex-shrink: 0;
     gap: 24px;
 
 }
-
 
 
 .midlane_last_no_button {
@@ -145,7 +145,7 @@ body button {
 .botlane_main_container {
     display: flex;
     width: calc(100vw - 232px);
-    height: 600px;
+    height:580px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
@@ -160,9 +160,13 @@ body button {
     flex-direction: column;
     align-items: flex-start;
     width: 246px;
+}
 
+.board_flex {
+    display: flex;
 
 }
+
 
 
 
@@ -737,5 +741,11 @@ body button {
 
 .drag-area-highlight {
         transform: rotate(357deg);
-    
+        background-color: rgba(0, 255, 8, 0.1); 
+}
+
+.drag-area:hover {
+   
+
+   
 }
