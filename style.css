@@ -253,7 +253,10 @@ nav {
     width: 100.03px;
 }
 
-#menu_icon {
+#menu_icon_contacts,
+#menu_icon_board,
+#menu_icon_addtask,
+#menu_icon_summary {
     height: 25px;
     width: 25px;
 }
