@@ -297,6 +297,7 @@ async function addToContacts() {
     console.log('updated contactlist:', contactList);
     await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
+    closeAddContactDialog();
     renderContactList();
     findAlphabetIndex(contact);
     saveContactButton.disabled = false;
@@ -319,11 +320,10 @@ function findAlphabetIndex(contact) {
  * @param {string} mail - It's the inputfield where the e-mail is written in.
  * @param {string} phone - It's the inputfield where the phonenumber is written in.
  */
-function resetAddContactForm(name, mail, phone) {
-    name.value = '';
-    mail.value = '';
-    phone.value = '';
-    closeAddContactDialog();
+function resetAddContactForm() {
+    document.getElementById('contactlist_name_input').value = '';
+    document.getElementById('contactlist_mail_input').value = '';
+    document.getElementById('contactlist_phone_input').value = '';
 }
 
 async function deleteContact() {
@@ -349,12 +349,17 @@ async function handleSubmit() {
     const cancelButton = document.getElementById("contact_cancel_button");
     const saveButton = document.getElementById("contact_save_button");
     const editButton = document.getElementById("contact_edit_button");
-
+    cancelButton.disabled = true;
+    saveButton.disabled = true;
+    editButton.disabled = true;
     if (event.submitter === cancelButton) {
-        console.log("Cancel button clicked");
+        resetAddContactForm();
     } else if (event.submitter === saveButton) {
         await addToContacts();
     } else if (event.submitter === editButton) {
         updateContact();
     }
+    cancelButton.disabled = false;
+    saveButton.disabled = false;
+    editButton.disabled = false;
 }
