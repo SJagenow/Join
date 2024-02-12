@@ -152,17 +152,16 @@
   
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 29px;
+    align-items: center;
+    padding: 32px 0px;
+    gap: 32px;
   
-    width: 422px;
+    width: 396px;
     height: 171px;
   
     /* Inside auto layout */
   
     flex: none;
-    order: 1;
     flex-grow: 0;
   }
   
@@ -255,7 +254,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    padding: 0px;
+    padding-top: 32px;
     gap: 35px;
     width: 341px;
     height: 51px;
@@ -269,7 +268,7 @@
     gap: 10px;
   
     width: 145px;
-    height: 51px;
+    height: 48px;
   
     background: #2a3647;
     border-radius: 8px;
@@ -291,37 +290,26 @@
   .btnGuestLog {
     box-sizing: border-box;
     border: 0;
-  
-    /* Auto layout */
-  
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 4px 16px;
-    gap: 10px;
-  
-    width: 161px;
-    height: 51px;
-  
-    /* Version 2/ main color */
-  
+    gap: 10px;  
+    width: 163px;
+    height: 48px;
     border: 1px solid #2a3647;
     border-radius: 8px;
-  
     font-family: "Inter";
     font-style: normal;
     font-weight: 700;
     font-size: 21px;
     line-height: 120%;
-    /* or 25px */
-  
-    /* Version 2/ main color */
-  
     color: #2a3647;
     cursor: pointer;
     background-color: white;
   }
+
   .btnGuestLog:hover {
     cursor: pointer;
     /* Ligth blue */
@@ -339,4 +327,6 @@
     border: 1px solid #000000;
     border-radius: 3px;
   }
-  
+  .d-none {
+    display: none;
+  }
