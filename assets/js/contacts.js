@@ -286,6 +286,7 @@ async function addToContacts() {
     resetAddContactForm(name, mail, phone);
     renderContactList();
     findAlphabetIndex(contact);
+    saveContactButton.disabled = false;
 }
 
 
