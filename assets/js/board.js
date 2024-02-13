@@ -12,7 +12,7 @@ let todo = [{
     'id': 1,
     'label': 'HTML',
     'title': 'Verschachteln und dann Spachteln',
-    'description': 'header menu html erstellen',
+    'description': 'header menubar html erstellen ...',
     'category': 'todos'
 },
 
@@ -28,14 +28,15 @@ let todo = [{
     'id': 3,
     'label': 'Testing',
     'title': 'Open Dialog',
-    'description': 'test dialog',
+    'description': 'test dialog auf richtige todos check dabei ob alle id´s haben',
     'category': 'await'
 },
 ];
 
-/*function backendTodoArray() {
-todo = value[0].
-}*/
+async function getTodosForBoard() {
+    let task = await getItem('tasks');
+    console.log(task);
+}
 
 let currentDraggedElement;
 
@@ -82,11 +83,16 @@ function generateTodo(clean) {
     let subtaskCount = 2; 
     let progressWidth = (1 / subtaskCount) * 100; 
     const todoId = `todo_${clean['id']}`; 
+    let descriptionWords = clean['description'].split(' ');
+    let truncatedDescription = descriptionWords.slice(0, 5).join(' ');
+    if (descriptionWords.length > 5) {
+        truncatedDescription += '...';
+    }
     
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
-        <div class="card_label">${clean['label']}</div>
+      <div class="arrow_flex">  <div class="card_label">${clean['label']}</div><div class="updown_buttons"><button class="updown_arrow"><img src="./assets/img/updown.jpg" alt=""></button> <button class="updown_arrow_two"><img src="./assets/img/updown.jpg" alt=""></button></div></div>
         <div class="card_title">${clean['title']}</div>
-        <div class="card_description">${clean['description']}</div>
+        <div class="card_description">${truncatedDescription}</div>
         <div id="myProgress">
             <div id="myBar" style="width: ${progressWidth}%;"></div>
             <div><span>Subtask 1/2</span></div>
