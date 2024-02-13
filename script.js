@@ -3,6 +3,8 @@ async function init() {
     highlightMenuLink();
     document.getElementById('searchInput').addEventListener('input', filterTodos);
     filterTodos()
+    updateTaskData();
+    getTodosForBoard()
 }
 
 async function includeHTML() {

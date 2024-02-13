@@ -96,7 +96,7 @@ body input {
     display: flex;
     color: (--menu-color, #42526E);
     font-family: Inter;
-    font-size: 20px;
+ 
     font-style: normal;
     font-weight: 700px;
     line-height: 120%;
@@ -404,7 +404,30 @@ body input {
     gap: 8px;
 
 }
+.updown_arrow img{
+height: 20px;
+rotate: 180deg;
+}
+.updown_arrow_two img{
+    height: 20px;
+    
+    }
 
+
+.updown_arrow button {
+    border: unset;
+}
+
+
+.updown_buttons {
+    display: flex;
+}
+.arrow_flex{
+    width: 200px;
+    display: flex;
+    justify-content:space-between;
+    border: 0;
+}
 .user_story_delete_edit img {
     width: 24px;
     height: 24px;
@@ -568,10 +591,10 @@ body input {
 @media(max-width:1439px) {}
 
 .drag-area {
-    height:50vh;
+    height:584px;
     background-color: rgba(247, 247, 247, 0.1);
     width: 246px;
-    margin-bottom: 50px;
+  
     display: flex;
     align-items: flex-start;
     flex-direction: column;
