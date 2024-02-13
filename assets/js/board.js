@@ -1,3 +1,4 @@
+
 let todoId;
 let clean;
 let todo = [{
@@ -77,10 +78,10 @@ function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
 
-function generateTodo() {
-    let subtaskCount = 2; // Anzahl der Subtasks
-    let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
-    const todoId = `todo_${clean['id']}`;
+function generateTodo(clean) {
+    let subtaskCount = 2; 
+    let progressWidth = (1 / subtaskCount) * 100; 
+    const todoId = `todo_${clean['id']}`; 
     
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
         <div class="card_label">${clean['label']}</div>
@@ -124,23 +125,21 @@ function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
-function renderDialog(){
- document.getElementById('user_story_dialog').innerHTML = returnDialog();
+function renderDialog(selectedTodo) {
+    document.getElementById('user_story_dialog').innerHTML = returnDialog(selectedTodo);
 }
 
-function returnDialog(){
+function returnDialog(selectedTodo) {
     return   `
     <div class="user_story_label_x_contrainer">
-        <div class="user_story">${clean['label']}<div></div>
-       
+        <div class="user_story">${selectedTodo['label']}<div></div>
         </div>
         <button onclick="closeDialog()">X</button>
     </div>
     <div class="user_story_headline">
-
-        <div> ${clean['title']} </div>
+        <div> ${selectedTodo['title']} </div>
     </div>
-    <div class="user_story_description">${clean['description']}</div>
+    <div class="user_story_description">${selectedTodo['description']}</div>
     <div class="user_story_date">
         <div class="story_date">Due date:</div>
         <div class="user_date">variable(datum)</div>
@@ -178,14 +177,15 @@ function returnDialog(){
                     <div>Edit</div>
                 </button></div>
         </div>
-      `
-     }
-
-
-function openDialog(){
-    document.getElementById('dialog_bg').classList.remove('d-none');
-    renderDialog()
+      `;
 }
+
+     function openDialog(todoId) {
+        let id = todoId.split('_')[1];
+        let selectedTodo = todo.find(t => t.id == id);
+        document.getElementById('dialog_bg').classList.remove('d-none');
+        renderDialog(selectedTodo);
+    }
 
 
 function closeDialog(){
@@ -194,7 +194,36 @@ function closeDialog(){
 
 
 
-let subtaskCount = 2; // Anzahl der Subtasks
+function filterTodosByTitle() {
+    let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
+
+    // Filtern der Todos, deren Titel die ersten drei Buchstaben mit dem Suchtext übereinstimmen
+    let filteredTodos = todo.filter(t => t['title'].toLowerCase().startsWith(searchText));
+
+    // Leeren Sie die Inhalte aller Spalten
+    document.getElementById('task_content_open').innerHTML = '';
+    document.getElementById('close_one').innerHTML = '';
+    document.getElementById('await_content').innerHTML = '';
+    document.getElementById('done_content').innerHTML = '';
+
+    // Durchlaufen Sie die gefilterten Todos und fügen Sie sie nur in die entsprechende Spalte ein
+    for (let index = 0; index < filteredTodos.length; index++) {
+        let clean = filteredTodos[index];
+        if (clean.category === 'todos') {
+            document.getElementById('task_content_open').innerHTML += generateTodo(clean);
+        } else if (clean.category === 'inprogress') {
+            document.getElementById('close_one').innerHTML += generateTodo(clean);
+        } else if (clean.category === 'await') {
+            document.getElementById('await_content').innerHTML += generateTodo(clean);
+        } else if (clean.category === 'done') {
+            document.getElementById('done_content').innerHTML += generateTodo(clean);
+        }
+    }
+}
+
+
+
+let subtaskCount = 2; // Anzahl der Subtasksgit
 let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
 document.getElementById('myBar').style.width = progressWidth + '%';
 

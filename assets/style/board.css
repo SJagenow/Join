@@ -73,7 +73,9 @@ body input {
     font-size: 21px;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%
+    line-height: 120%;
+    border: none;
+    
 }
 
 .input_button_container {
@@ -91,19 +93,19 @@ body input {
 
 
 .board_midlane_main_container {
-display: flex;
+    display: flex;
     color: (--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 700px;
     line-height: 120%;
     background: #F6F7F8;
     margin-left: 232px;
     gap: 24px;
 }
 
-.smal_midlane_main_container button {
+.board_midlane_main_container button {
     display: flex;
     width: 24px;
     height: 24px;
@@ -118,7 +120,7 @@ display: flex;
   
 }
 
-.smal_midlane_main_container button:hover {
+.board_midlane_main_container button:hover {
    color: #29ABE2;
     border:2px solid #29ABE2;
 }
@@ -132,6 +134,10 @@ display: flex;
 
 }
 
+.ml36:hover{
+    background-color: #29ABE2;
+    border: none;
+}
 
 .midlane_last_no_button {
     display: flex;
@@ -154,7 +160,6 @@ display: flex;
     margin-left: 256px;
     justify-content: flex-start;
 }
-
 .todofield {
     display: flex;
     flex-direction: column;
@@ -204,7 +209,7 @@ display: flex;
 
 .progress_await_container {
 
-   
+
 }
 
 .d_none {
@@ -570,7 +575,22 @@ display: flex;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-}
+        overflow:hidden;
+        scrollbar-width:thin; 
+        scrollbar-color: rgba(0, 207, 239, 0.3) transparent;
+       
+    }
+
+
+
+    
+
+    .drag-area:hover {
+        overflow: auto; 
+    }
+
+
+
 
 [id^="todo"]
    {display: flex;
@@ -586,7 +606,7 @@ display: flex;
     box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
     margin-top: 16px;
     cursor: grab;
-
+    margin-left:3px;
 
 }
 
