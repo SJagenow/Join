@@ -78,10 +78,10 @@ function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
 
-function generateTodo() {
-    let subtaskCount = 2; // Anzahl der Subtasks
-    let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
-    const todoId = `todo_${clean['id']}`;
+function generateTodo(clean) {
+    let subtaskCount = 2; 
+    let progressWidth = (1 / subtaskCount) * 100; 
+    const todoId = `todo_${clean['id']}`; 
     
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
         <div class="card_label">${clean['label']}</div>
@@ -197,34 +197,33 @@ function closeDialog(){
 function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
 
-  
+    // Filtern der Todos, deren Titel die ersten drei Buchstaben mit dem Suchtext übereinstimmen
     let filteredTodos = todo.filter(t => t['title'].toLowerCase().startsWith(searchText));
 
-  
+    // Leeren Sie die Inhalte aller Spalten
     document.getElementById('task_content_open').innerHTML = '';
     document.getElementById('close_one').innerHTML = '';
     document.getElementById('await_content').innerHTML = '';
     document.getElementById('done_content').innerHTML = '';
 
-  
+    // Durchlaufen Sie die gefilterten Todos und fügen Sie sie nur in die entsprechende Spalte ein
     for (let index = 0; index < filteredTodos.length; index++) {
         let clean = filteredTodos[index];
         if (clean.category === 'todos') {
             document.getElementById('task_content_open').innerHTML += generateTodo(clean);
         } else if (clean.category === 'inprogress') {
-            document.getElementById('close_one').innerHTML = generateTodo(clean);
+            document.getElementById('close_one').innerHTML += generateTodo(clean);
         } else if (clean.category === 'await') {
-            document.getElementById('await_content').innerHTML = generateTodo(clean);
+            document.getElementById('await_content').innerHTML += generateTodo(clean);
         } else if (clean.category === 'done') {
-            document.getElementById('done_content').innerHTML = generateTodo(clean);
+            document.getElementById('done_content').innerHTML += generateTodo(clean);
         }
     }
 }
 
 
 
-
-let subtaskCount = 2; // Anzahl der Subtasks
+let subtaskCount = 2; // Anzahl der Subtasksgit
 let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
 document.getElementById('myBar').style.width = progressWidth + '%';
 
