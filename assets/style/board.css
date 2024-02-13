@@ -73,7 +73,9 @@ body input {
     font-size: 21px;
     font-style: normal;
     font-weight: 700;
-    line-height: 120%
+    line-height: 120%;
+    border: none;
+    
 }
 
 .input_button_container {
@@ -573,8 +575,13 @@ body input {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    overflow-y: auto;
-}
+        overflow:hidden;
+    }
+
+    .drag-area:hover {
+        overflow: auto; /* Zeige Scrollleisten, wenn gehovert wird */
+    }
+
 
 [id^="todo"]
    {display: flex;
@@ -590,7 +597,7 @@ body input {
     box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
     margin-top: 16px;
     cursor: grab;
-
+    margin-left:3px;
 
 }
 
