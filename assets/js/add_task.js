@@ -1,16 +1,47 @@
 let contactList = [];
 let selectedUsers = [];
+let currentPrio = 'medium';
+let currentLabel = '';
 let subtasksArray = ['das ist ein subtask', 'das hier ist auch ein subtask wer weis denn sowas moin moin'];
-let tasks = [
+let tasks = [];
+let tasksBeispiel = [
     {
-        'id': 1,
-        'label': 'User Story',
-        'title': 'Kochwelt Recomender',
-        'description': 'Build start is next week',
-        'category': 'todos',
-        'priority': 'height'
+        "id": 0,
+        "title": "Kochwelt Recomender",
+        "description": "Build start is next week",
+        "contacts": [
+            "Benedikt Ziegler",
+            "David Eisenberg",
+            "Eva Fischer"
+        ],
+        "dueDate": "2024-02-16",
+        "priority": "urgent",
+        "category": "todos",
+        "label": "User Story",
+        "subtasks": [
+            "das ist ein subtask",
+            "das hier ist auch ein subtask wer weis denn sowas moin moin"
+        ]
     },
-];
+    {
+        "id": 1,
+        "title": "Kochwelt Recomender",
+        "description": "Build start is next week",
+        "contacts": [
+            "Benedikt Ziegler",
+            "David Eisenberg",
+            "Eva Fischer"
+        ],
+        "dueDate": "2024-02-16",
+        "priority": "urgent",
+        "category": "todos",
+        "label": "User Story",
+        "subtasks": [
+            "das ist ein subtask",
+            "das hier ist auch ein subtask wer weis denn sowas moin moin"
+        ]
+    },
+]
 
 
 // Holen des heutigen Datums im Format "YYYY-MM-DD"
@@ -24,13 +55,20 @@ function initAddTask() {
     loadContactList();
     renderSubtask();
     highlightMenuLink();
+    test()
+}
+
+
+async function test() {
+    tasks = JSON.parse(await getItem('tasks'));
+    console.log(tasks)
 }
 
 
 async function loadContactList() {
     try {
         contactList = JSON.parse(await getItem('contactList'));
-        console.log(contactList);
+        console.log(JSON.parse(await getItem('contactList')));
         renderContactListForTask()
     } catch(e){
         console.error('Loading error:', e);
@@ -134,25 +172,25 @@ function changePriority(prio) {
 
     if (prio == 'urgent') {
         if (urgent.classList.contains('urgent')) {
-
         } else {
             urgent.classList.add('urgent');
+            currentPrio = 'urgent';
             medium.classList.remove('medium');
             low.classList.remove('low');
         }
     } else if (prio == 'medium') {
         if (medium.classList.contains('medium')) {
-
         } else {
             medium.classList.add('medium');
+            currentPrio = 'medium';
             urgent.classList.remove('urgent');
             low.classList.remove('low');
         }
     } else if (prio == 'low') {
         if (low.classList.contains('low')) {
-
         } else {
             low.classList.add('low');
+            currentPrio = 'low';
             urgent.classList.remove('urgent');
             medium.classList.remove('medium');
         }
@@ -162,6 +200,7 @@ function changePriority(prio) {
 
 function selectLabel(label) {
     document.getElementById('add-task-category').innerHTML = `${label}`;
+    currentLabel = document.getElementById('add-task-category').innerHTML;
 }
 
 
@@ -203,9 +242,6 @@ function addSubtask() {
 }
 
 
-
-
-
 function editSubtask(i) {
     subtasksArray.splice(i, 1, document.getElementById('single-subtask'+[i]).innerHTML);
 
@@ -220,25 +256,35 @@ function deleteSubtask(i) {
 }
 
 
-function clearTask() {
-    document.getElementById('add-task-title');
-    document.getElementById('add-task-description');
-    get
-    document.getElementById('add-task-date');
-}
+// function clearTask() {
+//     document.getElementById('add-task-title');
+//     document.getElementById('add-task-description');
+//     document.getElementById('add-task-date');
+// }
 
 
-function createTask() {
+async function createTask() {
+    // document.getElementById('add-task-button').setAttribute('disabled');
+    // document.getElementById('clear-task-button').setAttribute('disabled');
+    tasks = JSON.parse(await getItem('tasks'));
+
     let task = {
-        'id': 1,
-        'title': '',
-        'description': '',
-        'contacts': '',
-        'dueDate':'',
-        'priority': '',
-        'category': '',
-        'label': '',
-        'subtasks': '',
-    }
-    document.getElementById('add-task-button')
+        "id": tasks.length,
+        "title": document.getElementById('add-task-title').value,
+        "description": document.getElementById('add-task-description').value,
+        "contacts": selectedUsers,
+        "dueDate":document.getElementById('add-task-date').value,
+        "priority": currentPrio,
+        "category": "todos",
+        "label": currentLabel,
+        "subtasks": subtasksArray,
+    };
+    tasks.push(task);
+    console.log(tasks);
+
+    await setItem('tasks', JSON.stringify(tasks));
+
+    // clearTask();
+    // document.getElementById('add-task-button').removeAttribute('disabled');
+    // document.getElementById('clear-task-button').removeAttribute('disabled');
 }
