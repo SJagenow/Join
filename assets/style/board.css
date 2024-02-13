@@ -91,7 +91,7 @@ body input {
 
 
 .board_midlane_main_container {
-display: flex;
+    display: flex;
     color: (--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
@@ -203,8 +203,8 @@ display: flex;
 
 
 .progress_await_container {
-height: 500px;
-   
+
+
 }
 
 .d_none {

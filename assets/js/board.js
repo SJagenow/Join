@@ -1,3 +1,4 @@
+
 let todoId;
 let clean;
 let todo = [{
@@ -192,6 +193,21 @@ function closeDialog(){
     document.getElementById('dialog_bg').classList.add('d-none');
 }
 
+
+function filterTodosByLabel() {
+    // Get the value of the search input field
+    let searchText = document.getElementById('filter_input').value.toLowerCase();
+
+    // Filter the todo array based on the search text
+    let filteredTodos = todo.filter(t => t['label'].toLowerCase().includes(searchText));
+
+    // Update the board with the filtered tasks
+    document.getElementById('task_content_open').innerHTML = '';
+    for (let index = 0; index < filteredTodos.length; index++) {
+        clean = filteredTodos[index];
+        document.getElementById('task_content_open').innerHTML += generateTodo();
+    }
+}
 
 
 let subtaskCount = 2; // Anzahl der Subtasks
