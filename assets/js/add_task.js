@@ -23,7 +23,7 @@ document.getElementById('add-task-date').setAttribute('min', today);
 function initAddTask() {
     loadContactList();
     renderSubtask();
-    highlightMenuLink();
+highlightMenuLink();
 }
 
 
@@ -229,9 +229,10 @@ function clearTask() {
 
 
 function createTask() {
+    // Inputs deklarieren
     let task = {
         'id': 1,
-        'title': '',
+        'title': '', // hier inputvariable.value überall eintragen
         'description': '',
         'contacts': '',
         'dueDate':'',
@@ -240,5 +241,7 @@ function createTask() {
         'label': '',
         'subtasks': '',
     }
+    // erst ins array pushen
+    // dann setitem mit dem array als key ins backend
     document.getElementById('add-task-button')
 }

@@ -399,22 +399,6 @@ body {
     gap: 16px;
 }
 
-/* #contact_cancel_button {
-    display: flex;
-    padding: 15px 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--Version-2-main-color, #2A3647);
-    color: var(--Version-2-main-color, #2A3647);
-    font-size: 21px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 120%;
-    background-color: transparent;
-    
-} */
 #contact_cancel_button {
     height: 56px;
     font-size: 21px;
@@ -435,8 +419,12 @@ body {
     transition: color, border-color, box-shadow 8000ms ease-out;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     transition: background-color 80ms ease-out, border-color 80ms ease-out, box-shadow 80ms ease-out;
+    cursor: pointer;
 }
 
+#contact_save_button:hover{
+    cursor: pointer;
+}
 
 #contact_save_button {
     display: flex;
@@ -832,6 +820,8 @@ body {
         width: 104px;
         height: 51px;
     }
+
+
 
     .right_side_add_contact_overlay form {
         gap: 24px;

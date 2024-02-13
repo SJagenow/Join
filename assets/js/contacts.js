@@ -116,14 +116,14 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     });
 }
 
-function getInitialsForOverlay(){
+function getInitialsForOverlay() {
     let nameInput = document.getElementById('contactlist_name_input').value;
     let initialsContainer = document.getElementById('contact_initials_container');
     let initials = nameInput.split(' ');
     let firstLetter = initials[0][0];
-    let secondLetter = initials[1] ? initials[1][0] : ''; 
+    let secondLetter = initials[1] ? initials[1][0] : '';
     initialsContainer.classList.add(`letter-${secondLetter.toLowerCase()}`);
-    initialsContainer.innerHTML = `${firstLetter+secondLetter}`;
+    initialsContainer.innerHTML = `${firstLetter + secondLetter}`;
 }
 
 function getInitials(contact) {
@@ -217,7 +217,7 @@ function openEditContact(alphabetIndex, contactIndex) {
 
 
 function updateContact() {
-    deleteContact();
+    deleteContactWithoutConfirm();
     addToContacts();
 }
 
@@ -249,8 +249,8 @@ function showAddContactDialog() {
     }, 100);
 }
 
-function renderContactOverlay(){
-    document.getElementById('contactlist_overlay_container'). innerHTML = `
+function renderContactOverlay() {
+    document.getElementById('contactlist_overlay_container').innerHTML = `
     <div class="contactlist_mid_layer">
             <div onclick="noClose(event)" id="add_contact_overlay">
                 <div class="left_side_add_contact_overlay">
@@ -401,6 +401,19 @@ function resetAddContactForm() {
     document.getElementById('contactlist_name_input').value = '';
     document.getElementById('contactlist_mail_input').value = '';
     document.getElementById('contactlist_phone_input').value = '';
+}
+
+async function deleteContactWithoutConfirm() {
+    const contactName = document.getElementById('contact_overview_name').innerText.trim();
+    const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
+    const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
+    if (indexToDelete !== -1) {
+        contactList.splice(indexToDelete, 1);
+        console.log('Contact deleted successfully.');
+    }
+    await setItem('contactList', JSON.stringify(contactList));
+    renderContactList();
+    document.getElementById('contact_overview').style.transform = 'translateX(200%)';
 }
 
 async function deleteContact() {
