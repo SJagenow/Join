@@ -181,11 +181,8 @@ function returnDialog(selectedTodo) {
 }
 
      function openDialog(todoId) {
-        // Die ID des Todos aus dem übergebenen todoId-Parameter extrahieren
         let id = todoId.split('_')[1];
-        // Das entsprechende Todo finden
         let selectedTodo = todo.find(t => t.id == id);
-        // Dialog anzeigen und füllen
         document.getElementById('dialog_bg').classList.remove('d-none');
         renderDialog(selectedTodo);
     }
@@ -198,37 +195,31 @@ function closeDialog(){
 
 
 function filterTodosByTitle() {
-    let searchText = document.getElementById('filter_input').value.toLowerCase();
+    let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
 
-   
-    let filteredTodos = todo.filter(t => t['title'].toLowerCase().includes(searchText));
+  
+    let filteredTodos = todo.filter(t => t['title'].toLowerCase().startsWith(searchText));
 
- 
+  
     document.getElementById('task_content_open').innerHTML = '';
-    for (let index = 0; index < filteredTodos.length; index++) {
-        clean = filteredTodos[index];
-        document.getElementById('task_content_open').innerHTML = generateTodo();
-    }
-
     document.getElementById('close_one').innerHTML = '';
-    for (let index = 0; index < filteredTodos.length; index++) {
-        clean = filteredTodos[index];
-        document.getElementById('close_one').innerHTML = generateTodo();
-    }
-
     document.getElementById('await_content').innerHTML = '';
-    for (let index = 0; index < filteredTodos.length; index++) {
-        clean = filteredTodos[index];
-        document.getElementById('await_content').innerHTML = generateTodo();
-    }
-
     document.getElementById('done_content').innerHTML = '';
+
+  
     for (let index = 0; index < filteredTodos.length; index++) {
-        clean = filteredTodos[index];
-        document.getElementById('done_content').innerHTML = generateTodo();
+        let clean = filteredTodos[index];
+        if (clean.category === 'todos') {
+            document.getElementById('task_content_open').innerHTML += generateTodo(clean);
+        } else if (clean.category === 'inprogress') {
+            document.getElementById('close_one').innerHTML = generateTodo(clean);
+        } else if (clean.category === 'await') {
+            document.getElementById('await_content').innerHTML = generateTodo(clean);
+        } else if (clean.category === 'done') {
+            document.getElementById('done_content').innerHTML = generateTodo(clean);
+        }
     }
 }
-
 
 
 
