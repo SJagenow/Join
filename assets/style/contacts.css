@@ -340,10 +340,16 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    height: 120px;
+    width: 120px;
+    font-size: 47px;
+    font-family: Inter;
+    font-weight: 500;
     border-radius: 70px;
-    border: 3px solid var(--white, #FFF);
-    background: #FFF;
+    border: 3px solid white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    color: white;
+    background-color: rgb(209,209,209);
 }
 
 .initials {
@@ -644,6 +650,10 @@ body {
 }
 
 @media(max-width:1210px) {
+
+    #contact_edit_button{
+        display: none;
+    }
 
     header{
         width: 100vw;
