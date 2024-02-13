@@ -190,8 +190,7 @@ function renderSubtask() {
 
 
 function addSubtask() {
-    const subtaskInput = document.getElementById('add-task-subtasks');
-    const addSubtaskButton = document.getElementById('add-subtask-button');
+    let subtaskInput = document.getElementById('add-task-subtasks');
 
     // Überprüfe, ob mindestens 3 Zeichen im Input-Feld vorhanden sind
     if (subtaskInput.value.length >= 3) {
@@ -202,9 +201,6 @@ function addSubtask() {
         subtaskInput.reportValidity();
     }
 }
-
-
-
 
 
 
