@@ -116,6 +116,15 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     });
 }
 
+function getInitialsForOverlay(){
+    let nameInput = document.getElementById('contactlist_name_input').value;
+    let initialsContainer = document.getElementById('contact_initials_container');
+    let initials = nameInput.split(' ');
+    let firstLetter = initials[0][0];
+    let secondLetter = initials[1] ? initials[1][0] : ''; 
+    initialsContainer.classList.add(`letter-${secondLetter.toLowerCase()}`);
+    initialsContainer.innerHTML = `${firstLetter+secondLetter}`;
+}
 
 function getInitials(contact) {
     const words = contact.name.split(" ");
@@ -195,15 +204,15 @@ function addHighlightsToContact(alphabetIndex, contactIndex) {
 function openEditContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     showAddContactDialog();
-    document.getElementById('contact_edit_button').style.display = "unset";
-    document.getElementById('under_headline').style.display = "none";
-    document.getElementById('contact_save_button').style.display = "none";
-    document.getElementById('contact_cancel_button').style.display = "none";
-    document.getElementById('add_contact_headline').innerHTML = `Edit contact`;
+    document.getElementById('contact_edit_button').style.display = 'flex';
+    document.getElementById('under_headline').style.display = 'none';
+    document.getElementById('contact_save_button').style.display = 'none';
+    document.getElementById('contact_cancel_button').innerHTML = 'Delete';
+    document.getElementById('add_contact_headline').innerHTML = 'Edit contact';
     document.getElementById('contactlist_name_input').value = contact.name;
     document.getElementById('contactlist_mail_input').value = contact.mail;
     document.getElementById('contactlist_phone_input').value = contact.phone;
-
+    getInitialsForOverlay();
 }
 
 
@@ -225,6 +234,7 @@ function closeContact() {
  * This function is used to show the add contact overlay by clicking the 'add new contact' button.
  */
 function showAddContactDialog() {
+    renderContactOverlay();
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
     document.getElementById('contact_edit_button').style.display = 'none';
     document.getElementById('under_headline').style.display = 'flex';
@@ -239,8 +249,75 @@ function showAddContactDialog() {
     }, 100);
 }
 
+function renderContactOverlay(){
+    document.getElementById('contactlist_overlay_container'). innerHTML = `
+    <div class="contactlist_mid_layer">
+            <div onclick="noClose(event)" id="add_contact_overlay">
+                <div class="left_side_add_contact_overlay">
+                    <div class="add_contact_close_container_handy">
+                        <img onclick="closeAddContactDialog()"
+                            src="./assets/contactbook/icons_contactbook/close_white.svg" alt="">
+                    </div>
+                    <img id="contact_list_logo_handy" src="./assets/contactbook/img_contactbook/join_logo.svg" alt="">
+                    <div class="add_contact_overlay_text_container">
+                        <span id="add_contact_headline">Add contact</span>
+                        <span id="under_headline">Tasks are better with a team!</span>
+                        <img src="./assets/contactbook/icons_contactbook/dividing_bar_blue_horizontal.svg" alt="">
+                    </div>
+                </div>
+                <div class="right_side_add_contact_overlay">
+                    <div class="center_up mb50">
+                        <div id="contact_initials_container">
+                            <img class="hw64" src="./assets/contactbook/icons_contactbook/person_white.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="center_up mb50">
+                        <div class="edit_formular_container">
+                            <div class="add_contact_close_container">
+                                <img onclick="closeAddContactDialog()"
+                                    src="./assets/contactbook/icons_contactbook/close.svg" alt="">
+                            </div>
+                            <form onsubmit="handleSubmit(); return false;">
+                                <div class="input_container">
+                                    <input onkeyup="getInitialsForOverlay()" required type="text" placeholder="Name" id="contactlist_name_input"
+                                        title="Please enter a name with at least 2 characters, a space, and the last name with at least 3 characters"
+                                        pattern="[^\s]+\s[^\s]{3,}">
+                                    <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
+                                </div>
+                                <div class="input_container">
+                                    <input required type="email" placeholder="E-Mail" id="contactlist_mail_input"
+                                        title="Please enter a valid email address">
+                                    <img src="./assets/contactbook/icons_contactbook/mail.svg" alt="">
+                                </div>
+                                <div class="input_container">
+                                    <input required type="text" placeholder="Phone" id="contactlist_phone_input"
+                                        pattern="\+[0-9]{2} [0-9]{3} [0-9]{3} [0-9]{3} [0-9]{2}"
+                                        title="Please enter a valid phone number in the format +49 333 333 333 33">
+                                    <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
+                                </div>
+                                <div class="edit_contact_button_container">
+                                    <button type="button" id="contact_cancel_button" onclick="resetAddContactForm();">
+                                        Cancel ✖
+                                    </button>
+                                    <button id="contact_save_button">
+                                        Create contact <img src="./assets/contactbook/icons_contactbook/check.svg"
+                                            alt="">
+                                    </button>
+                                    <button id="contact_edit_button" class="center">
+                                        Save <img src="./assets/contactbook/icons_contactbook/check.svg" alt="">
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
 function showAddContactDialogLowRes() {
+    renderContactOverlay();
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
     setTimeout(() => {
         document.getElementById('add_contact_overlay').style = 'transform: translateY(0%)';
@@ -263,6 +340,7 @@ function closeAddContactDialog() {
         contactListOverlayContainer.style.display = 'none';
         renderContactList();
     }, 100);
+    document.getElementById('contact_cancel_button').innerHTML = 'Cancel ✖';
 }
 
 
@@ -296,6 +374,7 @@ async function addToContacts() {
     console.log('updated contactlist:', contactList);
     await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
+    closeAddContactDialog();
     renderContactList();
     findAlphabetIndex(contact);
     saveContactButton.disabled = false;
@@ -318,11 +397,10 @@ function findAlphabetIndex(contact) {
  * @param {string} mail - It's the inputfield where the e-mail is written in.
  * @param {string} phone - It's the inputfield where the phonenumber is written in.
  */
-function resetAddContactForm(name, mail, phone) {
-    name.value = '';
-    mail.value = '';
-    phone.value = '';
-    closeAddContactDialog();
+function resetAddContactForm() {
+    document.getElementById('contactlist_name_input').value = '';
+    document.getElementById('contactlist_mail_input').value = '';
+    document.getElementById('contactlist_phone_input').value = '';
 }
 
 async function deleteContact() {
@@ -348,12 +426,15 @@ async function handleSubmit() {
     const cancelButton = document.getElementById("contact_cancel_button");
     const saveButton = document.getElementById("contact_save_button");
     const editButton = document.getElementById("contact_edit_button");
-
-    if (event.submitter === cancelButton) {
-        console.log("Cancel button clicked");
-    } else if (event.submitter === saveButton) {
+    cancelButton.disabled = true;
+    saveButton.disabled = true;
+    editButton.disabled = true;
+    if (event.submitter === saveButton) {
         await addToContacts();
     } else if (event.submitter === editButton) {
         updateContact();
     }
+    cancelButton.disabled = false;
+    saveButton.disabled = false;
+    editButton.disabled = false;
 }

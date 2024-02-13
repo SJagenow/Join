@@ -340,10 +340,16 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    height: 120px;
+    width: 120px;
+    font-size: 47px;
+    font-family: Inter;
+    font-weight: 500;
     border-radius: 70px;
-    border: 3px solid var(--white, #FFF);
-    background: #FFF;
+    border: 3px solid white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    color: white;
+    background-color: rgb(209,209,209);
 }
 
 .initials {
@@ -601,6 +607,21 @@ body {
 
 #contact_edit_button {
     display: none;
+    height: 56px;
+    font-size: 21px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+    padding: 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
+}
+
+#contact_edit_button:hover{
+    background-color: #29ABE2;
 }
 
 .center_up {
@@ -629,6 +650,10 @@ body {
 }
 
 @media(max-width:1210px) {
+
+    #contact_edit_button{
+        display: none;
+    }
 
     header{
         width: 100vw;

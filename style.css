@@ -81,6 +81,11 @@ h1 {
     width: 30px;
 }
 
+.hw64{
+    height: 64px;
+    width: 64px;
+}
+
 .max-h {
     max-height: 1024px;
 }
@@ -496,123 +501,124 @@ Not supports in Firefox and IE */
 
 /* Poppige Farben */
 .letter-a {
-    background-color: #FF1493; /* Pink */
+    background-color: #FF1493 !important; /* Pink */
 }
 
 .letter-b {
-    background-color: #FFD700; /* Gold */
+    background-color: #FFD700 !important; /* Gold */
 }
 
 .letter-c {
-    background-color: #32CD32; /* Limettengrün */
+    background-color: #32CD32 !important; /* Limettengrün */
 }
 
 .letter-d {
-    background-color: #00BFFF; /* Himmelblau */
+    background-color: #00BFFF !important; /* Himmelblau */
 }
 
 .letter-e {
-    background-color: #9370DB; /* Mittellila */
+    background-color: #9370DB !important; /* Mittellila */
 }
 
 .letter-f {
-    background-color: #FF6347; /* Tomatenrot */
+    background-color: #FF6347 !important; /* Tomatenrot */
 }
 
 .letter-g {
-    background-color: #FF4500; /* Orangerot */
+    background-color: #FF4500 !important; /* Orangerot */
 }
 
 .letter-h {
-    background-color: #FF69B4; /* Pink */
+    background-color: #FF69B4 !important; /* Pink */
 }
 
 .letter-i {
-    background-color: #FF8C00; /* Dunkelorangen */
+    background-color: #FF8C00 !important; /* Dunkelorangen */
 }
 
 .letter-j {
-    background-color: #00CED1; /* Dunkeltürkis */
+    background-color: #00CED1 !important; /* Dunkeltürkis */
 }
 
 .letter-k {
-    background-color: #9400D3; /* Dunkellila */
+    background-color: #9400D3 !important; /* Dunkellila */
 }
 
 .letter-l {
-    background-color: #6A5ACD; /* Mittelblau */
+    background-color: #6A5ACD !important; /* Mittelblau */
 }
 
 .letter-m {
-    background-color: #CD5C5C; /* Indisches Rot */
+    background-color: #CD5C5C !important; /* Indisches Rot */
 }
 
 .letter-n {
-    background-color: #4682B4; /* Stahlblau */
+    background-color: #4682B4 !important; /* Stahlblau */
 }
 
 .letter-o {
-    background-color: #00FF7F; /* Smaragdgrün */
+    background-color: #00FF7F !important; /* Smaragdgrün */
 }
 
 .letter-p {
-    background-color: #FF00FF; /* Magenta */
+    background-color: #FF00FF !important; /* Magenta */
 }
 
 .letter-q {
-    background-color: #8A2BE2; /* Indigo */
+    background-color: #8A2BE2 !important; /* Indigo */
 }
 
 .letter-r {
-    background-color: #B22222; /* Ziegelrot */
+    background-color: #B22222 !important; /* Ziegelrot */
 }
 
 .letter-s {
-    background-color: #20B2AA; /* Türkis */
+    background-color: #20B2AA !important; /* Türkis */
 }
 
 .letter-t {
-    background-color: #8B008B; /* Dunkelmagenta */
+    background-color: #8B008B !important; /* Dunkelmagenta */
 }
 
 .letter-u {
-    background-color: #FF69B4; /* Pink */
+    background-color: #FF69B4 !important; /* Pink */
 }
 
 .letter-v {
-    background-color: #1E90FF; /* Himmelblau */
+    background-color: #1E90FF !important; /* Himmelblau */
 }
 
 .letter-w {
-    background-color: #FF1493; /* Pink */
+    background-color: #FF1493 !important; /* Pink */
 }
 
 .letter-x {
-    background-color: #B22222; /* Ziegelrot */
+    background-color: #B22222 !important; /* Ziegelrot */
 }
 
 .letter-y {
-    background-color: #FFD700; /* Gold */
+    background-color: #FFD700 !important; /* Gold */
 }
 
 .letter-z {
-    background-color: #FF8C00; /* Dunkelorangen */
+    background-color: #FF8C00 !important; /* Dunkelorangen */
 }
 
 /* Umlaute */
 .letter-ä {
-    background-color: #FF1493; /* Pink */
+    background-color: #FF1493 !important; /* Pink */
 }
 
 .letter-ö {
-    background-color: #00CED1; /* Dunkeltürkis */
+    background-color: #00CED1 !important; /* Dunkeltürkis */
 }
 
 .letter-ü {
-    background-color: #FF69B4; /* Pink */
+    background-color: #FF69B4 !important; /* Pink */
 }
 
 /* Eszett */
 .letter-ß {
-    background-color: #FF4500; /* Orangerot */
+    background-color: #FF4500 !important; /* Orangerot */
 }
+
