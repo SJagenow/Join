@@ -1,5 +1,6 @@
 async function init() {
     await includeHTML();
+    highlightMenuLink();
     document.getElementById('searchInput').addEventListener('input', filterTodos);
     filterTodos()
 }
@@ -18,6 +19,31 @@ async function includeHTML() {
     }
 }
 
+function highlightMenuLink(){
+    let currentPage = window.location.pathname;
+    if (currentPage === '/summary.html'){
+        document.getElementById('summary_menu_link_container').style.backgroundColor = '#091931'
+        document.getElementById('summary_menu_link_container').querySelector('a').style.color = 'white'
+        document.getElementById('menu_icon_summary').src = './assets/img/summary_white.png'
+    } else if (currentPage === '/add_task.html'){
+        document.getElementById('addtask_menu_link_container').style.backgroundColor = '#091931'
+        document.getElementById('addtask_menu_link_container').querySelector('a').style.color = 'white'
+        document.getElementById('menu_icon_addtask').src = './assets/img/add_task_white.png'
+    } else if (currentPage === '/board.html'){
+        document.getElementById('board_menu_link_container').style.backgroundColor = '#091931'
+        document.getElementById('board_menu_link_container').querySelector('a').style.color = 'white'
+        document.getElementById('menu_icon_board').src = './assets/img/Board_white.png'
+    }else if (currentPage === '/contacts.html'){
+        document.getElementById('contacts_menu_link_container').style.backgroundColor = '#091931'
+        document.getElementById('contacts_menu_link_container').querySelector('a').style.color = 'white';
+        document.getElementById('menu_icon_contacts').src = './assets/img/contacts_white.png'
+    } else if (currentPage === '/privacy_policy.html'){
+        document.getElementById('privacy_policy_menulink').style.color = 'white';
+    } else if (currentPage === '/legal_notice.html'){
+        document.getElementById('legal_notice_menulink').style.color = 'white';
+    }
+}
+
 function toggleDropDown() {
     let dropdownElement = document.getElementById('dropdown-links').classList;
 
@@ -27,6 +53,10 @@ function toggleDropDown() {
         dropdownElement.add('d-none');
     }
 }
+
+// function logOut() {
+//     window.location.href = `index.html?msg=Du hast dich erfolgreich ausgeloggt!`;
+// }
 
 function changeColor(clickedLink) {
     var links = document.querySelectorAll('.mobile-menu_link_container');

@@ -23,6 +23,7 @@ document.getElementById('add-task-date').setAttribute('min', today);
 function initAddTask() {
     loadContactList();
     renderSubtask();
+    highlightMenuLink();
 }
 
 

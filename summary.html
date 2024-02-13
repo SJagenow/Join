@@ -11,6 +11,7 @@
     <script src="./assets/js/storage.js"></script>
     <script src="./assets/js/summary.js"></script>
     <title>Kanban Project Management Tool</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
 </head>
 
     <body onload="init()">
@@ -60,7 +61,7 @@
                     </div>
                     <div class="urgent-line"> </div>
                     <div class="deadline">
-                        <div class="deadline-day">October 16, 2022</div>
+                        <div class="deadline-day" id="deadline-date">October 16, 2022</div>
                         <span class="deadline-description">Upcoming Deadline</span>
                     </div>
                 </div>
@@ -80,8 +81,8 @@
                 </div>
             </div>
             <div class="summary-welcome-user"> 
-              <span class="good-morning">Good Morning,</span>
-              <span class="user-name">Sofia Müller</span>
+              <span class="good-morning" id="greet">Good Morning,</span>
+              <span class="user-name" id="summary-userName"> </span>
             </div>
           </div>
       </div>

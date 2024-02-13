@@ -90,23 +90,20 @@ body input {
 
 
 
-.smal_midlane_main_container {
+.board_midlane_main_container {
     display: flex;
-    width: calc(100vw - 232px);
-    justify-content: center;
-    align-items: flex-start;
-    color: var(--menu-color, #42526E);
+    color: (--menu-color, #42526E);
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 700px;
     line-height: 120%;
     background: #F6F7F8;
     margin-left: 232px;
     gap: 24px;
 }
 
-.smal_midlane_main_container button {
+.board_midlane_main_container button {
     display: flex;
     width: 24px;
     height: 24px;
@@ -121,7 +118,7 @@ body input {
   
 }
 
-.smal_midlane_main_container button:hover {
+.board_midlane_main_container button:hover {
    color: #29ABE2;
     border:2px solid #29ABE2;
 }
@@ -131,11 +128,9 @@ body input {
     width: 252px;
     justify-content: space-between;
     align-items: center;
-    flex-shrink: 0;
     gap: 24px;
 
 }
-
 
 
 .midlane_last_no_button {
@@ -150,7 +145,7 @@ body input {
 .botlane_main_container {
     display: flex;
     width: calc(100vw - 232px);
-    height: 600px;
+    height:580px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
@@ -165,9 +160,13 @@ body input {
     flex-direction: column;
     align-items: flex-start;
     width: 246px;
+}
 
+.board_flex {
+    display: flex;
 
 }
+
 
 
 
@@ -205,7 +204,7 @@ body input {
 
 .progress_await_container {
 
-   
+
 }
 
 .d_none {
@@ -742,5 +741,11 @@ body input {
 
 .drag-area-highlight {
         transform: rotate(357deg);
-    
+        background-color: rgba(0, 255, 8, 0.1); 
+}
+
+.drag-area:hover {
+   
+
+   
 }

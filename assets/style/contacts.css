@@ -4,10 +4,6 @@ body {
     background-color: rgb(246, 247, 248);
 }
 
-body button {
-    cursor: pointer;
-}
-
 #contact_list {
     display: flex;
     flex-direction: column;
@@ -15,7 +11,7 @@ body button {
     overflow-y: auto;
     overflow-x: hidden;
     height: calc(100vh - 104px);
-    /* 104px is the height from header*/
+    max-height: calc(1024px - 104px);
     width: 400px;
     padding: 0px 0px 0px 259px;
     background-color: white;
@@ -23,7 +19,7 @@ body button {
 
 #contact_list button {
     display: flex;
-    width: 352px;
+    width: 302px;
     padding: 12px 0px;
     justify-content: center;
     align-items: center;
@@ -45,6 +41,8 @@ body button {
     padding: 22.5px 0px;
     justify-content: center;
     align-items: center;
+    align-self: center;
+    width: 302px;
 }
 
 #contact_list button:hover {
@@ -136,7 +134,7 @@ body button {
     gap: 35px;
     border-radius: 10px;
     background: #FFF;
-    transition: 0.3s ease;
+    transition: 0.08s ease;
 }
 
 .contact_list_container:hover {
@@ -159,7 +157,7 @@ body button {
     height: 42px;
     width: 42px;
     color: white;
-    border-color: white;
+    border: 2px solid white;
 }
 
 .contact_list_overview_initals {
@@ -171,8 +169,7 @@ body button {
     height: 120px;
     width: 120px;
     color: white;
-    border-color: white;
-    border: 2px;
+    border: 2px solid white;
     font-family: Inter;
     font-weight: 500;
     font-size: 47px;
@@ -282,7 +279,7 @@ body button {
     background: #FFF;
     display: flex;
     transform: translateX(200%);
-    transition: transform 225ms ease-in-out;
+    transition: transform 125ms ease-in-out;
 }
 
 #add_contact_headline {
@@ -309,7 +306,7 @@ body button {
     margin-left: 56px;
     margin-top: 40px;
     min-width: 572px;
-    transition: transform 225ms ease-in-out;
+    transition: transform 125ms ease-in-out;
     transform: translateX(200%);
 }
 
@@ -343,10 +340,16 @@ body button {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    height: 120px;
+    width: 120px;
+    font-size: 47px;
+    font-family: Inter;
+    font-weight: 500;
     border-radius: 70px;
-    border: 3px solid var(--white, #FFF);
-    background: #FFF;
+    border: 3px solid white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    color: white;
+    background-color: rgb(209,209,209);
 }
 
 .initials {
@@ -604,6 +607,21 @@ body button {
 
 #contact_edit_button {
     display: none;
+    height: 56px;
+    font-size: 21px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+    padding: 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 80ms ease-in, border-color 80ms ease-in, box-shadow 80ms ease-in;
+}
+
+#contact_edit_button:hover{
+    background-color: #29ABE2;
 }
 
 .center_up {
@@ -614,6 +632,11 @@ body button {
 
 .marginL-24 {
     margin-left: -24px;
+}
+
+.selected{
+    background-color: #091931;
+    color: white;
 }
 
 @media(min-width:1440px) {
@@ -627,6 +650,10 @@ body button {
 }
 
 @media(max-width:1210px) {
+
+    #contact_edit_button{
+        display: none;
+    }
 
     header{
         width: 100vw;
@@ -683,7 +710,7 @@ body button {
     #contact_overview {
         /* display: none; */
         position: absolute;
-        top: 108px;
+        top: 104px;
         bottom: 80px;
         left: 0px;
         right: 0px;
