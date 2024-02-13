@@ -194,12 +194,12 @@ function closeDialog(){
 }
 
 
-function filterTodosByLabel() {
-    // Get the value of the search input field
+
+function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.toLowerCase();
 
     // Filter the todo array based on the search text
-    let filteredTodos = todo.filter(t => t['label'].toLowerCase().includes(searchText));
+    let filteredTodos = todo.filter(t => t['title'].toLowerCase().includes(searchText));
 
     // Update the board with the filtered tasks
     document.getElementById('task_content_open').innerHTML = '';
@@ -208,6 +208,9 @@ function filterTodosByLabel() {
         document.getElementById('task_content_open').innerHTML += generateTodo();
     }
 }
+
+
+
 
 
 let subtaskCount = 2; // Anzahl der Subtasks
