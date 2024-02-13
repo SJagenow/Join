@@ -158,7 +158,6 @@ body input {
     margin-left: 256px;
     justify-content: flex-start;
 }
-
 .todofield {
     display: flex;
     flex-direction: column;
@@ -574,6 +573,7 @@ body input {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 [id^="todo"]
