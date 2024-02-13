@@ -198,14 +198,32 @@ function closeDialog(){
 function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.toLowerCase();
 
-    // Filter the todo array based on the search text
+   
     let filteredTodos = todo.filter(t => t['title'].toLowerCase().includes(searchText));
 
-    // Update the board with the filtered tasks
+ 
     document.getElementById('task_content_open').innerHTML = '';
     for (let index = 0; index < filteredTodos.length; index++) {
         clean = filteredTodos[index];
-        document.getElementById('task_content_open').innerHTML += generateTodo();
+        document.getElementById('task_content_open').innerHTML = generateTodo();
+    }
+
+    document.getElementById('close_one').innerHTML = '';
+    for (let index = 0; index < filteredTodos.length; index++) {
+        clean = filteredTodos[index];
+        document.getElementById('close_one').innerHTML = generateTodo();
+    }
+
+    document.getElementById('await_content').innerHTML = '';
+    for (let index = 0; index < filteredTodos.length; index++) {
+        clean = filteredTodos[index];
+        document.getElementById('await_content').innerHTML = generateTodo();
+    }
+
+    document.getElementById('done_content').innerHTML = '';
+    for (let index = 0; index < filteredTodos.length; index++) {
+        clean = filteredTodos[index];
+        document.getElementById('done_content').innerHTML = generateTodo();
     }
 }
 
