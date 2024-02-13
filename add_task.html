@@ -21,7 +21,7 @@
             <main class="main-container">
                 <div class="main-div overflow">
                     <h1 class="add-task-title">Add Task</h1>
-                    <form action="" class="ad-task-form column-space-between" onsubmit="createTask()">
+                    <form id="add-task-form" action="" class="ad-task-form column-space-between" onsubmit="createTask()">
                         <div class="gap48">
                             <div class="add-task-input-div">
                                 <div class="column add-task-input-div">
@@ -101,15 +101,17 @@
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
-                                    <input id="add-task-subtasks" class="add-task-input" type="text" name="Subtasks"
-                                        placeholder="Add new subtask">
+                                    <input id="add-task-subtasks" class="add-task-input" type="text" minlength="3" name="Subtasks"
+                                        placeholder="Add new subtask" required>
                                         <div id="subbtask-input-icon">
                                             <svg class="subtask-icons">
                                                 <use href="assets/img/icons.svg#x-icon"></use>
                                             </svg>
-                                            <svg class="subtask-icons" onclick="addSubtask()">
-                                                <use href="assets/img/icons.svg#plus-add-icon"></use>
-                                            </svg>
+                                            <button type="button" id="add-subtask-button" formnovalidate onclick="addSubtask()">
+                                                <svg class="subtask-icons">
+                                                    <use href="assets/img/icons.svg#plus-add-icon"></use>
+                                                </svg>
+                                            </button>
                                         </div>
                                     <ul id="subtask-container">
                                         <li class="subbtask" contenteditable="true">

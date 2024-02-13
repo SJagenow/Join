@@ -190,11 +190,24 @@ function renderSubtask() {
 
 
 function addSubtask() {
-    let newSubtask = document.getElementById('add-task-subtasks');
-    subtasksArray.push(newSubtask.value);
+    const subtaskInput = document.getElementById('add-task-subtasks');
+    const addSubtaskButton = document.getElementById('add-subtask-button');
 
-    initAddTask()
+    // Überprüfe, ob mindestens 3 Zeichen im Input-Feld vorhanden sind
+    if (subtaskInput.value.length >= 3) {
+        // Füge den Subtask zum Array hinzu oder verarbeite ihn auf andere Weise
+        subtasksArray.push(subtaskInput.value);
+        initAddTask();
+    } else {
+        subtaskInput.reportValidity();
+    }
 }
+
+
+
+
+
+
 
 
 function editSubtask(i) {
