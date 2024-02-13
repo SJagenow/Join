@@ -576,11 +576,17 @@ body input {
     align-items: flex-start;
     flex-direction: column;
         overflow:hidden;
+        scrollbar-width:thin; 
+        scrollbar-color: rgba(0, 207, 239, 0.3) transparent;
+       
     }
 
     .drag-area:hover {
-        overflow: auto; /* Zeige Scrollleisten, wenn gehovert wird */
+        overflow: auto; 
     }
+
+
+
 
 
 [id^="todo"]
