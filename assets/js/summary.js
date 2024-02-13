@@ -4,6 +4,7 @@ let months = ["January", "February", "March", "April", "May", "June", "July", "A
 function getCurrentUser() {
     let userName = JSON.parse(localStorage.getItem("currentUserName"));
     document.getElementById('summary-userName').innerHTML = userName;
+    console.log(userName);
 }
 
 
@@ -12,13 +13,13 @@ function getCurrentDate() {
     let month = new Date().getMonth();
     let day = new Date().getDate();
     let hour = new Date().getHours();
-    //gemach
+    
     document.getElementById('greet').innerHTML = getGreetings(hour);
     document.getElementById('deadline-date').innerHTML = getFullDate(month, day, year);
     console.log(hour);
 }
 
-// ******* greetings change depending on the time of the day
+
 function getGreetings(hour) {
    console.log(hour);
     if (hour > 5 && hour < 11) return 'Good morning,';

@@ -11,6 +11,7 @@ async function init() {                             // Die Funktion init() wird 
     users = JSON.parse(userData) || [];
     // Jetzt sind die Benutzerdaten initialisiert und können in der Anwendung verwendet werden.
     await loadUsers();
+    autoFillLoginForm();
 }
 
 async function loadUsers() {
@@ -32,8 +33,9 @@ function btnGuestLog(){
     const msg = urlParams.get('msg');
     if (msg === "Du hast dich erfolgreich ausgeloggt!") {     // Überprüfen, ob die Nachricht besagt, dass der Benutzer erfolgreich ausgeloggt wurde
       } 
-      else {                                                  // Wenn ja, geschieht nichts (keine Aktion erforderlich)
-         savedLogin();                                      // Wenn nicht, rufe die Funktion savedLogin() auf, um den Benutzer automatisch anzumelden (falls vorhanden)
+      else {  
+                                                        // Wenn ja, geschieht nichts (keine Aktion erforderlich)
+        storeUserData();                                      // Wenn nicht, rufe die Funktion savedLogin() auf, um den Benutzer automatisch anzumelden (falls vorhanden)
     }
 }
 
@@ -47,13 +49,14 @@ function btnGuestLog(){
         return u.email === emailInput.value && u.password === passwordInput.value;
       });
     if (user) { 
+      // storeUserData(user);
       console.log('1 User gefunden');                                          // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
        window.location.href = "../summary.html";         // Weiterleiten des Benutzers zur Zusammenfassungsseite.
        
        getCurrentUser();                                // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
        console.log('2 muss weitergeleitet werden');
       } else {                                              // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
-        // moveElement();                                   // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
+         moveElement();                                   // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
         console.log('3 else');
       }
   }
@@ -71,8 +74,27 @@ function btnGuestLog(){
         logIn(); // Benutzer automatisch anmelden
     }
 }
+
 /*
-  function moveElement() {
+function storeUserData(user) {          // speichert die Benutzerdaten im lokalen Speicher abhängig davon, ob die Option "Remember Me" aktiviert ist.
+  let userEmail = user.email; // E-Mail-Adresse des Benutzers extrahieren
+  let userPassword = user.password; // Passwort des Benutzers extrahieren
+  let username = user.name; // Benutzername extrahieren
+
+  currentUserName.push(username); // Benutzername zum Array currentUserName hinzufügen
+  saveDataToLocalStorage("currentUserName", currentUserName); // Benutzernamen im lokalen Speicher speichern
+  if (document.getElementById('rememberMe').checked == true) {
+      currentUser.push({ email: userEmail, password: userPassword }); // E-Mail und Passwort zum Array currentUser hinzufügen, falls "Remember Me" aktiviert ist
+      saveDataToLocalStorage("currentUser", currentUser); // E-Mail und Passwort im lokalen Speicher speichern, falls "Remember Me" aktiviert ist
+  }
+}
+*/
+function saveDataToLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data)); // Daten im lokalen Speicher unter dem angegebenen Schlüssel speichern
+}
+
+
+function moveElement() {
     let mailShake = document.getElementById("moveEmail");
     let passwordShake = document.getElementById("passwordShake");
     let position = 0;
@@ -94,4 +116,4 @@ function btnGuestLog(){
     // Starte die Animation
     animate();
   }
-  */
+  

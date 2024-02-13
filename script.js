@@ -54,6 +54,10 @@ function toggleDropDown() {
     }
 }
 
+// function logOut() {
+//     window.location.href = `index.html?msg=Du hast dich erfolgreich ausgeloggt!`;
+// }
+
 function changeColor(clickedLink) {
     var links = document.querySelectorAll('.mobile-menu_link_container');
 
