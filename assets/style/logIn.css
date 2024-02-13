@@ -10,12 +10,27 @@
   }
   .headiconJoin {
     position: absolute;
-    left: 5.35%;
+    /* left: 5.35%;
     right: 87.71%;
     top: 7.81%;
     bottom: 80.28%;
-    height: 122px;
-    width: 100px;
+    height: 122px; */
+    /* width: 100px; */
+
+    width: 70px;
+    object-fit: contain;
+    /* position: absolute; */
+    top: calc(50vh - 211px);
+    left: calc(50vw - 235px);
+    transform: scale(0.55);
+    animation-name: slide-join-logo;
+    animation-duration: 500ms;
+    animation-timing-function: ease-in-out;
+    animation-delay: 250ms;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: both;
+    /* z-index: 2; */
   }
   
   .UserSignUp {
@@ -75,6 +90,7 @@
   
   section {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #f5f5f5;
@@ -329,4 +345,30 @@
   }
   .d-none {
     display: none;
+  }
+  .footer-links {
+    position: absolute;
+    bottom: 10px;    
+  }
+  .footer-links a{
+    text-decoration: none;
+    color: #a8a8a8;
+    padding: 8px;
+    gap: 8px;
+  }
+  .footer-links a:hover {
+    color: #29abe2;
+    transform: scale(1.15);
+  }
+  @keyframes slide-join-logo {
+    0% {
+      top: calc(50vh - 211px);
+      left: calc(50vw - 235px);
+      transform: scale(0.55);
+    }
+    100% {
+      top: 50px;
+      left: 50px;
+      transform: scale(1);
+    }
   }

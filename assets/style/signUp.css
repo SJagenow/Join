@@ -7,6 +7,7 @@
   
   section {
     display: flex;
+    flex-direction: column;
     height: 100vh; 
     width: 100%;
     justify-content: center;
@@ -180,3 +181,17 @@
     cursor: pointer;
   }
   
+  .footer-links {
+    position: absolute;
+    bottom: 10px;    
+  }
+  .footer-links a{
+    text-decoration: none;
+    color: #a8a8a8;
+    padding: 8px;
+    gap: 8px;
+  }
+  .footer-links a:hover {
+    color: #29abe2;
+    transform: scale(1.15);
+  }
