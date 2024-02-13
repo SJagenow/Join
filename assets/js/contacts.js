@@ -281,7 +281,7 @@ function renderContactOverlay(){
                                 <div class="input_container">
                                     <input onkeyup="getInitialsForOverlay()" required type="text" placeholder="Name" id="contactlist_name_input"
                                         title="Please enter a name with at least 2 characters, a space, and the last name with at least 3 characters"
-                                        pattern="[^\s]+\s[^\s]{3,}">
+                                        pattern="[a-zA-Z]{2,}\\s[a-zA-Z]{3,}">
                                     <img src="./assets/contactbook/icons_contactbook/person.svg" alt="">
                                 </div>
                                 <div class="input_container">
@@ -291,7 +291,7 @@ function renderContactOverlay(){
                                 </div>
                                 <div class="input_container">
                                     <input required type="text" placeholder="Phone" id="contactlist_phone_input"
-                                        pattern="\+[0-9]{2} [0-9]{3} [0-9]{3} [0-9]{3} [0-9]{2}"
+                                        pattern="\\+[0-9]{2} [0-9]{3} [0-9]{3} [0-9]{3} [0-9]{2}"
                                         title="Please enter a valid phone number in the format +49 333 333 333 33">
                                     <img src="./assets/contactbook/icons_contactbook/call.svg" alt="">
                                 </div>
