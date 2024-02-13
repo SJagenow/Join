@@ -37,6 +37,10 @@ function highlightMenuLink(){
         document.getElementById('contacts_menu_link_container').style.backgroundColor = '#091931'
         document.getElementById('contacts_menu_link_container').querySelector('a').style.color = 'white';
         document.getElementById('menu_icon_contacts').src = './assets/img/contacts_white.png'
+    } else if (currentPage === '/privacy_policy.html'){
+        document.getElementById('privacy_policy_menulink').style.color = 'white';
+    } else if (currentPage === '/legal_notice.html'){
+        document.getElementById('legal_notice_menulink').style.color = 'white';
     }
 }
 
@@ -49,6 +53,10 @@ function toggleDropDown() {
         dropdownElement.add('d-none');
     }
 }
+
+// function logOut() {
+//     window.location.href = `index.html?msg=Du hast dich erfolgreich ausgeloggt!`;
+// }
 
 function changeColor(clickedLink) {
     var links = document.querySelectorAll('.mobile-menu_link_container');
