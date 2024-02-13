@@ -96,14 +96,14 @@ display: flex;
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 700px;
     line-height: 120%;
     background: #F6F7F8;
     margin-left: 232px;
     gap: 24px;
 }
 
-.smal_midlane_main_container button {
+.board_midlane_main_container button {
     display: flex;
     width: 24px;
     height: 24px;
@@ -118,7 +118,7 @@ display: flex;
   
 }
 
-.smal_midlane_main_container button:hover {
+.board_midlane_main_container button:hover {
    color: #29ABE2;
     border:2px solid #29ABE2;
 }
@@ -203,7 +203,7 @@ display: flex;
 
 
 .progress_await_container {
-
+height: 500px;
    
 }
 
