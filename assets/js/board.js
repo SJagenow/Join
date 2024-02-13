@@ -125,23 +125,21 @@ function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
-function renderDialog(){
- document.getElementById('user_story_dialog').innerHTML = returnDialog();
+function renderDialog(selectedTodo) {
+    document.getElementById('user_story_dialog').innerHTML = returnDialog(selectedTodo);
 }
 
-function returnDialog(){
+function returnDialog(selectedTodo) {
     return   `
     <div class="user_story_label_x_contrainer">
-        <div class="user_story">${clean['label']}<div></div>
-       
+        <div class="user_story">${selectedTodo['label']}<div></div>
         </div>
         <button onclick="closeDialog()">X</button>
     </div>
     <div class="user_story_headline">
-
-        <div> ${clean['title']} </div>
+        <div> ${selectedTodo['title']} </div>
     </div>
-    <div class="user_story_description">${clean['description']}</div>
+    <div class="user_story_description">${selectedTodo['description']}</div>
     <div class="user_story_date">
         <div class="story_date">Due date:</div>
         <div class="user_date">variable(datum)</div>
@@ -179,14 +177,18 @@ function returnDialog(){
                     <div>Edit</div>
                 </button></div>
         </div>
-      `
-     }
-
-
-function openDialog(){
-    document.getElementById('dialog_bg').classList.remove('d-none');
-    renderDialog()
+      `;
 }
+
+     function openDialog(todoId) {
+        // Die ID des Todos aus dem übergebenen todoId-Parameter extrahieren
+        let id = todoId.split('_')[1];
+        // Das entsprechende Todo finden
+        let selectedTodo = todo.find(t => t.id == id);
+        // Dialog anzeigen und füllen
+        document.getElementById('dialog_bg').classList.remove('d-none');
+        renderDialog(selectedTodo);
+    }
 
 
 function closeDialog(){
