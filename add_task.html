@@ -102,13 +102,10 @@
                                 </div>
                                 <div class="column add-task-input-div">
                                     <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
-                                    <input id="add-task-subtasks" class="add-task-input" type="text" minlength="3" name="Subtasks"
+                                    <input id="add-task-subtasks" class="add-task-input" onclick="openSubtask()" type="text" minlength="3" name="Subtasks"
                                         placeholder="Add new subtask">
                                         <div id="subbtask-input-icon">
-                                            <svg class="subtask-icons">
-                                                <use href="assets/img/icons.svg#x-icon"></use>
-                                            </svg>
-                                            <button type="button" id="add-subtask-button" formnovalidate onclick="addSubtask()">
+                                            <button type="button" id="add-subtask-button" formnovalidate onclick="openSubtask()">
                                                 <svg class="subtask-icons">
                                                     <use href="assets/img/icons.svg#plus-add-icon"></use>
                                                 </svg>
@@ -116,15 +113,8 @@
                                         </div>
                                     <ul id="subtask-container">
                                         <li class="subbtask" contenteditable="true">
-                                            das ist ein subtask
-                                            <div>
-                                                <svg class="subtask-icons">
-                                                    <use href="assets/img/icons.svg#x-icon"></use>
-                                                </svg>
-                                                <svg class="subtask-icons">
-                                                    <use href="assets/img/icons.svg#hook-icon"></use>
-                                                </svg>
-                                            </div>
+                                            <span>das ist ein subtask</span>
+
                                         </li>
                                         <li class="subbtask" contenteditable="true">
                                             das hier ist auch ein subtask wer weis denn sowas moin moin
