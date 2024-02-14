@@ -1,9 +1,6 @@
 async function init() {
     await includeHTML();
     highlightMenuLink();
-
-    updateTaskData();
-    
 }
 
 async function includeHTML() {
