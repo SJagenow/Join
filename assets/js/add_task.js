@@ -44,17 +44,11 @@ let tasksBeispiel = [
 ]
 
 
-// Holen des heutigen Datums im Format "YYYY-MM-DD"
-const today = new Date().toISOString().split('T')[0];
-
-// Setzen des min-Attributs des Input-Feldes auf das heutige Datum
-document.getElementById('add-task-date').setAttribute('min', today);
-
-
 function initAddTask() {
     loadContactList();
     renderSubtask();
     highlightMenuLink();
+    setDueDateInput()
     test()
 }
 
@@ -79,13 +73,10 @@ async function loadContactList() {
 function renderContactListForTask() {
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i].name;
-
         const name = contact.split(" ");
         const firstName = name[0][0];
         const secondName = name[1] ? name[1][0] : '';
         let initials = firstName + secondName;
-
-
         document.getElementById('add-task-contact').innerHTML += /*html*/`
         <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
             <div class="name-div">
@@ -106,7 +97,6 @@ function renderContactListForTask() {
 function  dropdownMenuToggle(divID, arrow) {
     let dNone = document.getElementById(`${divID}`).classList.contains('d-none');
     document.getElementById(`${arrow}`);
-
     if (dNone) {
         openDropdownMenu(divID, arrow)
     } else {
@@ -150,7 +140,6 @@ function selectContact(i) {
 function updateSelectedUsers(i) {
     let contactsDiv = document.getElementById('contacts-div');
     contactsDiv.innerHTML = '';
-
     selectedUsers.forEach((selectedUser, index) => {
         let nameParts = selectedUser.split(" ");
         let initials = nameParts.map(part => part[0]).join('');
@@ -165,11 +154,16 @@ function updateSelectedUsers(i) {
 }
 
 
+function setDueDateInput() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('add-task-date').setAttribute('min', today);
+}
+
+
 function changePriority(prio) {
     let urgent = document.getElementById('prio-button-urgent');
     let medium = document.getElementById('prio-button-medium');
     let low = document.getElementById('prio-button-low');
-
     if (prio == 'urgent') {
         if (urgent.classList.contains('urgent')) {
         } else {
@@ -207,10 +201,8 @@ function selectLabel(label) {
 function renderSubtask() {
     let subtasks = document.getElementById('subtask-container');
     subtasks.innerHTML = '';
-
     for (let i = 0; i < subtasksArray.length; i++) {
         const subtask = subtasksArray[i];
-
         subtasks.innerHTML += /*html*/`
         <li id="single-subtask${i}" class="subbtask" contenteditable="true">
             ${subtask}
@@ -230,10 +222,7 @@ function renderSubtask() {
 
 function addSubtask() {
     let subtaskInput = document.getElementById('add-task-subtasks');
-
-    // Überprüfe, ob mindestens 3 Zeichen im Input-Feld vorhanden sind
     if (subtaskInput.value.length >= 3) {
-        // Füge den Subtask zum Array hinzu oder verarbeite ihn auf andere Weise
         subtasksArray.push(subtaskInput.value);
         initAddTask();
     } else {
@@ -244,14 +233,12 @@ function addSubtask() {
 
 function editSubtask(i) {
     subtasksArray.splice(i, 1, document.getElementById('single-subtask'+[i]).innerHTML);
-
     initAddTask();
 }
 
 
 function deleteSubtask(i) {
     subtasksArray.splice(i, 1);
-
     initAddTask();
 }
 
