@@ -20,14 +20,15 @@ async function getTodosForBoard() {
 
 let currentDraggedElement;
 
-function updateBoard() {
+async function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
 
     document.getElementById('task_content_open').innerHTML = '';
 
     for (let index = 0; index < todos.length; index++) {
         clean = todos[index];
-        document.getElementById('task_content_open').innerHTML += generateTodo(clean);
+        document.getElementById('task_content_open').innerHTML += await generateTodo(clean, index);
+        renderMemberListForOverview(clean, index);
     }
     let inprogress = todo.filter(t => t['category'] == 'inprogress');
 
@@ -35,7 +36,8 @@ function updateBoard() {
 
     for (let index = 0; index < inprogress.length; index++) {
         clean = inprogress[index];
-        document.getElementById('close_one').innerHTML += generateTodo(clean);
+        document.getElementById('close_one').innerHTML += await generateTodo(clean, index);
+        renderMemberListForOverview(clean, index);
     }
     let awaitList = todo.filter(t => t['category'] == 'await');
 
@@ -43,7 +45,8 @@ function updateBoard() {
 
     for (let index = 0; index < awaitList.length; index++) {
         clean = awaitList[index];
-        document.getElementById('await_content').innerHTML += generateTodo(clean);
+        document.getElementById('await_content').innerHTML += await generateTodo(clean, index);
+        renderMemberListForOverview(clean, index);
     }
     let doneList = todo.filter(t => t['category'] == 'done');
 
@@ -51,15 +54,30 @@ function updateBoard() {
 
     for (let index = 0; index < doneList.length; index++) {
         clean = doneList[index];
-        document.getElementById('done_content').innerHTML += generateTodo(clean);
+        document.getElementById('done_content').innerHTML += await generateTodo(clean, index);
+        renderMemberListForOverview(clean, index);
     }
+}
+
+async function renderMemberListForOverview(clean, index) {
+    document.getElementById(`board_overview_member_box${index}`).innerHTML = '';
+    for (let i = 0; i < clean.contacts.length; i++) {
+        const contact = clean.contacts[i];
+        const { profileinitials, secondName } = getInitials(contact);
+        console.log(contact);
+        document.getElementById(`board_overview_member_box${i}`).innerHTML += `
+    <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+    `;
+
+    }
+
 }
 
 function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
 
-function generateTodo(clean) {
+async function generateTodo(clean, i) {
     let subtaskCount = 2;
     let progressWidth = (1 / subtaskCount) * 100;
     const todoId = `todo_${clean['id']}`;
@@ -84,7 +102,7 @@ function generateTodo(clean) {
           <div><span>Subtask 1/2</span></div>
       </div>
       <div class="member_flex">
-          <div id="" class="circle_flex">
+          <div id="board_overview_member_box${i}" class="circle_flex">
           
           </div>
           <div class="prio_icon_containers">
@@ -175,7 +193,7 @@ async function renderMemberList(selectedTodo) {
     for (let i = 0; i < selectedTodo.contacts.length; i++) {
         const member = selectedTodo.contacts[i];
         const { profileinitials, secondName } = getInitials(member);
-               console.log(member);
+        console.log(member);
         document.getElementById('board_member_content').innerHTML += `
     <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
     `;
