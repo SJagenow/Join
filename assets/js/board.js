@@ -1,6 +1,15 @@
+function boardInit(){
+    init();   
+    getTodosForBoard();
+    updateBoard();
+    document.getElementById('searchInput').addEventListener('input', filterTodos);
+    filterTodos();
+ 
+}
 
 let todoId;
 let clean;
+let task = [];
 let todo = [{
     'id': 0,
     'label': 'JS',
@@ -34,7 +43,7 @@ let todo = [{
 ];
 
 async function getTodosForBoard() {
-    let task = await getItem('tasks');
+     task = JSON.parse (await getItem('tasks'));
     console.log(task);
 }
 

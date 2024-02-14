@@ -1,10 +1,9 @@
 async function init() {
     await includeHTML();
     highlightMenuLink();
-    document.getElementById('searchInput').addEventListener('input', filterTodos);
-    filterTodos()
+
     updateTaskData();
-    getTodosForBoard()
+    
 }
 
 async function includeHTML() {
