@@ -48,8 +48,8 @@ function initAddTask() {
     loadContactList();
     renderSubtask();
     highlightMenuLink();
-    setDueDateInput()
-    test()
+    setDueDateInput();
+    test();
 }
 
 
