@@ -70,6 +70,17 @@ function generateTodo(clean) {
         truncatedDescription += '...';
     }
 
+    let memberHtml = ''; // HTML für die Mitglieder
+
+    // Durchlaufe die Mitglieder des aktuellen Todos und erstelle das HTML für jedes Mitglied
+    for (let i = 0; i < clean.contacts.length; i++) {
+        const member = clean.contacts[i];
+        const { profileinitials, secondName } = getInitials(member);
+        memberHtml += `
+            <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+        `;
+    }
+
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
       <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
@@ -84,18 +95,15 @@ function generateTodo(clean) {
           <div id="myBar" style="width: ${progressWidth}%;"></div>
           <div><span>Subtask 1/2</span></div>
       </div>
-      <div class="member_flex">
-          <div id="" class="circle_flex">
-          
-          </div>
-          <div class="prio_icon_containers">
-              <svg width="22" height="20">
-                  <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
-              </svg>
-          </div>
+      <div class="member_flex" id="members_${todoId}">
+          ${memberHtml} <!-- Hier wird das HTML für die Mitglieder eingefügt -->
+      </div>
+      <div class="prio_icon_containers">
+          <svg width="22" height="20">
+              <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
+          </svg>
       </div>
     </div>`;
-
 }
 
 
