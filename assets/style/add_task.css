@@ -350,7 +350,7 @@
     gap: 48px;
 }
 
-@media (max-width: 1340px) {
+@media (max-width: 1400px) {
     .main-container {
         padding-left: 0;
         padding-right: 0;
@@ -360,7 +360,7 @@
     }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1350px) {
 
     .add-task-input-div {
         width: 396px;
@@ -406,7 +406,7 @@
     }
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1200px) {
     .gap48 {
         flex-direction: column;
     }
@@ -501,6 +501,7 @@
         height: 41px;
         width: 121.33px;
         font-size: 16px;
+        padding: 4px;
     }
 
     .form-input-titel {
@@ -532,8 +533,22 @@
     }
 }
 
+@media (max-width: 427px) {
+    .add-task-input-div {
+        width: 92vw;
+        min-width: 80vw;
+    }
 
+    .main-container0 {
+        height: calc(100vh - 184px);
+        max-height: 1024px;
+        width: calc(100vw);
+    }
 
+    .main-container0 {
+        padding-top: 48px;
+    }
+}
 
 .dropbtn {
     background-color: #04AA6D;
