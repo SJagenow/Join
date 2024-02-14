@@ -1,3 +1,4 @@
+
 async function boardInit() {
     init();
     await getTodosForBoard();
@@ -346,4 +347,4 @@ function moveTodo(todoId, direction, event) {
         // Füge das Todo-Element in die nächste Spalte ein
         document.getElementById(nextCategory).appendChild(todoElement);
     }
-}
+}    
