@@ -95,14 +95,16 @@ function generateTodo(clean) {
           <div id="myBar" style="width: ${progressWidth}%;"></div>
           <div><span>Subtask 1/2</span></div>
       </div>
-      <div class="member_flex" id="members_${todoId}">
-          ${memberHtml} <!-- Hier wird das HTML für die Mitglieder eingefügt -->
-      </div>
-      <div class="prio_icon_containers">
-          <svg width="22" height="20">
-              <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
-          </svg>
-      </div>
+        <div class ="space-between w100p">
+            <div class="member_flex" id="members_${todoId}">
+                ${memberHtml}
+            </div>
+            <div class="prio_icon_containers">
+                <svg width="22" height="20">
+                    <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
+                </svg>
+            </div>
+        </div>
     </div>`;
 }
 

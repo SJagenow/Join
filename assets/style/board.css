@@ -747,7 +747,6 @@ rotate: 180deg;
 
   .member_flex{
    display: flex;
-  justify-content: space-between;
    width: 200px;
   }
 

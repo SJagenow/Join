@@ -113,6 +113,14 @@ h1 {
     width: calc(100vw - 232px);
 }
 
+.w100p{
+    width: 100%;
+}
+
+.w80{
+    width: 80%;
+}
+
 .ml-36{
     margin-left: -36px;
 }
