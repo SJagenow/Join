@@ -18,7 +18,7 @@ body input {
     justify-content: flex-end;
 }
 
-.board_h1_button_container_handy{
+.board_h1_button_container_handy {
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
@@ -60,12 +60,12 @@ body input {
     background-repeat: no-repeat;
     background-position: right;
     background-size: 32px 32px;
-   outline-width: 0px;
-    
+    outline-width: 0px;
+
 }
 
 .board_h1_button_container_handy input:focus,
-.board_h1_button_container input:focus{
+.board_h1_button_container input:focus {
     border-color: #29ABE2;
 }
 
@@ -87,7 +87,7 @@ body input {
     font-weight: 700;
     line-height: 120%;
     border: none;
-    
+
 }
 
 .input_button_container {
@@ -108,7 +108,7 @@ body input {
     display: flex;
     color: (--menu-color, #42526E);
     font-family: Inter;
- 
+
     font-style: normal;
     font-weight: 700px;
     line-height: 120%;
@@ -129,12 +129,12 @@ body input {
     border-radius: 8px;
     border: 2px solid var(--Version-2-main-color, #2A3647);
     margin-right: 8px;
-  
+
 }
 
 .board_midlane_main_container button:hover {
-   color: #29ABE2;
-    border:2px solid #29ABE2;
+    color: #29ABE2;
+    border: 2px solid #29ABE2;
 }
 
 .midlane_flex_button {
@@ -148,7 +148,7 @@ body input {
 
 }
 
-.ml36:hover{
+.ml36:hover {
     background-color: #29ABE2;
     border: none;
 }
@@ -165,7 +165,7 @@ body input {
 .botlane_main_container {
     display: flex;
     width: calc(100vw - 232px);
-    height:580px;
+    height: 580px;
     align-items: flex-start;
     gap: 26px;
     flex-shrink: 0;
@@ -174,6 +174,7 @@ body input {
     margin-left: 256px;
     justify-content: flex-start;
 }
+
 .todofield {
     display: flex;
     flex-direction: column;
@@ -221,10 +222,7 @@ body input {
 }
 
 
-.progress_await_container {
-
-
-}
+.progress_await_container {}
 
 .d_none {
     display: none;
@@ -234,7 +232,7 @@ body input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
 .user_story {
@@ -269,8 +267,8 @@ body input {
     justify-content: flex-start;
     align-items: flex-start;
     height: 80%;
-    width:  420px;
-   padding: 42px;
+    width: 420px;
+    padding: 42px;
     flex-direction: column;
     gap: 40px;
     border-radius: 30px;
@@ -292,7 +290,7 @@ body input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
+
 }
 
 
@@ -315,7 +313,7 @@ body input {
 .user_story_headline {
 
 
-    
+
     color: var(--black, #000);
     /* Version 2/t1 */
     font-family: Inter;
@@ -327,7 +325,7 @@ body input {
 }
 
 .user_story_description {
- 
+
     color: var(--black, #000);
 
     font-family: Inter;
@@ -341,13 +339,11 @@ body input {
     display: flex;
     align-items: flex-start;
     gap: 25px;
-  
+
 }
 
 
-.user_story_button {
-    
-}
+.user_story_button {}
 
 .story_date {
     color: var(--Version-2-main-color, #2A3647);
@@ -373,7 +369,7 @@ body input {
     display: flex;
     align-items: center;
     gap: 25px;
- 
+
 }
 
 .story_priority {
@@ -400,7 +396,7 @@ body input {
 }
 
 .assigned_to {
- 
+
     color: var(--Version-2-main-color, #2A3647);
     font-family: Inter;
     font-size: 20px;
@@ -417,14 +413,16 @@ body input {
     gap: 8px;
 
 }
-#updown_arrow img{
-height: 20px;
-rotate: 180deg;
+
+#updown_arrow img {
+    height: 20px;
+    rotate: 180deg;
 
 }
-#updown_arrow_two img{
+
+#updown_arrow_two img {
     height: 20px;
-    }
+}
 
 #updown_arrow_two,
 #updown_arrow {
@@ -434,19 +432,21 @@ rotate: 180deg;
 
 #updown_arrow button {
 
-    border:none!important;
+    border: none !important;
 }
 
 
 .updown_buttons {
     display: flex;
 }
-.arrow_flex{
+
+.arrow_flex {
     width: 200px;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     border: 0;
 }
+
 .user_story_delete_edit img {
     width: 24px;
     height: 24px;
@@ -610,35 +610,35 @@ rotate: 180deg;
 @media(max-width:1439px) {}
 
 .drag-area {
-    height:584px;
+    height: 584px;
     background-color: rgba(247, 247, 247, 0.1);
-    width: 246px;
-  
+    width: 280px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-        overflow:hidden;
-        scrollbar-width:thin; 
-        scrollbar-color: rgba(0, 207, 239, 0.3) transparent;
-       
-    }
+    overflow: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 207, 239, 0.3) transparent;
 
-
-
-    
-
-    .drag-area:hover {
-        overflow: auto; 
-    }
+}
 
 
 
 
-[id^="todo"]
-   {display: flex;
+
+.drag-area:hover {
+    overflow: auto;
+}
+
+
+
+
+[id^="todo"] {
+    display: flex;
     height: auto;
-    width: 200px;
-    padding: 16px;
+    width: 244px;
+    height: 255px;
+    padding: 8px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -648,8 +648,7 @@ rotate: 180deg;
     box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.117);
     margin-top: 16px;
     cursor: grab;
-    margin-left:3px;
-
+    margin-left: 3px;
 }
 
 
@@ -664,7 +663,7 @@ rotate: 180deg;
     padding: 4px 16px 4px 16px;
     display: flex;
     align-items: center;
-    
+
 }
 
 .card_title {
@@ -672,39 +671,41 @@ rotate: 180deg;
 
 }
 
-.card_description {
+.card_description {}
 
-}#myProgress {
+#myProgress {
     width: 100%;
     background-color: rgb(245, 242, 242);
     display: flex;
     align-items: center;
-  }
-  
-  #myBar {
+}
+
+#myBar {
     width: 12%;
     height: 30px;
     background-color: #4589FF;
     height: 8px;
     border-radius: 28px;
 
-  }
+}
 
-  .circle{
+.circle {
     height: 32px;
     width: 32px;
     border-radius: 44px;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    margin-left: -2px; /* Adjust the margin as needed for overlapping effect */
-    transition: margin-left 0.5s ease; /* Add transition effect */
+    margin-left: -2px;
+    /* Adjust the margin as needed for overlapping effect */
+    transition: margin-left 0.5s ease;
+    /* Add transition effect */
 
-  }
+}
 
-  .circle_two{
+.circle_two {
     height: 32px;
     width: 32px;
     border-radius: 44px;
@@ -713,11 +714,13 @@ rotate: 180deg;
     align-items: center;
     justify-content: center;
     color: white;
-    margin-left: -8px; /* Adjust the margin as needed for overlapping effect */
-    transition: margin-left 0.5s ease; /* Add transition effect */
+    margin-left: -8px;
+    /* Adjust the margin as needed for overlapping effect */
+    transition: margin-left 0.5s ease;
+    /* Add transition effect */
 }
 
-  .circle_three{
+.circle_three {
     height: 32px;
     width: 32px;
     border-radius: 44px;
@@ -725,12 +728,14 @@ rotate: 180deg;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white; 
-    margin-left: -8px; /* Adjust the margin as needed for overlapping effect */
-    transition: margin-left 0.5s ease; /* Add transition effect */
+    color: white;
+    margin-left: -8px;
+    /* Adjust the margin as needed for overlapping effect */
+    transition: margin-left 0.5s ease;
+    /* Add transition effect */
 }
 
-  .circle_four{
+.circle_four {
     height: 32px;
     width: 32px;
     border-radius: 44px;
@@ -739,11 +744,13 @@ rotate: 180deg;
     align-items: center;
     justify-content: center;
     color: white;
-     margin-left: -8px; /* Adjust the margin as needed for overlapping effect */
-    transition: margin-left 0.5s ease; /* Add transition effect */
+    margin-left: -8px;
+    /* Adjust the margin as needed for overlapping effect */
+    transition: margin-left 0.5s ease;
+    /* Add transition effect */
 }
 
-  .circle_five{
+.circle_five {
     height: 32px;
     width: 32px;
     border-radius: 44px;
@@ -752,67 +759,77 @@ rotate: 180deg;
     align-items: center;
     justify-content: center;
     color: white;
-     margin-left: -8px; /* Adjust the margin as needed for overlapping effect */
-    transition: margin-left 0.5s ease; /* Add transition effect */
+    margin-left: -8px;
+    /* Adjust the margin as needed for overlapping effect */
+    transition: margin-left 0.5s ease;
+    /* Add transition effect */
 }
 
 
-  .member_flex{
-   display: flex;
-   width: 200px;
-  }
-
-  .circle_flex{
+.member_flex {
     display: flex;
-  }
-  
-  .prio_icon_containers{
- margin-top: 6px;
-  
+    width: 200px;
+}
 
-  }
+.circle_flex {
+    display: flex;
+}
 
- #myProgress{
+.prio_icon_containers {
+    margin-top: 6px;
+
+
+}
+
+#myProgress {
     display: flex;
     justify-content: space-between;
- } 
- .circle:hover {
-    margin-left: 0px; /* Adjust the margin to 0 on hover */
 }
+
+.circle:hover {
+    margin-left: 0px;
+    /* Adjust the margin to 0 on hover */
+}
+
 .circle_two:hover {
-    margin-left: 0px; /* Adjust the margin to 0 on hover */
+    margin-left: 0px;
+    /* Adjust the margin to 0 on hover */
 }
+
 .circle_three:hover {
-    margin-left: 0px; /* Adjust the margin to 0 on hover */
+    margin-left: 0px;
+    /* Adjust the margin to 0 on hover */
 }
+
 .circle_four:hover {
-    margin-left: 0px; /* Adjust the margin to 0 on hover */
+    margin-left: 0px;
+    /* Adjust the margin to 0 on hover */
 }
+
 .circle_five:hover {
-    margin-left: 0px; /* Adjust the margin to 0 on hover */
+    margin-left: 0px;
+    /* Adjust the margin to 0 on hover */
 }
 
 
-.input_button_container button:hover{
+.input_button_container button:hover {
     background-color: #29ABE2;
     box-shadow: 0px 4px 0px 0px rgba(157, 157, 157, 0.499);
-    border: 1px solid #29ABE2 ;
+    border: 1px solid #29ABE2;
 }
 
 
 .drag-area-highlight {
-        transform: rotate(357deg);
-        background-color: rgba(0, 255, 8, 0.1); 
+    transform: rotate(357deg);
+    background-color: rgba(0, 255, 8, 0.1);
 }
 
 
 
 
 .h1_input_media_flex {
-display: flex;
-    
-}
-.h1_input_media_flex input {
+    display: flex;
 
 }
 
+.h1_input_media_flex input {}
