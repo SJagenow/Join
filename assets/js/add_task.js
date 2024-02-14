@@ -193,8 +193,8 @@ function changePriority(prio) {
 
 
 function selectLabel(label) {
-    document.getElementById('add-task-category').innerHTML = `${label}`;
-    currentLabel = document.getElementById('add-task-category').innerHTML;
+    document.getElementById('add-task-category').value = `${label}`;
+    currentLabel = document.getElementById('add-task-category').value;
 }
 
 

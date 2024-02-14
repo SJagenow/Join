@@ -84,8 +84,9 @@
                                             <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
                                         </svg>
                                     </div>
-                                    <h2 class="form-input-titel" onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Category</h2>
-                                    <div id="add-task-category" class="add-task-select arrow-icon"  onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Select task category</div>
+                                    <h2 class="form-input-titel asterisk" onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Category</h2>
+                                    <input id="add-task-category" class="add-task-input add-task-select arrow-icon" onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')" type="text" placeholder="Select task category" pattern="(Technical Task|User Story|HTML|CSS|JS|Testing)" title="Gültige Werte: Technical Task, User Story, HTML, CSS, JS, Testing" required>
+                                    <!-- <div id="add-task-category0" class="add-task-select arrow-icon" onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">Select task category</div> -->
                                     <div id="add-task-category-list-div" class="dropdown-menu-div d-none">
                                         <div style="height: 9px;"></div>
                                         <div id="add-task-category-list" class="dropdown-menu">

@@ -291,6 +291,10 @@
     margin-bottom: 24px;
 }
 
+#add-task-category::placeholder {
+    color: black;
+}
+
 #add-task-category {
     display: flex;
     align-items: center;
