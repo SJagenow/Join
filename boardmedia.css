@@ -1,0 +1,7 @@
+@media(max-width:1300px){
+.board_midlane_main_container    {
+    flex-direction: column;
+    justify-content: center;
+ 
+}
+}

@@ -80,37 +80,43 @@ function startDragging(todoId) {
 }
 
 function generateTodo(clean) {
-    let subtaskCount = 2; 
-    let progressWidth = (1 / subtaskCount) * 100; 
-    const todoId = `todo_${clean['id']}`; 
+    let subtaskCount = 2;
+    let progressWidth = (1 / subtaskCount) * 100;
+    const todoId = `todo_${clean['id']}`;
     let descriptionWords = clean['description'].split(' ');
     let truncatedDescription = descriptionWords.slice(0, 5).join(' ');
     if (descriptionWords.length > 5) {
         truncatedDescription += '...';
     }
-    
+
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
-      <div class="arrow_flex">  <div class="card_label">${clean['label']}</div><div class="updown_buttons"><button class="updown_arrow"><img src="./assets/img/updown.jpg" alt=""></button> <button class="updown_arrow_two"><img src="./assets/img/updown.jpg" alt=""></button></div></div>
-        <div class="card_title">${clean['title']}</div>
-        <div class="card_description">${truncatedDescription}</div>
-        <div id="myProgress">
-            <div id="myBar" style="width: ${progressWidth}%;"></div>
-            <div><span>Subtask 1/2</span></div>
+      <div class="arrow_flex">
+        <div class="card_label">${clean['label']}</div>
+        <div class="updown_buttons">
+          <button class="updown_arrow" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button class="updown_arrow_two" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
         </div>
-        <div class="member_flex">
-            <div class="circle_flex">
-                <div class="circle">FF</div>
-                <div class="circle_two">GG</div>
-                <div class="circle_three">WP</div>
-                <div class="circle_four">CU</div>
-                <div class="circle_five">CU</div>
-            </div>
-            <div class="prio_icon_containers">
-                <svg width="22" height="20">
-                    <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
-                </svg>
-            </div>
-        </div>
+      </div>
+      <div class="card_title">${clean['title']}</div>
+      <div class="card_description">${truncatedDescription}</div>
+      <div id="myProgress">
+          <div id="myBar" style="width: ${progressWidth}%;"></div>
+          <div><span>Subtask 1/2</span></div>
+      </div>
+      <div class="member_flex">
+          <div class="circle_flex">
+              <div class="circle">FF</div>
+              <div class="circle_two">GG</div>
+              <div class="circle_three">WP</div>
+              <div class="circle_four">CU</div>
+              <div class="circle_five">CU</div>
+          </div>
+          <div class="prio_icon_containers">
+              <svg width="22" height="20">
+                  <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
+              </svg>
+          </div>
+      </div>
     </div>`;
 }
 
@@ -185,6 +191,8 @@ function returnDialog(selectedTodo) {
         </div>
       `;
 }
+
+
 
      function openDialog(todoId) {
         let id = todoId.split('_')[1];
@@ -261,3 +269,56 @@ if (window.screen.orientation) {
     console.error('Die Bildschirmorientierungs-API wird auf diesem Gerät nicht unterstützt.');
 }*/
 
+function moveTodo(todoId, direction, event) {
+    event.stopPropagation(); // Stoppt die Ereignisweiterleitung, um das Klicken auf das Todo-Element zu verhindern
+
+    const todoElement = document.getElementById(todoId);
+    const parentElement = todoElement.parentNode;
+    const index = Array.prototype.indexOf.call(parentElement.children, todoElement);
+    const category = parentElement.id; // Kategorie der aktuellen Spalte
+
+    let nextCategory;
+
+    // Bestimme die Kategorie der nächsten Spalte basierend auf der Bewegungsrichtung
+    if (direction === 'up') {
+        switch (category) {
+            case 'task_content_open':
+                nextCategory = 'close_one';
+                break;
+            case 'close_one':
+                nextCategory = 'await_content';
+                break;
+            case 'await_content':
+                nextCategory = 'done_content';
+                break;
+            default:
+                nextCategory = null;
+        }
+    } else if (direction === 'down') {
+        switch (category) {
+            case 'close_one':
+                nextCategory = 'task_content_open';
+                break;
+            case 'await_content':
+                nextCategory = 'close_one';
+                break;
+            case 'done_content':
+                nextCategory = 'await_content';
+                break;
+            default:
+                nextCategory = null;
+        }
+    }
+
+    // Wenn eine gültige nächste Kategorie vorhanden ist
+    if (nextCategory) {
+        // Ändere die Kategorie des Todos
+        todo['category'] = nextCategory;
+
+        // Entferne das Todo-Element aus der aktuellen Spalte
+        parentElement.removeChild(todoElement);
+
+        // Füge das Todo-Element in die nächste Spalte ein
+        document.getElementById(nextCategory).appendChild(todoElement);
+    }
+}
