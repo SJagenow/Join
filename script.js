@@ -1,6 +1,6 @@
 async function init() {
     await includeHTML();
-    highlightMenuLink();
+    await highlightMenuLink();
 }
 
 async function includeHTML() {
@@ -17,7 +17,7 @@ async function includeHTML() {
     }
 }
 
-function highlightMenuLink(){
+ async function highlightMenuLink(){
     let currentPage = window.location.pathname;
     if (currentPage === '/summary.html'){
         document.getElementById('summary_menu_link_container').style.backgroundColor = '#091931'
