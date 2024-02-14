@@ -47,8 +47,8 @@ let tasksBeispiel = [
 function initAddTask() {
     loadContactList();
     renderSubtask();
-    setDueDateInput()
-    test()
+    setDueDateInput();
+    test();
 }
 
 
@@ -204,18 +204,44 @@ function renderSubtask() {
         const subtask = subtasksArray[i];
         subtasks.innerHTML += /*html*/`
         <li id="single-subtask${i}" class="subbtask" contenteditable="true">
-            ${subtask}
+            <span>&bull; ${subtask}</span>
+            <div class="subtask-icons-single-div">
+                <svg class="subtask-icons-single" onclick="editSubtask(${i})">
+                    <use href="assets/img/icons.svg#edit-pen"></use>
+                </svg>
+                <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
+                    <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+                </svg>
+            </div>
         </li>
-        <div>
-                <svg class="subtask-icons" onclick="deleteSubtask(${i})">
-                    <use href="assets/img/icons.svg#x-icon"></use>
-                </svg>
-                <svg class="subtask-icons" onclick="editSubtask(${i})">
-                    <use href="assets/img/icons.svg#hook-icon"></use>
-                </svg>
-        </div>
     `;
     }
+}
+
+function openSubtask() {
+    document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
+        <svg class="subtask-icons" onclick="closeSubtask()">
+            <use href="assets/img/icons.svg#x-icon"></use>
+        </svg>
+        <div class="mini-seperator"></div>
+        <button type="button" id="add-subtask-button" formnovalidate onclick="addSubtask()">
+            <svg class="subtask-icons">
+                <use href="assets/img/icons.svg#hook-icon"></use>
+            </svg>
+        </button>
+    `;
+    document.getElementById("add-task-subtasks").focus();
+}
+
+function closeSubtask() {
+    document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
+        <button type="button" id="add-subtask-button" formnovalidate onclick="openSubtask()">
+            <svg class="subtask-icons">
+                <use href="assets/img/icons.svg#plus-add-icon"></use>
+            </svg>
+        </button>
+    `
+    document.getElementById('add-task-subtasks').value = '';
 }
 
 
@@ -274,4 +300,6 @@ async function createTask() {
     // clearTask();
     // document.getElementById('add-task-button').removeAttribute('disabled');
     // document.getElementById('clear-task-button').removeAttribute('disabled');
+
+
 }

@@ -300,10 +300,22 @@
     align-items: center;
 }
 
+#add-task-subtasks {
+    padding-right: 77px;
+}
+
+#add-subtask-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    height: 24px;
+}
+
 #subbtask-input-icon {
+    display: flex;
     position: absolute;
-    right: 20px;
-    transform: translateY(165%);
+    right: 16px;
+    transform: translateY(190%);
 }
 
 #subbtask-input-icon svg {
@@ -324,15 +336,45 @@
     width: 24px;
 }
 
-.mini-seperator {
-    background-color: D1D1D1;
-    width: 10px;
-    height: 10px;
+.subtask-icons-single-div {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
-.subbtask0 {
+.subtask-icons-single {
+    cursor: pointer;
+    padding: 4px;
+    height: 20px;
+    width: 20px;
+    fill: #2A3647;
+}
+
+.subtask-icons-single:hover {
+    transform: translateY(-1px) translateX(1px);
+}
+
+.mini-seperator {
+    background-color: #D1D1D1;
+    width: 1px;
+    height: 24px;
+}
+
+#subtask-container {
+    padding-left: 0;
+}
+
+.subbtask {
+    padding-left: 30px;
     display: flex;
     justify-content: space-between;
+    transition: background-color 125ms ease-in-out;
+}
+
+.subbtask:hover {
+    background-color: #eeeeee;
+    border-radius: 10px;
 }
 
 .dark-background {
@@ -408,6 +450,10 @@
     .input-icon {
         top: 43px;
     }
+
+    #subbtask-input-icon {
+        transform: translateY(170%);
+    }
 }
 
 @media (max-width: 1200px) {
@@ -481,6 +527,10 @@
     .input-icon {
         top: 47px;
     }
+
+    #subbtask-input-icon {
+        transform: translateY(190%);
+    }
 }
 
 @media (max-width: 1000px) {
@@ -493,9 +543,13 @@
     .main-container {
         padding-top: 48px;
     }
+
+    #subbtask-input-icon {
+        transform: translateY(190%);
+    }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 650px) {
     .add-task-input-div {
         width: 50vw;
         /* min-width: 419px; */
@@ -534,6 +588,10 @@
 
     .input-icon {
         top: 42px;
+    }
+
+    #subbtask-input-icon {
+        transform: translateY(170%);
     }
 }
 
