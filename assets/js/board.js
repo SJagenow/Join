@@ -27,9 +27,9 @@ async function updateBoard() {
 
     for (let index = 0; index < todos.length; index++) {
         clean = todo[index];
-        document.getElementById('task_content_open').innerHTML += await generateTodo(clean, index);
+        document.getElementById('task_content_open').innerHTML += await generateTodo(clean);
         for (let j = 0; j < clean.contacts.length; j++) {
-            renderMemberListForOverview(clean, index);
+            renderMemberListForOverview(clean);
         }
         
     }
@@ -40,7 +40,9 @@ async function updateBoard() {
     for (let index = 0; index < inprogress.length; index++) {
         clean = inprogress[index];
         document.getElementById('close_one').innerHTML += await generateTodo(clean);
-        renderMemberListForOverview(clean);
+        for (let j = 0; j < clean.contacts.length; j++) {
+            renderMemberListForOverview(clean);
+        }
     }
     let awaitList = todo.filter(t => t['category'] == 'await');
 
@@ -49,7 +51,9 @@ async function updateBoard() {
     for (let index = 0; index < awaitList.length; index++) {
         clean = awaitList[index];
         document.getElementById('await_content').innerHTML += await generateTodo(clean);
-        renderMemberListForOverview(clean);
+        for (let j = 0; j < clean.contacts.length; j++) {
+            renderMemberListForOverview(clean);
+        }
     }
     let doneList = todo.filter(t => t['category'] == 'done');
 
@@ -58,7 +62,9 @@ async function updateBoard() {
     for (let index = 0; index < doneList.length; index++) {
         clean = doneList[index];
         document.getElementById('done_content').innerHTML += await generateTodo(clean);
-        renderMemberListForOverview(clean);
+        for (let j = 0; j < clean.contacts.length; j++) {
+            renderMemberListForOverview(clean);
+        }
     }
 }
 
@@ -125,9 +131,9 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(category) {
+async function moveTo(category) {
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
-    updateBoard();
+    await updateBoard();
 }
 
 function highlight(todoId) {
