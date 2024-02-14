@@ -1,6 +1,6 @@
 body button {
     cursor: pointer;
-    border: unset;
+    border: none;
 }
 
 body input {
@@ -406,18 +406,24 @@ body input {
     gap: 8px;
 
 }
-.updown_arrow img{
+#updown_arrow img{
 height: 20px;
 rotate: 180deg;
+
 }
-.updown_arrow_two img{
+#updown_arrow_two img{
     height: 20px;
-    
     }
 
+#updown_arrow_two,
+#updown_arrow {
+    border: none;
+}
 
-.updown_arrow button {
-    border: unset;
+
+#updown_arrow button {
+
+    border:none!important;
 }
 
 

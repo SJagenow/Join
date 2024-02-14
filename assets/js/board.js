@@ -1,6 +1,6 @@
-function boardInit(){
+async function boardInit(){
     init();   
-    getTodosForBoard();
+   await getTodosForBoard();
     updateBoard();
     document.getElementById('searchInput').addEventListener('input', filterTodos);
     filterTodos();
@@ -9,43 +9,14 @@ function boardInit(){
 
 let todoId;
 let clean;
-let task = [];
-let todo = [{
-    'id': 0,
-    'label': 'JS',
-    'title': 'Drag and Drop Area',
-    'description': 'hops von todo nach inprogress await oder done hop hop function drag and drop basteln',
-    'category': 'todos'
-},
-{
-    'id': 1,
-    'label': 'HTML',
-    'title': 'Verschachteln und dann Spachteln',
-    'description': 'header menubar html erstellen ...',
-    'category': 'todos'
-},
+let todo = [];
 
-{
-    'id': 2,
-    'label': 'CSS',
-    'title': 'Alles an falsche Posi ist Abstrakte Kunst',
-    'description': 'margin: -1000px 200px -500px 200px',
-    'category': 'todos'
-},
-
-{
-    'id': 3,
-    'label': 'Testing',
-    'title': 'Open Dialog',
-    'description': 'test dialog auf richtige todos check dabei ob alle id´s haben',
-    'category': 'await'
-},
-];
 
 async function getTodosForBoard() {
-     task = JSON.parse (await getItem('tasks'));
-    console.log(task);
+     todo = JSON.parse(await getItem('tasks'));
+    console.log(todo); 
 }
+
 
 let currentDraggedElement;
 
@@ -102,8 +73,8 @@ function generateTodo(clean) {
       <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
-          <button class="updown_arrow" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-          <button class="updown_arrow_two" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button id="updown_arrow" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button id="updown_arrow_two" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
         </div>
       </div>
       <div class="card_title">${clean['title']}</div>
@@ -163,11 +134,11 @@ function returnDialog(selectedTodo) {
     <div class="user_story_description">${selectedTodo['description']}</div>
     <div class="user_story_date">
         <div class="story_date">Due date:</div>
-        <div class="user_date">variable(datum)</div>
+        <div class="user_date">${selectedTodo['dueDate']}</div>
     </div>
     <div class="user_story_priority">
         <div class="story_priority">Priority:</div>
-        <div class="user_priority">Variable(prio)</div>
+        <div class="user_priority">${selectedTodo['priority']}</div>
     </div>
     <div class="assigned_to_members_container">
         <div class="assigned_to">Assigned To:</div>
@@ -263,9 +234,6 @@ function setProgress(value) {
 setProgress(50);
 
 
-
-
-
 /* Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
 if (window.screen.orientation) {
     // Sperren der Bildschirmausrichtung auf "Portrait" (vertikale Ausrichtung)
@@ -277,6 +245,7 @@ if (window.screen.orientation) {
 } else {
     console.error('Die Bildschirmorientierungs-API wird auf diesem Gerät nicht unterstützt.');
 }*/
+
 
 function moveTodo(todoId, direction, event) {
     event.stopPropagation(); // Stoppt die Ereignisweiterleitung, um das Klicken auf das Todo-Element zu verhindern
