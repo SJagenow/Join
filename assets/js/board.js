@@ -1,10 +1,10 @@
-async function boardInit(){
-    init();   
-   await getTodosForBoard();
+async function boardInit() {
+    init();
+    await getTodosForBoard();
     updateBoard();
     document.getElementById('searchInput').addEventListener('input', filterTodos);
     filterTodos();
- 
+
 }
 
 let todoId;
@@ -13,8 +13,8 @@ let todo = [];
 
 
 async function getTodosForBoard() {
-     todo = JSON.parse(await getItem('tasks'));
-    console.log(todo); 
+    todo = JSON.parse(await getItem('tasks'));
+    console.log(todo);
 }
 
 
@@ -26,7 +26,7 @@ function updateBoard() {
     document.getElementById('task_content_open').innerHTML = '';
 
     for (let index = 0; index < todos.length; index++) {
-         clean = todos[index];
+        clean = todos[index];
         document.getElementById('task_content_open').innerHTML += generateTodo(clean);
     }
     let inprogress = todo.filter(t => t['category'] == 'inprogress');
@@ -34,7 +34,7 @@ function updateBoard() {
     document.getElementById('close_one').innerHTML = '';
 
     for (let index = 0; index < inprogress.length; index++) {
-         clean = inprogress[index];
+        clean = inprogress[index];
         document.getElementById('close_one').innerHTML += generateTodo(clean);
     }
     let awaitList = todo.filter(t => t['category'] == 'await');
@@ -42,7 +42,7 @@ function updateBoard() {
     document.getElementById('await_content').innerHTML = '';
 
     for (let index = 0; index < awaitList.length; index++) {
-         clean = awaitList[index];
+        clean = awaitList[index];
         document.getElementById('await_content').innerHTML += generateTodo(clean);
     }
     let doneList = todo.filter(t => t['category'] == 'done');
@@ -50,7 +50,7 @@ function updateBoard() {
     document.getElementById('done_content').innerHTML = '';
 
     for (let index = 0; index < doneList.length; index++) {
-         clean = doneList[index];
+        clean = doneList[index];
         document.getElementById('done_content').innerHTML += generateTodo(clean);
     }
 }
@@ -84,12 +84,8 @@ function generateTodo(clean) {
           <div><span>Subtask 1/2</span></div>
       </div>
       <div class="member_flex">
-          <div class="circle_flex">
-              <div class="circle">FF</div>
-              <div class="circle_two">GG</div>
-              <div class="circle_three">WP</div>
-              <div class="circle_four">CU</div>
-              <div class="circle_five">CU</div>
+          <div id="" class="circle_flex">
+          
           </div>
           <div class="prio_icon_containers">
               <svg width="22" height="20">
@@ -98,14 +94,18 @@ function generateTodo(clean) {
           </div>
       </div>
     </div>`;
+
 }
+
+
+
 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
 function moveTo(category) {
-    todo[currentDraggedElement.split('_')[1]]['category'] = category;   
+    todo[currentDraggedElement.split('_')[1]]['category'] = category;
     updateBoard();
 }
 
@@ -117,12 +117,13 @@ function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
-function renderDialog(selectedTodo) {
+async function renderDialog(selectedTodo) {
     document.getElementById('user_story_dialog').innerHTML = returnDialog(selectedTodo);
+    await renderMemberList(selectedTodo);
 }
 
 function returnDialog(selectedTodo) {
-    return   `
+    return `
     <div class="user_story_label_x_contrainer">
         <div class="user_story">${selectedTodo['label']}<div></div>
         </div>
@@ -144,12 +145,8 @@ function returnDialog(selectedTodo) {
         <div class="assigned_to">Assigned To:</div>
         <div class="assinged_member">
             <div class="member_flex">
-                <div class="circle_flex">
-                    <div class="circle">FF</div>
-                    <div class="circle_two">GG</div>
-                    <div class="circle_three">WP</div>
-                    <div class="circle_four">CU</div>
-                    <div class="circle_five">CU</div>
+                <div  id="board_member_content" class="circle_flex">
+            
                 </div>
             </div>
         </div>
@@ -170,19 +167,42 @@ function returnDialog(selectedTodo) {
                 </button></div>
         </div>
       `;
+
+}
+
+async function renderMemberList(selectedTodo) {
+    document.getElementById('board_member_content').innerHTML = '';
+    for (let i = 0; i < selectedTodo.contacts.length; i++) {
+        const member = selectedTodo.contacts[i];
+        const { profileinitials, secondName } = getInitials(member);
+               console.log(member);
+        document.getElementById('board_member_content').innerHTML += `
+    <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+    `;
+
+    }
+
 }
 
 
+function getInitials(contact) {
+    const words = contact.split(" ");
+    const firstName = words[0][0];
+    const secondName = words[1] ? words[1][0] : '';
+    const profileinitials = firstName + secondName;
+    return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
+}
 
-     function openDialog(todoId) {
-        let id = todoId.split('_')[1];
-        let selectedTodo = todo.find(t => t.id == id);
-        document.getElementById('dialog_bg').classList.remove('d-none');
-        renderDialog(selectedTodo);
-    }
+
+function openDialog(todoId) {
+    let id = todoId.split('_')[1];
+    let selectedTodo = todo.find(t => t.id == id);
+    document.getElementById('dialog_bg').classList.remove('d-none');
+    renderDialog(selectedTodo);
+}
 
 
-function closeDialog(){
+function closeDialog() {
     document.getElementById('dialog_bg').classList.add('d-none');
 }
 
@@ -225,7 +245,7 @@ document.getElementById('myBar').style.width = progressWidth + '%';
 function setProgress(value) {
     // Stelle sicher, dass der Wert zwischen 0 und 100 liegt
     value = Math.max(0, Math.min(100, value));
-    
+
     // Setze den Wert der Fortschrittsanzeige
     document.getElementById('progress').style.width = value + "50%";
 }
