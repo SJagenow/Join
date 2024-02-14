@@ -5,7 +5,7 @@ let users = [];
 
 let newID = 0;
 
-async function init() {
+async function initSignUp() {
   users = JSON.parse(await getItem("users")) || [];
 }
 

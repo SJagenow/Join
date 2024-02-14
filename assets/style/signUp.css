@@ -1,18 +1,27 @@
-* {
-    font-family: "Inter";
-    font-style: normal;
-    margin: 0;
-    box-sizing: content-box;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+  font-style: normal;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   }
   
+  *{
+    box-sizing: content-box;
+  }
   section {
     display: flex;
     flex-direction: column;
     height: 100vh; 
-    width: 100%;
+    width: 100vh;
     justify-content: center;
     align-items: center;
-    background: #f5f5f5;
+    
   }
   .headIcon {
     display: flex;
@@ -30,16 +39,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    align-items: center;
-  
+    flex-direction: column;  
     padding: 35px 0px;
-    /* gap: 35px; */
-  
+    /* gap: 35px; */  
     width: 652px;
-    height: 559px;
-    background: #ffffff;
-  
+    height: 620px;
+    background: #ffffff;  
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
     position: relative;
@@ -65,9 +70,9 @@
   }
   
   .headline {
-    width: 627px;
-    height: 73px;
-  
+    /* width: 627px;
+    height: 73px; */
+    margin: 0px;
     font-weight: 700;
     font-size: 61px;
     line-height: 120%;
@@ -86,8 +91,7 @@
     font-size: 21px;
     line-height: 120%;
   
-    text-align: center;
-  
+    text-align: center;  
     color: #000000;
   }
   
@@ -97,13 +101,7 @@
     align-items: center;
     padding: 0px;
     gap: 10px;
-  
     width: 422px;
-    /* height: 271px; */
-  
-    /* flex: none;
-    order: 0;
-    flex-grow: 0; */
   }
   
   .nameMailPasswordInputField {
@@ -111,17 +109,12 @@
     align-items: center;
     flex-direction: row;
     padding: 13px 21px;
-    gap: 10px;
-  
+    gap: 10px;  
     width: 422px;
     height: 51px;
-  
-    /* Inside auto layout */
-  
     flex: none;
     order: 0;
     flex-grow: 0;
-  
     border: 1px solid #d1d1d1;
     border-radius: 10px;
   }
@@ -195,3 +188,50 @@
     color: #29abe2;
     transform: scale(1.15);
   }
+  .signUpScreen {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 25px 25px;
+    border-radius: 20px;
+    background: #2a3647;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    color: white;
+    right: 0;
+    top: 45%;
+    transition: right 0.5s;
+  }
+  .hiden {
+    visibility: hidden;
+  }
+
+   @media (min-width: 319px) and (max-width: 481px){
+    
+    .inputFieldBox {
+      width: 326px;
+    }
+    .nameMailPasswordInputField {
+      width: 248px;
+    }
+    .backArrow img{
+      left: 9px;
+    }
+    .contentBox {
+      width: 305px;
+    }
+  } 
+  
+  @media(min-width: 482px) and (max-width:695px){
+    .nameMailPasswordInputField {
+      width: 385px;
+    }
+    .contentBox {
+      width: 449px;
+    }
+    .backArrow img{
+      left:3px;
+    }
+  }
+  
