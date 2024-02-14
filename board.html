@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
-  
+
     <script src="script.js"></script>
     <script src="./assets/js/board.js"></script>
     <script src="./assets/js/storage.js"></script>
@@ -25,15 +25,25 @@
 
     <div class="board_top">
         <div class="board_h1_button_container">
-           <h1>Board</h1>
+            <h1>Board</h1>
             <div class="input_button_container">
                 <input id="filter_input" type="text" placeholder="Filter tasks" oninput="filterTodosByTitle()">
-                    <div class="ml-36">|</div>
-                </div>
-                
-                <button class="ml36">Add task <b>+</b></button>
+                <div class="ml-36">|</div>
             </div>
+
+            <button class="ml36">Add task <b>+</b></button>
         </div>
+    </div>
+    <div class="board_h1_button_container_handy">
+        <div class="flex w100p space-between">
+            <h1>Board</h1><button class="ml36">Add task <b>+</b></button>
+        </div>
+        <div class="input_button_container">
+            <input id="filter_input" type="text" placeholder="Filter tasks" oninput="filterTodosByTitle()">
+            <div class="ml-36">|</div>
+        </div>
+    </div>
+    </div>
 
     </div>
 
@@ -83,7 +93,8 @@
                 </div>
                 <div class="progress_await_done">
                     <div class="progress_await_container">
-                        <div class="drag-area" id="await_content" ondrop="moveTo('await')" ondragover="allowDrop(event)"></div>
+                        <div class="drag-area" id="await_content" ondrop="moveTo('await')"
+                            ondragover="allowDrop(event)"></div>
                     </div>
                 </div>
             </div>
@@ -91,24 +102,25 @@
 
         </div>
         <div class="flexi">
-        <div>
-            <div class="midlane_flex_button">Done <button>+</button></div>
-        </div>
-   
-        <div>
-            <div class="no_task_container, d-none">
-                <span>no tasks Todo</span>
+            <div>
+                <div class="midlane_flex_button">Done <button>+</button></div>
             </div>
-            <div class="progress_await_done">
-                <div class="progress_await_container">
-                    <div class="drag-area" id="done_content" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+
+            <div>
+                <div class="no_task_container, d-none">
+                    <span>no tasks Todo</span>
+                </div>
+                <div class="progress_await_done">
+                    <div class="progress_await_container">
+                        <div class="drag-area" id="done_content" ondrop="moveTo('done')" ondragover="allowDrop(event)">
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
         </div>
-   
-   
-   
-    </div>
 
 
 

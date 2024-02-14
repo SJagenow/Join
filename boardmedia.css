@@ -13,11 +13,12 @@
     }
     .board_top {
         width: unset;
+        height: unset;
         margin-left:0;
     }
     .drag-area{
     height: 322px;
-        display: flex;
+    display: flex;
     flex-direction: row;
     gap: 12px;
 }
@@ -25,14 +26,12 @@
 
 
     @media(max-width:810px){
-        .h1_input_media_flex {
+        .board_h1_button_container_handy{
             display: flex;
-            flex-direction: column;
-                
-            }
-            .h1_input_media_flex input {
-            
-            }
+        }
+        .board_h1_button_container{
+            display: none;
+        }
 
     } 
     
