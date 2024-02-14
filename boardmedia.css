@@ -1,7 +1,38 @@
-/* @media(max-width:1300px){
+ @media(max-width:1300px){
 .board_midlane_main_container    {
     flex-direction: column;
-    justify-content: center;
+     align-items: center;
  
 }
-} */
+} 
+
+
+@media(max-width:1000px){
+    .board_midlane_main_container    {
+       margin-left:0;
+    }
+    .board_top {
+        width: unset;
+        margin-left:0;
+    }
+    .drag-area{
+    height: 322px;
+        display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+    } 
+
+
+    @media(max-width:810px){
+        .h1_input_media_flex {
+            display: flex;
+            flex-direction: column;
+                
+            }
+            .h1_input_media_flex input {
+            
+            }
+
+    } 
+    

@@ -794,8 +794,13 @@ rotate: 180deg;
         background-color: rgba(0, 255, 8, 0.1); 
 }
 
-.drag-area:hover {
-   
 
-   
+
+
+.h1_input_media_flex {
+display: flex;
+    
+}
+.h1_input_media_flex input {
+
 }
