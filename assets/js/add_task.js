@@ -206,10 +206,10 @@ function renderSubtask() {
         <li id="single-subtask${i}" class="subbtask" contenteditable="true">
             <span>&bull; ${subtask}</span>
             <div class="subtask-icons-single-div">
-                <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
+                <svg class="subtask-icons-single" onclick="editSubtask(${i})">
                     <use href="assets/img/icons.svg#edit-pen"></use>
                 </svg>
-                <svg class="subtask-icons-single" onclick="editSubtask(${i})">
+                <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
                     <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
                 </svg>
             </div>
