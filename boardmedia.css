@@ -53,7 +53,6 @@
      .h1_input_media_flex {
          display: flex;
          flex-direction: column;
-
      }
 
      .h1_input_media_flex input {}
