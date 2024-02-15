@@ -58,13 +58,21 @@
 
      .h1_input_media_flex input {}
 
+     .board_h1_button_container_handy {
+         display: flex;
+     }
+
+     .board_h1_button_container {
+         display: none;
+     }
+
  }
 
 
  @media(max-width:388px) {
      .input_button_container {
          width: 245px;
- 
+
      }
  }
 
