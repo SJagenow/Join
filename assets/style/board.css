@@ -102,7 +102,8 @@ body input {
     align-items: center;
     gap: 4px;
     border-radius: 10px;
-
+padding-left: 420px;
+width: 260px;
 
 
 }
@@ -118,7 +119,7 @@ body input {
     font-weight: 700px;
     line-height: 120%;
     background: #F6F7F8;
-    margin-left: 232px;
+    margin-left: 343px;
     gap: 24px;
 }
 
@@ -851,6 +852,14 @@ body input {
     border: 1px solid #29ABE2;
 }
 
+.button_img img {
+    height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+
 
 .drag-area-highlight {
     transform: rotate(357deg);
@@ -866,3 +875,7 @@ body input {
 }
 
 .h1_input_media_flex input {}
+
+#filter_input{
+    height: 23px;
+}

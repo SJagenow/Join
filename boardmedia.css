@@ -65,7 +65,9 @@
      .board_h1_button_container {
          display: none;
      }
-
+     .add_task_button_text{
+        display: none;
+     }
  }
 
 
@@ -77,6 +79,9 @@
  }
 
 
- @media(min-width:1300px) {
-     .board_midlane_main_container {}
- }
+
+ @media(max-width:1320px) {
+  .input_button_container{
+    padding-left: 0px;
+  }
+}
