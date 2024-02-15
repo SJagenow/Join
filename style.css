@@ -132,6 +132,10 @@ h1 {
     margin-left: 68px;
 }
 
+.margin56{
+    margin: 50px;
+}
+
 .space-between {
     display: flex;
     justify-content: space-between;

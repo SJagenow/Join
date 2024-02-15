@@ -478,7 +478,7 @@ function showSuccessButton(){
     }, 125);
     setTimeout(() => {
         successButton.style.display = 'none';
-    }, 500);
+    }, 1000);
     successButton.style.transform = 'translateY(400%)'; 
 }
 
