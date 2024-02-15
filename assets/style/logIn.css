@@ -203,7 +203,7 @@
     flex-grow: 0;
   }
   
-  .RememberMe {
+  .rememberMe {
     display: flex;
     gap: 20px;
     font-weight: 400;
@@ -367,7 +367,7 @@
     .emailPasswordField {
       width:auto;
     }
-    .RememberMe {
+    .rememberMe {
       width: 220px
     }
     .mailPasswordInputField {
