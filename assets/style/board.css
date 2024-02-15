@@ -866,13 +866,3 @@ body input {
 }
 
 .h1_input_media_flex input {}
-
-.dialog-slide-in {
-    transition: transform 0.5s ease-in-out; /* Übergangseigenschaften festlegen */
-    transform: translateX(0); /* Ursprüngliche Position */
-}
-
-.dialog-slide-out {
-    transition: transform 0.5s ease-in-out; /* Übergangseigenschaften festlegen */
-    transform: translateX(100%); /* Neue Position (aus dem Bildschirm heraus) */
-}
