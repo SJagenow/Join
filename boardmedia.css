@@ -32,12 +32,14 @@
 
 
     @media(max-width:810px){
-        .board_h1_button_container_handy{
+        .h1_input_media_flex {
             display: flex;
-        }
-        .board_h1_button_container{
-            display: none;
-        }
+            flex-direction: column;
+                
+            }
+            .h1_input_media_flex input {
+            
+            }
 
     } 
     
