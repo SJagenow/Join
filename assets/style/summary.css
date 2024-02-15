@@ -76,6 +76,9 @@
     top: 331px;
     user-select: none;
 }
+.summary-left a {
+    text-decoration: none;
+}
 .summary-content{
     display: flex;
     gap: 30px;
@@ -325,7 +328,7 @@
 
 
 
-.task-todo{
+.task-todo, .task-done{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -376,34 +379,53 @@
     text-align: center;
 }
 
-.task-todo:hover{
+.task-todo:hover, .task-done:hover{
     background: #2A3647;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     color: #FFFFFF;
     cursor: pointer;
 }
-
-.task-todo:hover .pencil {
+.todo-img {
+    background: url(../img/summary-pencil-dark.png);
+    background-size: cover;
+}
+.task-todo:hover .todo-img {
+    background: url(../img/summary-pencil-white.png) no-repeat;
+  }
+.done-img {
+    background: url(../img/summary-done-dark.png);
+    background-size: cover;
+}
+.task-done:hover .done-img {
+    background: url(../img/summary-done-white.png) no-repeat;
+  }
+  .todo-img, .done-img {
+    height: 69px;
+    width: 69px;
+    border-radius: 50%;
+  }   
+/* .task-todo:hover .pencil {
     background: url('/assets/img/summary-pencil-white.png');
     filter: invert(0); 
     background-size: cover;
-}
-
+} */
+/* 
 .task-todo:hover .done {
     background: url('/assets/img/summary-done-white.png');
     background-size: cover;
-}
+} */
+
 .task-todo:active{
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     color: #000000;
 }
-
+/* 
 .task-todo:active .todo-img{
     filter: invert(1);
-}
+} */
 
 .summary-welcome-user{
     display: flex;
@@ -445,17 +467,22 @@
     font-weight: 700;
     font-size: 64px;
     line-height: 120%;
-    /* identical to box height, or 77px */
-    /* Ligth blue */
     color: #29ABE2;
+    text-transform: capitalize;
 
 }
 .mobile-summary-header{ 
     display: none;
 }
-
+@media(max-width: 1314px){
+    .summary-welcome-user {
+        display: none;
+    }
+    .mobile-summary-header{
+        justify-content: flex-end;
+    }
+}
 @media screen and (max-width: 1000px){
-    
     .summary-header {
         display: flex;
         align-items: flex-start;
@@ -478,6 +505,7 @@
         flex-direction: column;
         padding: 65px;
         gap: 30px;
+        width: 400px;
     }
     .mobile-toolName {
     display: block;
@@ -507,5 +535,14 @@
     }    
    .MasterContainerInsidecl {
         padding-left: 0px;
+    }
+}
+@media (min-width:318px ) and (max-width: 610px) {
+    .mobile-summary-header {
+        padding: 24px;
+    }
+    .summary-content {
+        display: block;
+        width: 50%;
     }
 }

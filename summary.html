@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/style/summary.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
-    <script src="script.js"></script>
+    
     <script src="./assets/js/storage.js"></script>
+    <script src="script.js"></script>
     <script src="./assets/js/summary.js"></script>
     <title>Kanban Project Management Tool</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
 </head>
 
-    <body onload="init()">
+    <body onload="initSummary(), init()">
       <div class="flex header_container">
         <div w3-include-html="templates/menu.html"></div>
         <div w3-include-html="templates/header.html"></div>
@@ -35,23 +36,29 @@
           <div class="summary-content">
             <div class="summary-left">
                 <div class="summary-todo">
-                  <div href="./board.html" class="task-todo">
-                      <img src="./assets/img/summary-pencil-dark.png" class="todo-img pencil">
+                  <a href="./board.html">
+                    <div class="task-todo">
+                      <div class="todo-img"></div>
                       <div class="summary-todo-right">
                           <div class="task-counter-todo" id="task-counter-todo">1</div>
                           <span class="todo-description">To-do</span>
                       </div>
-                  </div>
-                   
-                    <div href="board.html" class="task-todo">
-                      <img src="./assets/img/summary-done-dark.png" class="todo-img done">
+                    </div>
+                  </a>
+                  
+                  <a href="./board.html">
+                    <div href="board.html" class="task-done">
+                      <div class="done-img"></div>
                       <div class="summary-todo-right">
                           <div class="task-counter-todo" id="task-counter-done">1</div>
                           <span class="todo-description">Done</span>
                       </div>
                     </div> 
+                  </a> 
+                    
                 </div>
-                <div href="./board.html" class="summary-task-deadline">
+                <a href="./board.html">
+                  <div  class="summary-task-deadline">
                     <div class="urgent">
                       <img class="urgent-img" src="./assets/img/summary-urgent.png">
                       <div class="task-urgent">
@@ -65,27 +72,36 @@
                         <span class="deadline-description">Upcoming Deadline</span>
                     </div>
                 </div>
+                </a>
+              
                 <div class="summary-task">
+                  <a href="./board.html">
                     <div class="task-type" href="board.html">
                       <div class=task-counter id="task-counter-all">1</div>
                       <span class="task-description">Tasks in Board</span>
                     </div>
+                  </a>
+                  <a href="./board.html">
                     <div href="board.html" class="task-type">
                       <div class=task-counter id="task-counter-Inprogress">2</div>
                       <span class="task-description">Tasks In Progress</span>
                     </div>
+                  </a>  
+                  <a href="./board.html">
                     <div href="board.html" class="task-type">
                       <div class=task-counter id="task-counter-awaiting">2</div>
                       <span class="task-description">Awaiting Feedback</span>
                     </div>
+                  </a>  
+                    
                 </div>
             </div>
             <div class="summary-welcome-user"> 
               <span class="good-morning" id="greet">Good Morning,</span>
-              <span class="user-name" id="summary-userName"> </span>
+              <span class="user-name" id="summary-userName"></span>
             </div>
           </div>
       </div>
     </body>
-
+    
     </html>
