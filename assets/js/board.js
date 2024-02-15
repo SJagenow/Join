@@ -121,6 +121,9 @@ function generateTodo(clean) {
 }
 
 
+async function upload() {
+    await setItem('tasks', JSON.stringify(todo));
+}
 
 
 function allowDrop(ev) {
@@ -129,6 +132,7 @@ function allowDrop(ev) {
 
 function moveTo(category) {
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
+    upload();
     updateBoard();
 }
 
