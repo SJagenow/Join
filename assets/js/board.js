@@ -55,7 +55,18 @@ function updateBoard() {
         clean = doneList[index];
         document.getElementById('done_content').innerHTML += generateTodo(clean);
     }
+
+
 }
+
+
+
+
+
+
+
+
+
 
 function startDragging(todoId) {
     currentDraggedElement = todoId;
@@ -86,8 +97,8 @@ function generateTodo(clean) {
       <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
-          <button id="updown_arrow" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-          <button id="updown_arrow_two" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button id="updown_arrow" class="d-none" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button id="updown_arrow_two" class="d-none"  onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
         </div>
       </div>
       <div class="card_title">${clean['title']}</div>

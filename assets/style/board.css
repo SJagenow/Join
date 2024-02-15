@@ -25,14 +25,18 @@ body input {
     align-items: center;
     margin-right: 90px;
     display: none;
-}
-
+}   
 .board_h1_button_container {
     display: flex;
     width: 1056px;
     justify-content: space-between;
     align-items: center;
     margin-right: 90px;
+}
+
+.board_h1_button_container button:hover {
+    box-shadow: 0px 3px 3px 2px rgba(0, 0, 0, 0.128);
+
 }
 
 .board_h1_button_container_handy h1,
@@ -87,6 +91,7 @@ body input {
     font-weight: 700;
     line-height: 120%;
     border: none;
+
 
 }
 
@@ -317,7 +322,7 @@ body input {
     color: var(--black, #000);
     /* Version 2/t1 */
     font-family: Inter;
-    font-size: 61px;
+    font-size: 41px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
@@ -412,6 +417,7 @@ body input {
     align-items: center;
     gap: 8px;
     width: 420px;
+    margin-top: 20px;
 }
 
 #updown_arrow img {
@@ -427,6 +433,7 @@ body input {
 #updown_arrow_two,
 #updown_arrow {
     border: none;
+    
 }
 
 
@@ -441,13 +448,16 @@ body input {
 
 .updown_buttons {
     display: flex;
+
 }
 
 .arrow_flex {
-    width: 200px;
+    width: 250px;
+    
     display: flex;
     justify-content: space-between;
     border: 0;
+
 }
 
 .user_story_delete_edit img {
@@ -495,6 +505,7 @@ body input {
     height: 20px;
     width: 1px;
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.192);
+    margin-left: 13px;
 }
 
 .subtask_center {
@@ -773,15 +784,28 @@ body input {
 #board_member_content{
     display: flex;
     flex-direction: column;
+    padding-left: 18px;
 }
 .member_flex {
     display: flex;
     width: 200px;
-  
+   
+
+}
+
+
+
+#updown_arro img{
+    height: 20px;
+    border: unset;
+
 }
 
 .circle_flex {
     display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 16px;
 }
 
 .prio_icon_containers {
@@ -842,3 +866,13 @@ body input {
 }
 
 .h1_input_media_flex input {}
+
+.dialog-slide-in {
+    transition: transform 0.5s ease-in-out; /* Übergangseigenschaften festlegen */
+    transform: translateX(0); /* Ursprüngliche Position */
+}
+
+.dialog-slide-out {
+    transition: transform 0.5s ease-in-out; /* Übergangseigenschaften festlegen */
+    transform: translateX(100%); /* Neue Position (aus dem Bildschirm heraus) */
+}
