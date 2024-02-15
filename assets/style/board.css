@@ -322,7 +322,7 @@ body input {
     color: var(--black, #000);
     /* Version 2/t1 */
     font-family: Inter;
-    font-size: 49px;
+    font-size: 41px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
@@ -417,6 +417,7 @@ body input {
     align-items: center;
     gap: 8px;
     width: 420px;
+    margin-top: 20px;
 }
 
 #updown_arrow img {
@@ -802,6 +803,9 @@ body input {
 
 .circle_flex {
     display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 16px;
 }
 
 .prio_icon_containers {
@@ -862,3 +866,13 @@ body input {
 }
 
 .h1_input_media_flex input {}
+
+.dialog-slide-in {
+    transition: transform 0.5s ease-in-out; /* Übergangseigenschaften festlegen */
+    transform: translateX(0); /* Ursprüngliche Position */
+}
+
+.dialog-slide-out {
+    transition: transform 0.5s ease-in-out; /* Übergangseigenschaften festlegen */
+    transform: translateX(100%); /* Neue Position (aus dem Bildschirm heraus) */
+}
