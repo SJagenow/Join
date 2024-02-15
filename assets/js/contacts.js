@@ -150,11 +150,11 @@ function renderContact(alphabetIndex, contactIndex) {
     setTimeout(() => {
         contactoverview.innerHTML = ` 
             <div class="contact_information_container">
-            <img onclick="closeContact()" src="./assets/img/arrow-left-line.png" alt="">
+                <img onclick="closeContact()" src="./assets/img/arrow-left-line.png" alt="">
                 <div id="contact_overview_top">
-                <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
-                ${profileinitials}
-            </div>
+                    <div class="contact_list_overview_initals letter-${secondName.toLowerCase()}">
+                        ${profileinitials}
+                    </div>
                     <div class="contact_overview_name_container column">
                         <div id="contact_overview_name">
                             ${contact.name}
@@ -188,6 +188,15 @@ function renderContact(alphabetIndex, contactIndex) {
         addHighlightsToContact(alphabetIndex, contactIndex);
         contactoverview.style.transform = 'translateX(0%)';
     }, 125);
+    
+    const addContactOptionsButton = document.getElementById('contactlist_add_contact_options_button');
+    if (window.innerWidth < 1210) {
+        addContactOptionsButton.style.display = 'flex';
+    } else {
+        addContactOptionsButton.style.display = 'none';
+    }
+    
+    document.getElementById('contactlist_add_contact_button').style.display = 'none';
 }
 
 
@@ -204,14 +213,7 @@ function addHighlightsToContact(alphabetIndex, contactIndex) {
 function openEditContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     showAddContactDialog();
-    document.getElementById('contact_edit_button').style.display = 'flex';
-    document.getElementById('under_headline').style.display = 'none';
-    document.getElementById('contact_save_button').style.display = 'none';
-    document.getElementById('contact_cancel_button').innerHTML = 'Delete';
-    document.getElementById('add_contact_headline').innerHTML = 'Edit contact';
-    document.getElementById('contactlist_name_input').value = contact.name;
-    document.getElementById('contactlist_mail_input').value = contact.mail;
-    document.getElementById('contactlist_phone_input').value = contact.phone;
+    changeAddContactoverlay(contact);
     getInitialsForOverlay();
 }
 
@@ -227,6 +229,8 @@ function closeContact() {
         document.getElementById('contact_overview').style.display = "none";
     }, 125);
     document.getElementById('contact_overview').style.transform = 'translateX(200%)';
+    document.getElementById('contactlist_add_contact_button').style.display = 'flex';
+    document.getElementById('contactlist_add_contact_options_button').style.display = 'none';
 }
 
 
@@ -472,4 +476,32 @@ function showSuccessButton(){
         successButton.style.display = 'none';
     }, 1000);
     successButton.style.transform = 'translateY(400%)'; 
+}
+
+async function openEditContactLowRes() {
+    const contactName = document.getElementById('contact_overview_name').innerText.trim();
+    const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
+    const contact = contactList.find(contact => contact.name === contactName && contact.mail === contactMail);
+    if (!contact) {
+        console.error('Contact not found.');
+        return;
+    }
+    showAddContactDialog();
+    changeAddContactoverlay(contact);
+    getInitialsForOverlay();
+}
+
+function changeAddContactoverlay(contact){
+    document.getElementById('contact_edit_button').style.display = 'flex';
+    document.getElementById('under_headline').style.display = 'none';
+    document.getElementById('contact_save_button').style.display = 'none';
+    document.getElementById('contact_cancel_button').innerHTML = 'Delete';
+    document.getElementById('add_contact_headline').innerHTML = 'Edit contact';
+    document.getElementById('contactlist_name_input').value = contact.name;
+    document.getElementById('contactlist_mail_input').value = contact.mail;
+    document.getElementById('contactlist_phone_input').value = contact.phone;
+}
+
+function showAddContactOptionsLowRes(){
+    document.getElementById('dropdown_options').style.display = 'flex';
 }
