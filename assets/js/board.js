@@ -190,9 +190,7 @@ async function renderMemberList(selectedTodo) {
         document.getElementById('board_member_content').innerHTML += `
     <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
     `;
-
     }
-
 }
 
 
