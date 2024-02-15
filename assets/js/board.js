@@ -97,8 +97,8 @@ function generateTodo(clean) {
       <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
-          <button id="updown_arro" class="up_down_img_board" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-          <button id="updown_arrow_two"  onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button id="updown_arrow" class="d-none" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+          <button id="updown_arrow_two" class="d-none"  onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
         </div>
       </div>
       <div class="card_title">${clean['title']}</div>

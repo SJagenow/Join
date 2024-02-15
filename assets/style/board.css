@@ -322,7 +322,7 @@ body input {
     color: var(--black, #000);
     /* Version 2/t1 */
     font-family: Inter;
-    font-size: 61px;
+    font-size: 49px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
@@ -504,6 +504,7 @@ body input {
     height: 20px;
     width: 1px;
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.192);
+    margin-left: 13px;
 }
 
 .subtask_center {
