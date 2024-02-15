@@ -1,73 +1,74 @@
- @media(max-width:1300px){
-.board_midlane_main_container    {
-    flex-direction: column;
-     align-items: center;
+ @media(max-width:1300px) {
+     .board_midlane_main_container {
+         flex-direction: column;
+         align-items: center;
+
+     }
+
+     .drag-area {
+         height: 300px;
+         display: flex;
+         flex-direction: row;
+         gap: 12px;
+         width: 76vw;
+     }
+ }
+
+
+ @media(max-width:1000px) {
+     .board_midlane_main_container {
+         margin-left: 0;
+     }
+
+     .board_top {
+         width: unset;
+         height: unset;
+         margin-left: 0;
+     }
+
+     .drag-area {
+         height: 322px;
+         display: flex;
+         flex-direction: row;
+         gap: 12px;
+         width: 91vw;
+     }
+
+     .up_down_img_board {
+         display: flex;
+     }
+
+
+
+
+
+     .up_down_img_board {
+         display: block;
+     }
+
+ }
+
+
+ @media(max-width:810px) {
+     .h1_input_media_flex {
+         display: flex;
+         flex-direction: column;
+
+     }
+
+     .h1_input_media_flex input {}
+
+ }
+
+
+ @media(max-width:388px) {
+     .input_button_container {
+         width: 245px;
  
-}
-.drag-area{
-    height: 300px;
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-   width: 76vw;
-}
-} 
+     }
+ }
 
 
-@media(max-width:1000px){
-    .board_midlane_main_container    {
-       margin-left:0;
-    }
-    .board_top {
-        width: unset;
-        height: unset;
-        margin-left:0;
-    }
-    .drag-area{
-    height: 322px;
-        display: flex;
-    flex-direction: row;
-    gap: 12px;
-    width: 91vw;
-}
-
-.up_down_img_board {
-    display: flex;
-}
-
-
-
- 
-  
-    .up_down_img_board {
-        display: block;
-    }
-
-    } 
-
-
-    @media(max-width:810px){
-        .h1_input_media_flex {
-            display: flex;
-            flex-direction: column;
-                
-            }
-            .h1_input_media_flex input {
-            
-            }
-
-    } 
-    
-    
-    @media(max-width:388px){
-    .input_button_container{
-        width: 245px;
-    }
-    } 
-
-
-    @media(min-width:1300px){
-        .board_midlane_main_container{
-        
-        }
-    }
+ @media(min-width:1300px) {
+     .board_midlane_main_container {}
+ }
