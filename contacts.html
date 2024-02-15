@@ -38,15 +38,18 @@
         <img id="contactlist_add_contact_symbol" src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
     </div>
     <div id="contactlist_add_contact_options_button" onclick="showAddContactOptionsLowRes()">
-        <img id="contactlist_add_contact_options_symbol" src="./assets/contactbook/icons_contactbook/more_vert.svg" alt="">
+        <img id="contactlist_add_contact_options_symbol" src="./assets/contactbook/icons_contactbook/more_vert.svg"
+            alt="">
     </div>
-    <div class="dropdown_options" id="dropdown_options">
-        <div class="marginL-24">
-            <div id="contactlist_edit_icon_container_options" onclick="openEditContactLowRes()">
-                <span>Edit</span>
-            </div>
-            <div id="contactlist_delete_icon_container_options" onclick="deleteContact()">
-                <span>Delete</span>
+    <div id="dropdown_overlay" onclick="closeAddContactOptionsLowRes()">
+        <div class="dropdown_options" id="dropdown_options" onclick="noClose(event)">
+            <div class="marginL-24">
+                <div id="contactlist_edit_icon_container_options" onclick="openEditContactLowRes()">
+                    <span>Edit</span>
+                </div>
+                <div id="contactlist_delete_icon_container_options" onclick="deleteContact()">
+                    <span>Delete</span>
+                </div>
             </div>
         </div>
     </div>
