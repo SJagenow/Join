@@ -63,7 +63,7 @@ async function loadContactList() {
         contactList = JSON.parse(await getItem('contactList'));
         console.log(JSON.parse(await getItem('contactList')));
         renderContactListForTask()
-    } catch(e){
+    } catch (e) {
         console.error('Loading error:', e);
     }
 }
@@ -93,7 +93,7 @@ function renderContactListForTask() {
 }
 
 
-function  dropdownMenuToggle(divID, arrow) {
+function dropdownMenuToggle(divID, arrow) {
     let dNone = document.getElementById(`${divID}`).classList.contains('d-none');
     document.getElementById(`${arrow}`);
     if (dNone) {
@@ -106,13 +106,13 @@ function  dropdownMenuToggle(divID, arrow) {
 
 function openDropdownMenu(divID, arrow) {
     document.getElementById(`${divID}`).classList.remove('d-none');
-    document.getElementById(`${arrow}`).style="transform: rotate(180deg);"
+    document.getElementById(`${arrow}`).style = "transform: rotate(180deg);"
 }
 
 
 function closeDropdownMenu(divID, arrow) {
     document.getElementById(`${divID}`).classList.add('d-none');
-    document.getElementById(`${arrow}`).style="transform: rotate(0);"
+    document.getElementById(`${arrow}`).style = "transform: rotate(0);"
 }
 
 
@@ -143,7 +143,7 @@ function updateSelectedUsers(i) {
         let nameParts = selectedUser.split(" ");
         let initials = nameParts.map(part => part[0]).join('');
         let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : '';
-        
+
         contactsDiv.innerHTML += /*html*/`
             <div class="name-div selected-initials">
                 <span class="initials letter-${secondName}">${initials}</span>
@@ -203,36 +203,13 @@ function renderSubtask() {
     for (let i = 0; i < subtasksArray.length; i++) {
         const subtask = subtasksArray[i];
         subtasks.innerHTML += /*html*/`
-        <li id="single-subtask${i}" class="subbtask" contenteditable="true" onmouseenter="editSubtaskButtonsOn(${i})" onmouseleave="editSubtaskButtonsOut(${i})">
-            &bull; ${subtask}
+        <li id="single-subtask${i}" class="subbtask" contenteditable="true" onmouseenter="subtaskEditButtonsOn(${i})" onmouseleave="subtaskEditButtonsOut(${i})" onclick="focusSubtask(${i})">
+            <span id="single-subtask-txt${i}">${subtask}</span>
+            <div id="subtask-edit-buttons${i}" class="subtask-icons-single-div"></div>
         </li>
     `;
     }
 }
-
-
-function editSubtaskButtonsOn(i) {
-    const subtask = subtasksArray[i];
-    document.getElementById(`single-subtask${i}`).innerHTML = /*html*/`
-            <span>&bull; ${subtask}</span>
-            <div class="subtask-icons-single-div">
-                <svg class="subtask-icons-single" onclick="editSubtask(${i})">
-                    <use href="assets/img/icons.svg#edit-pen"></use>
-                </svg>
-                <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
-                    <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
-                </svg>
-            </div>
-`;
-};
-
-
-function editSubtaskButtonsOut(i) {
-    const subtask = subtasksArray[i];
-    document.getElementById(`single-subtask${i}`).innerHTML = /*html*/`
-            <span>&bull; ${subtask}</span>
-`;
-};
 
 
 function openSubtask() {
@@ -249,6 +226,7 @@ function openSubtask() {
     `;
     document.getElementById("add-task-subtasks").focus();
 }
+
 
 function closeSubtask() {
     document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
@@ -273,15 +251,78 @@ function addSubtask() {
 }
 
 
+function subtaskEditButtonsOn(i) {
+    document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="focusSubtask(${i})">
+            <use href="assets/img/icons.svg#edit-pen"></use>
+        </svg>
+        <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+    `;
+};
+
+
+function subtaskEditButtonsOut(i) {
+    document.getElementById(`subtask-edit-buttons${i}`).innerHTML = '';
+};
+
+
+function onClickOutside(element, i) {
+    document.addEventListener('click', e => {
+        if (!element.contains(e.target)) {
+            document.getElementById('body').removeAttribute('onclick');
+            document.getElementById(`single-subtask${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOn(${i})`);
+            document.getElementById(`single-subtask${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOut(${i})`);
+            document.getElementById(`subtask-edit-buttons${i}`).innerHTML = '';
+        };
+    });
+}
+
+function startOnClickOutside(i) {
+    const myElement = document.getElementById(`single-subtask${i}`);
+    onClickOutside(myElement, i);
+}
+
+function doNotClose(event) {
+    event.stopPropagation();
+}
+
+
+function focusSubtask(i) {
+    document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
+    document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
+    document.getElementById('body').setAttribute('onclick', `startOnClickOutside(${i})`)
+    document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+        <svg class="subtask-icons-single" onclick="editSubtask(${i})">
+            <use href="assets/img/icons.svg#hook-icon"></use>
+        </svg>
+    `;
+}
+
+
 function editSubtask(i) {
-    subtasksArray.splice(i, 1, document.getElementById('single-subtask'+[i]).innerHTML);
-    initAddTask();
+    const subtask = subtasksArray[i];
+    subtasksArray.splice(i, 1, document.getElementById(`single-subtask-txt${i}`).innerHTML);
+    document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="focusSubtask(${i})">
+            <use href="assets/img/icons.svg#edit-pen"></use>
+        </svg>
+        <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+`;
+    // document.getElementById(`single-subtask${i}`).blur();
+    console.log(subtasksArray);
 }
 
 
 function deleteSubtask(i) {
     subtasksArray.splice(i, 1);
-    initAddTask();
+    renderSubtask();
 }
 
 
@@ -303,7 +344,7 @@ async function createTask() {
         "title": document.getElementById('add-task-title').value,
         "description": document.getElementById('add-task-description').value,
         "contacts": selectedUsers,
-        "dueDate":document.getElementById('add-task-date').value,
+        "dueDate": document.getElementById('add-task-date').value,
         "priority": currentPrio,
         "category": "todos",
         "label": currentLabel,
