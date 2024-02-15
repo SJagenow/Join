@@ -504,4 +504,15 @@ function changeAddContactoverlay(contact){
 
 function showAddContactOptionsLowRes(){
     document.getElementById('dropdown_options').style.display = 'flex';
+    setTimeout(() => {
+        document.getElementById('dropdown_options').style.transform = 'translateX(0%)';
+    }, 125);
 }
+
+function closeAddContactOptionsLowRes(){
+    setTimeout(() => {
+        document.getElementById('dropdown_options').style.transform = 'translateX(120%)';
+    }, 125);
+    document.getElementById('dropdown_options').style.display = 'none';
+}
+
