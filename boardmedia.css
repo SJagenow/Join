@@ -84,3 +84,15 @@
     padding-left: 0px;
   }
 }
+@media(max-width:538px) {
+.users_story_dialog{
+    width: 50%;
+}
+
+.user_story_delete_edit{
+    width: 290px;
+    margin-top: 0;
+    
+}
+  }
+

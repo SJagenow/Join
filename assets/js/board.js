@@ -6,6 +6,7 @@ async function boardInit() {
     document.getElementById('searchInput').addEventListener('input', filterTodos);
     filterTodos();
 
+
 }
 
 let todoId;
