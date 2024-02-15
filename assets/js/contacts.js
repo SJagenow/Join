@@ -503,16 +503,17 @@ function changeAddContactoverlay(contact){
 }
 
 function showAddContactOptionsLowRes(){
-    document.getElementById('dropdown_options').style.display = 'flex';
+    document.getElementById('dropdown_overlay').style.display = 'flex';
     setTimeout(() => {
         document.getElementById('dropdown_options').style.transform = 'translateX(0%)';
     }, 125);
 }
 
 function closeAddContactOptionsLowRes(){
+    document.getElementById('dropdown_options').style.transform = 'translateX(120%)';
     setTimeout(() => {
-        document.getElementById('dropdown_options').style.transform = 'translateX(120%)';
+        document.getElementById('dropdown_overlay').style.display = 'none';
     }, 125);
-    document.getElementById('dropdown_options').style.display = 'none';
+   
 }
 
