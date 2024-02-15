@@ -696,7 +696,7 @@ body {
 
     .contact_overview_header,
     #contact_overview {
-        /* display: none; */
+        display: none;
         position: absolute;
         top: 104px;
         bottom: 80px;
