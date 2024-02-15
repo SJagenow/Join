@@ -48,7 +48,7 @@ function initAddTask() {
     loadContactList();
     renderSubtask();
     setDueDateInput();
-    test();
+    // test();
 }
 
 
@@ -61,7 +61,6 @@ async function test() {
 async function loadContactList() {
     try {
         contactList = JSON.parse(await getItem('contactList'));
-        console.log(JSON.parse(await getItem('contactList')));
         renderContactListForTask()
     } catch (e) {
         console.error('Loading error:', e);
@@ -212,6 +211,29 @@ function renderSubtask() {
 }
 
 
+function addSubtask() {
+    let subtaskInput = document.getElementById('add-task-subtasks');
+    if (subtaskInput.value.length >= 3) {
+        subtasksArray.push(subtaskInput.value);
+        initAddTask();
+    } else {
+        subtaskInput.reportValidity();
+    }
+}
+
+
+function closeSubtask() {
+    document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
+        <button type="button" id="add-subtask-button" formnovalidate onclick="openSubtask()">
+            <svg class="subtask-icons">
+                <use href="assets/img/icons.svg#plus-add-icon"></use>
+            </svg>
+        </button>
+    `
+    document.getElementById('add-task-subtasks').value = '';
+}
+
+
 function openSubtask() {
     document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
         <svg class="subtask-icons" onclick="closeSubtask()">
@@ -228,34 +250,12 @@ function openSubtask() {
 }
 
 
-function closeSubtask() {
-    document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
-        <button type="button" id="add-subtask-button" formnovalidate onclick="openSubtask()">
-            <svg class="subtask-icons">
-                <use href="assets/img/icons.svg#plus-add-icon"></use>
-            </svg>
-        </button>
-    `
-    document.getElementById('add-task-subtasks').value = '';
-}
-
-
-function addSubtask() {
-    let subtaskInput = document.getElementById('add-task-subtasks');
-    if (subtaskInput.value.length >= 3) {
-        subtasksArray.push(subtaskInput.value);
-        initAddTask();
-    } else {
-        subtaskInput.reportValidity();
-    }
-}
-
-
 function subtaskEditButtonsOn(i) {
     document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="focusSubtask(${i})">
             <use href="assets/img/icons.svg#edit-pen"></use>
         </svg>
+        <div class="mini-seperator"></div>
         <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
@@ -297,6 +297,7 @@ function focusSubtask(i) {
         <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
+        <div class="mini-seperator"></div>
         <svg class="subtask-icons-single" onclick="editSubtask(${i})">
             <use href="assets/img/icons.svg#hook-icon"></use>
         </svg>
@@ -334,11 +335,9 @@ function deleteSubtask(i) {
 
 
 async function createTask() {
-
     // document.getElementById('add-task-button').setAttribute('disabled');
     // document.getElementById('clear-task-button').setAttribute('disabled');
     tasks = JSON.parse(await getItem('tasks'));
-
     let task = {
         "id": tasks.length,
         "title": document.getElementById('add-task-title').value,
@@ -351,10 +350,7 @@ async function createTask() {
         "subtasks": subtasksArray,
     };
     tasks.push(task);
-    console.log(tasks);
-
     await setItem('tasks', JSON.stringify(tasks));
-
     // clearTask();
     // document.getElementById('add-task-button').removeAttribute('disabled');
     // document.getElementById('clear-task-button').removeAttribute('disabled');
