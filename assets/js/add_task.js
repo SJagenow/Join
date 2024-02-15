@@ -92,6 +92,61 @@ function renderContactListForTask() {
 }
 
 
+async function filterContactsForAddTask() {
+    document.getElementById('add-task-contact').innerHTML = '';
+    let value = document.getElementById('add-task-assignet-to').value.toLowerCase();
+    for (let i = 0; i < contactList.length; i++) {
+        let checkContact = contactList[i].name.toLowerCase();
+        if (checkContact.includes(value)) {
+            let contact = contactList[i].name;
+            const name = contact.split(" ");
+            const firstName = name[0][0];
+            const secondName = name[1] ? name[1][0] : '';
+            let initials = firstName + secondName;
+            document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
+        }
+    }
+}
+
+
+// let searchName
+// function filterContactsForAddTask0() {
+//     document.getElementById('add-task-contact').innerHTML = '';
+//     searchName = document.getElementById('add-task-assignet-to').value.toLowerCase();
+//     let contacts = contactList.filter(checkContact);
+//     for (let i = 0; i < contacts.length; i++) {
+//         let contact = contacts[i].name;
+//         const name = contact.split(" ");
+//         const firstName = name[0][0];
+//         const secondName = name[1] ? name[1][0] : '';
+//         let initials = firstName + secondName;
+//         document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
+//     }
+// }
+
+
+// function checkContact(character) {
+//     return (character.name.toLowerCase().includes(searchName));
+// }
+
+
+function renderContactListForTaskHTML(contact, i, secondName, initials) {
+    return /*html*/`
+    <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
+        <div class="name-div">
+            <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
+            <span>${contact}</span>
+        </div>
+        <div>
+            <svg id="add-task-assignet-checkbox${i}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+            </svg>
+        </div>
+    </div>
+`;
+}
+
+
 function dropdownMenuToggle(divID, arrow) {
     let dNone = document.getElementById(`${divID}`).classList.contains('d-none');
     document.getElementById(`${arrow}`);
