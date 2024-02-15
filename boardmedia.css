@@ -5,10 +5,11 @@
  
 }
 .drag-area{
-    height: 260px;
+    height: 300px;
     display: flex;
     flex-direction: row;
     gap: 12px;
+   width: 76vw;
 }
 } 
 
@@ -27,6 +28,7 @@
         display: flex;
     flex-direction: row;
     gap: 12px;
+    width: 91vw;
 }
     } 
 
@@ -43,3 +45,16 @@
 
     } 
     
+    
+    @media(max-width:388px){
+    .input_button_container{
+        width: 245px;
+    }
+    } 
+
+
+    @media(min-width:1300px){
+        .board_midlane_main_container{
+        
+        }
+    }

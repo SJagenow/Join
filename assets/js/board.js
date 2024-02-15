@@ -23,6 +23,7 @@ let currentDraggedElement;
 
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
+    
 
     document.getElementById('task_content_open').innerHTML = '';
 
@@ -190,9 +191,7 @@ async function renderMemberList(selectedTodo) {
         document.getElementById('board_member_content').innerHTML += `
     <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
     `;
-
     }
-
 }
 
 

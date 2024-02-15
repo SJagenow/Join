@@ -49,7 +49,7 @@ function btnGuestLog(){
         return u.email === emailInput.value && u.password === passwordInput.value;
       });
     if (user) { 
-      // storeUserData(user);
+      storeUserData(user);
       console.log('1 User gefunden');                                          // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
        window.location.href = "../summary.html";         // Weiterleiten des Benutzers zur Zusammenfassungsseite.
        
@@ -75,7 +75,7 @@ function btnGuestLog(){
     }
 }
 
-/*
+
 function storeUserData(user) {          // speichert die Benutzerdaten im lokalen Speicher abhängig davon, ob die Option "Remember Me" aktiviert ist.
   let userEmail = user.email; // E-Mail-Adresse des Benutzers extrahieren
   let userPassword = user.password; // Passwort des Benutzers extrahieren
@@ -88,7 +88,7 @@ function storeUserData(user) {          // speichert die Benutzerdaten im lokale
       saveDataToLocalStorage("currentUser", currentUser); // E-Mail und Passwort im lokalen Speicher speichern, falls "Remember Me" aktiviert ist
   }
 }
-*/
+
 function saveDataToLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data)); // Daten im lokalen Speicher unter dem angegebenen Schlüssel speichern
 }
