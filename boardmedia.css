@@ -30,6 +30,19 @@
     gap: 12px;
     width: 91vw;
 }
+
+.up_down_img_board {
+    display: flex;
+}
+
+
+
+ 
+  
+    .up_down_img_board {
+        display: block;
+    }
+
     } 
 
 

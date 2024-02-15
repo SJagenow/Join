@@ -25,14 +25,18 @@ body input {
     align-items: center;
     margin-right: 90px;
     display: none;
-}
-
+}   
 .board_h1_button_container {
     display: flex;
     width: 1056px;
     justify-content: space-between;
     align-items: center;
     margin-right: 90px;
+}
+
+.board_h1_button_container button:hover {
+    box-shadow: 0px 3px 3px 2px rgba(0, 0, 0, 0.128);
+
 }
 
 .board_h1_button_container_handy h1,
@@ -87,6 +91,7 @@ body input {
     font-weight: 700;
     line-height: 120%;
     border: none;
+
 
 }
 
@@ -427,6 +432,7 @@ body input {
 #updown_arrow_two,
 #updown_arrow {
     border: none;
+    
 }
 
 
@@ -441,13 +447,16 @@ body input {
 
 .updown_buttons {
     display: flex;
+
 }
 
 .arrow_flex {
-    width: 200px;
+    width: 250px;
+    
     display: flex;
     justify-content: space-between;
     border: 0;
+
 }
 
 .user_story_delete_edit img {
@@ -777,7 +786,14 @@ body input {
 .member_flex {
     display: flex;
     width: 200px;
-  
+}
+
+
+
+#updown_arro img{
+    height: 20px;
+    border: unset;
+
 }
 
 .circle_flex {
