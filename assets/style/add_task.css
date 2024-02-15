@@ -367,8 +367,9 @@
 
 .subbtask {
     padding-left: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     transition: background-color 125ms ease-in-out;
@@ -378,9 +379,21 @@
     max-width: 340px;
 }
 
+.subbtask span::before {
+    content: '\2022';
+    margin-right: 5px;
+}
+
 .subbtask:hover {
     background-color: #eeeeee;
-    border-radius: 10px;
+}
+
+.subbtask:focus {
+    background-color: white;
+    border-radius: 0%;
+    outline: none;
+    outline-offset: 0;
+    border-bottom: #29ABE2 solid 1px;
 }
 
 .dark-background {

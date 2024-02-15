@@ -378,6 +378,7 @@ async function addToContacts() {
     renderContactList();
     findAlphabetIndex(contact);
     saveContactButton.disabled = false;
+    showSuccessButton();
 }
 
 
@@ -450,4 +451,25 @@ async function handleSubmit() {
     cancelButton.disabled = false;
     saveButton.disabled = false;
     editButton.disabled = false;
+}
+
+
+function showSuccessButton(){
+    let successButton = document.getElementById('create_contact_success_button');
+      if (window.innerWidth > 1210) {
+        successButton.style.display = 'flex'; 
+        successButton.style.bottom = '110px'; 
+        successButton.style.right = '346px'; 
+    } else {
+        successButton.style.display = 'flex'; 
+        successButton.style.bottom = '96px'; 
+        successButton.style.right = '148px'; 
+    }
+    setTimeout(() => {
+        successButton.style.transform = 'translateY(0%)'; 
+    }, 125);
+    setTimeout(() => {
+        successButton.style.display = 'none';
+    }, 1000);
+    successButton.style.transform = 'translateY(400%)'; 
 }
