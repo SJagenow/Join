@@ -203,7 +203,17 @@ function renderSubtask() {
     for (let i = 0; i < subtasksArray.length; i++) {
         const subtask = subtasksArray[i];
         subtasks.innerHTML += /*html*/`
-        <li id="single-subtask${i}" class="subbtask" contenteditable="true">
+        <li id="single-subtask${i}" class="subbtask" contenteditable="true" onmouseenter="editSubtaskButtonsOn(${i})" onmouseleave="editSubtaskButtonsOut(${i})">
+            &bull; ${subtask}
+        </li>
+    `;
+    }
+}
+
+
+function editSubtaskButtonsOn(i) {
+    const subtask = subtasksArray[i];
+    document.getElementById(`single-subtask${i}`).innerHTML = /*html*/`
             <span>&bull; ${subtask}</span>
             <div class="subtask-icons-single-div">
                 <svg class="subtask-icons-single" onclick="editSubtask(${i})">
@@ -213,10 +223,17 @@ function renderSubtask() {
                     <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
                 </svg>
             </div>
-        </li>
-    `;
-    }
-}
+`;
+};
+
+
+function editSubtaskButtonsOut(i) {
+    const subtask = subtasksArray[i];
+    document.getElementById(`single-subtask${i}`).innerHTML = /*html*/`
+            <span>&bull; ${subtask}</span>
+`;
+};
+
 
 function openSubtask() {
     document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
@@ -300,6 +317,4 @@ async function createTask() {
     // clearTask();
     // document.getElementById('add-task-button').removeAttribute('disabled');
     // document.getElementById('clear-task-button').removeAttribute('disabled');
-
-
 }

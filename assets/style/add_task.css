@@ -367,9 +367,15 @@
 
 .subbtask {
     padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     display: flex;
     justify-content: space-between;
     transition: background-color 125ms ease-in-out;
+}
+
+.subbtask span {
+    max-width: 340px;
 }
 
 .subbtask:hover {
