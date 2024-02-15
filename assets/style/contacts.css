@@ -958,11 +958,12 @@ body {
         display: flex;
     }
 
+    #contactlist_add_contact_options_button:hover,
     #contactlist_add_contact_button:hover {
         background-color: #29ABE2;
     }
 
-
+    #contactlist_add_contact_options_button:active,
     #contactlist_add_contact_button:active {
         background-color: #29ABE2;
     }
