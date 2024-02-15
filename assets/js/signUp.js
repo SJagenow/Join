@@ -20,5 +20,4 @@ async function addUser() {
   console.log(newID);
   //weiterleitung zu Login-Seite
   window.location.href = "../logIn.html";
-  // window.location.href = "../../logIn.html?msg=Du hast dich erfolgreich registriert";
 }
