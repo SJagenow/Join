@@ -345,6 +345,7 @@ function closeAddContactDialog() {
         renderContactList();
     }, 100);
     document.getElementById('contact_cancel_button').innerHTML = 'Cancel ✖';
+    closeAddContactOptionsLowRes();
 }
 
 
