@@ -23,6 +23,7 @@ let currentDraggedElement;
 
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
+    
 
     document.getElementById('task_content_open').innerHTML = '';
 
