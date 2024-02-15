@@ -783,10 +783,13 @@ body input {
 #board_member_content{
     display: flex;
     flex-direction: column;
+    padding-left: 18px;
 }
 .member_flex {
     display: flex;
     width: 200px;
+   
+
 }
 
 
