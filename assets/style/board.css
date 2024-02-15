@@ -290,7 +290,7 @@ body input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    width: 420px;
 }
 
 
@@ -411,7 +411,7 @@ body input {
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
-
+    width: 420px;
 }
 
 #updown_arrow img {
@@ -433,7 +433,10 @@ body input {
 #updown_arrow button {
 
     border: none !important;
+
 }
+
+
 
 
 .updown_buttons {
@@ -461,12 +464,13 @@ body input {
 }
 
 .user_story_delete_edit_one button {
-    border: 0px;
+    border: 0px!important;
     align-items: center;
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    
 }
 
 .user_story_delete_edit_two {
@@ -476,12 +480,13 @@ body input {
 }
 
 .user_story_delete_edit_two button {
-    border: 0px;
+    border: 0px!important;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
+    margin-left: 16px;
 }
 
 
@@ -496,7 +501,7 @@ body input {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding-left: 15px;
+
     padding-top: 15px;
 }
 
