@@ -92,7 +92,7 @@ function renderContactListForTask() {
 }
 
 
-async function filterContactsForAddTask() {
+async function filterContactsForAddTask0() {
     document.getElementById('add-task-contact').innerHTML = '';
     let value = document.getElementById('add-task-assignet-to').value.toLowerCase();
     for (let i = 0; i < contactList.length; i++) {
@@ -109,25 +109,25 @@ async function filterContactsForAddTask() {
 }
 
 
-// let searchName
-// function filterContactsForAddTask0() {
-//     document.getElementById('add-task-contact').innerHTML = '';
-//     searchName = document.getElementById('add-task-assignet-to').value.toLowerCase();
-//     let contacts = contactList.filter(checkContact);
-//     for (let i = 0; i < contacts.length; i++) {
-//         let contact = contacts[i].name;
-//         const name = contact.split(" ");
-//         const firstName = name[0][0];
-//         const secondName = name[1] ? name[1][0] : '';
-//         let initials = firstName + secondName;
-//         document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
-//     }
-// }
+let searchName
+function filterContactsForAddTask() {
+    document.getElementById('add-task-contact').innerHTML = '';
+    searchName = document.getElementById('add-task-assignet-to').value.toLowerCase();
+    let contacts = contactList.filter(checkContact);
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i].name;
+        const name = contact.split(" ");
+        const firstName = name[0][0];
+        const secondName = name[1] ? name[1][0] : '';
+        let initials = firstName + secondName;
+        document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
+    }
+}
 
 
-// function checkContact(character) {
-//     return (character.name.toLowerCase().includes(searchName));
-// }
+function checkContact(character) {
+    return (character.name.toLowerCase().includes(searchName));
+}
 
 
 function renderContactListForTaskHTML(contact, i, secondName, initials) {
