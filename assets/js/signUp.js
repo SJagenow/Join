@@ -7,6 +7,15 @@ let newID = 0;
 
 async function initSignUp() {
   users = JSON.parse(await getItem("users")) || [];
+  // loadUsers();
+  validateSignUpButton();
+  // displaySignUpSuccessMessage();
+}
+
+function displaySignUpSuccessMessage() {
+  let screen = document.getElementById("signUpScreen");
+  screen.classList.add("hidden");
+  screen.classList.remove("hidden");
 }
 
 async function addUser() {
@@ -19,5 +28,156 @@ async function addUser() {
   newID += newID + 1;
   console.log(newID);
   //weiterleitung zu Login-Seite
-  window.location.href = "../logIn.html";
+  window.location.href = "./logIn.html";
+}
+
+async function validateSignUpButton() {
+  let signUpButton = document.getElementById("signUpBtn");
+  const isEnabled = isButtonEnabled();
+
+  if (isEnabled) {
+    signUpButton.removeAttribute("disabled");
+  } else {
+    signUpButton.setAttribute("disabled", "disabled");
+  }
+}
+
+function checkName() {
+  let input = document.getElementById("names");
+  let invalidDiv = document.getElementById("nameInvalid");
+  let isValid = input.value.trim() !== "" && input.validity.valid;
+
+  invalidDiv.textContent = isValid ? "" : "Please enter a valid name!";
+  invalidDiv.classList.toggle("hidden", isValid);
+  input.classList.toggle("alert", !isValid);
+}
+
+function isButtonEnabled() {
+  const checkbox = document.getElementById("checkbox");
+  const nameField = document.getElementById("names");
+  const emailField = document.getElementById("emails");
+  const passwordField = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirmPW");
+  const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
+  const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
+  const hasNoWarning = !document.querySelector(".alert");
+
+  const isEnabled =
+    checkbox.src.includes("checkbox-icon-selected.svg") && // suchen
+    nameField.value.trim() !== "" &&
+    emailField.value.trim() !== "" &&
+    passwordField.value.trim() !== "" &&
+    confirmPasswordInput.value.trim() !== "" &&
+    hasNoErrors &&
+    hasNoWarning;
+
+  return isEnabled;
+}
+
+function togglePasswordIcon() {
+  const icon = document.querySelector(".pwIcon");
+  const passwordInput = document.getElementById("password");
+
+  const updateIcon = () => {
+    if (passwordInput.value.trim() === "") {
+      icon.src = "./assets/img/password_input.svg";
+    } else {
+      icon.src = passwordInput.type === "text" ? "./assets/img/visibility.png" : "./assets/img/visibility_off.png";
+    }
+  };
+  passwordInput.addEventListener("blur", updateIcon);
+  passwordInput.addEventListener("input", updateIcon);
+}
+
+function checkPasswordValidity() {
+  let passwordInput = document.getElementById("password");
+  let confirmPWInput = document.getElementById("confirmPW");
+
+  if (passwordInput.value.length > 0 && confirmPWInput.value.length > 0) {
+    if (passwordInput.value === confirmPWInput.value) {
+      checkPasswordLength(passwordInput.value, confirmPWInput.value);
+    } else {
+      handlePwMismatch();
+    }
+  } else {
+    hidePasswordMismatchMessage();
+  }
+}
+
+function handlePwMismatch() {
+  let invalidPW = document.querySelector(".pwInvalid");
+  let confirmPasswordInvalidDiv = document.querySelector(".confirmPWInvalid");
+  let passwordInput = document.getElementById("password");
+  let confirmPasswordInput = document.getElementById("confirmPW");
+
+  invalidPW.textContent = "Ups! your password don’t match";
+  confirmPasswordInvalidDiv.textContent = "Ups! your password don’t match";
+  invalidPW.classList.remove("hidden");
+  confirmPasswordInvalidDiv.classList.remove("hidden");
+
+  passwordInput.classList.add("alert");
+  confirmPasswordInput.classList.add("alert");
+}
+
+function hidePasswordMismatchMessage() {
+  
+  let passwordMismatchMessage = document.querySelector(".pwInvalid");     // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
+  let confirmPasswordMismatchMessage = document.querySelector(".confirmPWInvalid");
+  
+  passwordMismatchMessage.classList.add("hidden");             // Fügt den Meldungen die Klasse "hidden" hinzu, um sie auszublenden
+  confirmPasswordMismatchMessage.classList.add("hidden");
+}
+
+function validatePasswordLength(password, confirmPassword) {
+  const invalid = (input, invalidDiv) => {
+    invalidDiv.textContent = "Password must be 4 characters minimum!";
+    invalidDiv.classList.remove("hidden");
+    input.classList.add("alert");
+  };
+  [password, confirmPassword].forEach((input, index) => {                             //iteriert über die beiden Passwort-Eingabefelder 
+    const invalidDiv = document.querySelector(index ? ".confirmPWInvalid" : ".pwInvalid");
+    if (input.length < 4) invalid(input, invalidDiv);
+    else {
+      invalidDiv.classList.add("hidden");
+      input.classList.remove("alert");
+    }
+  });
+}
+
+function toggleConfirmPasswordInputIcon() {
+  let icon = document.querySelector(".pwInvalid");
+  let input = document.getElementById("confirmPW");
+
+  input.addEventListener("blur", function () {
+    if (input.value.trim() === "") {
+      icon.src = "./assets/img/password_input.svg";
+    }
+  });
+
+  input.addEventListener("input", function () {
+    if (input.value.trim() === "") {
+      input.type = "password";
+      icon.src = "./assets/img/password_input.svg";
+    } else {
+      if ( input.type === "text" && !icon.src.includes("visibility.png")
+      ) {
+        icon.src = "./assets/img/visibility.png";
+      } else if ( 
+         input.type === "password"   // && !icon.src.includes("visibility_off.png")
+      ) {
+        icon.src = "./assets/img/visibility_off.png";
+      }
+    }
+  });
+}
+
+function checkEmail() {
+  const emailInput = document.getElementById("emails");
+  const emailError = document.querySelector(".emailInvalid");
+  const email = emailInput.value.trim();
+  const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  emailError.textContent = isValid ? "" : "Please enter a valid email address!";
+  emailError.classList.toggle("hidden", isValid);
+  emailInput.classList.toggle("alert", !isValid);
 }

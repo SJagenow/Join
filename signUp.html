@@ -29,29 +29,40 @@
         </div>
         <form onsubmit="addUser(); return false;">
           <div class="inputFieldBox">
-            <div class="nameMailPasswordInputField">
-              <input required type="text" placeholder="Name" id="names" />
+            <div class="nameMsg">
+              <input required class="inputField" type="text" placeholder="Name" id="names" pattern="[A-Za-z]+(\s[A-Za-z]+)?" oninput="checkName()"/>
               <img src="./assets/img/person.png" alt="" />
             </div>
-            <div class="nameMailPasswordInputField">
-              <input required type="email" placeholder="Email" id="emails" />
+            <div class="nameInvalid hidden" id="nameInvalid">            
+            </div>
+
+            <div class="emailMsg">
+              <input required class="inputField"  type="email" placeholder="Email" id="emails" oninput="checkEmail()" />
               <img src="./assets/img/mail.png" alt="" />
+              
             </div>
-            <div class="nameMailPasswordInputField">
-              <input required type="password" placeholder="Password" id="passwords" />
-              <img src="./assets/img/password_input.svg" alt="" />
+            <div class="emailInvalid hidden">
             </div>
-            <div class="nameMailPasswordInputField">
-                <input required type="password" placeholder="Confirm Password" id="confirmPW" />
-                <img src="./assets/img/password_input.svg" alt="" />
-              </div>
-              <div class="form-checkbox">
+            <div class="passwordMsg">
+              <input required class="inputField"  type="password" placeholder="Password" id="password" autocomplete="on" minlength="4" oninput="checkPasswordValidity();" onfocus="togglePasswordIcon()">
+                <img class="pwIcon" src="./assets/img/password_input.svg" alt="" >
+              
+            </div>
+            <div class="pwInvalid hidden">
+              Please enter a valid Password.
+            </div>
+            <div class="confirmPasswordMsg">
+                <input required class="inputField"  type="password" placeholder="Confirm Password" id="confirmPW" autocomplete="on" minlength="4" oninput="checkPasswordValidity();" onfocus="toggleConfirmPasswordInputIcon()"/>
+                <img class="pwIcon" src="./assets/img/password_input.svg" alt="" />
+            </div>
+            <div class="confirmPWInvalid hidden">Ups! your password don’t match</div>
+            <div class="form-checkbox">
                 <input type="checkbox" id="checkbox" name="checkbox" required>
                 I accept the 
                 <a href="./privacy_policy.html">Privacy policy</a>
             </div>
             <div>
-              <button class="signUpBtn">Sign up</button>
+              <button type="submit" class="signUpBtn" id="signUpBtn" disabled="disabled">Sign up</button>
             </div>
             
           </div>
@@ -62,7 +73,7 @@
         <a href="../privacy_policy.html">Privacy Policy</a>
         <a href="../legal_notice.html">Legal notice</a>
       </div>
-      <div class="signUpScreen hiden">You Signed Up successfully</div>
+      <div class="signUpScreen hidden" id="signUpScreen">You Signed Up successfully</div>
     </section>
   </body>
 </html>
