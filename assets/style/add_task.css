@@ -419,6 +419,7 @@ header {
     background-color: #0919314b;
     position: absolute;
     top: 0;
+    z-index: 999;
 }
 
 .dark-background {
