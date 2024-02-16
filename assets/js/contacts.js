@@ -1,14 +1,15 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let contactList = [];
 
+
 async function initContactList() {
-    await includeHTML();
-    highlightMenuLink();
+    await init();
     await loadContactList();
     renderContactList();
-    getCurrentUser();
-   
+
 }
+
+
 
 
 /**
@@ -41,6 +42,18 @@ function renderContactList() {
             Add new contact <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
         </button>
     </div>
+    <div class="contact_list_container" id="contact_">
+    <div id="contact_list_initals" class="">
+    </div>
+    <div class="column gap8">
+        <div id="contact_list_name">
+            ${String(userName)}(Me)
+        </div>
+        <a id="contact_list_mail}">
+        </a>
+    </div>
+</div>
+    <div></div>
     `;
     for (let i = 0; i < alphabet.length; i++) {
         const singleLetter = alphabet[i];
@@ -56,6 +69,22 @@ function renderContactList() {
     `;
     }
     renderContactsToList();
+    renderInitialsOfUser();
+}
+
+function renderInitialsOfUser(){
+let { profileinitials, secondName } = getInitialsforUser(String(userName));
+document.getElementById('contact_list_initals').innerHTML = profileinitials;
+document.getElementById('contact_list_initals').classList.add(`letter-${secondName.toLowerCase()}`);
+
+}
+
+function getInitialsforUser(contact) {
+    const words = contact.split(" ");
+    const firstName = words[0][0];
+    const secondName = words[1] ? words[1][0] : '';
+    const profileinitials = firstName + secondName;
+    return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
 }
 
 
@@ -190,14 +219,14 @@ function renderContact(alphabetIndex, contactIndex) {
         addHighlightsToContact(alphabetIndex, contactIndex);
         contactoverview.style.transform = 'translateX(0%)';
     }, 125);
-    
+
     const addContactOptionsButton = document.getElementById('contactlist_add_contact_options_button');
     if (window.innerWidth < 1210) {
         addContactOptionsButton.style.display = 'flex';
     } else {
         addContactOptionsButton.style.display = 'none';
     }
-    
+
     document.getElementById('contactlist_add_contact_button').style.display = 'none';
 }
 
@@ -464,64 +493,64 @@ async function handleSubmit() {
 }
 
 
-function showSuccessButton(){
+function showSuccessButton() {
     let successButton = document.getElementById('create_contact_success_button');
-      if (window.innerWidth > 1210) {
-        successButton.style.display = 'flex'; 
-        successButton.style.bottom = '110px'; 
-        successButton.style.right = '346px'; 
+    if (window.innerWidth > 1210) {
+        successButton.style.display = 'flex';
+        successButton.style.bottom = '110px';
+        successButton.style.right = '346px';
     } else {
-        successButton.style.display = 'flex'; 
-        successButton.style.bottom = '96px'; 
-        successButton.style.right = '148px'; 
+        successButton.style.display = 'flex';
+        successButton.style.bottom = '96px';
+        successButton.style.right = '148px';
     }
     setTimeout(() => {
-        successButton.style.transform = 'translateY(0%)'; 
+        successButton.style.transform = 'translateY(0%)';
     }, 125);
     setTimeout(() => {
         successButton.style.display = 'none';
     }, 1000);
-    successButton.style.transform = 'translateY(400%)'; 
+    successButton.style.transform = 'translateY(400%)';
 }
 
-function showSuccessButtonEdit(){
+function showSuccessButtonEdit() {
     let successButton = document.getElementById('edit_contact_success_button');
-      if (window.innerWidth > 1210) {
-        successButton.style.display = 'flex'; 
-        successButton.style.bottom = '110px'; 
-        successButton.style.right = '346px'; 
+    if (window.innerWidth > 1210) {
+        successButton.style.display = 'flex';
+        successButton.style.bottom = '110px';
+        successButton.style.right = '346px';
     } else {
-        successButton.style.display = 'flex'; 
-        successButton.style.bottom = '96px'; 
-        successButton.style.right = '148px'; 
+        successButton.style.display = 'flex';
+        successButton.style.bottom = '96px';
+        successButton.style.right = '148px';
     }
     setTimeout(() => {
-        successButton.style.transform = 'translateY(0%)'; 
+        successButton.style.transform = 'translateY(0%)';
     }, 125);
     setTimeout(() => {
         successButton.style.display = 'none';
     }, 1000);
-    successButton.style.transform = 'translateY(400%)'; 
+    successButton.style.transform = 'translateY(400%)';
 }
 
-function showSuccessButtonDelete(){
+function showSuccessButtonDelete() {
     let successButton = document.getElementById('delete_contact_success_button');
-      if (window.innerWidth > 1210) {
-        successButton.style.display = 'flex'; 
-        successButton.style.bottom = '110px'; 
-        successButton.style.right = '346px'; 
+    if (window.innerWidth > 1210) {
+        successButton.style.display = 'flex';
+        successButton.style.bottom = '110px';
+        successButton.style.right = '346px';
     } else {
-        successButton.style.display = 'flex'; 
-        successButton.style.bottom = '96px'; 
-        successButton.style.right = '148px'; 
+        successButton.style.display = 'flex';
+        successButton.style.bottom = '96px';
+        successButton.style.right = '148px';
     }
     setTimeout(() => {
-        successButton.style.transform = 'translateY(0%)'; 
+        successButton.style.transform = 'translateY(0%)';
     }, 125);
     setTimeout(() => {
         successButton.style.display = 'none';
     }, 1000);
-    successButton.style.transform = 'translateY(400%)'; 
+    successButton.style.transform = 'translateY(400%)';
 }
 
 async function openEditContactLowRes() {
@@ -537,7 +566,7 @@ async function openEditContactLowRes() {
     getInitialsForOverlay();
 }
 
-function changeAddContactoverlay(contact){
+function changeAddContactoverlay(contact) {
     document.getElementById('contact_edit_button').style.display = 'flex';
     document.getElementById('under_headline').style.display = 'none';
     document.getElementById('contact_save_button').style.display = 'none';
@@ -548,34 +577,19 @@ function changeAddContactoverlay(contact){
     document.getElementById('contactlist_phone_input').value = contact.phone;
 }
 
-function showAddContactOptionsLowRes(){
+function showAddContactOptionsLowRes() {
     document.getElementById('dropdown_overlay').style.display = 'flex';
     setTimeout(() => {
         document.getElementById('dropdown_options').style.transform = 'translateX(0%)';
     }, 125);
 }
 
-function closeAddContactOptionsLowRes(){
+function closeAddContactOptionsLowRes() {
     document.getElementById('dropdown_options').style.transform = 'translateX(120%)';
     setTimeout(() => {
         document.getElementById('dropdown_overlay').style.display = 'none';
     }, 125);
-   
+
 }
 
-async function getCurrentUser() {
-    let userName = JSON.parse(localStorage.getItem("currentUserName"));
-    console.log(userName);
-    let { profileinitials } = getInitialsforHeader(userName);
-    document.getElementById('header_initials').innerHTML = `${profileinitials}`;
-  }
-  
-  function getInitialsforHeader(contact) {
-    const contactString = String(contact); // Konvertierung des Inputs zu einem String
-    const words = contactString.split(" ");
-    const firstName = words[0][0];
-    const secondName = words[1] ? words[1][0] : '';
-    const profileinitials = firstName + secondName;
-    return { profileinitials}; // Rückgabe von profileinitials und secondName als Objekt
-  }
-  
+
