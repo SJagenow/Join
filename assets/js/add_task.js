@@ -50,8 +50,6 @@ async function initAddTask() {
     renderSubtask();
     setDueDateInput();
     // test();
-   
-    
 }
 
 
