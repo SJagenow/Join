@@ -44,11 +44,14 @@ let tasksBeispiel = [
 ]
 
 
-function initAddTask() {
+async function initAddTask() {
+    await init();
     loadContactList();
     renderSubtask();
     setDueDateInput();
     // test();
+   
+    
 }
 
 
@@ -271,6 +274,7 @@ function addSubtask() {
     if (subtaskInput.value.length >= 3) {
         subtasksArray.push(subtaskInput.value);
         initAddTask();
+        subtaskInput.value = "";
     } else {
         subtaskInput.reportValidity();
     }
@@ -402,8 +406,6 @@ function clearTask() {
 
 
 async function createTask() {
-    // document.getElementById('add-task-button').setAttribute('disabled');
-    // document.getElementById('clear-task-button').setAttribute('disabled');
     document.getElementById('overlay-div').classList.remove('d-none');
     tasks = JSON.parse(await getItem('tasks'));
     let task = {
@@ -419,9 +421,17 @@ async function createTask() {
     };
     tasks.push(task);
     await setItem('tasks', JSON.stringify(tasks));
+    pauseAndExecute();
+}
+
+function goToBoard() {
     document.getElementById('clear-task-button').click();
     document.getElementById('overlay-div').classList.add('d-none');
-    // clearTask();
-    // document.getElementById('add-task-button').removeAttribute('disabled');
-    // document.getElementById('clear-task-button').removeAttribute('disabled');
+    window.location.href = 'board.html';
+}
+
+function pauseAndExecute() {
+    setTimeout(function() {
+        goToBoard();
+    }, 1500);
 }

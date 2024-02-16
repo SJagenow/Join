@@ -232,6 +232,10 @@
     color: black;
 }
 
+.summary-todo a{
+    color: black;
+}
+
 .urgent {
     display: flex;
     flex-direction: row;
@@ -257,7 +261,7 @@
     flex-grow: 0;
 }
 
-.urgent-counter {
+#urgent-counter {
     width: 50px;
     height: 56px;
     font-family: 'Inter';
