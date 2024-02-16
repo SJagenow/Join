@@ -864,7 +864,7 @@ margin-top: 12px;
 margin-right: 12px;
 }
 .button_img {
-    margin-top: 32px;
+
     
     }
 
@@ -890,4 +890,8 @@ margin-right: 12px;
 
 #filter_input{
     height: 23px;
+}
+
+.background_div {
+    display: flex;
 }
