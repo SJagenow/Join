@@ -20,6 +20,7 @@ async function includeHTML() {
 
 async function getCurrentUser() {
     let userName = JSON.parse(localStorage.getItem("currentUserName"));
+    let userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
     console.log(userName);
     let { profileinitials } = getInitialsforHeader(userName);
     document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
