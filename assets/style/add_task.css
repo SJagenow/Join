@@ -6,6 +6,10 @@
     width: 232px;
 }
 
+header {
+    box-shadow: -2px 4px 4px 0px rgba(0, 0, 0, 0.10), inset -1px 0px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
 .main-container {
     /* padding-top: 110px; */
     padding-left: 96px;
