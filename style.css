@@ -343,13 +343,11 @@ nav {
     scale: 1.2;
 }
 
-#sm_icon {
-    height: 64px;
-    width: 64px;
-}
 
-#sm_icon:hover{
+#header_initials:hover{
+    cursor: pointer;
     filter: brightness(80%);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .header_flex_container {
