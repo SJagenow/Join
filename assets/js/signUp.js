@@ -144,20 +144,21 @@ function hidePasswordMismatchMessage() {
 //   });
 // }
 
-function checkPasswordLength(password, confirmPassword) {
-  const invalid = (input, invalidDiv) => {
+function checkPasswordLength(passwordField, confirmPasswordField) {
+  const invalid = (inputField, invalidDiv) => {
     invalidDiv.textContent = "Password must be 4 characters minimum!";
     invalidDiv.classList.remove("hidden");
-    input.classList.add("alert");
+    inputField.classList.add("alert");
   };
 
-  [password, confirmPassword].forEach((input, index) => {
+  [passwordField, confirmPasswordField].forEach((inputField, index) => {
     const invalidDiv = document.querySelector(index ? ".confirmPWInvalid" : ".pwInvalid");
-    if (input.trim().length < 4) {
-      invalid(input, invalidDiv);
+    const inputValue = inputField.value.trim(); // Wert des Eingabefelds abrufen und Leerzeichen entfernen
+    if (inputValue.length < 4) {
+      invalid(inputField, invalidDiv);
     } else {
       invalidDiv.classList.add("hidden");
-      input.classList.remove("alert");
+      inputField.classList.remove("alert");
     }
   });
 }
