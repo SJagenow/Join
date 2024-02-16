@@ -51,7 +51,6 @@ async function initAddTask() {
     setDueDateInput();
     // test();
     getCurrentUser();
-    
 }
 
 
