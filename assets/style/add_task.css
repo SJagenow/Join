@@ -7,22 +7,27 @@
 }
 
 .main-container {
-    padding-top: 110px;
+    /* padding-top: 110px; */
     padding-left: 96px;
     width: calc(100vw - 232px);
     max-width: calc(1440px - 232px);
     height: calc(100vh - 104px);
     max-height: calc(1024px - 104px);
     background: #F6F7F8;
-    overflow: auto;
+    position: relative;
+    /* overflow: auto; */
 }
 
 .main-div {
-    max-width: 976px;
+    padding-top: 110px;
+    width: 1000px;
+    height: calc(100vh - 180px);
+    overflow: auto;
 }
 
 .add-task-title {
     margin-bottom: 38px;
+    min-width: 396px;
 }
 
 .ad-task-form {
@@ -41,7 +46,7 @@
 
 .conditions-text {
     display: flex;
-    align-items: end;
+    align-items: flex-start;
 }
 
 .conditions-text::before {
@@ -396,6 +401,14 @@
     border-bottom: #29ABE2 solid 1px;
 }
 
+.add-task-submit-container {
+    position: absolute;
+    bottom: 10px;
+    width: 976px;
+    max-width: 976px;
+    min-width: 396px;
+}
+
 .dark-background {
     background-color: #2A3647;
     border-radius: 10px;
@@ -426,6 +439,14 @@
 }
 
 @media (max-width: 1350px) {
+    .main-div {
+        width: 900px;
+    }
+
+    .add-task-submit-container {
+        width: 854px;
+        max-width: 976px;
+    }
 
     .add-task-input-div {
         width: 396px;
@@ -476,6 +497,22 @@
 }
 
 @media (max-width: 1200px) {
+    .main-div {
+        width: calc(100vw - 232px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-task-submit-container {
+        width: 50vw;
+        max-width: 976px;
+    }
+
+    .add-task-title {
+        width: 50vw;
+    }
+
     .gap48 {
         flex-direction: column;
     }
@@ -500,17 +537,6 @@
 
     .add-task-buttons-div {
         justify-content: flex-end;
-    }
-
-    .media-column {
-        flex-direction: column;
-        max-height: calc(1024px - 10px);
-        gap: 20px;
-    }
-
-    .conditions-text {
-        display: flex;
-        align-items: end;
     }
 
     .form-input-titel {
@@ -553,14 +579,24 @@
 }
 
 @media (max-width: 1000px) {
+    .add-task-submit-container {
+        align-items: center;
+    }
+
+    #clear-task-button {
+        display: none;
+    }
+    
+    .main-div {
+        height: calc(100vh - 260px);
+        width: 100vw;
+        padding-top: 60px;
+    }
+
     .main-container {
         height: calc(100vh - 184px);
         max-height: 1024px;
         width: calc(100vw);
-    }
-
-    .main-container {
-        padding-top: 48px;
     }
 
     #subbtask-input-icon {
@@ -571,7 +607,6 @@
 @media (max-width: 650px) {
     .add-task-input-div {
         width: 50vw;
-        /* min-width: 419px; */
     }
 
     .add-task-prio-button {
@@ -615,6 +650,19 @@
 }
 
 @media (max-width: 427px) {
+    .main-div {
+    }
+
+    .add-task-submit-container {
+        width: 92vw;
+        min-width: 80vw;
+    }
+
+    .add-task-title {
+        width: 92vw;
+        min-width: 80vw;
+    }
+
     .add-task-input-div {
         width: 92vw;
         min-width: 80vw;
