@@ -9,198 +9,222 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  }
-  
-  *{
-    box-sizing: content-box;
-  }
-  section {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; 
-    width: 100vh;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  .headIcon {
-    display: flex;
-  }
-  
-  .headIcon img {
-    position: absolute;
-    left: 5.35%;
-    width: 100.03px;
-    height: 121.97px;
-    top: 7.81%;
-  }
-  
-  .contentBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;  
-    padding: 35px 0px;
-    /* gap: 35px; */  
-    width: 652px;
-    height: 620px;
-    background: #ffffff;  
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border-radius: 30px;
-    position: relative;
-  }
-  
-  .backArrow img {
-    position: absolute;
-    width: 37px;
-    height: 37px;
-    left: 31px;
-    top: 34.5px;
-    cursor: pointer;
-  }
-  
-  .headlineBox {
-    /* display: flex;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vh;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.headIcon {
+  display: flex;
+}
+
+.headIcon img {
+  position: absolute;
+  left: 5.35%;
+  width: 100.03px;
+  height: 121.97px;
+  top: 7.81%;
+}
+
+.contentBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 35px 0px;
+  /* gap: 35px; */
+  width: 652px;
+  height: 620px;
+  background: #ffffff;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+  position: relative;
+}
+
+.contentBox input {
+  outline: none;
+  padding: 12px 21px;
+  flex: none;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+}
+
+.contentBox input:focus {
+  border-color: #29abe2;
+}
+
+.backArrow img {
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  left: 31px;
+  top: 34.5px;
+  cursor: pointer;
+}
+
+.headlineBox {
+  /* display: flex;
     flex-direction: column;
     align-items: center; */
-    text-align: center;
-    /* gap: 24px; */
-    padding-bottom: 16px;
-    
-  }
-  
-  .headline {
-    margin: 0px;
-    font-weight: 700;
-    font-size: 61px;
-    line-height: 120%;
-    text-align: center;
-    color: #000000;
-    flex: none;
-    flex-grow: 0;
-  }
-  
-  .headlineBoxText p {
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-    text-align: center;  
-    color: #000000;
-  }
-  
-  .inputFieldBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0px;
-    gap: 8px;
-    width: 422px;
-    height: 556px;
-    justify-content: space-between;
-  }
-  
-  .nameMailPasswordInputField {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    padding: 13px 21px;
-    gap: 10px;  
-    width: 422px;
-    height: 51px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    border: 1px solid #d1d1d1;
-    border-radius: 10px;
-  }
-  
-  .nameMailPasswordInputField input {
-    border: none;
-    width: 90%;
-    height: 71px;
-  
-    color: black;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 120%;
-  
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    outline: none;
-  }
-  
-  .nameMailPasswordInputField img {
-    width: 20px;
-    height: 18px;
-    flex: none;
-    flex-grow: 0;
-  }
-  .form-checkbox {
-    padding-bottom: 32px;;
-  }
-  .signUpBtn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 24px;
-    /* margin-top: 22px; */
-    width: 145px;
-    height: 51px;
-    gap: 32px;
-    background: #2a3647;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 21px;
-    line-height: 120%;
-  
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-  }
-  
-  .signUpBtn:hover {
-    background: #29abe2;
-    cursor: pointer;
-  }
-  
-  .footer-links {
-    position: absolute;
-    bottom: 10px;    
-  }
-  .footer-links a{
-    text-decoration: none;
-    color: #a8a8a8;
-    padding: 8px;
-    gap: 8px;
-  }
-  .footer-links a:hover {
-    color: #29abe2;
-    transform: scale(1.15);
-  }
-  .signUpScreen {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    padding: 25px 25px;
-    border-radius: 20px;
-    background: #2a3647;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
-    color: white;
-    right: 0;
-    top: 45%;
-    transition: right 0.5s;
-  }
-  .hidden {
-    visibility: hidden;
-  }
-  .alert {
-    border-color: #ff8190 !important;
-  }
-  .nameInvalid,
+  text-align: center;
+  /* gap: 24px; */
+  padding-bottom: 16px;
+
+}
+
+.headline {
+  margin: 0px;
+  font-weight: 700;
+  font-size: 61px;
+  line-height: 120%;
+  text-align: center;
+  color: #000000;
+  flex: none;
+  flex-grow: 0;
+}
+
+.headlineBoxText p {
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  text-align: center;
+  color: #000000;
+}
+
+.inputFieldBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  width: 422px;
+  height: 556px;
+  justify-content: center;
+}
+
+.nameMailPasswordInputField {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 13px 21px;
+  gap: 10px;
+  width: 422px;
+  height: 51px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+}
+
+.nameMailPasswordInputField input {
+  border: none;
+  width: 90%;
+  height: 71px;
+
+  color: black;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  outline: none;
+}
+
+.nameMailPasswordInputField img {
+  width: 20px;
+  height: 18px;
+  flex: none;
+  flex-grow: 0;
+}
+
+.form-checkbox {
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.signUpBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* padding: 15px 24px; */
+  /* margin-top: 22px; */
+  width: 145px;
+  height: 51px;
+  gap: 32px;
+  background: #2a3647;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 120%;
+
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.signUpBtn:hover {
+  background: #29abe2;
+  cursor: pointer;
+}
+
+.footer-links {
+  position: absolute;
+  bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #a8a8a8;
+  padding: 8px;
+  gap: 8px;
+}
+
+.footer-links a:hover {
+  color: #29abe2;
+  transform: scale(1.15);
+}
+
+.signUpScreen {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 25px 25px;
+  border-radius: 20px;
+  background: #2a3647;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+  color: white;
+  right: 0;
+  top: 45%;
+  transition: right 0.5s;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.alert {
+  border-color: #ff8190 !important;
+}
+
+.nameInvalid,
 .emailInvalid,
 .pwInvalid,
 .confirmPWInvalid {
@@ -213,6 +237,7 @@ body {
   width: 100%;
   top: 223px; */
 }
+
 .nameMsg,
 .emailMsg,
 .passwordMsg,
@@ -221,57 +246,68 @@ body {
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  padding: 13px 21px;  
+  padding: 13px 21px;
   width: 422px;
   height: 51px;
   flex: none;
   flex-grow: 0;
-  border: 1px solid #d1d1d1;
-  border-radius: 10px;    
+
 }
+
+.nameMsg img,
+.emailMsg img,
+.passwordMsg img,
+.confirmPasswordMsg img{
+  margin-left: -50px;
+}
+
 .inputField {
-  border:none;
+  border: none;
   font-size: 24px;
-  height: 100%;
-  width:100%;
+  width: 100%;
 }
-#side_back_arrow_img{
+
+#side_back_arrow_img {
   height: 32px;
   width: 32px;
   cursor: pointer;
 }
 
-#side_back_arrow_img:hover{
+#side_back_arrow_img:hover {
   border-radius: 32px;
   background-color: rgba(0, 0, 0, 0.1);
   scale: 1.1;
 }
 
-   @media (min-width: 319px) and (max-width: 481px){
-    
-    .inputFieldBox {
-      width: 326px;
-    }
-    .nameMailPasswordInputField {
-      width: 248px;
-    }
-    .backArrow img{
-      left: 9px;
-    }
-    .contentBox {
-      width: 305px;
-    }
-  } 
-  
-  @media(min-width: 482px) and (max-width:695px){
-    .nameMailPasswordInputField {
-      width: 385px;
-    }
-    .contentBox {
-      width: 449px;
-    }
-    .backArrow img{
-      left:3px;
-    }
+@media (min-width: 319px) and (max-width: 481px) {
+
+  .inputFieldBox {
+    width: 326px;
   }
-  
+
+  .nameMailPasswordInputField {
+    width: 248px;
+  }
+
+  .backArrow img {
+    left: 9px;
+  }
+
+  .contentBox {
+    width: 305px;
+  }
+}
+
+@media(min-width: 482px) and (max-width:695px) {
+  .nameMailPasswordInputField {
+    width: 385px;
+  }
+
+  .contentBox {
+    width: 449px;
+  }
+
+  .backArrow img {
+    left: 3px;
+  }
+}

@@ -1,6 +1,7 @@
 // import { users } from './signUp.js';
 let currentUser = [];
 let currentUserName = [];
+let currentUserEmail = [];
 let  contactlist = [];
 
 async function init() {                             // Die Funktion init() wird verwendet, um die Anwendung zu initialisieren, indem sie Benutzerdaten aus dem lokalen Speicher abruft und in das Array "users" einfügt.
@@ -52,7 +53,7 @@ function btnGuestLog(){
       console.log('1 User gefunden');                                          // Wenn ein Benutzer mit den eingegebenen Daten gefunden wurde:
        window.location.href = "../summary.html";         // Weiterleiten des Benutzers zur Zusammenfassungsseite.
        
-       getCurrentUser();                                // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
+      //  getCurrentUser();                                // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
        console.log('2 muss weitergeleitet werden');
       } else {                                              // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
          moveElement();                                   // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
@@ -81,7 +82,10 @@ function storeUserData(user) {          // speichert die Benutzerdaten im lokale
   let username = user.name; // Benutzername extrahieren
 
   currentUserName.push(username); // Benutzername zum Array currentUserName hinzufügen
+  currentUserEmail.push(userEmail);
   saveDataToLocalStorage("currentUserName", currentUserName); // Benutzernamen im lokalen Speicher speichern
+  saveDataToLocalStorage("currentUserEmail", userEmail);
+
   if (document.getElementById('rememberMe').checked == true) {
       currentUser.push({ email: userEmail, password: userPassword }); // E-Mail und Passwort zum Array currentUser hinzufügen, falls "Remember Me" aktiviert ist
       saveDataToLocalStorage("currentUser", currentUser); // E-Mail und Passwort im lokalen Speicher speichern, falls "Remember Me" aktiviert ist

@@ -1,6 +1,6 @@
 
 async function boardInit() {
-    init();
+    await init();
     await getTodosForBoard();
     updateBoard();
     document.getElementById('searchInput').addEventListener('input', filterTodos);
@@ -339,3 +339,4 @@ function moveTodo(todoId, direction, event) {
         document.getElementById(nextCategory).appendChild(todoElement);
     }
 }    
+

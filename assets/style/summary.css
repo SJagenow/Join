@@ -232,6 +232,10 @@
     color: black;
 }
 
+.summary-todo a{
+    color: black;
+}
+
 .urgent {
     display: flex;
     flex-direction: row;
@@ -257,7 +261,7 @@
     flex-grow: 0;
 }
 
-.urgent-counter {
+#urgent-counter {
     width: 50px;
     height: 56px;
     font-family: 'Inter';
@@ -528,6 +532,13 @@
 }
 
 @media screen and (max-width: 1000px) {
+    .main-container {
+        padding-top: 0;
+        padding-left: 96px;
+        width: 100vw;
+        height: calc(100vh - 184px);
+    }
+
     .summary-header {
         display: flex;
         align-items: flex-start;
