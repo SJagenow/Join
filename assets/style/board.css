@@ -1,7 +1,3 @@
-* {
-    box-sizing: border-box;
-}
-
 body button {
     cursor: pointer;
     border: none;
@@ -20,6 +16,7 @@ body input {
     max-height: calc(1024px - 104px);
     overflow: auto;
     background: #F6F7F8;
+    box-sizing: border-box;
 }
 
 .board_top {
