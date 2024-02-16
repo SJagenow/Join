@@ -378,6 +378,19 @@ nav {
 .dnone {
     display: none;
 }
+
+#side_back_arrow_img{
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
+
+#side_back_arrow_img:hover{
+    border-radius: 32px;
+    background-color: rgba(0, 0, 0, 0.1);
+    scale: 1.1;
+}
+
 @media(min-width:1440px) {
     header {
         width: 1208px;
