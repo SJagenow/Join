@@ -419,6 +419,7 @@ async function createTask() {
     };
     tasks.push(task);
     await setItem('tasks', JSON.stringify(tasks));
+    document.getElementById('clear-task-button').click();
     document.getElementById('overlay-div').classList.add('d-none');
     // clearTask();
     // document.getElementById('add-task-button').removeAttribute('disabled');
