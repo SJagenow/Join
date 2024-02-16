@@ -756,3 +756,44 @@
 body {
     overflow: hidden;
 }
+
+::-webkit-scrollbar {
+    background: #F6F7F8;
+    width: 14x;
+    height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 4px solid #F6F7F8;
+}
+
+
+
+
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+    border-width: 0px 8px 6px 8px;
+    border-color: white #F6F7F8 #c3c3c3 #F6F7F8;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+    border-color: white white #b0b0b0 white;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+    border-color: white white #a0a0a0 white;
+}
+
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    border-width: 6px 8px 0 8px;
+    border-color: #c3c3c3 #F6F7F8 white #F6F7F8;
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+    border-color: #b0b0b0 white white white;
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:active {
+    border-color: #a0a0a0 white white white;
+}
