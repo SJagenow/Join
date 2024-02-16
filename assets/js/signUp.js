@@ -136,21 +136,7 @@ function hidePasswordMismatchMessage() {
  
 }
 
-// function checkPasswordLength(password, confirmPassword) {
-//   const invalid = (input, invalidDiv) => {
-//     invalidDiv.textContent = "Password must be 4 characters minimum!";
-//     invalidDiv.classList.remove("hidden");
-//     input.classList.add("alert");
-//   };
-//   [password, confirmPassword].forEach((input, index) => {                             //iteriert über die beiden Passwort-Eingabefelder 
-//     const invalidDiv = document.querySelector(index ? ".confirmPWInvalid" : ".pwInvalid");
-//     if (input.length < 4) invalid(input, invalidDiv);
-//     else {
-//       invalidDiv.classList.add("hidden");
-//       input.classList.remove("alert");
-//     }
-//   });
-// }
+
 function validPwLength(passwordValue, confirmPasswordValue) {
   let passwordInvalidDiv = document.querySelector(".pwInvalid");
   let confirmPasswordInvalidDiv = document.querySelector(".confirmPWInvalid");
@@ -160,23 +146,22 @@ function validPwLength(passwordValue, confirmPasswordValue) {
     passwordInvalidDiv.textContent =
       "Password must be at least 4 characters long";
     passwordInvalidDiv.classList.remove("hidden");
-    signUpPasswordInput.classList.add("alert");
+    passwordInvalidDiv.classList.add("alert");
   } else {
     passwordInvalidDiv.classList.add("hidden");
-    signUpPasswordInput.classList.remove("alert");
+    passwordInvalidDiv.classList.remove("alert");
   }
 
   if (confirmPasswordValue.length < 4) {
     confirmPasswordInvalidDiv.textContent =
       "Password must be at least 4 characters long";
     confirmPasswordInvalidDiv.classList.remove("hidden");
-    confirmPasswordInput.classList.add("alert");
+    confirmPWInput.classList.add("alert");
   } else {
-    confirmPWInput.classList.add("hidden");
+    confirmPasswordInvalidDiv.classList.add("hidden");
     confirmPWInput.classList.remove("alert");
   }
 }
-
 
 
 
