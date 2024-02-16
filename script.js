@@ -1,3 +1,5 @@
+let userName = JSON.parse(localStorage.getItem("currentUserName"));
+
 async function init() {
     await includeHTML();
     await highlightMenuLink();

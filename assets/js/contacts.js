@@ -1,13 +1,15 @@
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let contactList = [];
 
+
 async function initContactList() {
     await init();
     await loadContactList();
     renderContactList();
-    getCurrentUser();
 
 }
+
+
 
 
 /**
@@ -40,6 +42,18 @@ function renderContactList() {
             Add new contact <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
         </button>
     </div>
+    <div class="contact_list_container" id="contact_">
+    <div id="contact_list_initals" class="">
+    </div>
+    <div class="column gap8">
+        <div id="contact_list_name">
+            ${String(userName)}(Me)
+        </div>
+        <a id="contact_list_mail}">
+        </a>
+    </div>
+</div>
+    <div></div>
     `;
     for (let i = 0; i < alphabet.length; i++) {
         const singleLetter = alphabet[i];
@@ -55,6 +69,22 @@ function renderContactList() {
     `;
     }
     renderContactsToList();
+    renderInitialsOfUser();
+}
+
+function renderInitialsOfUser(){
+let { profileinitials, secondName } = getInitialsforUser(String(userName));
+document.getElementById('contact_list_initals').innerHTML = profileinitials;
+document.getElementById('contact_list_initals').classList.add(`letter-${secondName.toLowerCase()}`);
+
+}
+
+function getInitialsforUser(contact) {
+    const words = contact.split(" ");
+    const firstName = words[0][0];
+    const secondName = words[1] ? words[1][0] : '';
+    const profileinitials = firstName + secondName;
+    return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
 }
 
 

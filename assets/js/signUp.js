@@ -163,8 +163,6 @@ function validPwLength(passwordValue, confirmPasswordValue) {
   }
 }
 
-
-
 function toggleConfirmPasswordInputIcon() {
   let icon = document.querySelector(".pwInvalid");
   let input = document.getElementById("confirmPW");
