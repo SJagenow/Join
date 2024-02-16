@@ -54,8 +54,7 @@ section {
 
 .contentBox input {
   outline: none;
-  padding: 13px 21px;
-  height: 51px;
+  padding: 12px 21px;
   flex: none;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
@@ -108,10 +107,9 @@ section {
   flex-direction: column;
   align-items: center;
   padding: 0px;
-  gap: 8px;
   width: 422px;
   height: 556px;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .nameMailPasswordInputField {
@@ -266,7 +264,6 @@ section {
 .inputField {
   border: none;
   font-size: 24px;
-  height: 100%;
   width: 100%;
 }
 
