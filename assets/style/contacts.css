@@ -1,7 +1,6 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background-color: rgb(246, 247, 248);
 }
 
 #contact_list {
@@ -191,6 +190,7 @@ body {
     display: flex;
     align-items: center;
     gap: 54px;
+    
 }
 
 
@@ -665,6 +665,8 @@ body {
     color: white;
 }
 
+#delete_contact_success_button,
+#edit_contact_success_button,
 #create_contact_success_button {
     height: 74px;
     width: 320px;
@@ -956,11 +958,12 @@ body {
         display: flex;
     }
 
+    #contactlist_add_contact_options_button:hover,
     #contactlist_add_contact_button:hover {
         background-color: #29ABE2;
     }
 
-
+    #contactlist_add_contact_options_button:active,
     #contactlist_add_contact_button:active {
         background-color: #29ABE2;
     }

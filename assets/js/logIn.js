@@ -33,8 +33,7 @@ function btnGuestLog(){
     const msg = urlParams.get('msg');
     if (msg === "Du hast dich erfolgreich ausgeloggt!") {     // Überprüfen, ob die Nachricht besagt, dass der Benutzer erfolgreich ausgeloggt wurde
       } 
-      else {  
-                                                        // Wenn ja, geschieht nichts (keine Aktion erforderlich)
+      else {                                            // Wenn ja, geschieht nichts (keine Aktion erforderlich)                                        
         storeUserData();                                      // Wenn nicht, rufe die Funktion savedLogin() auf, um den Benutzer automatisch anzumelden (falls vorhanden)
     }
 }

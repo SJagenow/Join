@@ -1,98 +1,91 @@
- @media(max-width:1300px) {
-     .board_midlane_main_container {
-         flex-direction: column;
-         align-items: center;
+@media(max-width:1300px) {
+    .board_midlane_main_container {
+        flex-direction: column;
+        align-items: center;
+    }
 
-     }
+    .drag-area {
+        height: 300px;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        width: 76vw;
+    }
+}
 
-     .drag-area {
-         height: 300px;
-         display: flex;
-         flex-direction: row;
-         gap: 12px;
-         width: 76vw;
-     }
- }
+@media(max-width:1000px) {
+    .board_midlane_main_container {
+        margin-left: 0;
+    }
 
+    .main-container {
+        padding-top: 110px;
+        padding-left: 64px;
+        width: 100vw;
+        max-width: 100vw;
+    }
 
- @media(max-width:1000px) {
-     .board_midlane_main_container {
-         margin-left: 0;
-     }
+    .board_top {
+        width: unset;
+        height: unset;
+        margin-left: 0;
+    }
 
-     .board_top {
-         width: unset;
-         height: unset;
-         margin-left: 0;
-     }
+    .drag-area {
+        height: 322px;
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        width: 91vw;
+    }
 
-     .drag-area {
-         height: 322px;
-         display: flex;
-         flex-direction: row;
-         gap: 12px;
-         width: 91vw;
-     }
+    .up_down_img_board {
+        display: flex;
+    }
 
-     .up_down_img_board {
-         display: flex;
-     }
+    .up_down_img_board {
+        display: block;
+    }
+}
 
+@media(max-width:810px) {
+    .h1_input_media_flex {
+        display: flex;
+        flex-direction: column;
+    }
 
+    .board_h1_button_container_handy {
+        display: flex;
+    }
 
-
-
-     .up_down_img_board {
-         display: block;
-     }
-
- }
-
-
- @media(max-width:810px) {
-     .h1_input_media_flex {
-         display: flex;
-         flex-direction: column;
-     }
-
-     .h1_input_media_flex input {}
-
-     .board_h1_button_container_handy {
-         display: flex;
-     }
-
-     .board_h1_button_container {
-         display: none;
-     }
-     .add_task_button_text{
+    .board_h1_button_container {
         display: none;
-     }
- }
+    }
 
-
- @media(max-width:388px) {
-     .input_button_container {
-         width: 245px;
-
-     }
- }
-
-
-
- @media(max-width:1320px) {
-  .input_button_container{
-    padding-left: 0px;
-  }
+    .add_task_button_text {
+        display: none;
+    }
 }
+
+@media(max-width:388px) {
+    .input_button_container {
+        width: 245px;
+    }
+}
+
+@media(max-width:1320px) {
+    .input_button_container {
+        padding-left: 0px;
+    }
+}
+
 @media(max-width:538px) {
-.users_story_dialog{
-    width: 50%;
-}
+    .users_story_dialog {
+        width: 50%;
+    }
 
-.user_story_delete_edit{
-    width: 290px;
-    margin-top: 0;
-    
+    .user_story_delete_edit {
+        width: 290px;
+        margin-top: 0;
+    }
 }
-  }
-

@@ -1,68 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/fonts.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/style/signUp.css" />
-    <script src="./assets/js/storage.js"></script>
-    <script src="./assets/js/signUp.js"></script>
-    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
-    <title>Sign up</title>
-    
-  </head>
-  <body onload="initSignUp()">
-    <section>
-      <div class="headIcon">
-        <img src="./assets/img/join_logo-dark.png" alt="" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/style/fonts.css" />
+  <link rel="stylesheet" type="text/css" href="./assets/style/signUp.css" />
+  <script src="./assets/js/storage.js"></script>
+  <script src="./assets/js/signUp.js"></script>
+  <script src="script.js"></script>
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
+  <title>Sign up</title>
+
+</head>
+
+<body onload="initSignUp()">
+  <section>
+    <div class="headIcon">
+      <img src="./assets/img/join_logo-dark.png" alt="" />
+    </div>
+    <div class="contentBox">
+      <div class="backArrow">
+        <a href="../../logIn.html"><img id="side_back_arrow_img" onclick="goBack()" src="./assets/img/arrow-left-line.png" alt="" /></a>
       </div>
-      <div class="contentBox">
-        <div class="backArrow">
-          <a href="../../logIn.html"
-            ><img src="./assets/img/arrow-left-line.png" alt=""
-          /></a>
-        </div>
-        <div class="headlineBox">
-          <p class="headline">Sign up</p>
-          <img src="./assets/img/blueUnderline.png">
-        </div>
-        <form onsubmit="addUser(); return false;">
-          <div class="inputFieldBox">
-            <div class="nameMailPasswordInputField">
-              <input required type="text" placeholder="Name" id="names" />
-              <img src="./assets/img/person.png" alt="" />
-            </div>
-            <div class="nameMailPasswordInputField">
-              <input required type="email" placeholder="Email" id="emails" />
-              <img src="./assets/img/mail.png" alt="" />
-            </div>
-            <div class="nameMailPasswordInputField">
-              <input required type="password" placeholder="Password" id="passwords" />
-              <img src="./assets/img/password_input.svg" alt="" />
-            </div>
-            <div class="nameMailPasswordInputField">
-                <input required type="password" placeholder="Confirm Password" id="confirmPW" />
-                <img src="./assets/img/password_input.svg" alt="" />
-              </div>
-              <div class="form-checkbox">
-                <input type="checkbox" id="checkbox" name="checkbox" required>
-                I accept the 
-                <a href="./privacy_policy.html">Privacy policy</a>
-            </div>
-            <div>
-              <button class="signUpBtn">Sign up</button>
-            </div>
-            
+      <div class="headlineBox">
+        <p class="headline">Sign up</p>
+        <img src="./assets/img/blueUnderline.png">
+      </div>
+      <form onsubmit="addUser(); return false;">
+        <div class="inputFieldBox">
+          <div class="nameMsg">
+            <input required class="inputField" type="text" placeholder="Name" id="names"
+              pattern="[A-Za-z]+(\s[A-Za-z]+)?" oninput="checkName()" />
+            <img src="./assets/img/person.png" alt="" />
           </div>
-        </form>
-        
-      </div>
-      <div class="footer-links">
-        <a href="../privacy_policy.html">Privacy Policy</a>
-        <a href="../legal_notice.html">Legal notice</a>
-      </div>
-      <div class="signUpScreen hiden">You Signed Up successfully</div>
-    </section>
-  </body>
+          <div class="nameInvalid hidden" id="nameInvalid">
+          </div>
+
+          <div class="emailMsg">
+            <input required class="inputField" type="email" placeholder="Email" id="emails" oninput="checkEmail()" />
+            <img src="./assets/img/mail.png" alt="" />
+
+          </div>
+          <div class="emailInvalid hidden">
+          </div>
+          <div class="passwordMsg">
+            <input required class="inputField" type="password" placeholder="Password" id="password" autocomplete="on"
+              minlength="4" oninput="checkPasswordValidity();" onfocus="togglePasswordIcon()">
+            <img class="pwIcon" src="./assets/img/password_input.svg" alt="">
+
+          </div>
+          <div class="pwInvalid hidden">
+            Please enter a valid Password.
+          </div>
+          <div class="confirmPasswordMsg">
+            <input required class="inputField" type="password" placeholder="Confirm Password" id="confirmPW"
+              autocomplete="on" minlength="4" oninput="checkPasswordValidity();"
+              onfocus="toggleConfirmPasswordInputIcon()" />
+            <img class="pwIcon" src="./assets/img/password_input.svg" alt="" />
+          </div>
+          <div class="confirmPWInvalid hidden">Ups! your password don’t match</div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="checkbox" name="checkbox" required>
+            I accept the
+            <a href="./privacy_policy.html">Privacy policy</a>
+          </div>
+          <div>
+            <button type="submit" class="signUpBtn" id="signUpBtn" disabled="disabled">Sign up</button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+    <div class="footer-links">
+      <a href="../privacy_policy.html">Privacy Policy</a>
+      <a href="../legal_notice.html">Legal notice</a>
+    </div>
+    <div class="signUpScreen hidden" id="signUpScreen">You Signed Up successfully</div>
+  </section>
+</body>
+
 </html>

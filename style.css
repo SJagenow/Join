@@ -132,6 +132,10 @@ h1 {
     margin-left: 68px;
 }
 
+.margin56{
+    margin: 56px;
+}
+
 .space-between {
     display: flex;
     justify-content: space-between;
@@ -157,6 +161,10 @@ h1 {
 
 .mb50{
     margin-bottom: 50px;
+}
+
+.mb106{
+    margin-bottom: 106px;
 }
 
 .mb28 {
@@ -370,6 +378,19 @@ nav {
 .dnone {
     display: none;
 }
+
+#side_back_arrow_img{
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
+
+#side_back_arrow_img:hover{
+    border-radius: 32px;
+    background-color: rgba(0, 0, 0, 0.1);
+    scale: 1.1;
+}
+
 @media(min-width:1440px) {
     header {
         width: 1208px;

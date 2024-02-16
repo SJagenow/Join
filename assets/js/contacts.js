@@ -218,9 +218,10 @@ function openEditContact(alphabetIndex, contactIndex) {
 }
 
 
-function updateContact() {
+async function updateContact() {
     deleteContactWithoutConfirm();
     addToContacts();
+    showSuccessButtonEdit();
 }
 
 
@@ -383,7 +384,6 @@ async function addToContacts() {
     renderContactList();
     findAlphabetIndex(contact);
     saveContactButton.disabled = false;
-    showSuccessButton();
 }
 
 
@@ -439,6 +439,7 @@ async function deleteContact() {
         renderContactList();
         document.getElementById('contact_overview').style.transform = 'translateX(200%)';
     }
+    showSuccessButtonDelete();
 }
 
 async function handleSubmit() {
@@ -450,8 +451,10 @@ async function handleSubmit() {
     editButton.disabled = true;
     if (event.submitter === saveButton) {
         await addToContacts();
+        showSuccessButton();
     } else if (event.submitter === editButton) {
-        updateContact();
+        await updateContact();
+        showSuccessButtonEdit();
     }
     cancelButton.disabled = false;
     saveButton.disabled = false;
@@ -461,6 +464,46 @@ async function handleSubmit() {
 
 function showSuccessButton(){
     let successButton = document.getElementById('create_contact_success_button');
+      if (window.innerWidth > 1210) {
+        successButton.style.display = 'flex'; 
+        successButton.style.bottom = '110px'; 
+        successButton.style.right = '346px'; 
+    } else {
+        successButton.style.display = 'flex'; 
+        successButton.style.bottom = '96px'; 
+        successButton.style.right = '148px'; 
+    }
+    setTimeout(() => {
+        successButton.style.transform = 'translateY(0%)'; 
+    }, 125);
+    setTimeout(() => {
+        successButton.style.display = 'none';
+    }, 1000);
+    successButton.style.transform = 'translateY(400%)'; 
+}
+
+function showSuccessButtonEdit(){
+    let successButton = document.getElementById('edit_contact_success_button');
+      if (window.innerWidth > 1210) {
+        successButton.style.display = 'flex'; 
+        successButton.style.bottom = '110px'; 
+        successButton.style.right = '346px'; 
+    } else {
+        successButton.style.display = 'flex'; 
+        successButton.style.bottom = '96px'; 
+        successButton.style.right = '148px'; 
+    }
+    setTimeout(() => {
+        successButton.style.transform = 'translateY(0%)'; 
+    }, 125);
+    setTimeout(() => {
+        successButton.style.display = 'none';
+    }, 1000);
+    successButton.style.transform = 'translateY(400%)'; 
+}
+
+function showSuccessButtonDelete(){
+    let successButton = document.getElementById('delete_contact_success_button');
       if (window.innerWidth > 1210) {
         successButton.style.display = 'flex'; 
         successButton.style.bottom = '110px'; 

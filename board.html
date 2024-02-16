@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./assets/style/board.css">
     <link rel="stylesheet" href="boardmedia.css">
-    <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="./assets/style/fonts.css">
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">
 
@@ -18,123 +17,106 @@
 </head>
 
 <body onload="boardInit();">
-    <div class="flex header_container">
-        <div w3-include-html="templates/menu.html"></div>
-        <div w3-include-html="templates/header.html"></div>
-    </div>
-
-    <div class="board_top">
-        <div class="board_h1_button_container">
-            <h1>Board</h1>
-            <div class="input_button_container">
-                <input id="filter_input" type="text" placeholder="Filter tasks" oninput="filterTodosByTitle()">
-                <div class="ml-36">|</div>
-            </div>
-
-            <button class="button_img ml36"><span class="add_task_button_text">Add task </span><b><img src="./assets/img/boardbuttonplus.png" alt=""></b></button>
-        </div>
-    </div>
-    <div class="board_h1_button_container_handy">
-        <div class="flex w100p space-between button_img">
-            <h1>Board</h1><button class="ml36"><span class="add_task_button_text">Add task </span><b><img src="./assets/img/boardbuttonplus.png" alt=""></b></button>
-        </div>
-        <div class="input_button_container">
-            <input id="filter_input" type="text" placeholder="Filter tasks" oninput="filterTodosByTitle()">
-            <div class="ml-36">|</div>
-        </div>
-    </div>
-    </div>
-
-    </div>
-
-    <div class="board_midlane_main_container">
-        
-        <div class="flexi">
-            <div>
-                <div class="midlane_flex_button">To do <button>+</button></div>
-            </div>
-
-            <div>
-                <div class="no_task_container, d-none">
-                    <span>no tasks Todo</span>
-                </div>
-                <div class="progress_await_container">
-                    <div class="drag-area" id="task_content_open" ondrop="moveTo('todos')"
-                        ondragover="allowDrop(event)">
-
+    <div class="flex max-h">
+        <div class="include-menu" w3-include-html="templates/menu.html"></div>
+        <div class="main max-h">
+            <div w3-include-html="templates/header.html"></div>
+            <main class="main-container">
+                <div class="board_top">
+                    <div class="board_h1_button_container">
+                        <h1>Board</h1>
+                        <div class="input_button_container">
+                            <input id="filter_input" type="text" placeholder="Filter tasks"
+                                oninput="filterTodosByTitle()">
+                            <div class="ml-36">|</div>
+                        </div>
+                        <button class="button_img ml36"><span class="add_task_button_text">Add task </span><b><img
+                                    src="./assets/img/boardbuttonplus.png" alt=""></b></button>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="flexi">
-            <div>
-                <div class="midlane_flex_button">In progress <button>+</button></div>
-            </div>
-            <div>
-                <div class="no_task_container, d-none">
-                    <span>no tasks in Progress</span>
-                </div>
-                <div class="progress_await_done">
-                    <div class="progress_await_container">
-                        <div class="drag-area" id="close_one" ondrop="moveTo('inprogress')"
-                            ondragover="allowDrop(event)"></div>
+                <div class="board_h1_button_container_handy">
+                    <div class="flex w100p space-between button_img">
+                        <h1>Board</h1><button class="ml36"><span class="add_task_button_text">Add task </span><b><img
+                                    src="./assets/img/boardbuttonplus.png" alt=""></b></button>
+                    </div>
+                    <div class="input_button_container">
+                        <input id="filter_input" type="text" placeholder="Filter tasks" oninput="filterTodosByTitle()">
+                        <div class="ml-36">|</div>
                     </div>
                 </div>
-            </div>
-
-
-        </div>
-        <div class="flexi">
-            <div>
-                <div class="midlane_flex_button">Await feedback <button>+</button></div>
-            </div>
-            <div>
-                <div class="no_task_container, d-none">
-                    <span>no tasks await Feedback</span>
-                </div>
-                <div class="progress_await_done">
-                    <div class="progress_await_container">
-                        <div class="drag-area" id="await_content" ondrop="moveTo('await')"
-                            ondragover="allowDrop(event)"></div>
+                <div class="board_midlane_main_container">
+                    <div class="flexi">
+                        <div>
+                            <div class="midlane_flex_button">To do <button>+</button></div>
+                        </div>
+                        <div>
+                            <div class="no_task_container, d-none">
+                                <span>no tasks Todo</span>
+                            </div>
+                            <div class="progress_await_container">
+                                <div class="drag-area" id="task_content_open" ondrop="moveTo('todos')"
+                                    ondragover="allowDrop(event)">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="flexi">
-            <div>
-                <div class="midlane_flex_button">Done <button>+</button></div>
-            </div>
-
-            <div>
-                <div class="no_task_container, d-none">
-                    <span>no tasks Done</span>
-                </div>
-                <div class="progress_await_done">
-                    <div class="progress_await_container">
-                        <div class="drag-area" id="done_content" ondrop="moveTo('done')" ondragover="allowDrop(event)">
+                    <div class="flexi">
+                        <div>
+                            <div class="midlane_flex_button">In progress <button>+</button></div>
+                        </div>
+                        <div>
+                            <div class="no_task_container, d-none">
+                                <span>no tasks in Progress</span>
+                            </div>
+                            <div class="progress_await_done">
+                                <div class="progress_await_container">
+                                    <div class="drag-area" id="close_one" ondrop="moveTo('inprogress')"
+                                        ondragover="allowDrop(event)"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexi">
+                        <div>
+                            <div class="midlane_flex_button">Await feedback <button>+</button></div>
+                        </div>
+                        <div>
+                            <div class="no_task_container, d-none">
+                                <span>no tasks await Feedback</span>
+                            </div>
+                            <div class="progress_await_done">
+                                <div class="progress_await_container">
+                                    <div class="drag-area" id="await_content" ondrop="moveTo('await')"
+                                        ondragover="allowDrop(event)"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexi">
+                        <div>
+                            <div class="midlane_flex_button">Done <button>+</button></div>
+                        </div>
+                        <div>
+                            <div class="no_task_container, d-none">
+                                <span>no tasks Done</span>
+                            </div>
+                            <div class="progress_await_done">
+                                <div class="progress_await_container">
+                                    <div class="drag-area" id="done_content" ondrop="moveTo('done')"
+                                        ondragover="allowDrop(event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dialog_bg" class="user_story_dialog_background d-none">
+                        <div id="user_story_dialog" class="users_story_dialog dialog-slide-out">
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
-
-
-
-
-
-
-        <div id="dialog_bg" class="user_story_dialog_background d-none">
-            <div id="user_story_dialog" class="users_story_dialog dialog-slide-out">
-
-            </div>
-        </div>
-
-
-
-
-
+    </div>
 
 </body>
 
