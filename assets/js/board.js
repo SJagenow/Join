@@ -61,17 +61,10 @@ function updateBoard() {
 }
 
 
-
-
-
-
-
-
-
-
 function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
+
 
 function generateTodo(clean) {
     let subtaskCount = 2;
