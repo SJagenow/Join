@@ -95,7 +95,7 @@ function renderContactListForTask() {
 }
 
 
-async function filterContactsForAddTask0() {
+async function filterContactsForAddTask() {
     document.getElementById('add-task-contact').innerHTML = '';
     let value = document.getElementById('add-task-assignet-to').value.toLowerCase();
     for (let i = 0; i < contactList.length; i++) {
@@ -112,25 +112,25 @@ async function filterContactsForAddTask0() {
 }
 
 
-let searchName
-function filterContactsForAddTask() {
-    document.getElementById('add-task-contact').innerHTML = '';
-    searchName = document.getElementById('add-task-assignet-to').value.toLowerCase();
-    let contacts = contactList.filter(checkContact);
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i].name;
-        const name = contact.split(" ");
-        const firstName = name[0][0];
-        const secondName = name[1] ? name[1][0] : '';
-        let initials = firstName + secondName;
-        document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
-    }
-}
+// let searchName
+// function filterContactsForAddTask() {
+//     document.getElementById('add-task-contact').innerHTML = '';
+//     searchName = document.getElementById('add-task-assignet-to').value.toLowerCase();
+//     let contacts = contactList.filter(checkContact);
+//     for (let i = 0; i < contacts.length; i++) {
+//         let contact = contacts[i].name;
+//         const name = contact.split(" ");
+//         const firstName = name[0][0];
+//         const secondName = name[1] ? name[1][0] : '';
+//         let initials = firstName + secondName;
+//         document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
+//     }
+// }
 
 
-function checkContact(character) {
-    return (character.name.toLowerCase().includes(searchName));
-}
+// function checkContact(character) {
+//     return (character.name.toLowerCase().includes(searchName));
+// }
 
 
 function renderContactListForTaskHTML(contact, i, secondName, initials) {
@@ -274,6 +274,7 @@ function addSubtask() {
     if (subtaskInput.value.length >= 3) {
         subtasksArray.push(subtaskInput.value);
         initAddTask();
+        subtaskInput.value = "";
     } else {
         subtaskInput.reportValidity();
     }
@@ -385,16 +386,27 @@ function deleteSubtask(i) {
 }
 
 
-// function clearTask() {
-//     document.getElementById('add-task-title');
-//     document.getElementById('add-task-description');
-//     document.getElementById('add-task-date');
-// }
+function clearTask() {
+    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
+    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
+    let contactsDiv = document.getElementById('contacts-div');
+    for (let i = 0; i < contactList.length; i++) {
+        let get = document.getElementById(`add-task-assignet-checkbox${i}`);
+        let contact = contactList[i];
+        if (get.innerHTML == checked) {
+            get.innerHTML = unchecked;
+            document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
+        }
+    }
+    contactsDiv.innerHTML = '';
+    changePriority('medium');
+    subtasksArray = [];
+    initAddTask();
+}
 
 
 async function createTask() {
-    // document.getElementById('add-task-button').setAttribute('disabled');
-    // document.getElementById('clear-task-button').setAttribute('disabled');
+    document.getElementById('overlay-div').classList.remove('d-none');
     tasks = JSON.parse(await getItem('tasks'));
     let task = {
         "id": tasks.length,
@@ -409,6 +421,7 @@ async function createTask() {
     };
     tasks.push(task);
     await setItem('tasks', JSON.stringify(tasks));
+<<<<<<< HEAD
     // clearTask();
     // document.getElementById('add-task-button').removeAttribute('disabled');
     // document.getElementById('clear-task-button').removeAttribute('disabled');
@@ -430,3 +443,19 @@ async function getCurrentUser() {
     return { profileinitials}; // Rückgabe von profileinitials und secondName als Objekt
   }
   
+=======
+    pauseAndExecute();
+}
+
+function goToBoard() {
+    document.getElementById('clear-task-button').click();
+    document.getElementById('overlay-div').classList.add('d-none');
+    window.location.href = 'board.html';
+}
+
+function pauseAndExecute() {
+    setTimeout(function() {
+        goToBoard();
+    }, 1500);
+}
+>>>>>>> 8b28d1b56920250d4093e3e2af7562acbed6d7dc

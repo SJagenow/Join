@@ -6,23 +6,32 @@
     width: 232px;
 }
 
+header {
+    box-shadow: -2px 4px 4px 0px rgba(0, 0, 0, 0.10), inset -1px 0px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
 .main-container {
-    padding-top: 110px;
+    /* padding-top: 110px; */
     padding-left: 96px;
     width: calc(100vw - 232px);
     max-width: calc(1440px - 232px);
     height: calc(100vh - 104px);
     max-height: calc(1024px - 104px);
     background: #F6F7F8;
-    overflow: auto;
+    position: relative;
+    /* overflow: auto; */
 }
 
 .main-div {
-    max-width: 976px;
+    padding-top: 110px;
+    width: 1000px;
+    height: calc(100vh - 180px);
+    overflow: auto;
 }
 
 .add-task-title {
     margin-bottom: 38px;
+    min-width: 396px;
 }
 
 .ad-task-form {
@@ -41,7 +50,7 @@
 
 .conditions-text {
     display: flex;
-    align-items: end;
+    align-items: flex-start;
 }
 
 .conditions-text::before {
@@ -396,6 +405,23 @@
     border-bottom: #29ABE2 solid 1px;
 }
 
+.add-task-submit-container {
+    position: absolute;
+    bottom: 10px;
+    width: 976px;
+    max-width: 976px;
+    min-width: 396px;
+}
+
+#overlay-div {
+    height: 100vh;
+    width: 100vw;
+    background-color: #0919314b;
+    position: absolute;
+    top: 0;
+    z-index: 999;
+}
+
 .dark-background {
     background-color: #2A3647;
     border-radius: 10px;
@@ -426,6 +452,14 @@
 }
 
 @media (max-width: 1350px) {
+    .main-div {
+        width: 900px;
+    }
+
+    .add-task-submit-container {
+        width: 854px;
+        max-width: 976px;
+    }
 
     .add-task-input-div {
         width: 396px;
@@ -476,6 +510,22 @@
 }
 
 @media (max-width: 1200px) {
+    .main-div {
+        width: calc(100vw - 232px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-task-submit-container {
+        width: 50vw;
+        max-width: 976px;
+    }
+
+    .add-task-title {
+        width: 50vw;
+    }
+
     .gap48 {
         flex-direction: column;
     }
@@ -500,17 +550,6 @@
 
     .add-task-buttons-div {
         justify-content: flex-end;
-    }
-
-    .media-column {
-        flex-direction: column;
-        max-height: calc(1024px - 10px);
-        gap: 20px;
-    }
-
-    .conditions-text {
-        display: flex;
-        align-items: end;
     }
 
     .form-input-titel {
@@ -553,14 +592,24 @@
 }
 
 @media (max-width: 1000px) {
+    .add-task-submit-container {
+        align-items: center;
+    }
+
+    #clear-task-button {
+        display: none;
+    }
+
+    .main-div {
+        height: calc(100vh - 260px);
+        width: 100vw;
+        padding-top: 60px;
+    }
+
     .main-container {
         height: calc(100vh - 184px);
         max-height: 1024px;
         width: calc(100vw);
-    }
-
-    .main-container {
-        padding-top: 48px;
     }
 
     #subbtask-input-icon {
@@ -571,7 +620,6 @@
 @media (max-width: 650px) {
     .add-task-input-div {
         width: 50vw;
-        /* min-width: 419px; */
     }
 
     .add-task-prio-button {
@@ -615,6 +663,19 @@
 }
 
 @media (max-width: 427px) {
+    .main-div {
+    }
+
+    .add-task-submit-container {
+        width: 92vw;
+        min-width: 80vw;
+    }
+
+    .add-task-title {
+        width: 92vw;
+        min-width: 80vw;
+    }
+
     .add-task-input-div {
         width: 92vw;
         min-width: 80vw;
@@ -699,4 +760,45 @@
 
 body {
     overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    background: #F6F7F8;
+    width: 14x;
+    height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+    border: 4px solid #F6F7F8;
+}
+
+
+
+
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+    border-width: 0px 8px 6px 8px;
+    border-color: white #F6F7F8 #c3c3c3 #F6F7F8;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+    border-color: white white #b0b0b0 white;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+    border-color: white white #a0a0a0 white;
+}
+
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    border-width: 6px 8px 0 8px;
+    border-color: #c3c3c3 #F6F7F8 white #F6F7F8;
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+    border-color: #b0b0b0 white white white;
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:active {
+    border-color: #a0a0a0 white white white;
 }
