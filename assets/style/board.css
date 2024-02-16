@@ -564,7 +564,7 @@ body input {
 .drag-area {
     height: 534px;
     background-color: rgba(247, 247, 247, 0.1);
-    width: 270px;
+    width: 278px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
