@@ -1,11 +1,8 @@
-
-
 async function initSummary() {
-  await includeHTML();
-  await getCurrentUser();
+  await init();
   updateGreeting();
-
 }
+
 async function getCurrentUser() {
   let userName = JSON.parse(localStorage.getItem("currentUserName"));
   let summaryUserName = document.getElementById('summary-userName');
@@ -17,7 +14,7 @@ async function getCurrentUser() {
     summaryUserName.textContentt = "Guest";
   }
   let { profileinitials } = getInitials(userName);
-  document.getElementById('header_initials').innerHTML = `${profileinitials}`;
+  document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
 }
 
 function getInitials(contact) {
@@ -26,12 +23,8 @@ function getInitials(contact) {
   const firstName = words[0][0];
   const secondName = words[1] ? words[1][0] : '';
   const profileinitials = firstName + secondName;
-  return { profileinitials}; // Rückgabe von profileinitials und secondName als Objekt
+  return { profileinitials }; // Rückgabe von profileinitials und secondName als Objekt
 }
-
-
-
-
 
 
 function updateGreeting() {

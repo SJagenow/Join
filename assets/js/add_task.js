@@ -45,12 +45,12 @@ let tasksBeispiel = [
 
 
 async function initAddTask() {
-    await includeHTML();
+    await init();
     loadContactList();
     renderSubtask();
     setDueDateInput();
     // test();
-    getCurrentUser();
+   
     
 }
 

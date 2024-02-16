@@ -563,19 +563,4 @@ function closeAddContactOptionsLowRes(){
    
 }
 
-async function getCurrentUser() {
-    let userName = JSON.parse(localStorage.getItem("currentUserName"));
-    console.log(userName);
-    let { profileinitials } = getInitialsforHeader(userName);
-    document.getElementById('header_initials').innerHTML = `${profileinitials}`;
-  }
-  
-  function getInitialsforHeader(contact) {
-    const contactString = String(contact); // Konvertierung des Inputs zu einem String
-    const words = contactString.split(" ");
-    const firstName = words[0][0];
-    const secondName = words[1] ? words[1][0] : '';
-    const profileinitials = firstName + secondName;
-    return { profileinitials}; // Rückgabe von profileinitials und secondName als Objekt
-  }
-  
+
