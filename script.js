@@ -82,3 +82,8 @@ function updateColorOnLoad() {
 
 // Rufe die Funktion bei Seitenaufruf auf
 window.onload = updateColorOnLoad;
+
+
+function goBack() {
+    window.history.back();
+  }
