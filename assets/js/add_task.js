@@ -403,8 +403,19 @@ function clearTask() {
 }
 
 
-async function createTask() {
+async function startCreateTask() {
+    let category = 'todos'
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('category')) {
+        category = urlParams.get('category');
+    }
     document.getElementById('overlay-div').classList.remove('d-none');
+    await createTask(category);
+    pauseAndExecute();
+}
+
+
+async function createTask(category) {
     tasks = JSON.parse(await getItem('tasks'));
     let task = {
         "id": tasks.length,
@@ -413,14 +424,14 @@ async function createTask() {
         "contacts": selectedUsers,
         "dueDate": document.getElementById('add-task-date').value,
         "priority": currentPrio,
-        "category": "todos",
+        "category": category,
         "label": currentLabel,
         "subtasks": subtasksArray,
     };
     tasks.push(task);
     await setItem('tasks', JSON.stringify(tasks));
-    pauseAndExecute();
 }
+
 
 function goToBoard() {
     document.getElementById('clear-task-button').click();
@@ -429,7 +440,7 @@ function goToBoard() {
 }
 
 function pauseAndExecute() {
-    setTimeout(function() {
+    setTimeout(function () {
         goToBoard();
     }, 1500);
 }

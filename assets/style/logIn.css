@@ -309,6 +309,13 @@
     color: #29abe2;
     transform: scale(1.15);
   }
+  .hidden {
+    visibility: hidden;
+  }
+
+  .alert {
+    border-color: #ff8190 !important;
+  }
   @keyframes slide-join-logo {
     0% {
       top: calc(50vh - 211px);

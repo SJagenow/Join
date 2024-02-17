@@ -22,7 +22,7 @@ async function getCurrentUser() {
   if (userName) {
     summaryUserName.textContent = userName;
   } else {
-    summaryUserName.textContentt = "Guest";
+    summaryUserName.textContent = `Guest`;
   }
   let { profileinitials } = getInitials(userName);
   document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
