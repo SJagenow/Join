@@ -31,7 +31,6 @@
 }
 
 .summary-headline {
-    width: 315px;
     height: 73px;
     /* Version 2/t1 */
     font-family: 'Inter';
@@ -58,7 +57,6 @@
 
 .summary-titelText {
     /* Everything in a nutshell! */
-    width: 400px;
     height: 32px;
     /* Version 2/t5 */
     font-family: 'Inter';
@@ -521,7 +519,7 @@
     display: none;
 }
 
-@media(max-width: 1314px) {
+@media(max-width: 1370px) {
     .summary-welcome-user {
         display: none;
     }
@@ -533,10 +531,12 @@
 
 @media screen and (max-width: 1000px) {
     .main-container {
-        padding-top: 0;
-        padding-left: 96px;
+        padding-top: 40px;
+        padding-left: 0;
         width: 100vw;
         height: calc(100vh - 184px);
+        display: flex;
+        justify-content: center;
     }
 
     .summary-header {
@@ -563,7 +563,6 @@
     .mobile-summary-header {
         display: flex;
         flex-direction: column;
-        padding: 65px;
         gap: 30px;
         width: 400px;
     }
@@ -601,9 +600,35 @@
     }
 }
 
-@media (min-width:318px) and (max-width: 610px) {
-    .mobile-summary-header {
-        padding: 24px;
+@media (min-width:318px) and (max-width: 650px) {
+    .task-todo, .task-done {
+        width: 186px;
+    }
+
+    .task-todo, .task-done, .summary-task-deadline, .task-type {
+        height: 110px;
+    }
+
+    .summary-task-deadline {
+        width: 396px;
+    }
+
+    .task-type {
+        width: 116px;
+    }
+
+    .summary-left {
+        width: auto;
+    }
+
+    .summary-todo {
+        width: auto;
+        gap: 24px;
+    }
+
+    .summary-task{
+        width: auto;
+        gap: 24px;
     }
 
     .summary-content {
