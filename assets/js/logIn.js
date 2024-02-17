@@ -2,17 +2,18 @@
 let currentUser = [];
 let currentUserName = [];
 let currentUserEmail = [];
-let  contactlist = [];
+let  contactlist = []; // braucht man das?
 
 async function init() {                             // Die Funktion init() wird verwendet, um die Anwendung zu initialisieren, indem sie Benutzerdaten aus dem lokalen Speicher abruft und in das Array "users" einfügt.
     let userData = await getItem("users");      // Benutzerdaten aus dem lokalen Speicher abrufen
-    // Überprüfen, ob Benutzerdaten vorhanden sind
-    // Wenn Daten vorhanden sind, werden sie als JSON-Parsen und in das Array "users" einfügen
-    // Wenn keine Daten vorhanden sind, wird ein leeres Array als Standardwert verwendet
+                                              // Überprüfen, ob Benutzerdaten vorhanden sind
+                                              // Wenn Daten vorhanden sind, werden sie als JSON-Parsen und in das Array "users" einfügen
+                                              // Wenn keine Daten vorhanden sind, wird ein leeres Array als Standardwert verwendet
     users = JSON.parse(userData) || [];
-    // Jetzt sind die Benutzerdaten initialisiert und können in der Anwendung verwendet werden.
+                                               // Jetzt sind die Benutzerdaten initialisiert und können in der Anwendung verwendet werden.
     await loadUsers();
-    autoFillLoginForm();
+    // autoFillLoginForm();
+    checkLoginStatus()
 }
 
 async function loadUsers() {
@@ -26,7 +27,7 @@ async function loadUsers() {
 function btnGuestLog(){
     localStorage.clear();
     window.location.href = "../summary.html";
-      greetGuest()
+    // document.getElementById('summary-userName').textContentt = `Guest`;
   }
 
   function checkLoginStatus() {
@@ -35,10 +36,22 @@ function btnGuestLog(){
     if (msg === "Du hast dich erfolgreich ausgeloggt!") {     // Überprüfen, ob die Nachricht besagt, dass der Benutzer erfolgreich ausgeloggt wurde
       } 
       else {                                            // Wenn ja, geschieht nichts (keine Aktion erforderlich)                                        
-        storeUserData();                                      // Wenn nicht, rufe die Funktion savedLogin() auf, um den Benutzer automatisch anzumelden (falls vorhanden)
+        autoFillLoginForm();                                      // Wenn nicht, rufe die Funktion savedLogin() auf, um den Benutzer automatisch anzumelden (falls vorhanden)
     }
 }
 
+function autoFillLoginForm() {
+  let currentUserData = localStorage.getItem("currentUser"); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher abrufen
+  let emailInputField = document.getElementById('email'); // E-Mail-Eingabefeld im Anmeldeformular abrufen
+  let passwordInputField = document.getElementById('password'); // Passwort-Eingabefeld im Anmeldeformular abrufen
+
+  if (currentUserData) {
+      let currentUser = JSON.parse(currentUserData); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher parsen
+      emailInputField.value = currentUser.email; // E-Mail-Eingabefeld mit der E-Mail-Adresse des Benutzers füllen
+      passwordInputField.value = currentUser.password; // Passwort-Eingabefeld mit dem Passwort des Benutzers füllen
+      logIn(); // Benutzer automatisch anmelden
+  }
+}
 
  function logIn(event) {    // Die Funktion logIn() wird aufgerufen, wenn der Benutzer versucht, sich anzumelden. Sie verhindert das Standardverhalten des Formulars (Neuladen der Seite).
       event.preventDefault();
@@ -61,21 +74,6 @@ function btnGuestLog(){
       }
   }
 
-
-  function autoFillLoginForm() {
-    let currentUserData = localStorage.getItem("currentUser"); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher abrufen
-    let emailInputField = document.getElementById('email'); // E-Mail-Eingabefeld im Anmeldeformular abrufen
-    let passwordInputField = document.getElementById('password'); // Passwort-Eingabefeld im Anmeldeformular abrufen
-
-    if (currentUserData) {
-        let currentUser = JSON.parse(currentUserData); // Anmeldeinformationen des aktuellen Benutzers aus dem lokalen Speicher parsen
-        emailInputField.value = currentUser.email; // E-Mail-Eingabefeld mit der E-Mail-Adresse des Benutzers füllen
-        passwordInputField.value = currentUser.password; // Passwort-Eingabefeld mit dem Passwort des Benutzers füllen
-        logIn(); // Benutzer automatisch anmelden
-    }
-}
-
-
 function storeUserData(user) {          // speichert die Benutzerdaten im lokalen Speicher abhängig davon, ob die Option "Remember Me" aktiviert ist.
   let userEmail = user.email; // E-Mail-Adresse des Benutzers extrahieren
   let userPassword = user.password; // Passwort des Benutzers extrahieren
@@ -96,7 +94,20 @@ function saveDataToLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data)); // Daten im lokalen Speicher unter dem angegebenen Schlüssel speichern
 }
 
+function showPasswordIcon() {
+  let password = document.getElementById('password');
+  let lockIMG = document.getElementById("eyeOffImg").classList;
+  let eye = document.getElementById('eyeImg').classList;
 
+  if (password.value.length > 0) {
+      lockIMG.add('hidden');
+      eye.remove('hidden');
+  } else {
+      lockIMG.remove('hidden');
+      eye.add('hidden');
+  }
+}
+/*
 function moveElement() {
     let mailShake = document.getElementById("moveEmail");
     let passwordShake = document.getElementById("passwordShake");
@@ -119,4 +130,15 @@ function moveElement() {
     // Starte die Animation
     animate();
   }
+  */
+
+  function checkEmail() {
+    const emailInput = document.getElementById("email");
+    const emailError = document.querySelector(".emailInvalid");
+    const email = emailInput.value.trim();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   
+    emailError.textContent = isValid ? "" : "Please enter a valid email address!";
+    emailError.classList.toggle("hidden", isValid);
+    emailInput.classList.toggle("alert", !isValid);
+  }

@@ -33,19 +33,25 @@
           <img src="./assets/img/blueUnderline.png">
         </div>
 
-        <form class="login" onsubmit="logIn(event); return false;" >
+        <form class="login" onsubmit="logIn(event); return false;">
           <div class="emailPasswordField">
             <div class="mailPasswordInputField" id="moveEmail">
-              <input required type="email" placeholder="Email" id="email"/>
+              <input required type="email" placeholder="Email" id="email" oninput="checkEmail()">
               <img src="./assets/img/mail.png" alt="" />
             </div>
+            <div class="emailInvalid hidden">Incorrect Email adress or password!</div>
 
             <div class="mailPasswordInputField">
-              <input required type="password" placeholder="Password" id="password"/>
-              <img src="./assets/img/password_input.svg" alt="" />
+              <input required type="password" placeholder="Password" id="password">
+              
+              <span onclick="showPassword()">
+                <!-- <img src="./assets/img/password_input.svg" alt="" /> -->
+                <img id="eyeOffImg" class="lock" src="./assets/img/visibility_off.png" alt="" onkeyup="showPasswordIcon()">
+                <img id="eyeImg" class="hidden" src="./assets/img/visibility.png" alt="">
+            </span>
             </div>
             <div class="rememberMe" id="rememberMe">
-              <input class="checkBox" type="checkbox"  />
+              <input class="checkBox" type="checkbox">
               <div>Remember me</div>
               <!-- <div>
                 <a class="ForgotPassword" href="src/templates/forgotPassword.html"
@@ -57,6 +63,7 @@
           <div class="btnLogGuest">
           
             <button class="btnLogIn">Log in</button>
+            <!-- <button class="btnGuestLog">Guest Log in</button> -->
             <button class="btnGuestLog" onclick="btnGuestLog()">Guest Log in</button>
           </div>
           
