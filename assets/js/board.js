@@ -338,5 +338,26 @@ function moveTodo(todoId, direction, event) {
         // Füge das Todo-Element in die nächste Spalte ein
         document.getElementById(nextCategory).appendChild(todoElement);
     }
-}    
+}
 
+
+function openAddTaskOverlay(category) {
+    if (window.innerWidth > 1000) {
+        document.getElementById('add-task-button').setAttribute('onclick', `startCreateTaskFromBoard(${category})`);
+        document.getElementById('add-task-container').classList.remove('d-none');
+    } else {
+        var url = 'add_task.html?category=' + category;
+        window.location.href = url;
+    }
+}
+
+async function startCreateTaskFromBoard(category) {
+    document.getElementById('add-task-container').classList.add('d-none');
+    await createTask(category);
+    document.getElementById('add-task-button').removeAttribute('onclick');
+}
+
+function closeAddTaskOverlay() {
+    document.getElementById('add-task-container').classList.add('d-none');
+    document.getElementById('add-task-button').removeAttribute('onclick');
+}
