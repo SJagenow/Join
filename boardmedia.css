@@ -1,7 +1,6 @@
-@media(max-width:1300px) {
+@media(max-width:1410px) {
     .board_midlane_main_container {
         flex-direction: column;
-        align-items: center;
     }
 
     .drag-area {
@@ -9,7 +8,7 @@
         display: flex;
         flex-direction: row;
         gap: 12px;
-        width: 76vw;
+        width: calc(100vw - 314px);
     }
 }
 
@@ -18,9 +17,26 @@
         margin-left: 0;
     }
 
+    .button_img {
+        margin-bottom: 20px;
+    }
+
+    .board_h1_button_container_handy {
+        align-items: start;
+        margin-bottom: 20px;
+    }
+
+    .input_button_container {
+        justify-content: start;
+    }
+
+    .midlane_flex_button {
+        margin-left: 4px;
+    }
+
     .main-container {
-        padding-top: 110px;
-        padding-left: 64px;
+        padding-top: 8vw;
+        padding-left: 4vw;
         width: 100vw;
         max-width: 100vw;
     }
@@ -36,7 +52,7 @@
         display: flex;
         flex-direction: row;
         gap: 12px;
-        width: 91vw;
+        width: calc(96vw - 17px);
     }
 
     .up_down_img_board {
@@ -67,9 +83,9 @@
     }
 }
 
-@media(max-width:388px) {
+@media(max-width:450px) {
     .input_button_container {
-        width: 245px;
+        width: 85vw;
     }
 }
 
