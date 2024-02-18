@@ -57,7 +57,7 @@ function autoFillLoginForm() {
       event.preventDefault();
       console.log('event');
     let emailInput = document.getElementById("email");      // Eingabe der E-Mail-Adresse und des Passworts aus den entsprechenden HTML-Elementen des Anmeldeformulars.
-    let passwordInput = document.getElementById("password");
+    let passwordInput = document.getElementById("passwordInput");
      let user = users.find(function(u) {                 // Suchen eines Benutzers mit der eingegebenen E-Mail-Adresse und dem eingegebenen Passwort in der Benutzerliste.
         return u.email === emailInput.value && u.password === passwordInput.value;
       });
@@ -69,7 +69,7 @@ function autoFillLoginForm() {
       //  getCurrentUser();                                // Abrufen und Verarbeiten der Daten des angemeldeten Benutzers (z.B. Anzeige des Benutzernamens).
        console.log('2 muss weitergeleitet werden');
       } else {                                              // Wenn kein Benutzer mit den eingegebenen Daten gefunden wurde:
-         moveElement();                                   // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
+        showUserPasswordMismatch();                                   // Durchführung einer visuellen Rückmeldung für ungültige Anmeldeinformationen (z.B. Schütteln des Eingabefelds).
         console.log('3 else');
       }
   }
@@ -94,19 +94,105 @@ function saveDataToLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data)); // Daten im lokalen Speicher unter dem angegebenen Schlüssel speichern
 }
 
-function showPasswordIcon() {
-  let password = document.getElementById('password');
-  let lockIMG = document.getElementById("eyeOffImg").classList;
-  let eye = document.getElementById('eyeImg').classList;
+function changePasswordInputIcon() {
+  let icon = document.querySelector(".passwordIcon");
+  let passwordInput = document.getElementById("passwordInput");
 
-  if (password.value.length > 0) {
-      lockIMG.add('hidden');
-      eye.remove('hidden');
+  passwordInput.addEventListener("blur", function () {
+    if (passwordInput.value.trim() === "") {
+      icon.src = "./assets/img/password_input.svg";
+    }
+  });
+  passwordInput.addEventListener("input", function () {
+    if (passwordInput.value.trim() === "") {
+      passwordInput.type = "password";
+      icon.src = "./assets/img/password_input.svg";
+    } else {
+      if (
+        passwordInput.type === "text" &&
+        !icon.src.includes("visibility.svg")
+      ) {
+        icon.src = "./assets/img/visibility.png";
+      } else if (
+        passwordInput.type === "password" &&
+        !icon.src.includes("visibility_off.png")
+      ) {
+        icon.src = "./assets/img/visibility_off.png";
+      }
+    }
+  });
+}
+
+function togglePasswordInputType() {
+  let icon = document.querySelector(".passwordIcon");
+  let passwordInput = document.getElementById("passwordInput");
+
+  if (passwordInput.type === "password") {
+    icon.src = "./assets/img/visibility.png";
+    passwordInput.type = "text";
   } else {
-      lockIMG.remove('hidden');
-      eye.add('hidden');
+    icon.src = "./assets/img/visibility_off.png";
+    passwordInput.type = "password";
   }
 }
+
+function showUserPasswordMismatch() {
+  let passwordInput = document.getElementById("passwordInput");
+  let passwordInvalidDiv = document.querySelector(".passwordInvalidDiv");
+  passwordInvalidDiv.textContent = "Incorrect Email adress or password.";
+  passwordInvalidDiv.classList.remove("hidden");
+  passwordInput.classList.add("alert");
+
+  let emailInput = document.getElementById("email");
+  let emailInvalidDiv = document.querySelector(".emailInvalid");
+  emailInvalidDiv.textContent = "Incorrect Email adress or password.";
+  emailInvalidDiv.classList.remove("hiden");
+  emailInput.classList.add("alert");
+}
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   var overlay = document.querySelector(".overlay");
+
+//   overlay.addEventListener("animationend", function () {
+//     overlay.remove();
+//   });
+// });
+
+
+// function showPasswordIcon() {
+//   let password = document.getElementById('password');
+//   let lock = document.getElementById("lock");
+//   let eye = document.getElementById('eyeOffImg');
+
+//   if (password.value.length > 0) {
+//       console.log('1');
+//       lock.classList.add('hidden');
+//       eye.classList.remove('hidden');
+//   } else {
+//     console.log('2');
+//       lock.classList.remove('hidden');
+//       eye.classList.add('hidden');
+//   }
+// }
+
+// function showPassword() {
+//   let inputfield = document.getElementById('password');
+//   let eye = document.getElementById('eyeOffImg');
+
+//   if (inputfield.type == "password") {
+    
+//     console.log('eye');
+//     inputfield.type = "text";
+//     eye.src = "./assets/img/visibility.png"; 
+     
+//   } 
+//   else {
+//     console.log('closAye');
+//     inputfield.type = "password"; 
+//     eye.src = "./assets/img/visibility_off.png";
+//     eye.classList.remove('hidden'); 
+//   }
+// }
 /*
 function moveElement() {
     let mailShake = document.getElementById("moveEmail");
@@ -132,7 +218,7 @@ function moveElement() {
   }
   */
 
-  function checkEmail() {
+  function checkEmailValidity() {
     const emailInput = document.getElementById("email");
     const emailError = document.querySelector(".emailInvalid");
     const email = emailInput.value.trim();
@@ -142,3 +228,16 @@ function moveElement() {
     emailError.classList.toggle("hidden", isValid);
     emailInput.classList.toggle("alert", !isValid);
   }
+
+  function checkPasswordValidity() {
+    let passwordInput = document.getElementById("passwordInput");
+    let passwordInvalidDiv = document.querySelector(".passwordInvalidDiv");
+  
+    if (passwordInput.value.length < 8 && passwordInput.value.length !== 0) {
+      showPasswordLengthInvalid();
+    } else {
+      passwordInvalidDiv.classList.add("hidden");
+      passwordInput.classList.remove("alert");
+    }
+  }
+  
