@@ -31,13 +31,13 @@
                                 oninput="filterTodosByTitle()">
                             <div class="ml-36">|</div>
                         </div>
-                        <button class="button_img ml36"><span class="add_task_button_text">Add task </span><b><img
+                        <button class="button_img ml36"><span class="add_task_button_text" onclick="openAddTaskOverlay('todos')">Add task </span><b><img
                                     src="./assets/img/boardbuttonplus.png" alt=""></b></button>
                     </div>
                 </div>
                 <div class="board_h1_button_container_handy">
                     <div class="flex w100p space-between button_img">
-                        <h1>Board</h1><button class="ml36"><span class="add_task_button_text">Add task </span><b><img
+                        <h1>Board</h1><button class="ml36" onclick="openAddTaskOverlay('todos')"><span class="add_task_button_text">Add task </span><b><img
                                     src="./assets/img/boardbuttonplus.png" alt=""></b></button>
                     </div>
                     <div class="input_button_container">
@@ -48,7 +48,7 @@
                 <div class="board_midlane_main_container">
                     <div class="flexi">
                         <div>
-                            <div class="midlane_flex_button">To do <button>+</button></div>
+                            <div class="midlane_flex_button">To do <button onclick="openAddTaskOverlay('todos')">+</button></div>
                         </div>
                         <div>
                             <div class="no_task_container, d-none">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="flexi">
                         <div>
-                            <div class="midlane_flex_button">In progress <button>+</button></div>
+                            <div class="midlane_flex_button">In progress <button onclick="openAddTaskOverlay('inprogress')">+</button></div>
                         </div>
                         <div>
                             <div class="no_task_container, d-none">
@@ -79,7 +79,7 @@
                     </div>
                     <div class="flexi">
                         <div>
-                            <div class="midlane_flex_button">Await feedback <button>+</button></div>
+                            <div class="midlane_flex_button">Await feedback <button onclick="openAddTaskOverlay('await')">+</button></div>
                         </div>
                         <div>
                             <div class="no_task_container, d-none">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="flexi">
                         <div>
-                            <div class="midlane_flex_button">Done <button>+</button></div>
+                            <div class="midlane_flex_button">Done <button onclick="openAddTaskOverlay('done')">+</button></div>
                         </div>
                         <div>
                             <div class="no_task_container, d-none">
@@ -110,16 +110,16 @@
                             </div>
                         </div>
                     </div>
-                    <div id="dialog_bg" class="user_story_dialog_background d-none">
-                        <div id="user_story_dialog" class="users_story_dialog dialog-slide-out">
+                    <div id="dialog_bg" class="user_story_dialog_background d-none" onclick="closeDialog()">
+                        <div id="user_story_dialog" class="users_story_dialog dialog-slide-out" onclick="doNotClose(event)">
                         </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
-    <div id="add-task-container" class="add-task-container center d-none">
-        <div id="add-task-div" class="add-task-div">
+    <div id="add-task-container" class="add-task-container center d-none" onclick="closeAddTaskOverlay()">
+        <div id="add-task-div" class="add-task-div" onclick="doNotClose(event)">
             <div class="main-div overflow">
                 <h1 class="add-task-title">Add Task</h1>
                 <form id="add-task-form" action="" class="ad-task-form column-space-between"
@@ -269,6 +269,7 @@
             </div>
         </div>
     </div>
+    <script src="./assets/js/add_task.js"></script>
 </body>
 
 </html>

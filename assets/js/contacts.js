@@ -5,12 +5,16 @@ let contactList = [];
 async function initContactList() {
     await init();
     await loadContactList();
+    // removeInvalidEntries(contactList);
     renderContactList();
-
+   
 }
 
 
-
+async function removeInvalidEntries(array) {
+    array.splice(9, 1); 
+    await setItem('contactList', JSON.stringify(contactList));
+}
 
 /**
  * Asynchronously loads the contact list from the backend storage.
@@ -36,25 +40,7 @@ async function loadContactList() {
  */
 function renderContactList() {
     document.getElementById('contact_list').innerHTML = ``;
-    document.getElementById('contact_list').innerHTML = `
-    <div class="contactlist_button_container">
-        <button onclick="showAddContactDialog()">
-            Add new contact <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
-        </button>
-    </div>
-    <div class="contact_list_container" id="contact_">
-    <div id="contact_list_initals" class="">
-    </div>
-    <div class="column gap8">
-        <div id="contact_list_name">
-            ${String(userName)}(Me)
-        </div>
-        <a id="contact_list_mail}">
-        </a>
-    </div>
-</div>
-    <div></div>
-    `;
+    renderContactlistTop();
     for (let i = 0; i < alphabet.length; i++) {
         const singleLetter = alphabet[i];
         document.getElementById('contact_list').innerHTML += `
@@ -71,6 +57,42 @@ function renderContactList() {
     renderContactsToList();
     renderInitialsOfUser();
 }
+
+function renderContactlistTop(){
+    document.getElementById('contact_list').innerHTML = `
+    <div class="contactlist_button_container">
+        <button onclick="showAddContactDialog()">
+            Add new contact <img src="./assets/contactbook/icons_contactbook/person_add.svg" alt="">
+        </button>
+    </div>
+    <div class="contact_list_container" id="contact_me" renderContact('me', 'me')>
+    <div id="contact_list_initals" class="">
+    </div>
+    <div class="column gap8">
+        <div id="contact_list_name">
+            ${userName}(Me)
+        </div>
+        <a id="contact_list_mail}">
+            ${userEmail}
+        </a>
+    </div>
+</div>
+    <div></div>
+    `;
+
+}
+
+function createCurrentUserForList(){
+    let contact = {
+        "name": String(userName),
+        "mail": userEmail,
+        "phone": " "
+    };
+    contactList.push(contact);
+    console.log('updated contactlist:', contactList);
+}
+
+
 
 function renderInitialsOfUser(){
 let { profileinitials, secondName } = getInitialsforUser(String(userName));

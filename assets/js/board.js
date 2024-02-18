@@ -3,10 +3,6 @@ async function boardInit() {
     await init();
     await getTodosForBoard();
     updateBoard();
-    document.getElementById('searchInput').addEventListener('input', filterTodos);
-    filterTodos();
-
-
 }
 
 let todoId;
@@ -180,7 +176,7 @@ function returnDialog(selectedTodo) {
         </div>
         <div class="user_story_delete_edit">
             <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
-                    <div>Delete</div>
+                    <div onclick="deleteTodo(event)">Delete</div>
                 </button></div>
             <div class="stripe"></div>
             <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt="">
@@ -338,5 +334,39 @@ function moveTodo(todoId, direction, event) {
         // Füge das Todo-Element in die nächste Spalte ein
         document.getElementById(nextCategory).appendChild(todoElement);
     }
-}    
+}
 
+
+function openAddTaskOverlay(category) {
+    if (window.innerWidth > 1000) {
+        document.getElementById('add-task-button').setAttribute('onclick', `startCreateTaskFromBoard(${category})`);
+        document.getElementById('add-task-container').classList.remove('d-none');
+    } else {
+        var url = 'add_task.html?category=' + category;
+        window.location.href = url;
+    }
+}
+
+async function startCreateTaskFromBoard(category) {
+    document.getElementById('add-task-container').classList.add('d-none');
+    await createTask(category);
+    document.getElementById('add-task-button').removeAttribute('onclick');
+}
+
+function closeAddTaskOverlay() {
+    document.getElementById('add-task-container').classList.add('d-none');
+    document.getElementById('add-task-button').removeAttribute('onclick');
+}
+
+
+function deleteTodo(event){
+event.stopPropagation();
+    let cleanId = clean.id;
+    let selectedTodoIndex = todo.findIndex(t => t.id == cleanId);
+    if(selectedTodoIndex !== -1){
+        todo.splice(selectedTodoIndex, 1);
+        upload()
+    }
+    closeDialog()
+    updateBoard()
+}
