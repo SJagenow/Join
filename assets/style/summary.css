@@ -563,8 +563,9 @@
     .mobile-summary-header {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 16px;
         width: 400px;
+        margin-bottom: 8px;
     }
 
     .mobile-toolName {
@@ -592,6 +593,7 @@
         /* position: absolute;  */
         max-width: 600px;
         box-sizing: border-box;
+        gap: 16px;
 
     }
 
@@ -611,6 +613,7 @@
 
     .summary-task-deadline {
         width: 396px;
+        gap: 24px;
     }
 
     .task-type {
@@ -635,4 +638,78 @@
         display: block;
         width: 50%;
     }
+}
+
+@media (min-width:318px) and (max-width: 430px) {
+    .summary-left {
+        align-items: center;
+        gap: 18px;
+        height: 505px;
+        justify-content: space-between;
+    }
+    
+    .summary-content {
+        display: block;
+        width: 100%;
+    }
+    
+    .summary-task {
+        width: 320px;
+        gap: 0px;
+    }
+    
+    .task-type {
+        width: 106px;
+        gap: 0px;
+        align-self: center;
+        height: 56px;
+    }
+    
+    .task-counter {
+        font-size: 45px;
+    }
+    
+    .task-description {
+        font-size: 15px;
+    }
+    
+    .summary-task-deadline {
+        width: 320px;
+        gap: 0px;
+    }
+    
+    .summary-todo {
+        width: 320px;
+        justify-content: flex-end;
+        gap: 0;
+    }
+    
+    .task-todo,
+    .task-done {
+        width: 160px;
+        height: 104px;
+        gap: 4px;
+    }
+    
+    .summary-task-deadline {
+        width: 320px;
+    }
+    
+    .mobile-summary-header {
+        gap: 27px;
+        width: 320px;
+    }
+
+    .todo-description{
+        font-size: 16px;
+    }
+    
+   .deadline{
+    align-items: center;
+   }
+
+   .urgent{
+    gap: 8px;
+   }
+    
 }
