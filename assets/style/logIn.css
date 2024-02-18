@@ -155,12 +155,14 @@
     flex-direction: column;
     align-items: center;
     padding: 32px 0px;
-    gap: 42px;
+    /* gap: 31px; */
     width: 396px;
     height: 171px;
     flex: none;
     flex-grow: 0;
-  }
+    justify-content: space-evenly;
+    height: 52%;
+}
   
   .mailPasswordInputField {
     display: flex;
@@ -338,7 +340,7 @@
   @media(max-width: 700px){
     .UserSignUp {
       top: unset;
-      bottom: 111.5px; 
+      bottom: 70px; 
       justify-content: center; 
       align-items: center;    
       left:10%;
