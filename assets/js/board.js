@@ -176,7 +176,7 @@ function returnDialog(selectedTodo) {
         </div>
         <div class="user_story_delete_edit">
             <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
-                    <div>Delete</div>
+                    <div onclick="deleteTodo(event)">Delete</div>
                 </button></div>
             <div class="stripe"></div>
             <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt="">
@@ -356,4 +356,17 @@ async function startCreateTaskFromBoard(category) {
 function closeAddTaskOverlay() {
     document.getElementById('add-task-container').classList.add('d-none');
     document.getElementById('add-task-button').removeAttribute('onclick');
+}
+
+
+function deleteTodo(event){
+event.stopPropagation();
+    let cleanId = clean.id;
+    let selectedTodoIndex = todo.findIndex(t => t.id == cleanId);
+    if(selectedTodoIndex !== -1){
+        todo.splice(selectedTodoIndex, 1);
+        upload()
+    }
+    closeDialog()
+    updateBoard()
 }
