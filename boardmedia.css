@@ -97,11 +97,17 @@
 
 @media(max-width:538px) {
     .users_story_dialog {
-        width: 50%;
+        width: 320px;
+        height: 70%;
+        align-self: center;
     }
 
     .user_story_delete_edit {
-        width: 290px;
-        margin-top: 0;
+        width: 250px;
+        margin-top: 16px;
+    }
+    
+    .user_story_headline{
+        font-size: 24px;
     }
 }

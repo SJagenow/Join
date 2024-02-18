@@ -264,17 +264,16 @@ body input {
 
 .users_story_dialog {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
     height: 80%;
     width: 420px;
     padding: 42px;
     flex-direction: column;
-    gap: 40px;
+    /* gap: 24px; */
     border-radius: 30px;
     background: #FFF;
     z-index: 9;
-    /* nuevo */
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
     margin-top: 45px;
 }
@@ -287,7 +286,7 @@ body input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 420px;
+    width: 100%;
 }
 
 
@@ -395,7 +394,7 @@ body input {
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
-    width: 420px;
+    width: 100%;
     margin-top: 20px;
 }
 

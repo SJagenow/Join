@@ -3,10 +3,6 @@ async function boardInit() {
     await init();
     await getTodosForBoard();
     updateBoard();
-    document.getElementById('searchInput').addEventListener('input', filterTodos);
-    filterTodos();
-
-
 }
 
 let todoId;
