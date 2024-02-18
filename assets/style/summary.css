@@ -168,7 +168,7 @@
 }
 
 .task-counter {
-    width: 41px;
+    /* width: 41px; */
     height: 77px;
     font-family: 'Inter';
     font-style: normal;
