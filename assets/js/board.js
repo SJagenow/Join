@@ -338,7 +338,7 @@ function moveTodo(todoId, direction, event) {
 
 function openAddTaskOverlay(category) {
     if (window.innerWidth > 1000) {
-        document.getElementById('add-task-button').setAttribute('onclick', `startCreateTaskFromBoard(${category})`);
+        document.getElementById('add-task-form').setAttribute('onsubmit', `startCreateTaskFromBoard("${category}"); return false`);
         document.getElementById('add-task-container').classList.remove('d-none');
     } else {
         var url = 'add_task.html?category=' + category;
@@ -349,12 +349,14 @@ function openAddTaskOverlay(category) {
 async function startCreateTaskFromBoard(category) {
     document.getElementById('add-task-container').classList.add('d-none');
     await createTask(category);
-    document.getElementById('add-task-button').removeAttribute('onclick');
+    clearTask();
+    boardInit();
+    document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
 function closeAddTaskOverlay() {
     document.getElementById('add-task-container').classList.add('d-none');
-    document.getElementById('add-task-button').removeAttribute('onclick');
+    document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
 

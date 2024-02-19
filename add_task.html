@@ -13,7 +13,8 @@
     <script src="./assets/js/storage.js"></script>
 </head>
 
-<body id="body" onload="initAddTask(),init()">
+<body id="body" onload="initAddTask(),init()"
+    onclick="closeFunction()">
     <div class="flex max-h">
         <div class="include-menu" w3-include-html="templates/menu.html"></div>
         <div class="main max-h">
@@ -35,7 +36,7 @@
                                     <textarea id="add-task-description" class="add-task-textarea" type="text"
                                         name="Description" placeholder="Enter a Description"></textarea>
                                 </div>
-                                <div class="column add-task-input-div">
+                                <div class="column add-task-input-div" onclick="doNotClose(event)">
                                     <div onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">
                                         <svg id="assignet-arrow" class="input-icon">
                                             <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
@@ -87,7 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column add-task-input-div">
+                                <div class="column add-task-input-div" onclick="doNotClose(event)">
                                     <div onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">
                                         <svg id="category-arrow" class="input-icon">
                                             <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
@@ -121,7 +122,7 @@
                                         <div style="height: 7px;"></div>
                                     </div>
                                 </div>
-                                <div class="column add-task-input-div">
+                                <div class="column add-task-input-div" onclick="doNotClose(event)">
                                     <label class="form-input-titel" for="add-task-subtasks">Subtasks</label>
                                     <input id="add-task-subtasks" class="add-task-input" onclick="openSubtask()"
                                         type="text" minlength="3" name="Subtasks" placeholder="Add new subtask">
