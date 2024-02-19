@@ -404,7 +404,7 @@ function clearTask() {
 
 
 async function startCreateTask() {
-    let category = 'todos'
+    let category = 'todos';
     let urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('category')) {
         category = urlParams.get('category');
