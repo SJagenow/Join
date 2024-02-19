@@ -260,8 +260,13 @@ function changePriority(prio) {
     }
 }
 
+function typeLabel() {
+    currentLabel = document.getElementById('add-task-category').value;
+    closeDropdownMenu('add-task-category-list-div', 'category-arrow');
+}
 
 function selectLabel(label) {
+    document.getElementById('add-task-category').value = `${label}`;
     currentLabel = document.getElementById('add-task-category').value;
     closeDropdownMenu('add-task-category-list-div', 'category-arrow');
 }
@@ -477,7 +482,7 @@ async function startCreateTask() {
 
 
 async function createTask(category) {
-    selectLabel();
+    typeLabel();
     tasks = JSON.parse(await getItem('tasks'));
     let task = {
         "id": tasks.length,
