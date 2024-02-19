@@ -64,6 +64,7 @@ function startDragging(todoId) {
 
 
 function generateTodo(clean) {
+
     let subtaskCount = 2;
     let progressWidth = (1 / subtaskCount) * 100;
     const todoId = `todo_${clean['id']}`;
@@ -73,9 +74,8 @@ function generateTodo(clean) {
         truncatedDescription += '...';
     }
 
-    let memberHtml = ''; // HTML für die Mitglieder
-
-    // Durchlaufe die Mitglieder des aktuellen Todos und erstelle das HTML für jedes Mitglied
+    let memberHtml = ''; 
+    
     for (let i = 0; i < clean.contacts.length; i++) {
         const member = clean.contacts[i];
         const { profileinitials, secondName } = getInitials(member);
@@ -136,11 +136,13 @@ function removeHighlight(todoId) {
 }
 
 async function renderDialog(selectedTodo) {
+    
     document.getElementById('user_story_dialog').innerHTML = returnDialog(selectedTodo);
     await renderMemberList(selectedTodo);
 }
 
 function returnDialog(selectedTodo) {
+    const prioImage = prioImg(selectedTodo["priority"]);
     return `
     <div class="user_story_label_x_contrainer">
         <div class="user_story">${selectedTodo['label']}<div></div>
@@ -157,7 +159,7 @@ function returnDialog(selectedTodo) {
     </div>
     <div class="user_story_priority">
         <div class="story_priority">Priority:</div>
-        <div class="user_priority">${selectedTodo['priority']}</div>
+        <div class="user_priority">${selectedTodo['priority']} <img id="Image${selectedTodo}" src="${prioImage}"> </div>
     </div>
     <div class="assigned_to_members_container">
         <div class="assigned_to">Assigned To:</div>
@@ -206,7 +208,7 @@ function getInitials(contact) {
     const firstName = words[0][0];
     const secondName = words[1] ? words[1][0] : '';
     const profileinitials = firstName + secondName;
-    return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
+    return { profileinitials, secondName };
 }
 
 
@@ -252,16 +254,16 @@ function filterTodosByTitle() {
 
 
 
-let subtaskCount = 2; // Anzahl der Subtasksgit
-let progressWidth = (1 / subtaskCount) * 100; // Breite der Fortschrittsanzeige in Prozent
+let subtaskCount = 2; 
+let progressWidth = (1 / subtaskCount) * 100; 
 document.getElementById('myBar').style.width = progressWidth + '%';
 
 
 function setProgress(value) {
-    // Stelle sicher, dass der Wert zwischen 0 und 100 liegt
+    
     value = Math.max(0, Math.min(100, value));
 
-    // Setze den Wert der Fortschrittsanzeige
+  
     document.getElementById('progress').style.width = value + "50%";
 }
 
@@ -282,16 +284,15 @@ if (window.screen.orientation) {
 
 
 function moveTodo(todoId, direction, event) {
-    event.stopPropagation(); // Stoppt die Ereignisweiterleitung, um das Klicken auf das Todo-Element zu verhindern
+    event.stopPropagation(); 
 
     const todoElement = document.getElementById(todoId);
     const parentElement = todoElement.parentNode;
     const index = Array.prototype.indexOf.call(parentElement.children, todoElement);
-    const category = parentElement.id; // Kategorie der aktuellen Spalte
+    const category = parentElement.id; 
 
     let nextCategory;
 
-    // Bestimme die Kategorie der nächsten Spalte basierend auf der Bewegungsrichtung
     if (direction === 'up') {
         switch (category) {
             case 'task_content_open':
@@ -322,15 +323,15 @@ function moveTodo(todoId, direction, event) {
         }
     }
 
-    // Wenn eine gültige nächste Kategorie vorhanden ist
+  
     if (nextCategory) {
-        // Ändere die Kategorie des Todos
+   
         todo['category'] = nextCategory;
 
-        // Entferne das Todo-Element aus der aktuellen Spalte
+      
         parentElement.removeChild(todoElement);
 
-        // Füge das Todo-Element in die nächste Spalte ein
+    
         document.getElementById(nextCategory).appendChild(todoElement);
     }
 }
@@ -378,14 +379,19 @@ event.stopPropagation();
 
 
 
+function prioImg(priority, selectedTodo) {
 
-function prioImg(){
-    if (priority === urgent){
-        return  }
+    document.getElementById(`Image${selectedTodo}`).innerHTML = '';
+    for (let i = 0; i < selectedTodo.priority.length; i++) {
+        const todoPrio = selectedTodo.priority[i];
+  
 
-    else if(priority === medium){
-        return  }
-        
-    else if(priority === low)
-    {return }
+        if (priority === 'urgent') {
+            document.getElementById(`Image${todoPrio}`).src = "../assets/img/icons/Heightprio.png";
+        } else if (priority === 'medium') {
+            document.getElementById(`Image${todoPrio}`).src = "../assets/img/icons/Mediumtprio.png";
+        } else if (priority === 'low') {
+            document.getElementById(`Image${todoPrio}`).src = "../assets/img/icons/Lowprio.png";
+        }
+    }
 }
