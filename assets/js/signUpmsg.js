@@ -1,9 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
-let msgBox = document.getElementById("msgBox");
+let msgBox = document.getElementById("signUpScreen");
 
 if (msg) {
-    msgBox.innerHTML = msg;
+    // msgBox.innerHTML = msg;
+    msgBox.classList.remove("hidden");
 } else {
-    document.getElementById("msgBox").classList.add("d-none");
+    msgBox.classList.add("hidden");
 }

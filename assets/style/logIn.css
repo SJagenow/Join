@@ -355,6 +355,12 @@
 .passwordIconDiv:hover {
   background-color: #0c2e621f;
 }
+.passwordIcon {
+  cursor: pointer;
+}
+.animationOut {
+  animation: fade-out 600ms ease-in-out;
+}
   @keyframes slide-join-logo {
     0% {
       top: calc(50vh - 211px);

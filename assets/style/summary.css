@@ -655,7 +655,7 @@
     
     .summary-task {
         width: 320px;
-        gap: 0px;
+        gap: 10px;
     }
     
     .task-type {
@@ -681,7 +681,7 @@
     .summary-todo {
         width: 320px;
         justify-content: flex-end;
-        gap: 0;
+        gap: 10px;
     }
     
     .task-todo,

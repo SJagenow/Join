@@ -8,39 +8,45 @@ let newID = 0;
 async function initSignUp() {
   users = JSON.parse(await getItem("users")) || [];
   // loadUsers();
-  validateSignUpButton();
-  // displaySignUpSuccessMessage();
+  // validateSignUpButton();
+   
 }
 
-function displaySignUpSuccessMessage() {
-  let screen = document.getElementById("signUpScreen");
-  screen.classList.add("hidden");
-  screen.classList.remove("hidden");
-}
+
 
 async function addUser() {
-  let name = document.getElementById('names').value;
-  let email = document.getElementById('emails').value;
-  let password = document.getElementById('passwords').value;
+  let nameInput = document.getElementById('names').value;
+  let emailInput = document.getElementById('emails').value;
+  let passwordInput = document.getElementById('password').value;
 
-  users.push({ name: name, email: email, password: password });
-  await setItem('users', JSON.stringify(users));
-  newID += newID + 1;
-  console.log(newID);
-  //weiterleitung zu Login-Seite
-  window.location.href = "./logIn.html";
-}
-
-async function validateSignUpButton() {
-  let signUpButton = document.getElementById("signUpBtn");
-  const isEnabled = isButtonEnabled();
-
-  if (isEnabled) {
-    signUpButton.removeAttribute("disabled");
-  } else {
-    signUpButton.setAttribute("disabled", "disabled");
+  let user = users.find(function(u) {                 
+        return u.email === emailInput && u.password === passwordInput && u.name === nameInput;
+  });
+  if (user) {
+    userExist()
   }
-}
+  else{
+    users.push({ name: nameInput, email: emailInput, password: passwordInput });
+    await setItem('users', JSON.stringify(users));
+    newID += newID;
+    console.log(newID);
+    //weiterleitung zu Login-Seite
+    displaySignUpSuccessMessage();
+    window.location.href = "./logIn.html";
+  }
+  }
+  
+
+// async function validateSignUpButton() {
+//   let signUpButton = document.getElementById("signUpBtn");
+//   const isEnabled = isButtonEnabled();
+
+//   if (isEnabled) {
+//     signUpButton.removeAttribute("disabled");
+//   } else {
+//     signUpButton.setAttribute("disabled", "disabled");
+//   }
+// }
 
 function checkName() {
   let input = document.getElementById("names");
@@ -52,27 +58,27 @@ function checkName() {
   input.classList.toggle("alert", !isValid);
 }
 
-function isButtonEnabled() {
-  const checkbox = document.getElementById("checkbox");
-  const nameField = document.getElementById("names");
-  const emailField = document.getElementById("emails");
-  const passwordField = document.getElementById("password");
-  const confirmPasswordInput = document.getElementById("confirmPW");
-  const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
-  const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
-  const hasNoWarning = !document.querySelector(".alert");
+// function isButtonEnabled() {
+//   const checkbox = document.getElementById("checkbox");
+//   const nameField = document.getElementById("names");
+//   const emailField = document.getElementById("emails");
+//   const passwordField = document.getElementById("password");
+//   const confirmPasswordInput = document.getElementById("confirmPW");
+//   const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
+//   const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
+//   const hasNoWarning = !document.querySelector(".alert");
 
-  const isEnabled =
-    checkbox.src.includes("checkbox-icon-selected.svg") && // suchen
-    nameField.value.trim() !== "" &&
-    emailField.value.trim() !== "" &&
-    passwordField.value.trim() !== "" &&
-    confirmPasswordInput.value.trim() !== "" &&
-    hasNoErrors &&
-    hasNoWarning;
+//   const isEnabled =
+//     checkbox.src.includes("checkbox-icon-selected.svg") && // suchen
+//     nameField.value.trim() !== "" &&
+//     emailField.value.trim() !== "" &&
+//     passwordField.value.trim() !== "" &&
+//     confirmPasswordInput.value.trim() !== "" &&
+//     hasNoErrors &&
+//     hasNoWarning;
 
-  return isEnabled;
-}
+//   return isEnabled;
+// }
 
 function togglePasswordIcon() {
   const icon = document.querySelector(".pwIcon");
@@ -199,4 +205,31 @@ function checkEmail() {
   emailError.textContent = isValid ? "" : "Please enter a valid email address!";
   emailError.classList.toggle("hidden", isValid);
   emailInput.classList.toggle("alert", !isValid);
+}
+
+function userExist() {
+  let emailInvalidDiv = document.querySelector(".emailInvalid");
+  let emailInput = document.getElementById("emails");
+  emailInvalidDiv.textContent =
+    "The provided email is already registered. Please choose another email address or log in with your existing account.";
+  emailInvalidDiv.classList.remove("hidden");
+  emailInput.classList.add("alert");
+}
+
+
+
+// function displaySignUpSuccessMessage() {
+//   let screen = document.getElementById("signUpScreen");
+//   screen.classList.remove('hidden');
+// }
+
+function displaySignUpSuccessMessage() {
+  let screen = document.getElementById("signUpScreen");
+  screen.classList.remove('hidden'); // Entfernen Sie die Klasse 'hidden', um das Element anzuzeigen
+  setTimeout(function() { 
+    screen.classList.add('animationOut'); // Fügen Sie die Klasse 'animationOut' hinzu, um die Ausblendanimation auszulösen
+    setTimeout(function() { 
+      screen.classList.add('hidden'); // Verstecken Sie das Element nach Abschluss der Animation
+    }, 600000); // Dauer der Ausblendanimation in Millisekunden
+  }, 300000); // Verzögerung, bevor die Ausblendanimation gestartet wird, in Millisekunden
 }
