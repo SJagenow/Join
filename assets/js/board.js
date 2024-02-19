@@ -373,10 +373,17 @@ function editTodo(event, i) {
     document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
     document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
     document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
+    document.getElementById('add-task-date-edit').value = `${todo[i].priority}`;
+    document.getElementById('add-task-date-edit').value = `${todo[i].label}`;
+    document.getElementById('add-task-date-edit').value = `${todo[i].label}`;
     // currentPrio,
     // category,
     // currentLabel,
     // subtasksArray,
+}
+
+function closeEditTodo() {
+    document.getElementById('add-task-container-edit').classList.add('d-none');
 }
 
 

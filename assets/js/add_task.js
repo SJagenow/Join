@@ -2,7 +2,16 @@ let contactList = [];
 let selectedUsers = [];
 let currentPrio = 'medium';
 let currentLabel = '';
-let subtasksArray = ['das ist ein subtask', 'das hier ist auch ein subtask wer weis denn sowas moin moin'];
+let subtasksArray = [
+    {
+        'task':'das ist ein subtask',
+        'done': false,
+    },
+    {
+        'task': 'das hier ist auch ein subtask wer weis denn sowas moin moin',
+        'done': false,
+    }
+];
 let tasks = [];
 let tasksBeispiel = [
     {
@@ -262,7 +271,7 @@ function renderSubtask() {
     let subtasks = document.getElementById('subtask-container');
     subtasks.innerHTML = '';
     for (let i = 0; i < subtasksArray.length; i++) {
-        const subtask = subtasksArray[i];
+        const subtask = subtasksArray[i].task;
         subtasks.innerHTML += /*html*/`
         <li id="single-subtask${i}" class="subbtask subbtask-hover" onmouseenter="subtaskEditButtonsOn(${i})" onmouseleave="subtaskEditButtonsOut(${i})" onclick="focusSubtask(${i})">
             <span id="single-subtask-txt${i}" contenteditable="true" class="subbtask-span" value="${subtask}">${subtask}</span>
@@ -283,9 +292,13 @@ function handleEnterKey(event) {
 
 
 function addSubtask() {
-    let subtaskInput = document.getElementById('add-task-subtasks');
+    let subtaskInput = document.getElementById('add-task-subtasks')
+    let subtaskInputArray = {
+        'task': subtaskInput.value,
+        'done': false,
+    };
     if (subtaskInput.value.length >= 3) {
-        subtasksArray.push(subtaskInput.value);
+        subtasksArray.push(subtaskInputArray);
         initAddTask();
         subtaskInput.value = "";
         closeSubtask();
