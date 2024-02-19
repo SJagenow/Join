@@ -253,7 +253,6 @@ function changePriority(prio) {
 
 
 function selectLabel(label) {
-    document.getElementById('add-task-category').value = `${label}`;
     currentLabel = document.getElementById('add-task-category').value;
     closeDropdownMenu('add-task-category-list-div', 'category-arrow');
 }
@@ -465,6 +464,7 @@ async function startCreateTask() {
 
 
 async function createTask(category) {
+    selectLabel();
     tasks = JSON.parse(await getItem('tasks'));
     let task = {
         "id": tasks.length,

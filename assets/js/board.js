@@ -20,9 +20,6 @@ async function getTodosForBoard() {
     console.log(todo);
 }
 
-
-
-
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
 
@@ -89,19 +86,19 @@ function generateTodo(clean) {
     }
 
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
-      <div class="arrow_flex">
+    <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
-          <button id="updown_arrow" class="d-none" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-          <button id="updown_arrow_two" class="d-none"  onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+        <button id="updown_arrow" class="d-none" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+        <button id="updown_arrow_two" class="d-none"  onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
         </div>
-      </div>
-      <div class="card_title">${clean['title']}</div>
-      <div class="card_description">${truncatedDescription}</div>
-      <div id="myProgress">
-          <div id="myBar" style="width: ${progressWidth}%;"></div>
-          <div><span>Subtask 1/2</span></div>
-      </div>
+    </div>
+    <div class="card_title">${clean['title']}</div>
+    <div class="card_description">${truncatedDescription}</div>
+    <div id="myProgress">
+        <div id="myBar" style="width: ${progressWidth}%;"></div>
+        <div><span>Subtask 1/2</span></div>
+    </div>
         <div class ="space-between w100p">
             <div class="member_flex" id="members_${todoId}">
                 ${memberHtml}
@@ -180,7 +177,6 @@ async function returnDialog(selectedTodo, selectedTodoID) {
             <div>Subtasks</div>
             <div class="subtask_center" id="subtaskContainer" ><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe
                     Recommendation</span></div>
-           
         </div>
         <div class="user_story_delete_edit">
             <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
@@ -191,7 +187,7 @@ async function returnDialog(selectedTodo, selectedTodoID) {
                     <div>Edit</div>
                 </button></div>
         </div>
-      `;
+    `;
 
 }
 
@@ -328,16 +324,9 @@ function moveTodo(todoId, direction, event) {
                 nextCategory = null;
         }
     }
-
-
     if (nextCategory) {
-
         todo['category'] = nextCategory;
-
-
         parentElement.removeChild(todoElement);
-
-
         document.getElementById(nextCategory).appendChild(todoElement);
     }
 }
@@ -412,6 +401,4 @@ async function renderSubtaskDialog() {
             document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img  src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
         }
     }
-
-
-}   
+}
