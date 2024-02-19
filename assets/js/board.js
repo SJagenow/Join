@@ -180,7 +180,7 @@ async function returnDialog(selectedTodo, selectedTodoID) {
         </div>
         <div class="user_story_delete_edit">
             <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
-                    <div onclick="deleteTodo(event)">Delete</div>
+                    <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
             <div class="user_story_delete_edit_two"><button onclick="editTodo" event><img src="./assets/img/edit.png" alt="">
@@ -363,22 +363,18 @@ function closeAddTaskOverlay() {
 }
 
 
-function deleteTodo(event){
-event.stopPropagation();
-    let cleanId = clean.id;
-    let selectedTodoIndex = todo.findIndex(t => t.id == cleanId);
-    if(selectedTodoIndex !== -1){
-        todo.splice(selectedTodoIndex, 1);
-        upload()
-    }
-    closeDialog()
-    updateBoard()
+function deleteTodo(event, ID){
+    event.stopPropagation();
+    todo.splice(ID, 1);
+    upload();
+    closeDialog();
+    updateBoard();
 }
+
 
 function editTodo(event) {
 event.stopPropagation();
 }
-
 
 
 async function prioImg(priority, selectedTodoID) {
