@@ -1,5 +1,6 @@
-let userName = JSON.parse(localStorage.getItem("currentUserName"));
-let userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
+let userName;
+let userEmail;
+
 
 async function init() {
     await includeHTML();
@@ -22,11 +23,17 @@ async function includeHTML() {
 }
 
 async function getCurrentUser() {
-    let userName = JSON.parse(localStorage.getItem("currentUserName"));
-    let userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
+  userName = JSON.parse(localStorage.getItem("currentUserName"));
+  userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
+  if (userName) {
+    console.log(userName);
+  } else {
+    userName = 'Guest';
+    userEmail = 'guest@test.de'
     console.log(userName, userEmail);
-    let { profileinitials } = getInitialsforHeader(userName);
-    document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
+  }
+  let { profileinitials } = getInitialsforHeader(userName);
+  document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
 }
 
 function getInitialsforHeader(contact) {

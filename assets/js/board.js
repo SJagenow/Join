@@ -142,7 +142,7 @@ async function renderDialog(selectedTodo, selectedTodoID) {
     document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
     await prioImg(selectedTodo["priority"], selectedTodoID);
     await renderMemberList(selectedTodo);
-    await renderSubtaskDialog();
+    await renderSubtaskDialog(selectedTodo);
 }
 
 async function returnDialog(selectedTodo, selectedTodoID) {
@@ -399,13 +399,11 @@ async function prioImg(priority, selectedTodoID) {
     }
 }
 
-async function renderSubtaskDialog() {
+async function renderSubtaskDialog(selectedTodo) {
     document.getElementById('subtaskContainer').innerHTML = '';
-    for (let i = 0; i < todo.length; i++) {
-        const task = todo[i];
-        for (let j = 0; j < task.subtasks.length; j++) {
-            const subtask = task.subtasks[j];
-            document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img  src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
-        }
+    for (let i = 0; i < selectedTodo.subtasks.length; i++) {
+        const subtask = selectedTodo.subtasks[i];
+        document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img  src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
+
     }
 }

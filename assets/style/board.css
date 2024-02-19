@@ -1761,14 +1761,14 @@ body {
 }
 
 .subbtask_subspan {
-
+    align-items: center;
     border-radius: 10px;
     border: none;
     display: flex;
     transition: background-color 125ms ease-in-out;
     width: 300px;
     gap: 12px;
-    height: 64px;
+    /* height: 64px; */
 }
 
 #subtaskContainer{

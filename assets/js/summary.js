@@ -17,12 +17,15 @@ async function getTodosForBoard() {
 async function getCurrentUser() {
   let userName = JSON.parse(localStorage.getItem("currentUserName"));
   let summaryUserName = document.getElementById('summary-userName');
-  console.log(userName);
+  
 
   if (userName) {
     summaryUserName.textContent = userName;
+    console.log(userName);
   } else {
-    summaryUserName.textContent = `Guest`;
+    userName = 'Guest';
+    summaryUserName.textContent = `${userName}`;
+    console.log(userName);
   }
   let { profileinitials } = getInitials(userName);
   document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
