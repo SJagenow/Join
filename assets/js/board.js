@@ -148,7 +148,7 @@ function returnDialog(selectedTodo) {
         </div>
         <button onclick="closeDialog()">X</button>
     </div>
-    <div class="user_story_headline">
+    <div id="todo-title" class="user_story_headline">
         <div> ${selectedTodo['title']} </div>
     </div>
     <div class="user_story_description">${selectedTodo['description']}</div>
@@ -178,10 +178,10 @@ function returnDialog(selectedTodo) {
         </div>
         <div class="user_story_delete_edit">
             <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
-                    <div onclick="deleteTodo(event)">Delete</div>
+                    <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button onclick="editTodo" event><img src="./assets/img/edit.png" alt="">
+            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
         </div>
@@ -360,22 +360,30 @@ function closeAddTaskOverlay() {
 }
 
 
-function deleteTodo(event){
-event.stopPropagation();
-    let cleanId = clean.id;
-    let selectedTodoIndex = todo.findIndex(t => t.id == cleanId);
-    if(selectedTodoIndex !== -1){
-        todo.splice(selectedTodoIndex, 1);
-        upload()
-    }
-    closeDialog()
-    updateBoard()
+function deleteTodo(event, ID){
+    event.stopPropagation();
+    todo.splice(ID, 1);
+    upload();
+    closeDialog();
+    updateBoard();
 }
 
-function editTodo(event) {
-event.stopPropagation();
-}
 
+function editTodo(event, i) {
+    event.stopPropagation();
+    document.getElementById('add-task-container-edit').classList.remove('d-none');
+    todo[i];
+
+
+    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
+    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
+    // selectedUsers;
+    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
+    // currentPrio,
+    // category,
+    // currentLabel,
+    // subtasksArray,
+}
 
 
 function prioImg(priority, selectedTodo) {

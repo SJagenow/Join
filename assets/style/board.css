@@ -1278,6 +1278,174 @@ header {
     gap: 48px;
 }
 
+
+/* edit todos */
+
+.main-div-edit {
+    height: calc(80vh - 180px);
+    max-height: 660px;
+    overflow: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-task-submit-container-edit {
+    width: 50vw;
+    max-width: 976px;
+    position: absolute;
+    bottom: 40px;
+    min-width: 396px;
+}
+
+.add-task-title-edit {
+    width: 50vw;
+    margin-bottom: 38px;
+    min-width: 396px;
+}
+
+.gap48-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.seperator-edit {
+    display: none;
+}
+
+.add-task-input-div-edit {
+    width: 50vw;
+    min-width: 440px;
+    position: relative;
+}
+
+.add-task-prio-button-edit {
+    height: 41px;
+    width: 121.33px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    background-color: white;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: box-shadow 80ms ease-in;
+}
+
+.add-task-prio-button-edit svg {
+    width: 20px;
+    margin-left: 4px;
+}
+
+.add-task-buttons-div-edit {
+    justify-content: flex-end;
+    display: flex;
+    gap: 16px;
+}
+
+.form-input-titel-edit {
+    font-size: 20px;
+    color: #2A3647;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+
+.conditions-text-edit::before {
+    content: "*";
+    color: #FF8190;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.asterisk-edit::after {
+    content: "*";
+    color: #FF8190;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.add-task-input-edit {
+    height: 48px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    font-size: 20px;
+    padding-left: 21px;
+    outline-width: 0px;
+}
+
+.add-task-textarea-edit {
+    height: 120px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    margin-bottom: 28px;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    padding-left: 21px;
+    padding-top: 19px;
+    outline-width: 0px;
+}
+
+.add-task-select-edit {
+    height: 48px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    font-size: 20px;
+    margin-bottom: 28px;
+    padding-left: 21px;
+    outline-width: 0px;
+}
+
+.add-task-prio-button-edit {
+    font-size: 20px;
+    height: 56px;
+    width: 136px;
+    border-radius: 10px;
+    border: #D1D1D1 solid 1px;
+    background-color: white;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: box-shadow 80ms ease-in;
+}
+
+.input-icon-edit {
+    position: absolute;
+    z-index: 10;
+    display: inline-block;
+    right: 16px;
+    top: 47px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    background-color: transparent;
+    border-radius: 50px;
+    padding: 8px;
+}
+
+#subbtask-input-icon-edit {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    transform: translateY(190%);
+}
+
+#subbtask-input-icon-edit svg {
+    height: 24px;
+    width: 24px;
+    transition: all 0.15s ease-in-out;
+}
+
+
 @media (max-width: 1400px) {
     /* .main-container {
         padding-left: 0;
