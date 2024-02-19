@@ -65,10 +65,22 @@ function startDragging(todoId) {
 
 
 function generateTodo(clean) {
-    let maxSubtask = clean.subtasks.length;
-    let subTaskDone = clean.subtasks.done;
-    let subTasksDone = todo.filter(t => t['subtasks'].done == '');
-    let subtaskCount;
+    todo.forEach(task => {
+        // Initialisiere die Anzahl der erledigten Subtasks auf 0
+        let subTasksDone = 0;
+    
+        // Iteriere über jede Subtask-Gruppe des aktuellen Tasks
+        task.subtasks.forEach(subtaskGroup => {
+                // Prüfe, ob der Subtask erledigt ist (done === true)
+                if (subtaskGroup.done === true) {
+                    subTasksDone++;
+                }
+        
+        });
+    
+        // Gib die Anzahl der erledigten Subtasks für den aktuellen Task aus
+        console.log(`Task mit der ID ${task.id} hat ${subTasksDone} erledigte Subtasks.`);
+    })
     let progressWidth = (1 / subtaskCount) * 100;
     const todoId = `todo_${clean['id']}`;
     let descriptionWords = clean['description'].split(' ');
