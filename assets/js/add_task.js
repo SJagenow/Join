@@ -274,6 +274,15 @@ function renderSubtask() {
 }
 
 
+function handleEnterKey(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        event.target.blur();
+        addSubtask();
+    }
+}
+
+
 function addSubtask() {
     let subtaskInput = document.getElementById('add-task-subtasks');
     if (subtaskInput.value.length >= 3) {
@@ -372,7 +381,7 @@ function focusSubtask(i) {
 }
 
 
-function focusSubtaskfromBoard () {
+function focusSubtaskfromBoard() {
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
     document.getElementById('main-div').setAttribute('onclick', `closeFunction(); startOnClickOutside(${i})`)
