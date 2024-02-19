@@ -9,6 +9,10 @@ async function boardInit() {
 let todoId;
 let clean;
 let todo = [];
+let currentDraggedElement;
+let subtaskCount = 2; 
+let progressWidth = (1 / subtaskCount) * 100; 
+document.getElementById('myBar').style.width = progressWidth + '%';
 
 
 async function getTodosForBoard() {
@@ -17,7 +21,7 @@ async function getTodosForBoard() {
 }
 
 
-let currentDraggedElement;
+
 
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
@@ -141,6 +145,7 @@ async function renderDialog(selectedTodo, selectedTodoID) {
     document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
     await prioImg(selectedTodo["priority"], selectedTodoID);
     await renderMemberList(selectedTodo);
+    await renderSubtaskDialog();
 }
 
 async function returnDialog(selectedTodo, selectedTodoID) {
@@ -173,10 +178,9 @@ async function returnDialog(selectedTodo, selectedTodoID) {
         </div>
         <div class="user_story_Subtasks">
             <div>Subtasks</div>
-            <div class="subtask_center"><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe
+            <div class="subtask_center" id="subtaskContainer" ><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe
                     Recommendation</span></div>
-            <div class="subtask_center"> <img src="./assets/img/checkbox.png" alt=""> <span>Start Page
-                    Layout</span></div>
+           
         </div>
         <div class="user_story_delete_edit">
             <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
@@ -195,10 +199,11 @@ async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
     for (let i = 0; i < selectedTodo.contacts.length; i++) {
         const member = selectedTodo.contacts[i];
-        const { profileinitials, secondName } = getInitials(member);
+        const { profileinitials, secondName} = getInitials(member);
                console.log(member);
         document.getElementById('board_member_content').innerHTML += `
-    <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+   <div class="task_name_container"> <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+    <div>${member}</div></div>
     `;
     }
 }
@@ -209,7 +214,7 @@ function getInitials(contact) {
     const firstName = words[0][0];
     const secondName = words[1] ? words[1][0] : '';
     const profileinitials = firstName + secondName;
-    return { profileinitials, secondName };
+    return { profileinitials, secondName};
 }
 
 
@@ -219,6 +224,7 @@ function openDialog(todoId) {
     let selectedTodoID = selectedTodo.id;
     document.getElementById('dialog_bg').classList.remove('d-none');
     renderDialog(selectedTodo, selectedTodoID);
+   
 }
 
 
@@ -256,13 +262,11 @@ function filterTodosByTitle() {
 
 
 
-let subtaskCount = 2; 
-let progressWidth = (1 / subtaskCount) * 100; 
-document.getElementById('myBar').style.width = progressWidth + '%';
+
 
 
 function setProgress(value) {
-    
+
     value = Math.max(0, Math.min(100, value));
 
   
@@ -376,11 +380,9 @@ function editTodo(event, i) {
     event.stopPropagation();
     document.getElementById('add-task-container-edit').classList.remove('d-none');
     todo[i];
-
-
     document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
     document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
-    // selectedUsers;
+    document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
     document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
     // currentPrio,
     // category,
@@ -400,3 +402,16 @@ async function prioImg(priority, selectedTodoID) {
         document.getElementById(`Image`).src = "../assets/img/icons/Lowprio.png";
     }
 }
+
+async function renderSubtaskDialog() {
+document.getElementById('subtaskContainer').innerHTML='';
+for (let i = 0; i < todo.length; i++) {
+    const task = todo[i];
+    for (let j = 0; j <task.subtasks.length; j++) {
+        const subtask = task.subtasks[j];
+        document.getElementById('subtaskContainer').innerHTML+=`  <div class="subbtask_subspan"><img  src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
+    }
+}
+
+
+}   

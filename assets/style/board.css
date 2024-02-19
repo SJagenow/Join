@@ -472,11 +472,16 @@ body input {
     align-items: center;
     gap: 12px;
     padding-top: 15px;
+    margin-left: 12px;
+ 
 }
 
 .subtask_center img {
     object-fit: cover;
-    width: 18px;
+    width: 16px;
+    height: 16px;
+   align-self: center;
+    
 }
 
 .postion_mid-bot-container {
@@ -710,7 +715,7 @@ body input {
 #board_member_content {
     display: flex;
     flex-direction: column;
-    padding-left: 18px;
+    padding-left: 8px;
 }
 
 .member_flex {
@@ -1753,4 +1758,30 @@ header {
 
 body {
     overflow: hidden;
+}
+
+.subbtask_subspan {
+
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    transition: background-color 125ms ease-in-out;
+    width: 300px;
+    gap: 12px;
+    height: 64px;
+}
+
+#subtaskContainer{
+    display: flex;
+    align-items: flex-start;
+    padding-top: 15px;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 160px;
+}
+
+.task_name_container {
+  display: flex;
+  align-items: center;
+  gap:16px;  
 }
