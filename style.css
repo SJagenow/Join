@@ -492,7 +492,7 @@ Not supports in Firefox and IE */
 ::-webkit-scrollbar {
     background-color: #fff;
     width: 14x;
-    height: 14px;
+    height: 0px;
 }
 
 ::-webkit-scrollbar-thumb {
