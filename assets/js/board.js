@@ -3,6 +3,7 @@ async function boardInit() {
     await init();
     await getTodosForBoard();
     updateBoard();
+    initAddTask();
 }
 
 let todoId;
@@ -103,7 +104,8 @@ function generateTodo(clean) {
             </div>
             <div class="prio_icon_containers">
                 <svg width="22" height="20">
-                    <use xlink:href="./assets/img/icons/height-prio-icon.svg#height-prio-icon" fill="red"></use>
+        const member = clean.contacts[i];
+                    <use href="assets/img/icons.svg#${clean.priority}-prio-icon-for-board"></use>
                 </svg>
             </div>
         </div>
@@ -134,14 +136,14 @@ function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
-async function renderDialog(selectedTodo) {
+async function renderDialog(selectedTodo, selectedTodoID) {
     
-    document.getElementById('user_story_dialog').innerHTML = returnDialog(selectedTodo);
+    document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
+    await prioImg(selectedTodo["priority"], selectedTodoID);
     await renderMemberList(selectedTodo);
 }
 
-function returnDialog(selectedTodo) {
-    const prioImage = prioImg(selectedTodo["priority"]);
+async function returnDialog(selectedTodo, selectedTodoID) {
     return `
     <div class="user_story_label_x_contrainer">
         <div class="user_story">${selectedTodo['label']}<div></div>
@@ -158,7 +160,7 @@ function returnDialog(selectedTodo) {
     </div>
     <div class="user_story_priority">
         <div class="story_priority">Priority:</div>
-        <div class="user_priority">${selectedTodo['priority']} <img id="Image${selectedTodo}" src="${prioImage}"> </div>
+        <div class="user_priority">${selectedTodo['priority']} <img id="Image" src=""> </div>
     </div>
     <div class="assigned_to_members_container">
         <div class="assigned_to">Assigned To:</div>
@@ -214,8 +216,9 @@ function getInitials(contact) {
 function openDialog(todoId) {
     let id = todoId.split('_')[1];
     let selectedTodo = todo.find(t => t.id == id);
+    let selectedTodoID = selectedTodo.id;
     document.getElementById('dialog_bg').classList.remove('d-none');
-    renderDialog(selectedTodo);
+    renderDialog(selectedTodo, selectedTodoID);
 }
 
 
@@ -386,19 +389,14 @@ function editTodo(event, i) {
 }
 
 
-function prioImg(priority, selectedTodo) {
-
-    document.getElementById(`Image${selectedTodo}`).innerHTML = '';
-    for (let i = 0; i < selectedTodo.priority.length; i++) {
-        const todoPrio = selectedTodo.priority[i];
-  
-
-        if (priority === 'urgent') {
-            document.getElementById(`Image${todoPrio}`).src = "../assets/img/icons/Heightprio.png";
-        } else if (priority === 'medium') {
-            document.getElementById(`Image${todoPrio}`).src = "../assets/img/icons/Mediumtprio.png";
-        } else if (priority === 'low') {
-            document.getElementById(`Image${todoPrio}`).src = "../assets/img/icons/Lowprio.png";
-        }
+async function prioImg(priority, selectedTodoID) {
+    console.log(selectedTodoID);
+    document.getElementById(`Image`).innerHTML = '';
+    if (priority === 'urgent') {
+        document.getElementById(`Image`).src = "../assets/img/icons/Heightprio.png";
+    } else if (priority === 'medium') {
+        document.getElementById(`Image`).src = "../assets/img/icons/Mediumprio.png";
+    } else if (priority === 'low') {
+        document.getElementById(`Image`).src = "../assets/img/icons/Lowprio.png";
     }
 }
