@@ -269,6 +269,157 @@
             </div>
         </div>
     </div>
+    <div id="add-task-container-edit" class="add-task-container center d-none" onclick="closeAddTaskOverlay()">
+        <div id="add-task-div" class="add-task-div" onclick="doNotClose(event)">
+            <div id="main-div" class="main-div-edit overflow" onclick="closeFunction()">
+                <h1 class="add-task-title-edit">Add Task</h1>
+                <form id="add-task-form" action="" class="ad-task-form column-space-between"
+                    onsubmit="startCreateTask('todos'); return false">
+                    <div class="gap48-edit">
+                        <div class="add-task-input-div-edit">
+                            <div class="column add-task-input-div-edit">
+                                <label class="form-input-titel-edit asterisk-edit" for="add-task-title-edit">Title</label>
+                                <input id="add-task-title-edit" class="add-task-input-edit mb28" type="text" name="Title"
+                                    required placeholder="Enter a title">
+                            </div>
+                            <div class="column add-task-input-div-edit">
+                                <label class="form-input-titel-edit" for="add-task-description-edit">Description</label>
+                                <textarea id="add-task-description-edit" class="add-task-textarea-edit" type="text"
+                                    name="Description" placeholder="Enter a Description"></textarea>
+                            </div>
+                            <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
+                                <div onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">
+                                    <svg id="assignet-arrow" class="input-icon-edit">
+                                        <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
+                                    </svg>
+                                </div>
+                                <label class="form-input-titel-edit" for="add-task-assignet-to-edit"
+                                    onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">Assignet
+                                    to</label>
+                                <input id="add-task-assignet-to-edit" class="add-task-select-edit arrow-icon"
+                                    onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')"
+                                    onkeyup="filterContactsForAddTask()" type="text"
+                                    placeholder="Select contacts to assign">
+                                <div id="add-task-contact-div" class="dropdown-menu-div d-none">
+                                    <div style="height: 9px;"></div>
+                                    <div id="add-task-contact" class="dropdown-menu"></div>
+                                    <div style="height: 7px;"></div>
+                                </div>
+                            </div>
+                            <div id="contacts-div"></div>
+                        </div>
+                        <div class="seperator-edit"></div>
+                        <div>
+                            <div class="column add-task-input-div-edit">
+                                <label class="form-input-titel-edit asterisk-edit" for="add-task-date">Due date</label>
+                                <input id="add-task-date-edit" class="add-task-input-edit mb28" type="date" name="Due date"
+                                    min="" required placeholder="dd//mm//yyyy">
+                            </div>
+                            <div class="column add-task-input-div-edit">
+                                <h2 class="form-input-titel-edit">Prio</h2>
+                                <div class="space-between gap8" id="prio-div">
+                                    <div id="prio-button-urgent-edit" class="add-task-prio-button-edit"
+                                        onclick="changePriority('urgent')">
+                                        Urgent
+                                        <svg viewBox="0 0 21 16">
+                                            <use href="assets/img/icons.svg#height-prio-icon"></use>
+                                        </svg>
+                                    </div>
+                                    <div id="prio-button-medium-edit" class="add-task-prio-button-edit medium"
+                                        onclick="changePriority('medium')">Medium
+                                        <svg viewBox="0 0 21 16">
+                                            <use href="assets/img/icons.svg#medium-prio-icon"></use>
+                                        </svg>
+                                    </div>
+                                    <div id="prio-button-low-edit" class="add-task-prio-button-edit"
+                                        onclick="changePriority('low')">Low
+                                        <svg viewBox="0 0 21 16">
+                                            <use href="assets/img/icons.svg#low-prio-icon"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
+                                <div onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">
+                                    <svg id="category-arrow" class="input-icon-edit">
+                                        <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
+                                    </svg>
+                                </div>
+                                <h2 class="form-input-titel-edit asterisk-edit"
+                                    onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">
+                                    Category</h2>
+                                <input id="add-task-category-edit" class="add-task-input-edit add-task-select-edit arrow-icon"
+                                    onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')"
+                                    type="text" placeholder="Select task category"
+                                    pattern="(Technical Task|User Story|HTML|CSS|JS|Testing)"
+                                    title="Gültige Werte: Technical Task, User Story, HTML, CSS, JS, Testing"
+                                    required>
+                                <div id="add-task-category-list-div-edit" class="dropdown-menu-div d-none">
+                                    <div style="height: 9px;"></div>
+                                    <div id="add-task-category-list" class="dropdown-menu">
+                                        <div id="task-label-technical" class="add-task-single"
+                                            onclick="selectLabel('Technical Task')">Technical Task</div>
+                                        <div id="task-label-user" class="add-task-single"
+                                            onclick="selectLabel('User Story')">User Story</div>
+                                        <div id="task-label-html" class="add-task-single"
+                                            onclick="selectLabel('HTML')">HTML</div>
+                                        <div id="task-label-css" class="add-task-single"
+                                            onclick="selectLabel('CSS')">CSS</div>
+                                        <div id="task-label-js" class="add-task-single" onclick="selectLabel('JS')">
+                                            JS</div>
+                                        <div id="task-label-tesig" class="add-task-single"
+                                            onclick="selectLabel('Testing')">Testing</div>
+                                    </div>
+                                    <div style="height: 7px;"></div>
+                                </div>
+                            </div>
+                            <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
+                                <label class="form-input-titel-edit" for="add-task-subtasks-edit">Subtasks</label>
+                                <input id="add-task-subtasks-edit" class="add-task-input-edit" onclick="openSubtask()"
+                                    type="text" minlength="3" name="Subtasks" placeholder="Add new subtask">
+                                <div id="subbtask-input-icon-edit">
+                                    <button type="button" id="add-subtask-button" formnovalidate
+                                        onclick="openSubtask()">
+                                        <svg class="subtask-icons">
+                                            <use href="assets/img/icons.svg#plus-add-icon"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <ul id="subtask-container">
+                                    <li class="subbtask" contenteditable="true">
+                                        <span>das ist ein subtask</span>
+                                    </li>
+                                    <li class="subbtask" contenteditable="true">
+                                        das hier ist auch ein subtask wer weis denn sowas moin moin
+                                        <div>
+                                            <svg class="subtask-icons">
+                                                <use href="assets/img/icons.svg#x-icon"></use>
+                                            </svg>
+                                            <svg class="subtask-icons">
+                                                <use href="assets/img/icons.svg#hook-icon"></use>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-between add-task-submit-container-edit">
+                        <div class="conditions-text-edit">This field is required</div>
+                        <div class="add-task-buttons-div-edit">
+                            <button id="clear-task-button" class="parrent-button-light" onclick="clearTask()"
+                                type="reset">Clear &#10006;</button>
+                            <button id="add-task-button" class="parrent-button-dark" type="submit">Create Task
+                                <svg>
+                                    <use href="assets/img/icons.svg#hook-icon"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="./assets/js/add_task.js"></script>
 </body>
 

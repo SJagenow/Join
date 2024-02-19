@@ -150,7 +150,7 @@ async function returnDialog(selectedTodo, selectedTodoID) {
         </div>
         <button onclick="closeDialog()">X</button>
     </div>
-    <div class="user_story_headline">
+    <div id="todo-title" class="user_story_headline">
         <div> ${selectedTodo['title']} </div>
     </div>
     <div class="user_story_description">${selectedTodo['description']}</div>
@@ -183,7 +183,7 @@ async function returnDialog(selectedTodo, selectedTodoID) {
                     <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button onclick="editTodo" event><img src="./assets/img/edit.png" alt="">
+            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
         </div>
@@ -372,8 +372,20 @@ function deleteTodo(event, ID){
 }
 
 
-function editTodo(event) {
-event.stopPropagation();
+function editTodo(event, i) {
+    event.stopPropagation();
+    document.getElementById('add-task-container-edit').classList.remove('d-none');
+    todo[i];
+
+
+    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
+    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
+    // selectedUsers;
+    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
+    // currentPrio,
+    // category,
+    // currentLabel,
+    // subtasksArray,
 }
 
 
