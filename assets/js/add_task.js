@@ -345,6 +345,7 @@ function onClickOutside(element, i) {
     });
 }
 
+
 function startOnClickOutside(i) {
     const myElement = document.getElementById(`single-subtask${i}`);
     onClickOutside(myElement, i);
@@ -355,6 +356,25 @@ function focusSubtask(i) {
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
     document.getElementById('body').setAttribute('onclick', `closeFunction(); startOnClickOutside(${i})`)
+    document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+        <div class="mini-seperator"></div>
+        <svg class="subtask-icons-single" onclick="editSubtask(${i})">
+            <use href="assets/img/icons.svg#hook-icon"></use>
+        </svg>
+    `;
+    document.getElementById(`single-subtask-txt${i}`).focus();
+    document.getElementById(`single-subtask${i}`).classList.add('subbtask-on-focus');
+    document.getElementById(`single-subtask${i}`).classList.remove('subbtask-hover');
+}
+
+
+function focusSubtaskfromBoard () {
+    document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
+    document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
+    document.getElementById('main-div').setAttribute('onclick', `closeFunction(); startOnClickOutside(${i})`)
     document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>

@@ -17,7 +17,7 @@
     <title>Document</title>
 </head>
 
-<body onload="boardInit();" onclick="closeFunction()">
+<body onload="boardInit();">
     <div class="flex max-h">
         <div class="include-menu" w3-include-html="templates/menu.html"></div>
         <div class="main max-h">
@@ -120,7 +120,7 @@
     </div>
     <div id="add-task-container" class="add-task-container center d-none" onclick="closeAddTaskOverlay()">
         <div id="add-task-div" class="add-task-div" onclick="doNotClose(event)">
-            <div class="main-div overflow">
+            <div id="main-div" class="main-div overflow" onclick="closeFunction()">
                 <h1 class="add-task-title">Add Task</h1>
                 <form id="add-task-form" action="" class="ad-task-form column-space-between"
                     onsubmit="startCreateTask('todos'); return false">

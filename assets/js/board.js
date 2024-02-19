@@ -3,6 +3,7 @@ async function boardInit() {
     await init();
     await getTodosForBoard();
     updateBoard();
+    initAddTask();
 }
 
 let todoId;
