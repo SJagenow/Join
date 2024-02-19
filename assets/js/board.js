@@ -179,7 +179,7 @@ function returnDialog(selectedTodo) {
                     <div onclick="deleteTodo(event)">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button><img src="./assets/img/edit.png" alt="">
+            <div class="user_story_delete_edit_two"><button onclick="editTodo" event><img src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
         </div>
@@ -226,16 +226,15 @@ function closeDialog() {
 function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
 
-    // Filtern der Todos, deren Titel die ersten drei Buchstaben mit dem Suchtext übereinstimmen
+
     let filteredTodos = todo.filter(t => t['title'].toLowerCase().startsWith(searchText));
 
-    // Leeren Sie die Inhalte aller Spalten
     document.getElementById('task_content_open').innerHTML = '';
     document.getElementById('close_one').innerHTML = '';
     document.getElementById('await_content').innerHTML = '';
     document.getElementById('done_content').innerHTML = '';
 
-    // Durchlaufen Sie die gefilterten Todos und fügen Sie sie nur in die entsprechende Spalte ein
+
     for (let index = 0; index < filteredTodos.length; index++) {
         let clean = filteredTodos[index];
         if (clean.category === 'todos') {
@@ -265,7 +264,6 @@ function setProgress(value) {
     document.getElementById('progress').style.width = value + "50%";
 }
 
-// Setze die Fortschrittsanzeige auf 50% (1/2)
 setProgress(50);
 
 
@@ -369,4 +367,22 @@ event.stopPropagation();
     }
     closeDialog()
     updateBoard()
+}
+
+function editTodo(event) {
+event.stopPropagation();
+}
+
+
+
+
+function prioImg(){
+    if (priority === urgent){
+      return  }
+
+    else if(priority === medium){
+        return  }
+        
+    else if(priority === low)
+    {return }
 }
