@@ -371,11 +371,11 @@ function editTodo(event, i) {
     todo[i];
     document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
     document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
-    document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
     document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
-    document.getElementById('add-task-date-edit').value = `${todo[i].priority}`;
-    document.getElementById('add-task-date-edit').value = `${todo[i].label}`;
-    document.getElementById('add-task-date-edit').value = `${todo[i].label}`;
+    document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
+    document.getElementById('add-task-date-edit0').value = `${todo[i].priority}`;
+    document.getElementById('add-task-date-edit0').value = `${todo[i].label}`;
+    document.getElementById('add-task-date-edit0').value = `${todo[i].label}`;
     // currentPrio,
     // category,
     // currentLabel,
