@@ -11,8 +11,7 @@ let clean;
 let todo = [];
 let currentDraggedElement;
 let subtaskCount;
-let progressWidth = (1 / subtaskCount) * 100;
-document.getElementById('myBar').style.width = progressWidth + '%';
+
 
 
 async function getTodosForBoard() {
@@ -28,7 +27,8 @@ function updateBoard() {
 
     for (let index = 0; index < todos.length; index++) {
         clean = todos[index];
-        document.getElementById('task_content_open').innerHTML += generateTodo(clean);
+        let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+        document.getElementById('task_content_open').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
     let inprogress = todo.filter(t => t['category'] == 'inprogress');
 
@@ -36,7 +36,8 @@ function updateBoard() {
 
     for (let index = 0; index < inprogress.length; index++) {
         clean = inprogress[index];
-        document.getElementById('close_one').innerHTML += generateTodo(clean);
+        let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+        document.getElementById('close_one').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
     let awaitList = todo.filter(t => t['category'] == 'await');
 
@@ -44,7 +45,8 @@ function updateBoard() {
 
     for (let index = 0; index < awaitList.length; index++) {
         clean = awaitList[index];
-        document.getElementById('await_content').innerHTML += generateTodo(clean);
+        let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+        document.getElementById('await_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
     let doneList = todo.filter(t => t['category'] == 'done');
 
@@ -52,7 +54,8 @@ function updateBoard() {
 
     for (let index = 0; index < doneList.length; index++) {
         clean = doneList[index];
-        document.getElementById('done_content').innerHTML += generateTodo(clean);
+        let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+        document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
 
 
@@ -64,24 +67,21 @@ function startDragging(todoId) {
 }
 
 
-function generateTodo(clean) {
-    todo.forEach(task => {
-        // Initialisiere die Anzahl der erledigten Subtasks auf 0
-        let subTasksDone = 0;
+function getSubtaskDoneCounter(clean) {
+    let subTasksTotal = clean.subtasks.length;
+    let subTasksDone = 0; // Außerhalb der forEach-Schleife initialisieren
+    clean.subtasks.forEach(subtask => {
+        if (subtask.done === true) {
+            subTasksDone++;
+        }
+    });
+    console.log(`Task mit der ID ${clean.id} hat insgesamt ${subTasksTotal} Tasks und ${subTasksDone} davon erledigt.`);
+    let progressWidth = (subTasksDone / subTasksTotal) * 100;
+    return { progressWidth, subTasksDone, subTasksTotal }; // progressWidth zurückgeben
+}
+
+function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal  ) {
     
-        // Iteriere über jede Subtask-Gruppe des aktuellen Tasks
-        task.subtasks.forEach(subtaskGroup => {
-                // Prüfe, ob der Subtask erledigt ist (done === true)
-                if (subtaskGroup.done === true) {
-                    subTasksDone++;
-                }
-        
-        });
-    
-        // Gib die Anzahl der erledigten Subtasks für den aktuellen Task aus
-        console.log(`Task mit der ID ${task.id} hat ${subTasksDone} erledigte Subtasks.`);
-    })
-    let progressWidth = (1 / subtaskCount) * 100;
     const todoId = `todo_${clean['id']}`;
     let descriptionWords = clean['description'].split(' ');
     let truncatedDescription = descriptionWords.slice(0, 5).join(' ');
@@ -109,9 +109,9 @@ function generateTodo(clean) {
     </div>
     <div class="card_title">${clean['title']}</div>
     <div class="card_description">${truncatedDescription}</div>
-    <div id="myProgress">
+    <div id="myProgress${todoId}">
         <div id="myBar" style="width: ${progressWidth}%;"></div>
-        <div><span>Subtask 1/2</span></div>
+        <div><span>Subtask ${subTasksDone}/${subTasksTotal}</span></div>
     </div>
         <div class ="space-between w100p">
             <div class="member_flex" id="members_${todoId}">
@@ -275,15 +275,15 @@ function filterTodosByTitle() {
 
 
 
-function setProgress(value) {
+// function setProgress(value) {
 
-    value = Math.max(0, Math.min(100, value));
+//     value = Math.max(0, Math.min(100, value));
 
 
-    document.getElementById('progress').style.width = value + "50%";
-}
+//     document.getElementById('progress').style.width = value + "50%";
+// }
 
-setProgress(50);
+// setProgress(50);
 
 
 /* Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
