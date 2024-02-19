@@ -65,8 +65,8 @@ function startDragging(todoId) {
 
 
 function generateTodo(clean) {
-    let maxSubtask = clean.subtasks.length
-    let subTaskDone = clean.subtasks.done
+    let maxSubtask = clean.subtasks.length;
+    let subTaskDone = clean.subtasks.done;
     let subTasksDone = todo.filter(t => t['subtasks'].done == '');
     let subtaskCount;
     let progressWidth = (1 / subtaskCount) * 100;
