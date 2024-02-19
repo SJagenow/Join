@@ -10,7 +10,7 @@ let todoId;
 let clean;
 let todo = [];
 let currentDraggedElement;
-let subtaskCount = 2;
+let subtaskCount;
 let progressWidth = (1 / subtaskCount) * 100;
 document.getElementById('myBar').style.width = progressWidth + '%';
 
@@ -65,8 +65,10 @@ function startDragging(todoId) {
 
 
 function generateTodo(clean) {
-
-    let subtaskCount = 2;
+    let maxSubtask = clean.subtasks.length
+    let subTaskDone = clean.subtasks.done
+    let subTasksDone = todo.filter(t => t['subtasks'].done == '');
+    let subtaskCount;
     let progressWidth = (1 / subtaskCount) * 100;
     const todoId = `todo_${clean['id']}`;
     let descriptionWords = clean['description'].split(' ');

@@ -715,7 +715,7 @@ body input {
 #board_member_content {
     display: flex;
     flex-direction: column;
-    padding-left: 8px;
+    padding-left: git a8px;
 }
 
 .member_flex {
