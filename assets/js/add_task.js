@@ -171,6 +171,11 @@ function closeDropdownMenu(divID, arrow) {
 }
 
 
+// function closeContactMenu() {}
+
+// function closeLabelMenu() {}
+
+
 function selectContact(i) {
     let get = document.getElementById(`add-task-assignet-checkbox${i}`);
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
@@ -249,6 +254,7 @@ function changePriority(prio) {
 function selectLabel(label) {
     document.getElementById('add-task-category').value = `${label}`;
     currentLabel = document.getElementById('add-task-category').value;
+    closeDropdownMenu('add-task-category-list-div', 'category-arrow');
 }
 
 
@@ -258,9 +264,9 @@ function renderSubtask() {
     for (let i = 0; i < subtasksArray.length; i++) {
         const subtask = subtasksArray[i];
         subtasks.innerHTML += /*html*/`
-        <li id="single-subtask${i}" class="subbtask" contenteditable="true" onmouseenter="subtaskEditButtonsOn(${i})" onmouseleave="subtaskEditButtonsOut(${i})" onclick="focusSubtask(${i})">
-            <span id="single-subtask-txt${i}">${subtask}</span>
-            <div id="subtask-edit-buttons${i}" class="subtask-icons-single-div"></div>
+        <li id="single-subtask${i}" class="subbtask subbtask-hover" onmouseenter="subtaskEditButtonsOn(${i})" onmouseleave="subtaskEditButtonsOut(${i})" onclick="focusSubtask(${i})">
+            <span id="single-subtask-txt${i}" contenteditable="true" class="subbtask-span" value="${subtask}">${subtask}</span>
+            <div id="subtask-edit-buttons${i}" class="subtask-icons-single-div" onclick="doNotClose(event)"></div>
         </li>
     `;
     }
@@ -273,6 +279,7 @@ function addSubtask() {
         subtasksArray.push(subtaskInput.value);
         initAddTask();
         subtaskInput.value = "";
+        closeSubtask();
     } else {
         subtaskInput.reportValidity();
     }
@@ -328,9 +335,11 @@ function subtaskEditButtonsOut(i) {
 function onClickOutside(element, i) {
     document.addEventListener('click', e => {
         if (!element.contains(e.target)) {
-            document.getElementById('body').removeAttribute('onclick');
+            // document.getElementById('body').removeAttribute('onclick');
             document.getElementById(`single-subtask${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOn(${i})`);
             document.getElementById(`single-subtask${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOut(${i})`);
+            document.getElementById(`single-subtask${i}`).classList.remove('subbtask-on-focus');
+            document.getElementById(`single-subtask${i}`).classList.add('subbtask-hover');
             document.getElementById(`subtask-edit-buttons${i}`).innerHTML = '';
         };
     });
@@ -341,15 +350,11 @@ function startOnClickOutside(i) {
     onClickOutside(myElement, i);
 }
 
-function doNotClose(event) {
-    event.stopPropagation();
-}
-
 
 function focusSubtask(i) {
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
-    document.getElementById('body').setAttribute('onclick', `startOnClickOutside(${i})`)
+    document.getElementById('body').setAttribute('onclick', `closeFunction(); startOnClickOutside(${i})`)
     document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="deleteSubtask(${i})">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
@@ -359,6 +364,9 @@ function focusSubtask(i) {
             <use href="assets/img/icons.svg#hook-icon"></use>
         </svg>
     `;
+    document.getElementById(`single-subtask-txt${i}`).focus();
+    document.getElementById(`single-subtask${i}`).classList.add('subbtask-on-focus');
+    document.getElementById(`single-subtask${i}`).classList.remove('subbtask-hover');
 }
 
 
@@ -373,7 +381,9 @@ function editSubtask(i) {
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
 `;
-    // document.getElementById(`single-subtask${i}`).blur();
+    document.getElementById(`single-subtask${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOn(${i})`);
+    document.getElementById(`single-subtask${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOut(${i})`);
+    document.getElementById(`single-subtask${i}`).classList.remove('subbtask-on-focus');
     console.log(subtasksArray);
 }
 
@@ -381,6 +391,13 @@ function editSubtask(i) {
 function deleteSubtask(i) {
     subtasksArray.splice(i, 1);
     renderSubtask();
+}
+
+
+function closeFunction() {
+    closeDropdownMenu('add-task-contact-div', 'assignet-arrow');
+    closeDropdownMenu('add-task-category-list-div', 'category-arrow');
+    closeSubtask();
 }
 
 
@@ -443,4 +460,14 @@ function pauseAndExecute() {
     setTimeout(function () {
         goToBoard();
     }, 1500);
+}
+
+
+async function deleteAllTasksEmergencyFunction() {
+    tasks = JSON.parse(await getItem('tasks'));
+    console.log(tasks);
+    tasks = [];
+    await setItem('tasks', JSON.stringify(tasks));
+    let test = JSON.parse(await getItem('tasks'));
+    console.log(test);
 }
