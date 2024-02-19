@@ -70,6 +70,7 @@ async function loadContactList() {
 
 
 function renderContactListForTask() {
+    document.getElementById('add-task-contact').innerHTML = '';
     for (let i = 0; i < contactList.length; i++) {
         let contact = contactList[i].name;
         const name = contact.split(" ");
@@ -436,6 +437,8 @@ function clearTask() {
     contactsDiv.innerHTML = '';
     changePriority('medium');
     subtasksArray = [];
+    contactList = [];
+    selectedUsers = [];
     initAddTask();
 }
 
