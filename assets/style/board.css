@@ -1786,3 +1786,7 @@ body {
   align-items: center;
   gap:16px;  
 }
+
+[id^="myProgresstodo"] {
+    width: 100%;
+}

@@ -166,7 +166,7 @@ async function returnDialog(selectedTodo, selectedTodoID) {
         </div>
         <button onclick="closeDialog()">X</button>
     </div>
-    <div id="todo-title" class="user_story_headline">
+    <div id="dialog_title" class="user_story_headline">
         <div> ${selectedTodo['title']} </div>
     </div>
     <div class="user_story_description">${selectedTodo['description']}</div>
