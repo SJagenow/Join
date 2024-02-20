@@ -2,12 +2,15 @@ const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
 let contactList = [];
 
 
+/**
+ * Initializes the contact list by calling other initialization functions and rendering the contact list.
+ * 
+ * @returns {Promise<void>} A Promise that resolves once the contact list is initialized and rendered.
+ */
 async function initContactList() {
-    await init();
-    await loadContactList();
-    // removeInvalidEntries(contactList);
+    await init(); 
+    await loadContactList(); 
     renderContactList();
-   
 }
 
 
@@ -15,6 +18,7 @@ async function removeInvalidEntries(array) {
     array.splice(9, 1); 
     await setItem('contactList', JSON.stringify(contactList));
 }
+
 
 /**
  * Asynchronously loads the contact list from the backend storage.
@@ -58,6 +62,10 @@ function renderContactList() {
     renderInitialsOfUser();
 }
 
+
+/**
+ * Renders the top section of the contact list with options for adding a new contact.
+ */
 function renderContactlistTop(){
     document.getElementById('contact_list').innerHTML = `
     <div class="contactlist_button_container">
@@ -82,6 +90,10 @@ function renderContactlistTop(){
 
 }
 
+
+/**
+ * Creates a new contact for the current user and adds it to the contact list.
+ */
 function createCurrentUserForList(){
     let contact = {
         "name": String(userName),
@@ -93,14 +105,19 @@ function createCurrentUserForList(){
 }
 
 
-
+/**
+ * Renders the initials of the current user in the contact list.
+ */
 function renderInitialsOfUser(){
 let { profileinitials, secondName } = getInitialsforUser(String(userName));
 document.getElementById('contact_list_initals').innerHTML = profileinitials;
 document.getElementById('contact_list_initals').classList.add(`letter-${secondName.toLowerCase()}`);
-
 }
 
+/**
+ * Renders contacts into their corresponding alphabetical rows within the contact list.
+ * If no contacts start with a certain letter, hides the corresponding containers.
+ */
 function getInitialsforUser(contact) {
     const words = contact.split(" ");
     const firstName = words[0][0];
@@ -169,6 +186,22 @@ function renderIntoAlphabetContainer(namesContainer, alphabetContainer, contacts
     });
 }
 
+
+/**
+ * Retrieves initials for a given contact's name.
+ * 
+ * @param {string} contact - The name of the contact.
+ * @returns {Object} An object containing profile initials and the second name's initial.
+ */
+function getInitials(contact) {
+    const words = contact.name.split(" ");
+    const firstName = words[0][0];
+    const secondName = words[1] ? words[1][0] : '';
+    const profileinitials = firstName + secondName;
+    return { profileinitials, secondName };
+}
+
+
 function getInitialsForOverlay() {
     let nameInput = document.getElementById('contactlist_name_input').value;
     let initialsContainer = document.getElementById('contact_initials_container');
@@ -177,14 +210,6 @@ function getInitialsForOverlay() {
     let secondLetter = initials[1] ? initials[1][0] : '';
     initialsContainer.classList.add(`letter-${secondLetter.toLowerCase()}`);
     initialsContainer.innerHTML = `${firstLetter + secondLetter}`;
-}
-
-function getInitials(contact) {
-    const words = contact.name.split(" ");
-    const firstName = words[0][0];
-    const secondName = words[1] ? words[1][0] : '';
-    const profileinitials = firstName + secondName;
-    return { profileinitials, secondName }; // Rückgabe von profileinitials und secondName als Objekt
 }
 
 
@@ -241,18 +266,22 @@ function renderContact(alphabetIndex, contactIndex) {
         addHighlightsToContact(alphabetIndex, contactIndex);
         contactoverview.style.transform = 'translateX(0%)';
     }, 125);
-
     const addContactOptionsButton = document.getElementById('contactlist_add_contact_options_button');
     if (window.innerWidth < 1210) {
         addContactOptionsButton.style.display = 'flex';
     } else {
         addContactOptionsButton.style.display = 'none';
     }
-
     document.getElementById('contactlist_add_contact_button').style.display = 'none';
 }
 
 
+/**
+ * Adds highlights to the selected contact in the contact list.
+ * 
+ * @param {number} alphabetIndex - Index of the corresponding alphabetical row.
+ * @param {number} contactIndex - Index of the selected contact.
+ */
 function addHighlightsToContact(alphabetIndex, contactIndex) {
     const allContactContainers = document.querySelectorAll('.contact_list_container');
     allContactContainers.forEach(container => {
@@ -263,6 +292,15 @@ function addHighlightsToContact(alphabetIndex, contactIndex) {
 }
 
 
+/**
+ * Opens the edit contact dialog.
+ * This function is triggered when the user wants to edit a contact from the contact list.
+ * It retrieves the contact details based on the provided indices, shows the add contact dialog,
+ * and populates it with the details of the selected contact.
+ * 
+ * @param {number} alphabetIndex - Index of the corresponding alphabetical row.
+ * @param {number} contactIndex - Index of the selected contact.
+ */
 function openEditContact(alphabetIndex, contactIndex) {
     const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
     showAddContactDialog();
@@ -271,6 +309,17 @@ function openEditContact(alphabetIndex, contactIndex) {
 }
 
 
+/**
+ * Updates a contact after editing.
+ * 
+ * This function first deletes the contact without asking for confirmation,
+ * then adds the edited contact to the contact list,
+ * and finally shows a success button indicating that the contact was edited successfully.
+ * 
+ * Note: This function does not handle user confirmation for deletion or editing.
+ * 
+ * @returns {Promise<void>} A Promise that resolves once the contact is updated.
+ */
 async function updateContact() {
     deleteContactWithoutConfirm();
     addToContacts();
@@ -278,6 +327,13 @@ async function updateContact() {
 }
 
 
+/**
+ * Closes the contact overview.
+ * 
+ * This function sets a timeout to hide the contact overview after 125 milliseconds.
+ * It also sets the transform style property to move the contact overview off-screen horizontally.
+ * Additionally, it displays the 'Add Contact' button and hides the 'Add Contact Options' button.
+ */
 function closeContact() {
     setTimeout(() => {
         document.getElementById('contact_overview').style.display = "none";
@@ -307,6 +363,14 @@ function showAddContactDialog() {
     }, 100);
 }
 
+
+/**
+ * Renders the contact overlay for adding or editing contacts.
+ * 
+ * This function dynamically generates the HTML content for the contact overlay and inserts it into the 'contactlist_overlay_container' element.
+ * It includes input fields for entering contact information (name, email, phone), buttons for canceling, saving, and editing contacts, and icons for visual representation.
+ * The overlay also includes event listeners for handling user interactions such as closing the overlay, submitting the form, and updating the initials display.
+ */
 function renderContactOverlay() {
     document.getElementById('contactlist_overlay_container').innerHTML = `
     <div class="contactlist_mid_layer">
@@ -374,6 +438,14 @@ function renderContactOverlay() {
     `;
 }
 
+
+/**
+ * Displays the add contact dialog in low resolution.
+ * 
+ * This function renders the contact overlay for adding or editing contacts using the 'renderContactOverlay' function.
+ * It sets the display style of the 'contactlist_overlay_container' element to 'unset' to make the overlay visible.
+ * Additionally, it animates the 'add_contact_overlay' element by setting its transform style to 'translateY(0%)' after a delay of 100 milliseconds.
+ */
 function showAddContactDialogLowRes() {
     renderContactOverlay();
     document.getElementById('contactlist_overlay_container').style.display = 'unset';
@@ -440,6 +512,15 @@ async function addToContacts() {
 }
 
 
+/**
+ * Finds the alphabet index and contact index for a given contact in the contact list.
+ * 
+ * This function takes a contact object as input and extracts the first letter of the contact's name to determine its alphabetical index.
+ * It then finds the corresponding alphabetical row in the contact list using the 'alphabet' array and returns the index.
+ * Additionally, it finds the index of the contact within the filtered list of contacts starting with the same letter and renders detailed information about the contact using the 'renderContact' function.
+ * 
+ * @param {Object} contact - The contact object for which to find the alphabet index and contact index.
+ */
 function findAlphabetIndex(contact) {
     const firstLetter = contact.name.charAt(0).toUpperCase();
     const alphabetIndex = alphabet.indexOf(firstLetter);
@@ -462,6 +543,7 @@ function resetAddContactForm() {
     document.getElementById('contactlist_phone_input').value = '';
 }
 
+
 async function deleteContactWithoutConfirm() {
     const contactName = document.getElementById('contact_overview_name').innerText.trim();
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
@@ -475,6 +557,16 @@ async function deleteContactWithoutConfirm() {
     document.getElementById('contact_overview').style.transform = 'translateX(200%)';
 }
 
+
+/**
+ * Deletes a contact from the contact list without confirmation.
+ * 
+ * This function retrieves the name and email of the contact to be deleted from the contact overview section.
+ * It then finds the index of the contact to be deleted in the contact list based on its name and email.
+ * If the contact is found (index is not -1), it is removed from the contact list.
+ * The updated contact list is then stored in the backend storage.
+ * Finally, it renders the updated contact list and hides the contact overview section.
+ */
 async function deleteContact() {
     const contactName = document.getElementById('contact_overview_name').innerText.trim();
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
@@ -495,6 +587,16 @@ async function deleteContact() {
     showSuccessButtonDelete();
 }
 
+
+/**
+ * Handles the form submission for adding or editing a contact.
+ * Disables the form buttons during submission to prevent multiple submissions.
+ * Depending on the button clicked (Save or Edit), it either adds a new contact or updates an existing contact.
+ * Enables the form buttons after submission.
+ * 
+ * @param {Event} event - The form submission event.
+ * @returns {Promise<void>} A Promise that resolves after adding or updating the contact.
+ */
 async function handleSubmit() {
     const cancelButton = document.getElementById("contact_cancel_button");
     const saveButton = document.getElementById("contact_save_button");
@@ -535,6 +637,11 @@ function showSuccessButton() {
     successButton.style.transform = 'translateY(400%)';
 }
 
+
+/**
+ * Displays the success button after adding a new contact.
+ * The button appears temporarily and then fades out.
+ */
 function showSuccessButtonEdit() {
     let successButton = document.getElementById('edit_contact_success_button');
     if (window.innerWidth > 1210) {
@@ -555,6 +662,11 @@ function showSuccessButtonEdit() {
     successButton.style.transform = 'translateY(400%)';
 }
 
+
+/**
+ * Displays the success button after deleting a contact.
+ * The button appears temporarily and then fades out.
+ */
 function showSuccessButtonDelete() {
     let successButton = document.getElementById('delete_contact_success_button');
     if (window.innerWidth > 1210) {
@@ -575,6 +687,12 @@ function showSuccessButtonDelete() {
     successButton.style.transform = 'translateY(400%)';
 }
 
+
+/**
+ * Asynchronously opens the edit contact dialog in low-resolution screens.
+ * Retrieves the contact information from the contact overview, displays the add contact dialog,
+ * populates it with the contact information, and retrieves the initials for the overlay.
+ */
 async function openEditContactLowRes() {
     const contactName = document.getElementById('contact_overview_name').innerText.trim();
     const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
@@ -588,6 +706,15 @@ async function openEditContactLowRes() {
     getInitialsForOverlay();
 }
 
+
+/**
+ * Updates the add contact dialog to display contact information for editing.
+ * Displays the edit button, hides the under headline, hides the save button,
+ * changes the cancel button text to "Delete", updates the headline to "Edit contact",
+ * and populates the input fields with the contact's name, email, and phone number.
+ * 
+ * @param {object} contact - The contact object containing name, mail, and phone properties.
+ */
 function changeAddContactoverlay(contact) {
     document.getElementById('contact_edit_button').style.display = 'flex';
     document.getElementById('under_headline').style.display = 'none';
@@ -599,6 +726,11 @@ function changeAddContactoverlay(contact) {
     document.getElementById('contactlist_phone_input').value = contact.phone;
 }
 
+
+/**
+ * Displays the add contact options dropdown menu in low-resolution mode.
+ * Shows the dropdown overlay and animates the dropdown options into view.
+ */
 function showAddContactOptionsLowRes() {
     document.getElementById('dropdown_overlay').style.display = 'flex';
     setTimeout(() => {
@@ -606,12 +738,14 @@ function showAddContactOptionsLowRes() {
     }, 125);
 }
 
+
+/**
+ * Closes the add contact options dropdown menu in low-resolution mode.
+ * Animates the dropdown options out of view and hides the dropdown overlay.
+ */
 function closeAddContactOptionsLowRes() {
     document.getElementById('dropdown_options').style.transform = 'translateX(120%)';
     setTimeout(() => {
         document.getElementById('dropdown_overlay').style.display = 'none';
     }, 125);
-
 }
-
-

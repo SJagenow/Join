@@ -62,14 +62,77 @@ function updateBoard() {
 
 }
 
+document.getElementById('add-task-assignet-to-edit').addEventListener('click', function() {
+    dropdownMenuToggle('add-task-contact-div', 'assignet-arrow');
+});
+
 function noTaskInContainer() {
-   document.getElementById('task_content_open');
-    if (innerHTML === '') {
+  let todoColumn = document.getElementById('task_content_open').innerHTML;
+    if (todoColumn === '') {
         document.getElementById('no_task_container').classList.remove('d-none');
     } else {
         document.getElementById('no_task_container').classList.add('d-none');
     }
 }
+
+function renderContactListForTaskHTML(contact, i, secondName, initials) {
+    return /*html*/`
+    <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
+        <div class="name-div">
+            <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
+            <span>${contact}</span>
+        </div>
+        <div>
+            <svg id="add-task-assignet-checkbox${i}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+            </svg>
+        </div>
+    </div>
+`;
+}
+
+async function filterContactsForAddTaskEditOverlay() {
+    document.getElementById('add-task-contact').innerHTML = '';
+    let value = document.getElementById('add-task-assignet-to-edit').value.toLowerCase();
+    for (let i = 0; i < contactList.length; i++) {
+        let checkContact = contactList[i].name.toLowerCase();
+        if (checkContact.includes(value)) {
+            let contact = contactList[i].name;
+            const name = contact.split(" ");
+            const firstName = name[0][0];
+            const secondName = name[1] ? name[1][0] : '';
+            let initials = firstName + secondName;
+            document.getElementById('add-task-contact-edit').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
+        }
+    }
+}
+
+document.getElementById('add-task-assignet-to-edit').addEventListener('click', function() {
+    dropdownMenuToggle('add-task-contact-div', 'assignet-arrow');
+});
+
+function dropdownMenuToggle(divID, arrow) {
+    
+    let dNone = document.getElementById(`${divID}`).classList.contains('d-none');
+    document.getElementById(`${arrow}`);
+    if (dNone) {
+        openDropdownMenu(divID, arrow)
+    } else {
+        closeDropdownMenu(divID, arrow)
+    }
+}
+
+function openDropdownMenu(divID, arrow) {
+    document.getElementById(`${divID}`).classList.remove('d-none');
+    document.getElementById(`${arrow}`).style = "transform: rotate(180deg);"
+}
+
+
+function closeDropdownMenu(divID, arrow) {
+    document.getElementById(`${divID}`).classList.add('d-none');
+    document.getElementById(`${arrow}`).style = "transform: rotate(0);"
+}
+
 
 
 
@@ -402,7 +465,7 @@ function editTodo(event, i) {
     document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
     document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
     document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
-    document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
+    // document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
     document.getElementById('add-task-date-edit0').value = `${todo[i].priority}`;
     document.getElementById('add-task-date-edit0').value = `${todo[i].label}`;
     document.getElementById('add-task-date-edit0').value = `${todo[i].label}`;
