@@ -419,6 +419,8 @@ body input {
 
 .updown_buttons {
     display: flex;
+    margin-left: 58px;
+    display: none;
 
 }
 
@@ -1789,4 +1791,10 @@ body {
 
 [id^="myProgresstodo"] {
     width: 100%;
+}
+
+
+.display_none_arrows {
+display: none;
+
 }
