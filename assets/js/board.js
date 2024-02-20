@@ -202,6 +202,13 @@ async function renderDialog(selectedTodo, selectedTodoID) {
     await renderSubtaskDialog(selectedTodo);
 }
 
+
+/**
+ * Returns the HTML markup for the dialog displaying details of the selected todo.
+ * @param {Object} selectedTodo - The selected todo object containing details.
+ * @param {number} selectedTodoID - The ID of the selected todo.
+ * @returns {string} The HTML markup for the dialog.
+ */
 async function returnDialog(selectedTodo, selectedTodoID) {
     return `
     <div class="user_story_label_x_contrainer">
@@ -562,6 +569,7 @@ function renderSubtaskEdit(j) {
     }
 }
 
+
 /**
  * Adds a subtask to the todo item being edited.
  * @param {number} i - The index of the todo item.
@@ -580,7 +588,6 @@ function addSubtaskEdit(i) {
     } else {
         subtaskInput.reportValidity();
     }
-
 }
 
 
