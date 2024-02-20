@@ -737,7 +737,9 @@ function deleteSubtaskEdit(i, j) {
     renderSubtaskEdit(j);
 }
 
-
+/**
+ * Clears the task edit form by resetting checkboxes, contact list, priority, and subtasks array.
+ */
 function clearTaskEdit() {
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
     let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
@@ -758,7 +760,9 @@ function clearTaskEdit() {
     initAddTask();
 }
 
-
+/**
+ * Starts editing a task by setting the category based on the URL parameters, removing the 'd-none' class from the overlay div, creating the task, and pausing to execute further actions.
+ */
 async function startEditTask() {
     let category = 'todos';
     let urlParams = new URLSearchParams(window.location.search);
@@ -770,7 +774,10 @@ async function startEditTask() {
     pauseAndExecute();
 }
 
-
+/**
+ * Edits a task by updating its details in the tasks list based on the provided category.
+ * @param {string} category - The category of the task being edited.
+ */
 async function editTask(category) {
     typeLabel();
     tasks = JSON.parse(await getItem('tasks'));
