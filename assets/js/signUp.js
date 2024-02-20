@@ -40,23 +40,8 @@ function checkName() {
 }
 
 
-// function togglePasswordIcon() {
-//   const icon = document.querySelector(".pwIcon");
-//   const passwordInput = document.getElementById("password");
-
-//   const updateIcon = () => {
-//     if (passwordInput.value.trim() === "") {
-//       icon.src = "./assets/img/password_input.svg";
-//     } else {
-//       icon.src = passwordInput.type === "text" ? "./assets/img/visibility.png" : "./assets/img/visibility_off.png";
-//     }
-//   };
-//   passwordInput.addEventListener("blur", updateIcon);
-//   passwordInput.addEventListener("input", updateIcon);
-// }
-
 function togglePasswordIcon() {
-  let icon = document.querySelector(".pwIcon");
+  let icon = document.querySelector(".pWIcon");
   let passwordInput = document.getElementById("password");
 
   passwordInput.addEventListener("blur", function () {
@@ -84,20 +69,22 @@ function togglePasswordIcon() {
   });
 }
 
+
 function checkPasswordValidity() {
   let passwordInput = document.getElementById("password").value;
-  let confirmPWInput = document.getElementById("confirmPW").value;
+  let passwordConfirm = document.getElementById("confirmPW").value;
+  let btnFalse = document.getElementById("signUpBtn").disabled = false;
+  let btnTrue = document.getElementById("signUpBtn").disabled = true;
 
-  if (passwordInput.length > 0 && confirmPWInput.length > 0) {
-    if (passwordInput.value === confirmPWInput.value){
-      validPwLength(passwordInput, confirmPWInput);
-     } else {
-      hidePasswordMismatchMessage();
-    }
+  if (passwordInput === passwordConfirm) {
+    btnFalse;
+    hidePasswordMismatchMessage();
   } else {
+    btnTrue;
     handlePwMismatch();
   }
 }
+
 
 function handlePwMismatch() {
   let invalidPW = document.querySelector(".pwInvalid");
@@ -112,39 +99,41 @@ function handlePwMismatch() {
   confirmPasswordInput.classList.add("alert");
 }
 
+
 function hidePasswordMismatchMessage() {
     let passwordMismatchMessage = document.querySelector(".pwInvalid");     // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
   let confirmPasswordMismatchMessage = document.querySelector(".confirmPWInvalid");
+  let passwordInput = document.getElementById("password");
+  let confirmPasswordInput = document.getElementById("confirmPW");
   passwordMismatchMessage.classList.add("hidden");             // Fügt den Meldungen die Klasse "hidden" hinzu, um sie auszublenden
   confirmPasswordMismatchMessage.classList.add("hidden");
+  passwordInput.classList.remove("alert");
+  confirmPasswordInput.classList.remove("alert");
 }
 
 
-function validPwLength(passwordValue, confirmPasswordValue) {
+function validPwLength() {
+  let passwordInput = document.getElementById("password");
   let passwordInvalidDiv = document.querySelector(".pwInvalid");
-  let confirmPasswordInvalidDiv = document.querySelector(".confirmPWInvalid");
-  let confirmPWInput = document.getElementById('confirmPW');
 
-  if (passwordValue.length < 4) {
+  if (passwordInput.value.length === 0) {
+    passwordInvalidDiv.textContent = "";
+    passwordInvalidDiv.classList.add("hidden");
+    passwordInput.classList.remove("alert");
+
+  } else if (passwordInput.value.length < 4) {
     passwordInvalidDiv.textContent = "Password must be at least 4 characters long";
     passwordInvalidDiv.classList.remove("hidden");
-    passwordInvalidDiv.classList.add("alert");
+    passwordInput.classList.add("alert");
   } else {
+    passwordInvalidDiv.textContent = "";
     passwordInvalidDiv.classList.add("hidden");
-    passwordInvalidDiv.classList.remove("alert");
-  }
-  if (confirmPasswordValue.length < 4) {
-    confirmPasswordInvalidDiv.textContent = "Password must be at least 4 characters long";
-    confirmPasswordInvalidDiv.classList.remove("hidden");
-    confirmPWInput.classList.add("alert");
-  } else {
-    confirmPasswordInvalidDiv.classList.add("hidden");
-    confirmPWInput.classList.remove("alert");
+    passwordInput.classList.remove("alert");
   }
 }
 
 
-function toggleConfirmPasswordInputIcon() {
+function togglePasswordIcon() {
   let icon = document.querySelector(".pwInvalid");
   let input = document.getElementById("confirmPW");
   input.addEventListener("blur", function () {
@@ -167,6 +156,34 @@ function toggleConfirmPasswordInputIcon() {
       }
     }
   });
+}
+
+
+function togglePwType() {
+  let icon = document.getElementById("pWIcon");
+  let passwordInput = document.getElementById("password");
+
+  if (passwordInput.type === "password") {
+    icon.src = "./assets/img/visibility.png";
+    passwordInput.type = "text";
+  } else {
+    icon.src = "./assets/img/visibility_off.png";
+    passwordInput.type = "password";
+  }
+}
+
+
+function togglePwTypeConf() {
+  let icon = document.getElementById("pwIconConf");
+  let passwordInput = document.getElementById("confirmPW");
+
+  if (passwordInput.type === "password") {
+    icon.src = "./assets/img/visibility.png";
+    passwordInput.type = "text";
+  } else {
+    icon.src = "./assets/img/visibility_off.png";
+    passwordInput.type = "password";
+  }
 }
 
 

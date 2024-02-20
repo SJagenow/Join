@@ -46,19 +46,30 @@
           <div class="emailInvalid hidden">
           </div>
           <div class="passwordMsg">
-            <input required class="inputField" type="password" placeholder="Password" id="password" autocomplete="on"
-              minlength="4" oninput="checkPasswordValidity();" onfocus="togglePasswordIcon()">
-            <img class="pwIcon" src="./assets/img/password_input.svg" alt="">
+            <input required class="inputField" 
+              type="password" 
+              placeholder="Password" 
+              id="password" 
+              autocomplete="on"
+              minlength="4" 
+              onchange="validPwLength(), checkPasswordValidity()" 
+              oninput="togglePasswordIcon()">
+            <img class="pwIcon" id="pWIcon" onclick="togglePwType()" src="./assets/img/password_input.svg" alt="">
 
           </div>
           <div class="pwInvalid hidden">
            
           </div>
           <div class="confirmPasswordMsg">
-            <input required class="inputField" type="password" placeholder="Confirm Password" id="confirmPW"
-              autocomplete="on" minlength="4" oninput="checkPasswordValidity();"
-              onfocus="toggleConfirmPasswordInputIcon()" />
-            <img class="pwIcon" src="./assets/img/password_input.svg" alt="" />
+            <input required class="inputField" 
+              type="password" 
+              placeholder="Confirm Password" 
+              id="confirmPW"
+              autocomplete="on" 
+              minlength="4" 
+              onchange="checkPasswordValidity(), validPwLength()"
+              oninput="togglePasswordIcon()" >
+            <img class="pwIcon" id="pwIconConf" onclick="togglePwTypeConf()" src="./assets/img/password_input.svg" alt="" />
           </div>
           <div class="confirmPWInvalid hidden"></div>
           <div class="form-checkbox">
