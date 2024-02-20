@@ -7,13 +7,19 @@ async function initSummary() {
 
 let todo = [];
 
-
+/**
+ * Retrieves the todos associated with the current board from the storage.
+ * @returns {Promise} - A Promise that resolves with the retrieved todos.
+ */
 async function getTodosForBoard() {
     todo = JSON.parse(await getItem('tasks'));
     console.log(todo);
 }
 
-
+/**
+ * Retrieves the current user's information from the local storage and updates the summary user name and header initials accordingly.
+ * @returns {Promise} - A Promise that resolves with the retrieved user's information.
+ */
 async function getCurrentUser() {
   let userName = JSON.parse(localStorage.getItem("currentUserName"));
   let summaryUserName = document.getElementById('summary-userName');
@@ -31,6 +37,11 @@ async function getCurrentUser() {
   document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
 }
 
+/**
+ * Retrieves the initials of a contact's name.
+ * @param {string} contact - The contact's name.
+ * @returns {Object} - An object containing the profile initials.
+ */
 function getInitials(contact) {
   const contactString = String(contact); // Konvertierung des Inputs zu einem String
   const words = contactString.split(" ");
@@ -40,7 +51,9 @@ function getInitials(contact) {
   return { profileinitials }; // Rückgabe von profileinitials und secondName als Objekt
 }
 
-
+/**
+ * Updates the greeting message based on the current time.
+ */
 function updateGreeting() {
   let greetingTime = document.getElementById("greet");
   let currentDate = new Date();
@@ -55,6 +68,9 @@ function updateGreeting() {
   }
 }
 
+/**
+ * Renders the number of tasks in different categories and with different priorities.
+ */
 async function renderNumbersOfTasks() {
   let numberOfToDo = document.getElementById('task-counter-todo');
   let numberOfDone = document.getElementById('task-counter-done');
@@ -91,6 +107,9 @@ async function renderNumbersOfTasks() {
   renderNearestDueDate();
 }
 
+/**
+ * Renders the nearest due date among the tasks.
+ */
 function renderNearestDueDate() {
   let nearestDueDateContainer = document.getElementById('deadline-date');
   let currentDate = new Date();

@@ -3,14 +3,20 @@ let currentUserName = [];
 let currentUserEmail = [];
 let  contactlist = []; 
 
-
+/**
+ * Initializes the application by loading user data and checking the login status.
+ * @returns {Promise<void>}
+ */
 async function init() {                             
     let userData = await getItem("users");      
     users = JSON.parse(userData) || [];
     checkLoginStatus()
 }
 
-
+/**
+ * Loads user data from storage.
+ * @returns {Promise<void>}
+ */
 async function loadUsers() {
     try {                                               
        users = JSON.parse(await getItem('users'));
@@ -19,13 +25,17 @@ async function loadUsers() {
     }
 }
 
-
+/**
+ * Logs out the guest user and redirects to the summary page.
+ */
 function btnGuestLog(){
     localStorage.clear();
     window.location.href = "../summary.html";
   }
 
-
+/**
+ * Checks the login status based on the URL parameters and performs actions accordingly.
+ */
 function checkLoginStatus() {
     const urlParams = new URLSearchParams(window.location.search);      
     const msg = urlParams.get('msg');
@@ -37,6 +47,9 @@ function checkLoginStatus() {
 }
 
 
+/**
+ * Autofills the login form with the saved user data from localStorage if available.
+ */
 function autoFillLoginForm() {
   let currentUserData = localStorage.getItem("currentUser"); 
   let emailInputField = document.getElementById('email'); 
@@ -50,7 +63,10 @@ function autoFillLoginForm() {
 }
 }
 
-
+/**
+ * Handles the login process.
+ * @param {Event} event - The event object.
+ */
 function logIn(event) {    
       event.preventDefault();
       console.log('event');
@@ -73,6 +89,10 @@ function logIn(event) {
   }
 
 
+/**
+ * Stores user data in local storage.
+ * @param {Object} user - The user object containing email, password, and name.
+ */
 function storeUserData(user) {          
   let userEmail = user.email; // E-Mail-Adresse des Benutzers extrahieren
   let userPassword = user.password; // Passwort des Benutzers extrahieren
@@ -89,12 +109,18 @@ function storeUserData(user) {
   }
 }
 
-
+/**
+ * Saves data to local storage under the specified key.
+ * @param {string} key - The key under which the data will be stored in local storage.
+ * @param {any} data - The data to be stored in local storage.
+ */
 function saveDataToLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data)); // Daten im lokalen Speicher unter dem angegebenen Schlüssel speichern
 }
 
-
+/**
+ * Changes the password input icon based on user interaction.
+ */
 function changePasswordInputIcon() {
   let icon = document.querySelector(".passwordIcon");
   let passwordInput = document.getElementById("passwordInput");
@@ -124,7 +150,9 @@ function changePasswordInputIcon() {
   });
 }
 
-
+/**
+ * Toggles the visibility of the password input field.
+ */
 function togglePasswordInputType() {
   let icon = document.querySelector(".passwordIcon");
   let passwordInput = document.getElementById("passwordInput");
@@ -138,7 +166,9 @@ function togglePasswordInputType() {
   }
 }
 
-
+/**
+ * Displays a message indicating incorrect email address or password and adds alert styling to input fields.
+ */
 function showUserPasswordMismatch() {
   let passwordInput = document.getElementById("passwordInput");
   let passwordInvalidDiv = document.querySelector(".passwordInvalidDiv");
@@ -153,7 +183,9 @@ function showUserPasswordMismatch() {
   emailInput.classList.add("alert");
 }
 
-
+/**
+ * Checks the validity of the email input field and displays an error message if the email is invalid.
+ */
 function checkEmailValidity() {
     const emailInput = document.getElementById("email");
     const emailError = document.querySelector(".emailInvalid");
@@ -165,7 +197,9 @@ function checkEmailValidity() {
     emailInput.classList.toggle("alert", !isValid);
   }
 
-
+  /**
+ * Checks the validity of the password input field and displays an error message if the password length is less than 8 characters.
+ */
 function checkPasswordValidity() {
     let passwordInput = document.getElementById("passwordInput");
     let passwordInvalidDiv = document.querySelector(".passwordInvalidDiv");
