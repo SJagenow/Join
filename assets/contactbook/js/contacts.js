@@ -112,7 +112,6 @@ async function addToContacts() {
         "phone": phone.value
     };
     contactList.push(contact);
-    console.log('updated contactlist:', contactList);
     await setItem('contactList', JSON.stringify(contactList));
     resetAddContactForm(name, mail, phone);
     closeAddContactDialog();
@@ -150,9 +149,7 @@ async function deleteContact() {
         const confirmDelete = confirm('Are you sure you want to edit/delete this contact?');
         if (confirmDelete) {
             contactList.splice(indexToDelete, 1);
-            console.log('Contact deleted successfully.');
         } else {
-            console.log('Deletion of contact canceled.');
             return;
         }
         await setItem('contactList', JSON.stringify(contactList));

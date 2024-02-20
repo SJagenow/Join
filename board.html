@@ -281,7 +281,7 @@
     </div>
     <div id="add-task-container-edit" class="add-task-container center d-none"
         onclick="closeAddTaskOverlay(); closeEditTodo()">
-        <div id="add-task-div" class="add-task-div" onclick="doNotClose(event)">
+        <div id="add-task-div" class="add-task-div-edit" onclick="doNotClose(event)">
             <div id="main-div" class="main-div-edit overflow" onclick="closeFunction()">
                 <h1 class="add-task-title-edit">Add Task</h1>
                 <form id="add-task-form" action="" class="ad-task-form column-space-between"
@@ -329,7 +329,7 @@
                             </div>
                             <div class="column add-task-input-div-edit">
                                 <h2 class="form-input-titel-edit">Prio</h2>
-                                <div class="space-between gap8" id="prio-div">
+                                <div class="flex gap8" id="prio-div">
                                     <div id="prio-button-urgent-edit" class="add-task-prio-button-edit"
                                         onclick="changePriorityEdit('urgent')">
                                         Urgent
