@@ -11,12 +11,10 @@ async function boardInit() {
     initAddTask();
 }
 
-
 async function getTodosForBoard() {
     todo = JSON.parse(await getItem('tasks'));
     console.log(todo);
 }
-
 
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
@@ -51,11 +49,9 @@ function updateBoard() {
     }
 }
 
-
 function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
-
 
 function getSubtaskDoneCounter(clean) {
     let subTasksTotal = clean.subtasks.length;
@@ -69,7 +65,6 @@ function getSubtaskDoneCounter(clean) {
     let progressWidth = (subTasksDone / subTasksTotal) * 100;
     return { progressWidth, subTasksDone, subTasksTotal }; // progressWidth zurückgeben
 }
-
 
 function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     const todoId = `todo_${clean['id']}`;
@@ -115,16 +110,13 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     </div>`;
 }
 
-
 async function upload() {
     await setItem('tasks', JSON.stringify(todo));
 }
 
-
 function allowDrop(ev) {
     ev.preventDefault();
 }
-
 
 function moveTo(category) {
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
@@ -132,16 +124,13 @@ function moveTo(category) {
     updateBoard();
 }
 
-
 function highlight(todoId) {
     document.getElementById(todoId).classList.add('drag-area-highlight');
 }
 
-
 function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
-
 
 async function renderDialog(selectedTodo, selectedTodoID) {
     document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
@@ -149,7 +138,6 @@ async function renderDialog(selectedTodo, selectedTodoID) {
     await renderMemberList(selectedTodo);
     await renderSubtaskDialog(selectedTodo);
 }
-
 
 async function returnDialog(selectedTodo, selectedTodoID) {
     return `
@@ -211,7 +199,6 @@ async function renderMemberList(selectedTodo) {
     }
 }
 
-
 function getInitials(contact) {
     const words = contact.split(" ");
     const firstName = words[0][0];
@@ -219,7 +206,6 @@ function getInitials(contact) {
     const profileinitials = firstName + secondName;
     return { profileinitials, secondName };
 }
-
 
 function openDialog(todoId) {
     let id = todoId.split('_')[1];
@@ -229,11 +215,9 @@ function openDialog(todoId) {
     renderDialog(selectedTodo, selectedTodoID);
 }
 
-
 function closeDialog() {
     document.getElementById('dialog_bg').classList.add('d-none');
 }
-
 
 function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
@@ -255,19 +239,6 @@ function filterTodosByTitle() {
         }
     }
 }
-
-/* Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
-if (window.screen.orientation) {
-    // Sperren der Bildschirmausrichtung auf "Portrait" (vertikale Ausrichtung)
-    window.screen.orientation.lock('portrait').then(function() {
-        console.log('Bildschirmausrichtung auf Portrait gesperrt');
-    }).catch(function(error) {
-        console.error('Fehler beim Sperren der Bildschirmausrichtung:', error);
-    });
-} else {
-    console.error('Die Bildschirmorientierungs-API wird auf diesem Gerät nicht unterstützt.');
-}*/
-
 
 function moveTodo(todoId, direction, event) {
     event.stopPropagation();
@@ -312,7 +283,6 @@ function moveTodo(todoId, direction, event) {
     }
 }
 
-
 function openAddTaskOverlay(category) {
     if (window.innerWidth > 1000) {
         document.getElementById('add-task-form').setAttribute('onsubmit', `startCreateTaskFromBoard("${category}"); return false`);
@@ -323,7 +293,6 @@ function openAddTaskOverlay(category) {
     }
 }
 
-
 async function startCreateTaskFromBoard(category) {
     document.getElementById('add-task-container').classList.add('d-none');
     await createTask(category);
@@ -332,12 +301,10 @@ async function startCreateTaskFromBoard(category) {
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
-
 function closeAddTaskOverlay() {
     document.getElementById('add-task-container').classList.add('d-none');
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
-
 
 function deleteTodo(event, ID) {
     event.stopPropagation();
@@ -346,7 +313,6 @@ function deleteTodo(event, ID) {
     closeDialog();
     updateBoard();
 }
-
 
 function editTodo(event, i) {
     event.stopPropagation();
@@ -365,11 +331,9 @@ function editTodo(event, i) {
     // subtasksArray,
 }
 
-
 function closeEditTodo() {
     document.getElementById('add-task-container-edit').classList.add('d-none');
 }
-
 
 async function prioImg(priority, selectedTodoID) {
     console.log(selectedTodoID);
@@ -383,7 +347,6 @@ async function prioImg(priority, selectedTodoID) {
     }
 }
 
-
 async function renderSubtaskDialog(selectedTodo) {
     document.getElementById('subtaskContainer').innerHTML = '';
     for (let i = 0; i < selectedTodo.subtasks.length; i++) {
@@ -395,7 +358,6 @@ async function renderSubtaskDialog(selectedTodo) {
         }
     }
 }
-
 
 function checkBoxSwitchImg(i, ID) {
     let checkbox = document.getElementById(`checkBoxDialogImg${i}`);
@@ -413,3 +375,4 @@ function checkBoxSwitchImg(i, ID) {
         updateBoard();
     }
 }
+
