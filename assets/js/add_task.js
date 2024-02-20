@@ -362,7 +362,6 @@ function subtaskEditButtonsOut(i) {
 function onClickOutside(element, i) {
     document.addEventListener('click', e => {
         if (!element.contains(e.target)) {
-            // document.getElementById('body').removeAttribute('onclick');
             document.getElementById(`single-subtask${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOn(${i})`);
             document.getElementById(`single-subtask${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOut(${i})`);
             document.getElementById(`single-subtask${i}`).classList.remove('subbtask-on-focus');

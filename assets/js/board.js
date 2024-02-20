@@ -394,18 +394,15 @@ function deleteTodo(event, ID) {
 function editTodo(event, i) {
     event.stopPropagation();
     document.getElementById('add-task-container-edit').classList.remove('d-none');
-    todo[i];
     document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
     document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
     document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
-    document.getElementById('add-task-contact-edit').innerHTML = `${todo[i].contacts}`;
-    document.getElementById('add-task-date-edit0').value = `${todo[i].priority}`;
-    document.getElementById('add-task-date-edit0').value = `${todo[i].label}`;
-    document.getElementById('add-task-date-edit0').value = `${todo[i].label}`;
-    // currentPrio,
-    // category,
-    // currentLabel,
-    // subtasksArray,
+    changePriorityEdit(todo[i].priority);
+    selectLabelEdit(todo[i].label);
+    console.log(todo[i].label);
+    renderSubtaskEdit(i);
+    document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
+    document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
 }
 
 function closeEditTodo() {
@@ -454,4 +451,190 @@ function checkBoxSwitchImg(i, ID){
         upload();
         updateBoard();
     }
+}
+
+
+function changePriorityEdit(prio) {
+    let urgent = document.getElementById('prio-button-urgent-edit');
+    let medium = document.getElementById('prio-button-medium-edit');
+    let low = document.getElementById('prio-button-low-edit');
+    if (prio == 'urgent') {
+        if (urgent.classList.contains('urgent')) {
+        } else {
+            urgent.classList.add('urgent');
+            currentPrio = 'urgent';
+            medium.classList.remove('medium');
+            low.classList.remove('low');
+        }
+    } else if (prio == 'medium') {
+        if (medium.classList.contains('medium')) {
+        } else {
+            medium.classList.add('medium');
+            currentPrio = 'medium';
+            urgent.classList.remove('urgent');
+            low.classList.remove('low');
+        }
+    } else if (prio == 'low') {
+        if (low.classList.contains('low')) {
+        } else {
+            low.classList.add('low');
+            currentPrio = 'low';
+            urgent.classList.remove('urgent');
+            medium.classList.remove('medium');
+        }
+    }
+}
+
+
+function typeLabel() {
+    currentLabel = document.getElementById('add-task-category-edit').value;
+    closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
+}
+
+
+function selectLabelEdit(label) {
+    document.getElementById('add-task-category-edit').value = `${label}`;
+    currentLabel = document.getElementById('add-task-category-edit').value;
+    closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
+}
+
+function renderSubtaskEdit(j) {
+    let subtasks = document.getElementById('subtask-container-edit');
+    subtasks.innerHTML = '';
+    for (let i = 0; i < todo[j].subtasks.length; i++) {
+        const subtask = todo[j].subtasks[i].task;
+        subtasks.innerHTML += /*html*/`
+        <li id="single-subtask-edit${i}" class="subbtask subbtask-hover" onmouseenter="subtaskEditButtonsOnEdit(${i})" onmouseleave="subtaskEditButtonsOutEdit(${i})" onclick="focusSubtaskEdit(${i}, ${j})">
+            <span id="single-subtask-txt-edit${i}" contenteditable="true" class="subbtask-span" value="${subtask}">${subtask}</span>
+            <div id="subtask-edit-buttons-edit${i}" class="subtask-icons-single-div" onclick="doNotClose(event)"></div>
+        </li>
+    `;
+    }
+}
+
+function addSubtaskEdit(i) {
+    let subtaskInput = document.getElementById('add-task-subtasks-edit');
+    let subtaskInputArray = {
+        'task': subtaskInput.value,
+        'done': false,
+    };
+    if (subtaskInput.value.length >= 3) {
+        todo[i].subtasks.push(subtaskInputArray);
+        renderSubtaskEdit(i);
+        subtaskInput.value = "";
+        closeSubtask();
+    } else {
+        subtaskInput.reportValidity();
+    }
+
+}
+
+
+function openSubtaskEdit(i) {
+    document.getElementById('subbtask-input-icon-edit').innerHTML = /*html*/`
+        <svg class="subtask-icons" onclick="closeSubtaskEdit(${i})">
+            <use href="assets/img/icons.svg#x-icon"></use>
+        </svg>
+        <div class="mini-seperator"></div>
+        <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate onclick="addSubtaskEdit(${i})">
+            <svg class="subtask-icons">
+                <use href="assets/img/icons.svg#hook-icon"></use>
+            </svg>
+        </button>
+    `;
+    document.getElementById("add-task-subtasks-edit").focus();
+}
+
+
+function closeSubtaskEdit(i) {
+    document.getElementById('subbtask-input-icon-edit').innerHTML = /*html*/`
+        <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate onclick="openSubtaskEdit(${i})">
+            <svg class="subtask-icons">
+                <use href="assets/img/icons.svg#plus-add-icon"></use>
+            </svg>
+        </button>
+    `
+    document.getElementById('add-task-subtasks-edit').value = '';
+}
+
+
+function subtaskEditButtonsOnEdit(i, j) {
+    document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i}, ${j})">
+            <use href="assets/img/icons.svg#edit-pen"></use>
+        </svg>
+        <div class="mini-seperator"></div>
+        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+    `;
+};
+
+
+function subtaskEditButtonsOutEdit(i, j) {
+    document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = '';
+};
+
+
+function focusSubtaskEdit(i, j) {
+    document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseenter');
+    document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseleave');
+    document.getElementById('body').setAttribute('onclick', `closeFunctionEdit(); startOnClickOutsideEdit(${i}, ${j})`)
+    document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+        <div class="mini-seperator"></div>
+        <svg class="subtask-icons-single" onclick="editSubtaskEdit(${i}, ${j})">
+            <use href="assets/img/icons.svg#hook-icon"></use>
+        </svg>
+    `;
+    document.getElementById(`single-subtask-txt-edit${i}`).focus();
+    document.getElementById(`single-subtask-edit${i}`).classList.add('subbtask-on-focus');
+    document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-hover');
+}
+
+
+function onClickOutsideEdit(element, i, j) {
+    document.addEventListener('click', e => {
+        if (!element.contains(e.target)) {
+            document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOnEdit(${i}, ${j})`);
+            document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOutEdit(${i}, ${j})`);
+            document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-on-focus');
+            document.getElementById(`single-subtask-edit${i}`).classList.add('subbtask-hover');
+            document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = '';
+        };
+    });
+}
+
+
+function startOnClickOutsideEdit(i, j) {
+    const myElement = document.getElementById(`single-subtask-edit${i}, ${j}`);
+    onClickOutsideEdit(myElement, i, j);
+}
+
+
+function editSubtaskEdit(i, j) {
+    const subtask = todo[j].subtasks[i];
+    console.log('ijarnfgn', subtask);
+    subtask.splice(i, 1, document.getElementById(`single-subtask-txt-edit${i}`).innerHTML);
+    document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
+        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i})">
+            <use href="assets/img/icons.svg#edit-pen"></use>
+        </svg>
+        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+        </svg>
+`;
+    document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOnEdit(${i})`);
+    document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOutEdit(${i})`);
+    document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-on-focus');
+}
+
+
+function deleteSubtaskEdit(i, j) {
+    console.log(todo[j].subtasks[i]);
+    todo[j].subtasks.splice(i, 1);
+    upload();
+    renderSubtaskEdit(j);
 }

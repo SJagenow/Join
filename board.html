@@ -17,7 +17,7 @@
     <title>Document</title>
 </head>
 
-<body onload="boardInit();">
+<body id="body" onload="boardInit();">
     <div class="flex max-h">
         <div class="include-menu" w3-include-html="templates/menu.html"></div>
         <div class="main max-h">
@@ -319,20 +319,20 @@
                                 <h2 class="form-input-titel-edit">Prio</h2>
                                 <div class="space-between gap8" id="prio-div">
                                     <div id="prio-button-urgent-edit" class="add-task-prio-button-edit"
-                                        onclick="changePriority('urgent')">
+                                        onclick="changePriorityEdit('urgent')">
                                         Urgent
                                         <svg viewBox="0 0 21 16">
                                             <use href="assets/img/icons.svg#height-prio-icon"></use>
                                         </svg>
                                     </div>
                                     <div id="prio-button-medium-edit" class="add-task-prio-button-edit medium"
-                                        onclick="changePriority('medium')">Medium
+                                        onclick="changePriorityEdit('medium')">Medium
                                         <svg viewBox="0 0 21 16">
                                             <use href="assets/img/icons.svg#medium-prio-icon"></use>
                                         </svg>
                                     </div>
                                     <div id="prio-button-low-edit" class="add-task-prio-button-edit"
-                                        onclick="changePriority('low')">Low
+                                        onclick="changePriorityEdit('low')">Low
                                         <svg viewBox="0 0 21 16">
                                             <use href="assets/img/icons.svg#low-prio-icon"></use>
                                         </svg>
@@ -340,16 +340,16 @@
                                 </div>
                             </div>
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
-                                <div onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">
+                                <div onclick="dropdownMenuToggle('add-task-category-list-div-edit', 'category-arrow')">
                                     <svg id="category-arrow" class="input-icon-edit">
                                         <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
                                     </svg>
                                 </div>
                                 <h2 class="form-input-titel-edit asterisk-edit"
-                                    onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')">
+                                    onclick="dropdownMenuToggle('add-task-category-list-div-edit', 'category-arrow')">
                                     Category</h2>
                                 <input id="add-task-category-edit" class="add-task-input-edit add-task-select-edit arrow-icon"
-                                    onclick="dropdownMenuToggle('add-task-category-list-div', 'category-arrow')"
+                                    onclick="dropdownMenuToggle('add-task-category-list-div-edit', 'category-arrow')"
                                     type="text" placeholder="Select task category"
                                     pattern="(Technical Task|User Story|HTML|CSS|JS|Testing)"
                                     title="Gültige Werte: Technical Task, User Story, HTML, CSS, JS, Testing"
@@ -357,35 +357,35 @@
                                 <div id="add-task-category-list-div-edit" class="dropdown-menu-div d-none">
                                     <div style="height: 9px;"></div>
                                     <div id="add-task-category-list" class="dropdown-menu">
-                                        <div id="task-label-technical" class="add-task-single"
-                                            onclick="selectLabel('Technical Task')">Technical Task</div>
-                                        <div id="task-label-user" class="add-task-single"
-                                            onclick="selectLabel('User Story')">User Story</div>
-                                        <div id="task-label-html" class="add-task-single"
-                                            onclick="selectLabel('HTML')">HTML</div>
-                                        <div id="task-label-css" class="add-task-single"
-                                            onclick="selectLabel('CSS')">CSS</div>
-                                        <div id="task-label-js" class="add-task-single" onclick="selectLabel('JS')">
+                                        <div id="task-label-technical-edit" class="add-task-single"
+                                            onclick="selectLabelEdit('Technical Task')">Technical Task</div>
+                                        <div id="task-label-user-edit" class="add-task-single"
+                                            onclick="selectLabelEdit('User Story')">User Story</div>
+                                        <div id="task-label-html-edit" class="add-task-single"
+                                            onclick="selectLabelEdit('HTML')">HTML</div>
+                                        <div id="task-label-css-edit" class="add-task-single"
+                                            onclick="selectLabelEdit('CSS')">CSS</div>
+                                        <div id="task-label-js-edit" class="add-task-single" onclick="selectLabelEdit('JS')">
                                             JS</div>
-                                        <div id="task-label-tesig" class="add-task-single"
-                                            onclick="selectLabel('Testing')">Testing</div>
+                                        <div id="task-label-tesig-edit" class="add-task-single"
+                                            onclick="selectLabelEdit('Testing')">Testing</div>
                                     </div>
                                     <div style="height: 7px;"></div>
                                 </div>
                             </div>
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
                                 <label class="form-input-titel-edit" for="add-task-subtasks-edit">Subtasks</label>
-                                <input id="add-task-subtasks-edit" class="add-task-input-edit" onclick="openSubtask()"
+                                <input id="add-task-subtasks-edit" class="add-task-input-edit" onclick="openSubtaskEdit()"
                                     type="text" minlength="3" name="Subtasks" placeholder="Add new subtask">
                                 <div id="subbtask-input-icon-edit">
-                                    <button type="button" id="add-subtask-button" formnovalidate
-                                        onclick="openSubtask()">
+                                    <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate
+                                        onclick="openSubtaskEdit()">
                                         <svg class="subtask-icons">
                                             <use href="assets/img/icons.svg#plus-add-icon"></use>
                                         </svg>
                                     </button>
                                 </div>
-                                <ul id="subtask-container">
+                                <ul id="subtask-container-edit">
                                     <li class="subbtask" contenteditable="true">
                                         <span>das ist ein subtask</span>
                                     </li>

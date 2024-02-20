@@ -838,6 +838,13 @@ body input {
     width: 232px;
 }
 
+.subtask-button-edit {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    height: 24px;
+}
+
 header {
     box-shadow: -2px 4px 4px 0px rgba(0, 0, 0, 0.10), inset -1px 0px 4px 0px rgba(0, 0, 0, 0.05);
 }
@@ -1412,6 +1419,7 @@ header {
 }
 
 .add-task-prio-button-edit {
+    cursor: pointer;
     font-size: 20px;
     height: 56px;
     width: 136px;
@@ -1452,6 +1460,23 @@ header {
     height: 24px;
     width: 24px;
     transition: all 0.15s ease-in-out;
+}
+
+.add-task-prio-button-edit svg {
+    width: 20px;
+    margin-left: 4px;
+}
+
+#prio-button-urgent-edit svg {
+    fill: #FF3D00;
+}
+
+#prio-button-medium-edit svg {
+    fill: #FFA800;
+}
+
+#prio-button-low-edit svg {
+    fill: #7AE229;
 }
 
 
