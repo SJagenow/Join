@@ -433,32 +433,6 @@ function deleteTodo(event, ID) {
     updateBoard();
 }
 
-/**
- * Edits a todo item.
- * @param {Event} event - The event object.
- * @param {number} i - The index of the todo item to be edited.
- */
-function editTodo(event, i) {
-    event.stopPropagation();
-    document.getElementById('add-task-container-edit').classList.remove('d-none');
-    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
-    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
-    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
-    changePriorityEdit(todo[i].priority);
-    selectLabelEdit(todo[i].label);
-    console.log(todo[i].label);
-    renderSubtaskEdit(i);
-    document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
-    document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
-}
-
-/**
- * Closes the edit todo overlay.
- */
-function closeEditTodo() {
-    document.getElementById('add-task-container-edit').classList.add('d-none');
-}
-
 
 /**
  * Sets the priority image based on the priority value of the selected todo.
@@ -762,7 +736,48 @@ async function editTask(category) {
 }
 
 
+async function loadContactListEdit() {
+    try {
+        contactList = JSON.parse(await getItem('contactList'));
+        renderContactListForTaskEdit()
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
+
+
+function renderContactListForTaskEdit() {
+    document.getElementById('add-task-contact-edit').innerHTML = '';
+    for (let i = 0; i < contactList.length; i++) {
+        let contact = contactList[i].name;
+        const name = contact.split(" ");
+        const firstName = name[0][0];
+        const secondName = name[1] ? name[1][0] : '';
+        let initials = firstName + secondName;
+        document.getElementById('add-task-contact-edit').innerHTML += /*html*/`
+        <div id="task-contakt-edit${i}" class="add-task-single" onclick="selectContact(${i})">
+            <div class="name-div">
+                <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
+                <span>${contact}</span>
+            </div>
+            <div>
+                <svg id="add-task-assignet-checkbox${i}" class="add-task-assignet-checkbox">
+                    <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+                </svg>
+            </div>
+        </div>
+    `;
+    }
+}
+
+
+/**
+ * Edits a todo item.
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the todo item to be edited.
+ */
 function editTodo(event, i) {
+    loadContactListEdit();
     event.stopPropagation();
     document.getElementById('add-task-container-edit').classList.remove('d-none');
     document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
@@ -774,4 +789,11 @@ function editTodo(event, i) {
     renderSubtaskEdit(i);
     document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
     document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
+}
+
+/**
+ * Closes the edit todo overlay.
+ */
+function closeEditTodo() {
+    document.getElementById('add-task-container-edit').classList.add('d-none');
 }
