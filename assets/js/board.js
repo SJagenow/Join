@@ -569,6 +569,11 @@ function selectLabelEdit(label) {
     closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
 }
 
+
+/**
+ * Renders the subtask edit section in the task edit form.
+ * @param {number} j - The index of the todo item.
+ */
 function renderSubtaskEdit(j) {
     let subtasks = document.getElementById('subtask-container-edit');
     subtasks.innerHTML = '';
@@ -583,6 +588,10 @@ function renderSubtaskEdit(j) {
     }
 }
 
+/**
+ * Adds a subtask to the todo item being edited.
+ * @param {number} i - The index of the todo item.
+ */
 function addSubtaskEdit(i) {
     let subtaskInput = document.getElementById('add-task-subtasks-edit');
     let subtaskInputArray = {
@@ -601,6 +610,10 @@ function addSubtaskEdit(i) {
 }
 
 
+/**
+ * Opens the subtask edit dialog for the specified todo item.
+ * @param {number} i - The index of the todo item.
+ */
 function openSubtaskEdit(i) {
     document.getElementById('subbtask-input-icon-edit').innerHTML = /*html*/`
         <svg class="subtask-icons" onclick="closeSubtaskEdit(${i})">
@@ -617,6 +630,10 @@ function openSubtaskEdit(i) {
 }
 
 
+/**
+ * Closes the subtask edit dialog.
+ * @param {number} i - The index of the todo item.
+ */
 function closeSubtaskEdit(i) {
     document.getElementById('subbtask-input-icon-edit').innerHTML = /*html*/`
         <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate onclick="openSubtaskEdit(${i})">
@@ -628,7 +645,11 @@ function closeSubtaskEdit(i) {
     document.getElementById('add-task-subtasks-edit').value = '';
 }
 
-
+/**
+ * Handles the mouseenter event for subtask edit buttons.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function subtaskEditButtonsOnEdit(i, j) {
     document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i}, ${j})">
@@ -641,12 +662,21 @@ function subtaskEditButtonsOnEdit(i, j) {
     `;
 };
 
-
+/**
+ * Handles the mouseleave event for subtask edit buttons.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function subtaskEditButtonsOutEdit(i, j) {
     document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = '';
 };
 
 
+/**
+ * Focuses on editing a subtask and displays edit/delete buttons.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function focusSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseleave');
@@ -665,7 +695,12 @@ function focusSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-hover');
 }
 
-
+/**
+ * Listens for clicks outside the specified element and triggers actions accordingly.
+ * @param {HTMLElement} element - The HTML element.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function onClickOutsideEdit(element, i, j) {
     document.addEventListener('click', e => {
         if (!element.contains(e.target)) {
@@ -678,13 +713,21 @@ function onClickOutsideEdit(element, i, j) {
     });
 }
 
-
+/**
+ * Starts listening for clicks outside the specified element and triggers actions accordingly.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function startOnClickOutsideEdit(i, j) {
     const myElement = document.getElementById(`single-subtask-edit${i}, ${j}`);
     onClickOutsideEdit(myElement, i, j);
 }
 
-
+/**
+ * Edits the content of a subtask in the edit mode.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function editSubtaskEdit(i, j) {
     const subtask = todo[j].subtasks[i];
     console.log('ijarnfgn', subtask);
@@ -702,7 +745,11 @@ function editSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-on-focus');
 }
 
-
+/**
+ * Deletes a subtask from the todo item in the edit mode.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function deleteSubtaskEdit(i, j) {
     console.log(todo[j].subtasks[i]);
     todo[j].subtasks.splice(i, 1);
