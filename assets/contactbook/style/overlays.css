@@ -221,7 +221,7 @@
 #contactlist_delete_icon_container {
     height: 24px;
     width: 24px;
-    background-image: url(../contactbook/icons_contactbook/delete.svg);
+    background-image: url(../icons_contactbook/delete.svg);
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -237,7 +237,7 @@
 #contactlist_delete_icon_container_options {
     height: 24px;
     width: 24px;
-    background-image: url(../contactbook/icons_contactbook/delete.svg);
+    background-image: url(../icons_contactbook/delete.svg);
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -253,7 +253,7 @@
 #contactlist_edit_icon_container_options{
     height: 24px;
     width: 24px;
-    background-image: url(../contactbook/icons_contactbook/edit.svg);
+    background-image: url(../icons_contactbook/edit.svg);
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -269,7 +269,7 @@
 #contactlist_edit_icon_container {
     height: 24px;
     width: 24px;
-    background-image: url(../contactbook/icons_contactbook/edit.svg);
+    background-image: url(../icons_contactbook/edit.svg);
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -287,7 +287,7 @@
 #contactlist_delete_icon_container:hover {
     height: 24px;
     width: 24px;
-    background-image: url(../contactbook/icons_contactbook/delete_blue.svg);
+    background-image: url(../icons_contactbook/delete_blue.svg);
     color: #29ABE2;
     cursor: pointer;
     scale: 1.0;
@@ -303,7 +303,7 @@
 #contactlist_edit_icon_container:hover {
     height: 24px;
     width: 24px;
-    background-image: url(../contactbook/icons_contactbook/edit_blue.svg);
+    background-image: url(../icons_contactbook/edit_blue.svg);
     color: #29ABE2;
     cursor: pointer;
     scale: 1.0;
