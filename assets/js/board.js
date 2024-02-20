@@ -237,11 +237,11 @@ async function returnDialog(selectedTodo, selectedTodoID) {
                     Recommendation</span></div>
         </div>
         <div class="user_story_delete_edit">
-            <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
+            <div class="user_story_delete_edit_one"><button class="edit-button"><img src="./assets/img/delete.png" alt="">
                     <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img
+            <div class="user_story_delete_edit_two"><button class="edit-button" onclick="editTodo(event, ${selectedTodoID})"><img
                         src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
@@ -751,8 +751,74 @@ function editSubtaskEdit(i, j) {
  * @param {number} j - The index of the todo item.
  */
 function deleteSubtaskEdit(i, j) {
-    console.log(todo[j].subtasks[i]);
     todo[j].subtasks.splice(i, 1);
     upload();
     renderSubtaskEdit(j);
+}
+
+
+function clearTaskEdit() {
+    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
+    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
+    let contactsDiv = document.getElementById('contacts-div');
+    for (let i = 0; i < contactList.length; i++) {
+        let get = document.getElementById(`add-task-assignet-checkbox${i}`);
+        let contact = contactList[i];
+        if (get.innerHTML == checked) {
+            get.innerHTML = unchecked;
+            document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
+        }
+    }
+    contactsDiv.innerHTML = '';
+    changePriority('medium');
+    subtasksArray = [];
+    contactList = [];
+    selectedUsers = [];
+    initAddTask();
+}
+
+
+async function startEditTask() {
+    let category = 'todos';
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('category')) {
+        category = urlParams.get('category');
+    }
+    document.getElementById('overlay-div').classList.remove('d-none');
+    await createTask(category);
+    pauseAndExecute();
+}
+
+
+async function editTask(category) {
+    typeLabel();
+    tasks = JSON.parse(await getItem('tasks'));
+    let task = {
+        "id": tasks.length,
+        "title": document.getElementById('add-task-title').value,
+        "description": document.getElementById('add-task-description').value,
+        "contacts": selectedUsers,
+        "dueDate": document.getElementById('add-task-date').value,
+        "priority": currentPrio,
+        "category": category,
+        "label": currentLabel,
+        "subtasks": subtasksArray,
+    };
+    tasks.push(task);
+    await setItem('tasks', JSON.stringify(tasks));
+}
+
+
+function editTodo(event, i) {
+    event.stopPropagation();
+    document.getElementById('add-task-container-edit').classList.remove('d-none');
+    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
+    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
+    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
+    changePriorityEdit(todo[i].priority);
+    selectLabelEdit(todo[i].label);
+    console.log(todo[i].label);
+    renderSubtaskEdit(i);
+    document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
+    document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
 }
