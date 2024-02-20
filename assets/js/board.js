@@ -63,11 +63,11 @@ function updateBoard() {
 }
 
 function noTaskInContainer() {
-   document.getElementById('task_content_open');
-    if (innerHTML === '') {
-        document.getElementById('no_task_container').classList.remove('d-none');
+    let openContent = document.getElementById('task_content_open');
+    if (openContent.innerHTML === '') {
+        openContent.classList.remove('d-none');
     } else {
-        document.getElementById('no_task_container').classList.add('d-none');
+        openContent.classList.add('d-none');
     }
 }
 
