@@ -69,7 +69,7 @@ function startDragging(todoId) {
 
 function getSubtaskDoneCounter(clean) {
     let subTasksTotal = clean.subtasks.length;
-    let subTasksDone = 0; // Außerhalb der forEach-Schleife initialisieren
+    let subTasksDone = 0; 
     clean.subtasks.forEach(subtask => {
         if (subtask.done === true) {
             subTasksDone++;
@@ -103,8 +103,9 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal  ) {
     <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
-        <button id="updown_arrow" class="d-none" onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-        <button id="updown_arrow_two" class="d-none"  onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+        <button id="updown_arrow" class="display_none_arrows" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+        <button id="updown_arrow_two" class="display_none_arrows"  onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+        
         </div>
     </div>
     <div class="card_title">${clean['title']}</div>

@@ -2,6 +2,9 @@
     .board_midlane_main_container {
         flex-direction: column;
     }
+.updown_buttons{
+    display: flex;
+}
 
     .drag-area {
         height: 300px;
