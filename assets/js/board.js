@@ -4,6 +4,7 @@ async function boardInit() {
     await getTodosForBoard();
     updateBoard();
     initAddTask();
+    noTaskInContainer();
 }
 
 let todoId;
@@ -60,6 +61,16 @@ function updateBoard() {
 
 
 }
+
+function noTaskInContainer() {
+   document.getElementById('task_content_open');
+    if (innerHTML === '') {
+        document.getElementById('no_task_container').classList.remove('d-none');
+    } else {
+        document.getElementById('no_task_container').classList.add('d-none');
+    }
+}
+
 
 
 function startDragging(todoId) {
