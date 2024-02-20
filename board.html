@@ -120,7 +120,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="dialog_bg" class="user_story_dialog_background d-none" onclick="closeDialog()">
+                    <div id="dialog_bg" class="user_story_dialog_background center d-none" onclick="closeDialog()">
                         <div id="user_story_dialog" class="users_story_dialog dialog-slide-out"
                             onclick="doNotClose(event)">
                         </div>
@@ -300,25 +300,25 @@
                                     name="Description" placeholder="Enter a Description"></textarea>
                             </div>
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
-                                <div onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">
-                                    <svg id="assignet-arrow" class="input-icon-edit">
+                                <div onclick="dropdownMenuToggle('add-task-contact-div-edit', 'assignet-arrow-edit')">
+                                    <svg id="assignet-arrow-edit" class="input-icon-edit">
                                         <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
                                     </svg>
                                 </div>
                                 <label class="form-input-titel-edit" for="add-task-assignet-to-edit"
-                                    onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')">Assignet
+                                    onclick="dropdownMenuToggle('add-task-contact-div-edit', 'assignet-arrow-edit')">Assignet
                                     to</label>
                                 <input id="add-task-assignet-to-edit" class="add-task-select-edit arrow-icon"
-                                    onclick="dropdownMenuToggle('add-task-contact-div', 'assignet-arrow')"
-                                    onkeyup="filterContactsForAddTask()" type="text"
+                                    onclick="dropdownMenuToggle('add-task-contact-div-edit', 'assignet-arrow-edit')"
+                                    onkeyup="filterContactsForAddTaskEdit()" type="text"
                                     placeholder="Select contacts to assign">
-                                <div id="add-task-contact-div" class="dropdown-menu-div d-none">
+                                <div id="add-task-contact-div-edit" class="dropdown-menu-div d-none">
                                     <div style="height: 9px;"></div>
-                                    <div id="add-task-contact" class="dropdown-menu"></div>
+                                    <div id="add-task-contact-edit" class="dropdown-menu"></div>
                                     <div style="height: 7px;"></div>
                                 </div>
                             </div>
-                            <div id="contacts-div"></div>
+                            <div id="contacts-div-edit" class="contacts-div-edit"></div>
                         </div>
                         <div class="seperator-edit"></div>
                         <div>

@@ -239,7 +239,6 @@ body input {
     background: #FFF;
     z-index: 9;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-    margin-top: 45px;
 }
 .user_story_dialog h1 {
     font-size: 44px;
@@ -332,7 +331,7 @@ body input {
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
-    width: 100%;
+    width: 350px;
     margin-top: 20px;
 }
 #updown_arrow img {
@@ -393,3 +392,4 @@ body input {
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.192);
     margin-left: 13px;
 }
+ 

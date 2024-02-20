@@ -202,6 +202,13 @@ async function renderDialog(selectedTodo, selectedTodoID) {
     await renderSubtaskDialog(selectedTodo);
 }
 
+
+/**
+ * Returns the HTML markup for the dialog displaying details of the selected todo.
+ * @param {Object} selectedTodo - The selected todo object containing details.
+ * @param {number} selectedTodoID - The ID of the selected todo.
+ * @returns {string} The HTML markup for the dialog.
+ */
 async function returnDialog(selectedTodo, selectedTodoID) {
     return `
     <div class="user_story_label_x_contrainer">
@@ -237,11 +244,11 @@ async function returnDialog(selectedTodo, selectedTodoID) {
                     Recommendation</span></div>
         </div>
         <div class="user_story_delete_edit">
-            <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
+            <div class="user_story_delete_edit_one"><button class="edit-button"><img src="./assets/img/delete.png" alt="">
                     <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img
+            <div class="user_story_delete_edit_two"><button class="edit-button" onclick="editTodo(event, ${selectedTodoID})"><img
                         src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
@@ -433,32 +440,6 @@ function deleteTodo(event, ID) {
     updateBoard();
 }
 
-/**
- * Edits a todo item.
- * @param {Event} event - The event object.
- * @param {number} i - The index of the todo item to be edited.
- */
-function editTodo(event, i) {
-    event.stopPropagation();
-    document.getElementById('add-task-container-edit').classList.remove('d-none');
-    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
-    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
-    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
-    changePriorityEdit(todo[i].priority);
-    selectLabelEdit(todo[i].label);
-    console.log(todo[i].label);
-    renderSubtaskEdit(i);
-    document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
-    document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
-}
-
-/**
- * Closes the edit todo overlay.
- */
-function closeEditTodo() {
-    document.getElementById('add-task-container-edit').classList.add('d-none');
-}
-
 
 /**
  * Sets the priority image based on the priority value of the selected todo.
@@ -569,6 +550,11 @@ function selectLabelEdit(label) {
     closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
 }
 
+
+/**
+ * Renders the subtask edit section in the task edit form.
+ * @param {number} j - The index of the todo item.
+ */
 function renderSubtaskEdit(j) {
     let subtasks = document.getElementById('subtask-container-edit');
     subtasks.innerHTML = '';
@@ -583,6 +569,11 @@ function renderSubtaskEdit(j) {
     }
 }
 
+
+/**
+ * Adds a subtask to the todo item being edited.
+ * @param {number} i - The index of the todo item.
+ */
 function addSubtaskEdit(i) {
     let subtaskInput = document.getElementById('add-task-subtasks-edit');
     let subtaskInputArray = {
@@ -597,10 +588,13 @@ function addSubtaskEdit(i) {
     } else {
         subtaskInput.reportValidity();
     }
-
 }
 
 
+/**
+ * Opens the subtask edit dialog for the specified todo item.
+ * @param {number} i - The index of the todo item.
+ */
 function openSubtaskEdit(i) {
     document.getElementById('subbtask-input-icon-edit').innerHTML = /*html*/`
         <svg class="subtask-icons" onclick="closeSubtaskEdit(${i})">
@@ -617,6 +611,10 @@ function openSubtaskEdit(i) {
 }
 
 
+/**
+ * Closes the subtask edit dialog.
+ * @param {number} i - The index of the todo item.
+ */
 function closeSubtaskEdit(i) {
     document.getElementById('subbtask-input-icon-edit').innerHTML = /*html*/`
         <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate onclick="openSubtaskEdit(${i})">
@@ -628,7 +626,11 @@ function closeSubtaskEdit(i) {
     document.getElementById('add-task-subtasks-edit').value = '';
 }
 
-
+/**
+ * Handles the mouseenter event for subtask edit buttons.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function subtaskEditButtonsOnEdit(i, j) {
     document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i}, ${j})">
@@ -641,12 +643,21 @@ function subtaskEditButtonsOnEdit(i, j) {
     `;
 };
 
-
+/**
+ * Handles the mouseleave event for subtask edit buttons.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function subtaskEditButtonsOutEdit(i, j) {
     document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = '';
 };
 
 
+/**
+ * Focuses on editing a subtask and displays edit/delete buttons.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function focusSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseleave');
@@ -665,7 +676,12 @@ function focusSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-hover');
 }
 
-
+/**
+ * Listens for clicks outside the specified element and triggers actions accordingly.
+ * @param {HTMLElement} element - The HTML element.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function onClickOutsideEdit(element, i, j) {
     document.addEventListener('click', e => {
         if (!element.contains(e.target)) {
@@ -678,13 +694,21 @@ function onClickOutsideEdit(element, i, j) {
     });
 }
 
-
+/**
+ * Starts listening for clicks outside the specified element and triggers actions accordingly.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function startOnClickOutsideEdit(i, j) {
     const myElement = document.getElementById(`single-subtask-edit${i}, ${j}`);
     onClickOutsideEdit(myElement, i, j);
 }
 
-
+/**
+ * Edits the content of a subtask in the edit mode.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function editSubtaskEdit(i, j) {
     const subtask = todo[j].subtasks[i];
     console.log('ijarnfgn', subtask);
@@ -702,10 +726,249 @@ function editSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-on-focus');
 }
 
-
+/**
+ * Deletes a subtask from the todo item in the edit mode.
+ * @param {number} i - The index of the subtask.
+ * @param {number} j - The index of the todo item.
+ */
 function deleteSubtaskEdit(i, j) {
-    console.log(todo[j].subtasks[i]);
     todo[j].subtasks.splice(i, 1);
     upload();
     renderSubtaskEdit(j);
+}
+
+/**
+ * Clears the task edit form by resetting checkboxes, contact list, priority, and subtasks array.
+ */
+function clearTaskEdit() {
+    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
+    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
+    let contactsDiv = document.getElementById('contacts-div');
+    for (let i = 0; i < contactList.length; i++) {
+        let get = document.getElementById(`add-task-assignet-checkbox-edit${i}`);
+        let contact = contactList[i];
+        if (get.innerHTML == checked) {
+            get.innerHTML = unchecked;
+            document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
+        }
+    }
+    contactsDiv.innerHTML = '';
+    changePriority('medium');
+    subtasksArray = [];
+    contactList = [];
+    selectedUsers = [];
+    initAddTask();
+}
+
+/**
+ * Starts editing a task by setting the category based on the URL parameters, removing the 'd-none' class from the overlay div, creating the task, and pausing to execute further actions.
+ */
+async function startEditTask() {
+    let category = 'todos';
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('category')) {
+        category = urlParams.get('category');
+    }
+    document.getElementById('overlay-div').classList.remove('d-none');
+    await createTask(category);
+    pauseAndExecute();
+}
+
+/**
+ * Edits a task by updating its details in the tasks list based on the provided category.
+ * @param {string} category - The category of the task being edited.
+ */
+async function editTask(category) {
+    typeLabel();
+    tasks = JSON.parse(await getItem('tasks'));
+    let task = {
+        "id": tasks.length,
+        "title": document.getElementById('add-task-title').value,
+        "description": document.getElementById('add-task-description').value,
+        "contacts": selectedUsers,
+        "dueDate": document.getElementById('add-task-date').value,
+        "priority": currentPrio,
+        "category": category,
+        "label": currentLabel,
+        "subtasks": subtasksArray,
+    };
+    tasks.push(task);
+    await setItem('tasks', JSON.stringify(tasks));
+}
+
+
+/**
+ * Loads the contact list from local storage and renders it for tasks.
+ * 
+ * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
+ */
+async function loadContactListEdit(i) {
+    try {
+        contactList = JSON.parse(await getItem('contactList'));
+        renderContactListForTaskEdit(i);
+        updateSelectedUsersEdit();
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
+
+
+/**
+ * Renders the contact list for tasks.
+ */
+function renderContactListForTaskEdit(j) {
+    selectedUsers = todo[j].contacts;
+    document.getElementById('add-task-contact-edit').innerHTML = '';
+    for (let i = 0; i < contactList.length; i++) {
+        let contact = contactList[i].name;
+        const name = contact.split(" ");
+        const firstName = name[0][0];
+        const secondName = name[1] ? name[1][0] : '';
+        let initials = firstName + secondName;
+        let isChecked = selectedUsers.includes(contact);
+        let checkboxSVGId = `add-task-assignet-checkbox-edit${i}`;
+        let checkboxSVG = isChecked ? 
+            `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-checked-icon"></use>
+            </svg>` :
+            `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+            </svg>`;
+
+        let backgroundClass = isChecked ? 'dark-background' : '';
+
+        document.getElementById('add-task-contact-edit').innerHTML += /*html*/`
+            <div id="task-contakt-edit${i}" class="add-task-single ${backgroundClass}" onclick="selectContactEdit(${i})">
+                <div class="name-div">
+                    <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
+                    <span>${contact}</span>
+                </div>
+                <div>
+                    ${checkboxSVG}
+                </div>
+            </div>
+        `;
+    }
+}
+
+
+/**
+ * Filters and renders contacts for adding tasks based on the input value.
+ */
+async function filterContactsForAddTaskEdit() {
+    document.getElementById('add-task-contact-edit').innerHTML = '';
+    let value = document.getElementById('add-task-assignet-to-edit').value.toLowerCase();
+    for (let i = 0; i < contactList.length; i++) {
+        let checkContact = contactList[i].name.toLowerCase();
+        if (checkContact.includes(value)) {
+            let contact = contactList[i].name;
+            const name = contact.split(" ");
+            const firstName = name[0][0];
+            const secondName = name[1] ? name[1][0] : '';
+            let initials = firstName + secondName;
+            document.getElementById('add-task-contact-edit').innerHTML += renderContactListForTaskEditHTML(contact, i, secondName, initials);
+        }
+    }
+}
+
+
+/**
+ * Generates HTML markup for rendering a contact in the task list.
+ * 
+ * @param {string} contact - The name of the contact.
+ * @param {number} i - The index of the contact.
+ * @param {string} secondName - The second name of the contact.
+ * @param {string} initials - The initials of the contact.
+ * @returns {string} HTML markup for rendering the contact.
+ */
+function renderContactListForTaskEditHTML(contact, i, secondName, initials) {
+    return /*html*/`
+    <div id="task-contakt-edit${i}" class="add-task-single" onclick="selectContactEdit(${i})">
+        <div class="name-div">
+            <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
+            <span>${contact}</span>
+        </div>
+        <div>
+            <svg id="add-task-assignet-checkbox-edit${i}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+            </svg>
+        </div>
+    </div>
+`;
+}
+
+
+/**
+ * Selects or deselects a contact based on its index and updates the list of selected users.
+ * 
+ * @param {number} i - The index of the contact.
+ */
+function selectContactEdit(i) {
+    let get = document.getElementById(`add-task-assignet-checkbox-edit${i}`);
+    let isChecked = get.querySelector('use').getAttribute('href') === 'assets/img/icons.svg#checkbox-checked-icon';
+    let user = contactList[i].name;
+
+    if (isChecked) {
+        get.innerHTML = '<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>';
+        document.getElementById(`task-contakt-edit${i}`).classList.remove('dark-background');
+        selectedUsers = selectedUsers.filter(selectedUser => selectedUser !== user);
+    } else {
+        get.innerHTML = '<use href="assets/img/icons.svg#checkbox-checked-icon"></use>';
+        document.getElementById(`task-contakt-edit${i}`).classList.add('dark-background');
+        if (!selectedUsers.includes(user)) {
+            selectedUsers.push(user);
+        }
+    }
+    updateSelectedUsersEdit(i);
+}
+
+
+/**
+ * Updates the list of selected users and renders their initials.
+ * 
+ * @param {number} i - The index of the contact.
+ */
+function updateSelectedUsersEdit(i) {
+    let contactsDiv = document.getElementById('contacts-div-edit');
+    contactsDiv.innerHTML = '';
+    selectedUsers.forEach((selectedUser, index) => {
+        let nameParts = selectedUser.split(" ");
+        let initials = nameParts.map(part => part[0]).join('');
+        let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : '';
+
+        contactsDiv.innerHTML += /*html*/`
+            <div class="name-div selected-initials">
+                <span class="initials letter-${secondName}">${initials}</span>
+            </div>
+        `;
+    });
+}
+
+
+/**
+ * Edits a todo item.
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the todo item to be edited.
+ */
+function editTodo(event, i) {
+    event.stopPropagation();
+    loadContactListEdit(i);
+    selectedUsers.push(todo[i].contacts);
+    document.getElementById('add-task-container-edit').classList.remove('d-none');
+    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
+    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
+    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
+    changePriorityEdit(todo[i].priority);
+    selectLabelEdit(todo[i].label);
+    console.log(todo[i].label);
+    renderSubtaskEdit(i);
+    document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
+    document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
+}
+
+/**
+ * Closes the edit todo overlay.
+ */
+function closeEditTodo() {
+    document.getElementById('add-task-container-edit').classList.add('d-none');
 }
