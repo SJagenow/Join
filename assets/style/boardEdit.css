@@ -83,7 +83,7 @@
     font-size: 20px;
     padding-left: 21px;
     outline-width: 0px;
-    width: 300px;
+    width: 374px;
 }
 
 .add-task-textarea-edit {
@@ -96,7 +96,7 @@
     padding-left: 21px;
     padding-top: 19px;
     outline-width: 0px;
-    width: 300px;
+    width: 374px;
 }
 
 .add-task-select-edit {
@@ -107,13 +107,13 @@
     margin-bottom: 28px;
     padding-left: 21px;
     outline-width: 0px;
-    width: 300px;
+    width: 374px;
 }
 
 .add-task-prio-button-edit {
     font-size: 20px;
     height: 56px;
-    width: 96px;
+    width: 119px;
     border-radius: 10px;
     border: #D1D1D1 solid 1px;
     background-color: white;
@@ -229,7 +229,7 @@ body {
     border: none;
     display: flex;
     transition: background-color 125ms ease-in-out;
-    width: 300px;
+    width: 374px;
     gap: 12px;
 }
 
@@ -239,7 +239,7 @@ body {
     padding-top: 15px;
     flex-direction: column;
     overflow-y: auto;
-    height: 160px;
+    height: 10vh;
 }
 
 .task_name_container {
@@ -264,4 +264,27 @@ body {
     height: calc(90vh - 84px);
     max-height: 900px;
     
+}
+
+.subtask-button-edit {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    height: 24px;
+}
+
+#prio-button-urgent-edit svg {
+    fill: #FF3D00;
+}
+
+#prio-button-medium-edit svg {
+    fill: #FFA800;
+}
+
+#prio-button-low-edit svg {
+    fill: #7AE229;
+}
+
+.edit-button{
+    width: 90px !important;
 }

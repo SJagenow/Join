@@ -237,11 +237,11 @@ async function returnDialog(selectedTodo, selectedTodoID) {
                     Recommendation</span></div>
         </div>
         <div class="user_story_delete_edit">
-            <div class="user_story_delete_edit_one"><button><img src="./assets/img/delete.png" alt="">
+            <div class="user_story_delete_edit_one"><button class="edit-button"><img src="./assets/img/delete.png" alt="">
                     <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img
+            <div class="user_story_delete_edit_two"><button class="edit-button" onclick="editTodo(event, ${selectedTodoID})"><img
                         src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
