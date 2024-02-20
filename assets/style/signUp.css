@@ -288,6 +288,9 @@ section {
   background-color: rgba(0, 0, 0, 0.1);
   scale: 1.1;
 }
+.pwIcon {
+  cursor: pointer;
+}
 
 @media (min-width: 319px) and (max-width: 481px) {
 
