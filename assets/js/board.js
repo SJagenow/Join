@@ -826,13 +826,14 @@ function renderContactListForTaskEdit(j) {
         const secondName = name[1] ? name[1][0] : '';
         let initials = firstName + secondName;
         let isChecked = selectedUsers.includes(contact);
+        let checkboxSVGId = `add-task-assignet-checkbox-edit${i}`;
         let checkboxSVG = isChecked ? 
-            '<svg class="add-task-assignet-checkbox">' +
-            '   <use href="assets/img/icons.svg#checkbox-checked-icon"></use>' +
-            '</svg>' :
-            '<svg class="add-task-assignet-checkbox">' +
-            '   <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>' +
-            '</svg>';
+            `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-checked-icon"></use>
+            </svg>` :
+            `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
+                <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+            </svg>`;
 
         let backgroundClass = isChecked ? 'dark-background' : '';
 
@@ -865,7 +866,7 @@ async function filterContactsForAddTaskEdit() {
             const firstName = name[0][0];
             const secondName = name[1] ? name[1][0] : '';
             let initials = firstName + secondName;
-            document.getElementById('add-task-contact-edit').innerHTML += renderContactListForTasEditkHTML(contact, i, secondName, initials);
+            document.getElementById('add-task-contact-edit').innerHTML += renderContactListForTaskEditHTML(contact, i, secondName, initials);
         }
     }
 }
@@ -880,7 +881,7 @@ async function filterContactsForAddTaskEdit() {
  * @param {string} initials - The initials of the contact.
  * @returns {string} HTML markup for rendering the contact.
  */
-function renderContactListForTasEditkHTML(contact, i, secondName, initials) {
+function renderContactListForTaskEditHTML(contact, i, secondName, initials) {
     return /*html*/`
     <div id="task-contakt-edit${i}" class="add-task-single" onclick="selectContactEdit(${i})">
         <div class="name-div">
@@ -904,15 +905,15 @@ function renderContactListForTasEditkHTML(contact, i, secondName, initials) {
  */
 function selectContactEdit(i) {
     let get = document.getElementById(`add-task-assignet-checkbox-edit${i}`);
-    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
-    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
+    let isChecked = get.querySelector('use').getAttribute('href') === 'assets/img/icons.svg#checkbox-checked-icon';
     let user = contactList[i].name;
-    if (get.innerHTML == checked) {
-        get.innerHTML = unchecked;
+
+    if (isChecked) {
+        get.innerHTML = '<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>';
         document.getElementById(`task-contakt-edit${i}`).classList.remove('dark-background');
         selectedUsers = selectedUsers.filter(selectedUser => selectedUser !== user);
     } else {
-        get.innerHTML = checked;
+        get.innerHTML = '<use href="assets/img/icons.svg#checkbox-checked-icon"></use>';
         document.getElementById(`task-contakt-edit${i}`).classList.add('dark-background');
         if (!selectedUsers.includes(user)) {
             selectedUsers.push(user);
