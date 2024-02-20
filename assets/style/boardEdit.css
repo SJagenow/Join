@@ -288,3 +288,7 @@ body {
 .edit-button{
     width: 90px !important;
 }
+
+.contacts-div-edit {
+    display: flex;
+}

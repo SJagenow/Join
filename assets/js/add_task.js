@@ -198,10 +198,6 @@ function closeDropdownMenu(divID, arrow) {
 }
 
 
-// function closeContactMenu() {}
-
-// function closeLabelMenu() {}
-
 /**
  * Selects or deselects a contact based on its index and updates the list of selected users.
  * 
