@@ -202,6 +202,13 @@ async function renderDialog(selectedTodo, selectedTodoID) {
     await renderSubtaskDialog(selectedTodo);
 }
 
+
+/**
+ * Returns the HTML markup for the dialog displaying details of the selected todo.
+ * @param {Object} selectedTodo - The selected todo object containing details.
+ * @param {number} selectedTodoID - The ID of the selected todo.
+ * @returns {string} The HTML markup for the dialog.
+ */
 async function returnDialog(selectedTodo, selectedTodoID) {
     return `
     <div class="user_story_label_x_contrainer">
@@ -562,6 +569,7 @@ function renderSubtaskEdit(j) {
     }
 }
 
+
 /**
  * Adds a subtask to the todo item being edited.
  * @param {number} i - The index of the todo item.
@@ -580,7 +588,6 @@ function addSubtaskEdit(i) {
     } else {
         subtaskInput.reportValidity();
     }
-
 }
 
 
@@ -730,7 +737,9 @@ function deleteSubtaskEdit(i, j) {
     renderSubtaskEdit(j);
 }
 
-
+/**
+ * Clears the task edit form by resetting checkboxes, contact list, priority, and subtasks array.
+ */
 function clearTaskEdit() {
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
     let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
@@ -751,7 +760,9 @@ function clearTaskEdit() {
     initAddTask();
 }
 
-
+/**
+ * Starts editing a task by setting the category based on the URL parameters, removing the 'd-none' class from the overlay div, creating the task, and pausing to execute further actions.
+ */
 async function startEditTask() {
     let category = 'todos';
     let urlParams = new URLSearchParams(window.location.search);
@@ -763,7 +774,10 @@ async function startEditTask() {
     pauseAndExecute();
 }
 
-
+/**
+ * Edits a task by updating its details in the tasks list based on the provided category.
+ * @param {string} category - The category of the task being edited.
+ */
 async function editTask(category) {
     typeLabel();
     tasks = JSON.parse(await getItem('tasks'));
