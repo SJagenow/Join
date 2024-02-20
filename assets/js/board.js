@@ -429,11 +429,24 @@ async function renderSubtaskDialog(selectedTodo) {
     document.getElementById('subtaskContainer').innerHTML = '';
     for (let i = 0; i < selectedTodo.subtasks.length; i++) {
         const subtask = selectedTodo.subtasks[i].task;
-        document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i})" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
+        document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, ${selectedTodo.id})" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
     }
 }
 
-function checkBoxSwitchImg(i){
-   
-        document.getElementById(`checkBoxDialogImg${i}`).src = './assets/img/checkedButtondialog.png';
+
+function checkBoxSwitchImg(i, ID){
+    let checkbox = document.getElementById(`checkBoxDialogImg${i}`);
+    let unchecked = `./assets/img/checkbox.png`;
+    let checked = `./assets/img/checkedButtondialog.png`;
+    if (todo[ID].subtasks[i].done == false) {
+        checkbox.src = checked;
+        todo[ID].subtasks[i].done = true;
+        upload();
+        updateBoard();
+    } else {
+        checkbox.src = unchecked;
+        todo[ID].subtasks[i].done = false;
+        upload();
+        updateBoard();
+    }
 }
