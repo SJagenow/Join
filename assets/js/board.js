@@ -271,13 +271,17 @@ function filterTodosByTitle() {
     for (let index = 0; index < filteredTodos.length; index++) {
         let clean = filteredTodos[index];
         if (clean.category === 'todos') {
-            document.getElementById('task_content_open').innerHTML += generateTodo(clean);
+            let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+            document.getElementById('task_content_open').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
         } else if (clean.category === 'inprogress') {
-            document.getElementById('close_one').innerHTML += generateTodo(clean);
+            let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+            document.getElementById('close_one').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
         } else if (clean.category === 'await') {
-            document.getElementById('await_content').innerHTML += generateTodo(clean);
+            let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+            document.getElementById('await_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
         } else if (clean.category === 'done') {
-            document.getElementById('done_content').innerHTML += generateTodo(clean);
+            let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+            document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
         }
     }
 }
