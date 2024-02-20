@@ -952,10 +952,10 @@ async function createTaskEdit(i) {
     todo[i].dueDate = document.getElementById('add-task-date-edit').value;
     todo[i].priority = currentPrio;
     todo[i].label = currentLabel;
-    todo[i].subtasks = subtasksArray;
-    // upload();
+    upload();
     console.log(todo);
     closeEditTodo();
     closeAddTaskOverlay(); 
-    updateBoard()
+    closeDialog();
+    boardInit();
 }
