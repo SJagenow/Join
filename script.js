@@ -26,11 +26,9 @@ async function getCurrentUser() {
   userName = JSON.parse(localStorage.getItem("currentUserName"));
   userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
   if (userName) {
-    console.log(userName);
   } else {
     userName = 'Guest';
     userEmail = 'guest@test.de'
-    console.log(userName, userEmail);
   }
   let { profileinitials } = getInitialsforHeader(userName);
   document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;

@@ -4,6 +4,11 @@ let todo = [];
 let currentDraggedElement;
 let subtaskCount;
 
+/**
+ * Initializes the board by performing necessary setup tasks.
+ * 
+ * @returns {Promise<void>} A Promise that resolves when the board is initialized.
+ */
 async function boardInit() {
     await init();
     await getTodosForBoard();
@@ -11,11 +16,21 @@ async function boardInit() {
     initAddTask();
 }
 
+
+/**
+ * Retrieves the list of todos from storage for the board.
+ * 
+ * @returns {Promise<void>} A Promise that resolves when the todos are retrieved and logged.
+ */
 async function getTodosForBoard() {
     todo = JSON.parse(await getItem('tasks'));
     console.log(todo);
 }
 
+
+/**
+ * Updates the board with the current list of todos.
+ */
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
     document.getElementById('task_content_open').innerHTML = '';
@@ -49,10 +64,21 @@ function updateBoard() {
     }
 }
 
+
+/**
+ * Sets the current dragged element when starting the drag operation.
+ * @param {string} todoId - The ID of the todo being dragged.
+ */
 function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
 
+
+/**
+ * Calculates the number of subtasks done and the progress width for a given task.
+ * @param {object} clean - The task object containing subtasks.
+ * @returns {object} An object containing the progress width, number of subtasks done, and total number of subtasks.
+ */
 function getSubtaskDoneCounter(clean) {
     let subTasksTotal = clean.subtasks.length;
     let subTasksDone = 0;
@@ -66,6 +92,15 @@ function getSubtaskDoneCounter(clean) {
     return { progressWidth, subTasksDone, subTasksTotal }; // progressWidth zurückgeben
 }
 
+
+/**
+ * Generates HTML markup for displaying a todo item.
+ * @param {object} clean - The task object containing task details.
+ * @param {number} progressWidth - The width of the progress bar.
+ * @param {number} subTasksDone - The number of subtasks done.
+ * @param {number} subTasksTotal - The total number of subtasks.
+ * @returns {string} HTML markup representing the todo item.
+ */
 function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     const todoId = `todo_${clean['id']}`;
     let descriptionWords = clean['description'].split(' ');
@@ -110,28 +145,56 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     </div>`;
 }
 
+/**
+ * Uploads the current state of tasks to the storage.
+ * @returns {Promise<void>}
+ */
 async function upload() {
     await setItem('tasks', JSON.stringify(todo));
 }
 
+
+/**
+ * Prevents the default behavior for a drop event.
+ * @param {Event} ev - The drop event.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+
+/**
+ * Moves a todo item to the specified category and updates the board.
+ * @param {string} category - The category to which the todo item will be moved.
+ */
 function moveTo(category) {
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
     upload();
     updateBoard();
 }
 
+
+/**
+ * Adds a CSS class to highlight a todo item when it is being dragged over.
+ * @param {string} todoId - The ID of the todo item.
+ */
 function highlight(todoId) {
     document.getElementById(todoId).classList.add('drag-area-highlight');
 }
 
+/**
+ * Removes a CSS class to remove the highlight from a todo item after dragging.
+ * @param {string} todoId - The ID of the todo item.
+ */
 function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
+/**
+ * Renders a dialog box with details of the selected todo item.
+ * @param {object} selectedTodo - The selected todo item object.
+ * @param {number} selectedTodoID - The ID of the selected todo item.
+ */
 async function renderDialog(selectedTodo, selectedTodoID) {
     document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
     await prioImg(selectedTodo["priority"], selectedTodoID);
@@ -186,6 +249,13 @@ async function returnDialog(selectedTodo, selectedTodoID) {
         `;
         }
 
+
+/**
+ * Returns the HTML content for a dialog box displaying details of the selected todo item.
+ * @param {object} selectedTodo - The selected todo item object.
+ * @param {number} selectedTodoID - The ID of the selected todo item.
+ * @returns {string} The HTML content for the dialog box.
+ */        
 async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
     for (let i = 0; i < selectedTodo.contacts.length; i++) {
@@ -199,6 +269,11 @@ async function renderMemberList(selectedTodo) {
     }
 }
 
+/**
+ * Extracts the initials from a contact's name.
+ * @param {string} contact - The contact's name.
+ * @returns {Object} An object containing the profile initials and the second name's initial.
+ */
 function getInitials(contact) {
     const words = contact.split(" ");
     const firstName = words[0][0];
@@ -207,6 +282,11 @@ function getInitials(contact) {
     return { profileinitials, secondName };
 }
 
+
+/**
+ * Opens a dialog box for the selected todo item.
+ * @param {string} todoId - The ID of the todo item.
+ */
 function openDialog(todoId) {
     let id = todoId.split('_')[1];
     let selectedTodo = todo.find(t => t.id == id);
@@ -215,10 +295,17 @@ function openDialog(todoId) {
     renderDialog(selectedTodo, selectedTodoID);
 }
 
+/**
+ * Closes the dialog box.
+ */
 function closeDialog() {
     document.getElementById('dialog_bg').classList.add('d-none');
 }
 
+/**
+ * Filters todos by their title.
+ * Updates the board with filtered todos based on the input value.
+ */
 function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
     let filteredTodos = todo.filter(t => t['title'].toLowerCase().startsWith(searchText));
@@ -244,6 +331,12 @@ function filterTodosByTitle() {
     }
 }
 
+/**
+ * Moves a todo element in the specified direction within its parent category.
+ * @param {string} todoId - The ID of the todo element to be moved.
+ * @param {string} direction - The direction in which to move the todo element ('up' or 'down').
+ * @param {Event} event - The event object.
+ */
 function moveTodo(todoId, direction, event) {
     event.stopPropagation();
     const todoElement = document.getElementById(todoId);
@@ -287,6 +380,12 @@ function moveTodo(todoId, direction, event) {
     }
 }
 
+/**
+ * Opens the overlay for adding a new task.
+ * If the window width is greater than 1000 pixels, it displays the form in the overlay;
+ * otherwise, it redirects to the add_task.html page with the specified category.
+ * @param {string} category - The category of the task to be added.
+ */
 function openAddTaskOverlay(category) {
     if (window.innerWidth > 1000) {
         document.getElementById('add-task-form').setAttribute('onsubmit', `startCreateTaskFromBoard("${category}"); return false`);
@@ -297,6 +396,13 @@ function openAddTaskOverlay(category) {
     }
 }
 
+
+/**
+ * Starts the process of creating a new task from the board overlay.
+ * Hides the add task container, creates a new task in the specified category,
+ * clears the task input fields, updates the board, and removes the 'onsubmit' attribute from the form.
+ * @param {string} category - The category of the task to be created.
+ */
 async function startCreateTaskFromBoard(category) {
     document.getElementById('add-task-container').classList.add('d-none');
     await createTask(category);
@@ -305,11 +411,20 @@ async function startCreateTaskFromBoard(category) {
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
+/**
+ * Closes the add task overlay by adding the 'd-none' class to the add task container
+ * and removing the 'onsubmit' attribute from the add task form.
+ */
 function closeAddTaskOverlay() {
     document.getElementById('add-task-container').classList.add('d-none');
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
+/**
+ * Deletes a todo item from the list.
+ * @param {Event} event - The event object.
+ * @param {number} ID - The ID of the todo item to be deleted.
+ */
 function deleteTodo(event, ID) {
     event.stopPropagation();
     todo.splice(ID, 1);
@@ -318,6 +433,11 @@ function deleteTodo(event, ID) {
     updateBoard();
 }
 
+/**
+ * Edits a todo item.
+ * @param {Event} event - The event object.
+ * @param {number} i - The index of the todo item to be edited.
+ */
 function editTodo(event, i) {
     event.stopPropagation();
     document.getElementById('add-task-container-edit').classList.remove('d-none');
@@ -332,10 +452,19 @@ function editTodo(event, i) {
     document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
 }
 
+/**
+ * Closes the edit todo overlay.
+ */
 function closeEditTodo() {
     document.getElementById('add-task-container-edit').classList.add('d-none');
 }
 
+
+/**
+ * Sets the priority image based on the priority value of the selected todo.
+ * @param {string} priority - The priority value of the selected todo.
+ * @param {number} selectedTodoID - The ID of the selected todo.
+ */
 async function prioImg(priority, selectedTodoID) {
     console.log(selectedTodoID);
     document.getElementById(`Image`).innerHTML = '';
@@ -348,6 +477,10 @@ async function prioImg(priority, selectedTodoID) {
     }
 }
 
+/**
+ * Renders the subtask dialog for the selected todo.
+ * @param {object} selectedTodo - The selected todo object.
+ */
 async function renderSubtaskDialog(selectedTodo) {
     document.getElementById('subtaskContainer').innerHTML = '';
     for (let i = 0; i < selectedTodo.subtasks.length; i++) {
@@ -360,6 +493,11 @@ async function renderSubtaskDialog(selectedTodo) {
     }
 }
 
+/**
+ * Switches the checkbox image and updates the todo's subtask status.
+ * @param {number} i - The index of the subtask.
+ * @param {number} ID - The ID of the todo.
+ */
 function checkBoxSwitchImg(i, ID) {
     let checkbox = document.getElementById(`checkBoxDialogImg${i}`);
     let unchecked = `./assets/img/checkbox.png`;
@@ -378,6 +516,10 @@ function checkBoxSwitchImg(i, ID) {
 }
 
 
+/**
+ * Changes the priority of the todo being edited and updates the UI accordingly.
+ * @param {string} prio - The priority value ('urgent', 'medium', or 'low').
+ */
 function changePriorityEdit(prio) {
     let urgent = document.getElementById('prio-button-urgent-edit');
     let medium = document.getElementById('prio-button-medium-edit');
@@ -409,13 +551,18 @@ function changePriorityEdit(prio) {
     }
 }
 
-
+/**
+ * Sets the current label based on the value selected in the edit task form.
+ */
 function typeLabel() {
     currentLabel = document.getElementById('add-task-category-edit').value;
     closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
 }
 
-
+/**
+ * Selects the label in the edit task form based on the provided label value.
+ * @param {string} label - The label value to be selected.
+ */
 function selectLabelEdit(label) {
     document.getElementById('add-task-category-edit').value = `${label}`;
     currentLabel = document.getElementById('add-task-category-edit').value;
