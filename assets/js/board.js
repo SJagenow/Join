@@ -1,18 +1,15 @@
-
-async function boardInit() {
-    await init();
-    await getTodosForBoard();
-    updateBoard();
-    initAddTask();
-   
-}
-
 let todoId;
 let clean;
 let todo = [];
 let currentDraggedElement;
 let subtaskCount;
 
+async function boardInit() {
+    await init();
+    await getTodosForBoard();
+    updateBoard();
+    initAddTask();
+}
 
 
 async function getTodosForBoard() {
@@ -20,19 +17,16 @@ async function getTodosForBoard() {
     console.log(todo);
 }
 
+
 function updateBoard() {
     let todos = todo.filter(t => t['category'] == 'todos');
-
-
     document.getElementById('task_content_open').innerHTML = '';
-
     for (let index = 0; index < todos.length; index++) {
         clean = todos[index];
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('task_content_open').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
     let inprogress = todo.filter(t => t['category'] == 'inprogress');
-
     document.getElementById('close_one').innerHTML = '';
 
     for (let index = 0; index < inprogress.length; index++) {
@@ -43,26 +37,19 @@ function updateBoard() {
     let awaitList = todo.filter(t => t['category'] == 'await');
 
     document.getElementById('await_content').innerHTML = '';
-
     for (let index = 0; index < awaitList.length; index++) {
         clean = awaitList[index];
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('await_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
     let doneList = todo.filter(t => t['category'] == 'done');
-
     document.getElementById('done_content').innerHTML = '';
-
     for (let index = 0; index < doneList.length; index++) {
         clean = doneList[index];
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
-
-
 }
-
-
 
 
 function startDragging(todoId) {
@@ -72,7 +59,7 @@ function startDragging(todoId) {
 
 function getSubtaskDoneCounter(clean) {
     let subTasksTotal = clean.subtasks.length;
-    let subTasksDone = 0; 
+    let subTasksDone = 0;
     clean.subtasks.forEach(subtask => {
         if (subtask.done === true) {
             subTasksDone++;
@@ -83,17 +70,15 @@ function getSubtaskDoneCounter(clean) {
     return { progressWidth, subTasksDone, subTasksTotal }; // progressWidth zurückgeben
 }
 
-function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal  ) {
-    
+
+function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     const todoId = `todo_${clean['id']}`;
     let descriptionWords = clean['description'].split(' ');
     let truncatedDescription = descriptionWords.slice(0, 5).join(' ');
     if (descriptionWords.length > 5) {
         truncatedDescription += '...';
     }
-
     let memberHtml = '';
-
     for (let i = 0; i < clean.contacts.length; i++) {
         const member = clean.contacts[i];
         const { profileinitials, secondName } = getInitials(member);
@@ -101,7 +86,6 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal  ) {
             <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
         `;
     }
-
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
     <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
@@ -141,27 +125,31 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
+
 function moveTo(category) {
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
     upload();
     updateBoard();
 }
 
+
 function highlight(todoId) {
     document.getElementById(todoId).classList.add('drag-area-highlight');
 }
+
 
 function removeHighlight(todoId) {
     document.getElementById(todoId).classList.remove('drag-area-highlight');
 }
 
-async function renderDialog(selectedTodo, selectedTodoID) {
 
+async function renderDialog(selectedTodo, selectedTodoID) {
     document.getElementById('user_story_dialog').innerHTML = await returnDialog(selectedTodo, selectedTodoID);
     await prioImg(selectedTodo["priority"], selectedTodoID);
     await renderMemberList(selectedTodo);
     await renderSubtaskDialog(selectedTodo);
 }
+
 
 async function returnDialog(selectedTodo, selectedTodoID) {
     return `
@@ -186,14 +174,15 @@ async function returnDialog(selectedTodo, selectedTodoID) {
         <div class="assigned_to">Assigned To:</div>
         <div class="assinged_member">
             <div class="member_flex">
-                <div  id="board_member_content" class="circle_flex">
-            
+                <div id="board_member_content" class="circle_flex">
+
                 </div>
             </div>
         </div>
         <div class="user_story_Subtasks">
             <div>Subtasks</div>
-            <div class="subtask_center" id="subtaskContainer" ><img src="./assets/img/accept.png" alt=""> <span>Implement Recipe
+            <div class="subtask_center" id="subtaskContainer"><img src="./assets/img/accept.png" alt=""> <span>Implement
+                    Recipe
                     Recommendation</span></div>
         </div>
         <div class="user_story_delete_edit">
@@ -201,13 +190,13 @@ async function returnDialog(selectedTodo, selectedTodoID) {
                     <div onclick="deleteTodo(event, ${selectedTodoID})">Delete</div>
                 </button></div>
             <div class="stripe"></div>
-            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img src="./assets/img/edit.png" alt="">
+            <div class="user_story_delete_edit_two"><button onclick="editTodo(event, ${selectedTodoID})"><img
+                        src="./assets/img/edit.png" alt="">
                     <div>Edit</div>
                 </button></div>
         </div>
-    `;
-
-}
+        `;
+        }
 
 async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
@@ -238,7 +227,6 @@ function openDialog(todoId) {
     let selectedTodoID = selectedTodo.id;
     document.getElementById('dialog_bg').classList.remove('d-none');
     renderDialog(selectedTodo, selectedTodoID);
-
 }
 
 
@@ -247,19 +235,13 @@ function closeDialog() {
 }
 
 
-
 function filterTodosByTitle() {
     let searchText = document.getElementById('filter_input').value.trim().toLowerCase();
-
-
     let filteredTodos = todo.filter(t => t['title'].toLowerCase().startsWith(searchText));
-
     document.getElementById('task_content_open').innerHTML = '';
     document.getElementById('close_one').innerHTML = '';
     document.getElementById('await_content').innerHTML = '';
     document.getElementById('done_content').innerHTML = '';
-
-
     for (let index = 0; index < filteredTodos.length; index++) {
         let clean = filteredTodos[index];
         if (clean.category === 'todos') {
@@ -273,22 +255,6 @@ function filterTodosByTitle() {
         }
     }
 }
-
-
-
-
-
-
-// function setProgress(value) {
-
-//     value = Math.max(0, Math.min(100, value));
-
-
-//     document.getElementById('progress').style.width = value + "50%";
-// }
-
-// setProgress(50);
-
 
 /* Überprüfen, ob die Bildschirmorientierungs-API unterstützt wird
 if (window.screen.orientation) {
@@ -305,14 +271,11 @@ if (window.screen.orientation) {
 
 function moveTodo(todoId, direction, event) {
     event.stopPropagation();
-
     const todoElement = document.getElementById(todoId);
     const parentElement = todoElement.parentNode;
     const index = Array.prototype.indexOf.call(parentElement.children, todoElement);
     const category = parentElement.id;
-
     let nextCategory;
-
     if (direction === 'up') {
         switch (category) {
             case 'task_content_open':
@@ -360,6 +323,7 @@ function openAddTaskOverlay(category) {
     }
 }
 
+
 async function startCreateTaskFromBoard(category) {
     document.getElementById('add-task-container').classList.add('d-none');
     await createTask(category);
@@ -367,6 +331,7 @@ async function startCreateTaskFromBoard(category) {
     boardInit();
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
+
 
 function closeAddTaskOverlay() {
     document.getElementById('add-task-container').classList.add('d-none');
@@ -400,6 +365,7 @@ function editTodo(event, i) {
     // subtasksArray,
 }
 
+
 function closeEditTodo() {
     document.getElementById('add-task-container-edit').classList.add('d-none');
 }
@@ -417,6 +383,7 @@ async function prioImg(priority, selectedTodoID) {
     }
 }
 
+
 async function renderSubtaskDialog(selectedTodo) {
     document.getElementById('subtaskContainer').innerHTML = '';
     for (let i = 0; i < selectedTodo.subtasks.length; i++) {
@@ -426,12 +393,11 @@ async function renderSubtaskDialog(selectedTodo) {
         } else {
             document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, ${selectedTodo.id})" src="./assets/img/checkedButtondialog.png" alt=""> ${subtask} </div>`;
         }
-    
     }
 }
 
 
-function checkBoxSwitchImg(i, ID){
+function checkBoxSwitchImg(i, ID) {
     let checkbox = document.getElementById(`checkBoxDialogImg${i}`);
     let unchecked = `./assets/img/checkbox.png`;
     let checked = `./assets/img/checkedButtondialog.png`;

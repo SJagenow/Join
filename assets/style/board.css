@@ -24,8 +24,6 @@ body input {
 .board_top {
     height: 123px;
     flex-shrink: 0;
-    /* display: flex;
-    justify-content: flex-end; */
 }
 
 .board_h1_button_container_handy {
@@ -44,7 +42,6 @@ body input {
 
 .board_h1_button_container button:hover {
     box-shadow: 0px 3px 3px 2px rgba(0, 0, 0, 0.128);
-
 }
 
 .board_h1_button_container_handy h1,
@@ -100,7 +97,6 @@ body input {
     border: none;
 }
 
-
 .input_button_container {
     display: flex;
     padding: 8px 16px;
@@ -113,7 +109,6 @@ body input {
     height: 48px;
 }
 
-
 .board_midlane_main_container {
     display: flex;
     color: (--menu-color, #42526E);
@@ -121,7 +116,6 @@ body input {
     font-style: normal;
     font-weight: 700px;
     line-height: 120%;
-    /* gap: 4px; */
 }
 
 .board_midlane_main_container button {
@@ -142,7 +136,7 @@ body input {
     border: 2px solid #29ABE2;
 }
 
-.flexi{
+.flexi {
     display: flex;
     flex-direction: column;
 }
@@ -213,7 +207,6 @@ body input {
 
 .no_task_container span {
     color: var(--icon, #A8A8A8);
-    /* Version 2/body */
     font-family: "Open Sans";
     font-size: 16px;
     font-style: normal;
@@ -235,7 +228,6 @@ body input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .user_story {
@@ -261,7 +253,6 @@ body input {
     display: flex;
     justify-content: center;
     z-index: 999;
-
 }
 
 .users_story_dialog {
@@ -272,7 +263,6 @@ body input {
     width: 420px;
     padding: 42px;
     flex-direction: column;
-    /* gap: 24px; */
     border-radius: 30px;
     background: #FFF;
     z-index: 9;
@@ -291,7 +281,6 @@ body input {
     width: 100%;
 }
 
-
 .user_story_label_x_container button {
     display: flex;
     width: 32px;
@@ -300,19 +289,16 @@ body input {
     justify-content: center;
     align-items: center;
     border: 0px;
-
     cursor: pointer;
 }
 
 .user_story_headline {
     color: var(--black, #000);
-    /* Version 2/t1 */
     font-family: Inter;
     font-size: 41px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
-    /* 73.2px */
 }
 
 .user_story_description {
@@ -332,7 +318,6 @@ body input {
 
 .story_date {
     color: var(--Version-2-main-color, #2A3647);
-    /* Version 2/t6 */
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
@@ -342,7 +327,6 @@ body input {
 
 .user_date {
     color: var(--black, #000);
-    /* Version 2/t6 */
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
@@ -354,34 +338,28 @@ body input {
     display: flex;
     align-items: center;
     gap: 25px;
-
 }
 
 .story_priority {
-
     color: var(--Version-2-main-color, #2A3647);
-    /* Version 2/t6 */
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-    /* 24px */
 }
 
 .user_priority {
     color: var(--black, #000);
-    /* Version 2/t6 */
+
     font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
-
 }
 
 .assigned_to {
-
     color: var(--Version-2-main-color, #2A3647);
     font-family: Inter;
     font-size: 20px;
@@ -422,7 +400,6 @@ body input {
     display: flex;
     margin-left: 58px;
     display: none;
-
 }
 
 .arrow_flex {
@@ -477,15 +454,13 @@ body input {
     gap: 12px;
     padding-top: 15px;
     margin-left: 12px;
- 
 }
 
 .subtask_center img {
     object-fit: cover;
     width: 16px;
     height: 16px;
-   align-self: center;
-    
+    align-self: center;
 }
 
 .postion_mid-bot-container {
@@ -497,85 +472,6 @@ body input {
     flex-direction: column;
 }
 
-
-/* inter-200 - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 200;
-    src: url('../fonts/inter-v13-latin-200.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* inter-300 - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 300;
-    src: url('../fonts/inter-v13-latin-300.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* inter-regular - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    src: url('../fonts/inter-v13-latin-regular.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* inter-500 - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    src: url('../fonts/inter-v13-latin-500.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* inter-600 - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    src: url('../fonts/inter-v13-latin-600.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* inter-800 - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 800;
-    src: url('../fonts/inter-v13-latin-800.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* inter-900 - latin */
-@font-face {
-    font-display: swap;
-    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 900;
-    src: url('../fonts/inter-v13-latin-900.woff2') format('woff2');
-    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-@media(max-width:1439px) {}
 
 .drag-area {
     height: calc(100vh - 334px);
@@ -651,9 +547,8 @@ body input {
     justify-content: center;
     color: white;
     margin-left: -2px;
-    /* Adjust the margin as needed for overlapping effect */
     transition: margin-left 0.5s ease;
-    /* Add transition effect */
+
 }
 
 .circle_two {
@@ -666,9 +561,7 @@ body input {
     justify-content: center;
     color: white;
     margin-left: -8px;
-    /* Adjust the margin as needed for overlapping effect */
     transition: margin-left 0.5s ease;
-    /* Add transition effect */
 }
 
 .circle_three {
@@ -681,9 +574,7 @@ body input {
     justify-content: center;
     color: white;
     margin-left: -8px;
-    /* Adjust the margin as needed for overlapping effect */
     transition: margin-left 0.5s ease;
-    /* Add transition effect */
 }
 
 .circle_four {
@@ -696,9 +587,7 @@ body input {
     justify-content: center;
     color: white;
     margin-left: -8px;
-    /* Adjust the margin as needed for overlapping effect */
     transition: margin-left 0.5s ease;
-    /* Add transition effect */
 }
 
 .circle_five {
@@ -711,9 +600,7 @@ body input {
     justify-content: center;
     color: white;
     margin-left: -8px;
-    /* Adjust the margin as needed for overlapping effect */
     transition: margin-left 0.5s ease;
-    /* Add transition effect */
 }
 
 #board_member_content {
@@ -750,27 +637,22 @@ body input {
 
 .circle:hover {
     margin-left: 0px;
-    /* Adjust the margin to 0 on hover */
 }
 
 .circle_two:hover {
     margin-left: 0px;
-    /* Adjust the margin to 0 on hover */
 }
 
 .circle_three:hover {
     margin-left: 0px;
-    /* Adjust the margin to 0 on hover */
 }
 
 .circle_four:hover {
     margin-left: 0px;
-    /* Adjust the margin to 0 on hover */
 }
 
 .circle_five:hover {
     margin-left: 0px;
-    /* Adjust the margin to 0 on hover */
 }
 
 .input_button_container button:hover {
@@ -834,7 +716,7 @@ body input {
     max-height: 900px;
 }
 
-.menu_link_container{
+.menu_link_container {
     width: 232px;
 }
 
@@ -851,7 +733,6 @@ header {
     max-height: calc(1024px - 104px);
     background: #F6F7F8;
     position: relative;
-    /* overflow: auto; */
 }
 
 .main-div {
@@ -931,7 +812,7 @@ header {
 
 .add-task-select:focus,
 .add-task-input:focus,
-.add-task-textarea:focus{
+.add-task-textarea:focus {
     border-color: #29ABE2;
 }
 
@@ -1038,19 +919,22 @@ header {
     fill: white;
 }
 
-.urgent, .urgent svg {
+.urgent,
+.urgent svg {
     background-color: #FF3D00 !important;
     color: white !important;
     fill: white !important;
 }
 
-.medium, .medium svg {
+.medium,
+.medium svg {
     background-color: #FFA800 !important;
     color: white !important;
     fill: white !important;
 }
 
-.low, .low svg {
+.low,
+.low svg {
     background-color: #7AE229 !important;
     color: white !important;
     fill: white !important;
@@ -1454,246 +1338,6 @@ header {
     transition: all 0.15s ease-in-out;
 }
 
-
-@media (max-width: 1400px) {
-    /* .main-container {
-        padding-left: 0;
-        padding-right: 0;
-        width: auto;
-    } */
-}
-
-@media (max-width: 1350px) {
-    .add-task-submit-container {
-        width: 854px;
-        max-width: 976px;
-    }
-
-    .add-task-input-div {
-        width: 396px;
-        min-width: 396px;
-    }
-
-    .add-task-prio-button {
-        height: 41px;
-        width: 121.33px;
-        font-size: 16px;
-    }
-
-    .gap48 {
-        gap: 33px;
-    }
-
-    .form-input-titel {
-        font-size: 16px;
-    }
-
-    .conditions-text::before {
-        font-size: 16px;
-    }
-
-    .asterisk::after {
-        font-size: 16px;
-    }
-
-    .add-task-input {
-        font-size: 16px;
-    }
-
-    .add-task-textarea {
-        font-size: 16px;
-    }
-
-    .add-task-select {
-        font-size: 16px;
-    }
-
-    .input-icon {
-        top: 43px;
-    }
-
-    #subbtask-input-icon {
-        transform: translateY(170%);
-    }
-}
-
-@media (max-width: 1200px) {
-    .main-div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .add-task-submit-container {
-        width: 50vw;
-        max-width: 976px;
-    }
-
-    .add-task-title {
-        width: 50vw;
-    }
-
-    .gap48 {
-        flex-direction: column;
-    }
-
-    .seperator {
-        display: none;
-    }
-
-    .add-task-input-div {
-        width: 50vw;
-        /* min-width: 419px; */
-    }
-
-    .add-task-prio-button {
-        height: 41px;
-        width: 121.33px;
-    }
-
-    .gap48 {
-        gap: 0;
-    }
-
-    .add-task-buttons-div {
-        justify-content: flex-end;
-    }
-
-    .form-input-titel {
-        font-size: 20px;
-    }
-
-    .conditions-text::before {
-        font-size: 20px;
-    }
-
-    .asterisk::after {
-        font-size: 20px;
-    }
-
-    .add-task-input {
-        font-size: 20px;
-    }
-
-    .add-task-textarea {
-        font-size: 20px;
-    }
-
-    .add-task-select {
-        font-size: 20px;
-    }
-
-    .add-task-prio-button {
-        font-size: 20px;
-        height: 56px;
-        width: 136px;
-    }
-
-    .input-icon {
-        top: 47px;
-    }
-
-    #subbtask-input-icon {
-        transform: translateY(190%);
-    }
-}
-
-@media (max-width: 1000px) {
-    .add-task-submit-container {
-        align-items: center;
-    }
-
-    #clear-task-button {
-        display: none;
-    }
-
-    .main-container {
-        height: calc(100vh - 184px);
-        max-height: 1024px;
-        width: 100vw;
-    }
-
-    #subbtask-input-icon {
-        transform: translateY(190%);
-    }
-}
-
-@media (max-width: 650px) {
-    .add-task-div {
-        padding: 10px;
-    }
-
-    .add-task-input-div {
-        width: 50vw;
-    }
-
-    .add-task-prio-button {
-        height: 41px;
-        width: 121.33px;
-        font-size: 16px;
-        padding: 4px;
-    }
-
-    .form-input-titel {
-        font-size: 16px;
-    }
-
-    .conditions-text::before {
-        font-size: 16px;
-    }
-
-    .asterisk::after {
-        font-size: 16px;
-    }
-
-    .add-task-input {
-        font-size: 16px;
-    }
-
-    .add-task-textarea {
-        font-size: 16px;
-    }
-
-    .add-task-select {
-        font-size: 16px;
-    }
-
-    .input-icon {
-        top: 42px;
-    }
-
-    #subbtask-input-icon {
-        transform: translateY(170%);
-    }
-}
-
-@media (max-width: 500px) {
-    .add-task-submit-container {
-        width: 80vw;
-        min-width: 80vw;
-    }
-
-    .add-task-title {
-        width: 80vw;
-        min-width: 80vw;
-    }
-
-    .add-task-input-div {
-        width: 80vw;
-        min-width: 80vw;
-    }
-
-    .main-container0 {
-        height: calc(100vh - 184px);
-        max-height: 1024px;
-        width: calc(100vw);
-    }
-
-    .main-container0 {
-        padding-top: 48px;
-    }
-}
-
 .dropbtn {
     background-color: #04AA6D;
     color: white;
@@ -1737,14 +1381,14 @@ header {
     min-width: 390px;
     border: 1px solid #ddd;
     z-index: 1;
-    /* max-height: 300px; */
 }
 
 .add-task-contact-list {
     overflow: auto;
 }
 
-.dropdown-content a, .dropdown-content div {
+.dropdown-content a,
+.dropdown-content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -1772,10 +1416,9 @@ body {
     transition: background-color 125ms ease-in-out;
     width: 300px;
     gap: 12px;
-    /* height: 64px; */
 }
 
-#subtaskContainer{
+#subtaskContainer {
     display: flex;
     align-items: flex-start;
     padding-top: 15px;
@@ -1785,17 +1428,16 @@ body {
 }
 
 .task_name_container {
-  display: flex;
-  align-items: center;
-  gap:16px;  
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 [id^="myProgresstodo"] {
     width: 100%;
 }
 
-
 .display_none_arrows {
-display: none;
+    display: none;
 
 }
