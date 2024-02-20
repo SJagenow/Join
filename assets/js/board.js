@@ -238,7 +238,8 @@ function filterTodosByTitle() {
             let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
             document.getElementById('await_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
         } else if (clean.category === 'done') {
-            document.getElementById('done_content').innerHTML += generateTodo(clean);
+            let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
+            document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
         }
     }
 }
