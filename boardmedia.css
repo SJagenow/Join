@@ -2,9 +2,10 @@
     .board_midlane_main_container {
         flex-direction: column;
     }
-.updown_buttons{
-    display: flex;
-}
+
+    .updown_buttons {
+        display: flex;
+    }
 
     .drag-area {
         height: 300px;
@@ -109,8 +110,246 @@
         width: 250px;
         margin-top: 16px;
     }
-    
-    .user_story_headline{
+
+    .user_story_headline {
         font-size: 24px;
+    }
+}
+
+@media (max-width: 1400px) {
+    /* .main-container {
+        padding-left: 0;
+        padding-right: 0;
+        width: auto;
+    } */
+}
+
+@media (max-width: 1350px) {
+    .add-task-submit-container {
+        width: 854px;
+        max-width: 976px;
+    }
+
+    .add-task-input-div {
+        width: 396px;
+        min-width: 396px;
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+        font-size: 16px;
+    }
+
+    .gap48 {
+        gap: 33px;
+    }
+
+    .form-input-titel {
+        font-size: 16px;
+    }
+
+    .conditions-text::before {
+        font-size: 16px;
+    }
+
+    .asterisk::after {
+        font-size: 16px;
+    }
+
+    .add-task-input {
+        font-size: 16px;
+    }
+
+    .add-task-textarea {
+        font-size: 16px;
+    }
+
+    .add-task-select {
+        font-size: 16px;
+    }
+
+    .input-icon {
+        top: 43px;
+    }
+
+    #subbtask-input-icon {
+        transform: translateY(170%);
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-task-submit-container {
+        width: 50vw;
+        max-width: 976px;
+    }
+
+    .add-task-title {
+        width: 50vw;
+    }
+
+    .gap48 {
+        flex-direction: column;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .add-task-input-div {
+        width: 50vw;
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+    }
+
+    .gap48 {
+        gap: 0;
+    }
+
+    .add-task-buttons-div {
+        justify-content: flex-end;
+    }
+
+    .form-input-titel {
+        font-size: 20px;
+    }
+
+    .conditions-text::before {
+        font-size: 20px;
+    }
+
+    .asterisk::after {
+        font-size: 20px;
+    }
+
+    .add-task-input {
+        font-size: 20px;
+    }
+
+    .add-task-textarea {
+        font-size: 20px;
+    }
+
+    .add-task-select {
+        font-size: 20px;
+    }
+
+    .add-task-prio-button {
+        font-size: 20px;
+        height: 56px;
+        width: 136px;
+    }
+
+    .input-icon {
+        top: 47px;
+    }
+
+    #subbtask-input-icon {
+        transform: translateY(190%);
+    }
+}
+
+@media (max-width: 1000px) {
+    .add-task-submit-container {
+        align-items: center;
+    }
+
+    #clear-task-button {
+        display: none;
+    }
+
+    .main-container {
+        height: calc(100vh - 184px);
+        max-height: 1024px;
+        width: 100vw;
+    }
+
+    #subbtask-input-icon {
+        transform: translateY(190%);
+    }
+}
+
+@media (max-width: 650px) {
+    .add-task-div {
+        padding: 10px;
+    }
+
+    .add-task-input-div {
+        width: 50vw;
+    }
+
+    .add-task-prio-button {
+        height: 41px;
+        width: 121.33px;
+        font-size: 16px;
+        padding: 4px;
+    }
+
+    .form-input-titel {
+        font-size: 16px;
+    }
+
+    .conditions-text::before {
+        font-size: 16px;
+    }
+
+    .asterisk::after {
+        font-size: 16px;
+    }
+
+    .add-task-input {
+        font-size: 16px;
+    }
+
+    .add-task-textarea {
+        font-size: 16px;
+    }
+
+    .add-task-select {
+        font-size: 16px;
+    }
+
+    .input-icon {
+        top: 42px;
+    }
+
+    #subbtask-input-icon {
+        transform: translateY(170%);
+    }
+}
+
+@media (max-width: 500px) {
+    .add-task-submit-container {
+        width: 80vw;
+        min-width: 80vw;
+    }
+
+    .add-task-title {
+        width: 80vw;
+        min-width: 80vw;
+    }
+
+    .add-task-input-div {
+        width: 80vw;
+        min-width: 80vw;
+    }
+
+    .main-container0 {
+        height: calc(100vh - 184px);
+        max-height: 1024px;
+        width: calc(100vw);
+    }
+
+    .main-container0 {
+        padding-top: 48px;
     }
 }
