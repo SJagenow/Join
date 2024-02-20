@@ -417,15 +417,11 @@ async function renderSubtaskDialog(selectedTodo) {
     document.getElementById('subtaskContainer').innerHTML = '';
     for (let i = 0; i < selectedTodo.subtasks.length; i++) {
         const subtask = selectedTodo.subtasks[i].task;
-        document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg" onclick="checkBoxSwitchImg()" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
+        document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i})" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
     }
 }
 
-function checkBoxSwitchImg(){
+function checkBoxSwitchImg(i){
    
-        
-   
-        document.getElementById('checkBoxDialogImg').src = './assets/img/checkedButtondialog.png';
-    
-    
+        document.getElementById(`checkBoxDialogImg${i}`).src = './assets/img/checkedButtondialog.png';
 }
