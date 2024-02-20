@@ -22,7 +22,11 @@ function getInitials(contact) {
     return { profileinitials, secondName };
 }
 
-
+/**
+ * Generates initials based on the input name and displays them in the contact overlay.
+ * If the input name consists of two or more words, it takes the first letter of each word.
+ * Adds a class to the initials container based on the second letter for styling purposes.
+ */
 function getInitialsForOverlay() {
     let nameInput = document.getElementById('contactlist_name_input').value;
     let initialsContainer = document.getElementById('contact_initials_container');
