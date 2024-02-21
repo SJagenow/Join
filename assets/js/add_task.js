@@ -2,16 +2,7 @@ let contactList = [];
 let selectedUsers = [];
 let currentPrio = 'medium';
 let currentLabel = '';
-let subtasksArray = [
-    {
-        'task':'das ist ein subtask',
-        'done': false,
-    },
-    {
-        'task': 'das hier ist auch ein subtask wer weis denn sowas moin moin',
-        'done': false,
-    }
-];
+let subtasksArray = [];
 let tasks = [];
 let tasksBeispiel = [
     {
@@ -53,6 +44,11 @@ let tasksBeispiel = [
 ]
 
 
+/**
+ * Initializes the process of adding a new task.
+ * 
+ * @returns {Promise<void>} A Promise that resolves after initialization.
+ */
 async function initAddTask() {
     await init();
     loadContactList();
@@ -62,12 +58,22 @@ async function initAddTask() {
 }
 
 
+/**
+ * Fetches and logs the list of tasks from the local storage.
+ * 
+ * @returns {Promise<void>} A Promise that resolves after fetching and logging the tasks.
+ */
 async function test() {
     tasks = JSON.parse(await getItem('tasks'));
     console.log(tasks)
 }
 
 
+/**
+ * Loads the contact list from local storage and renders it for tasks.
+ * 
+ * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
+ */
 async function loadContactList() {
     try {
         contactList = JSON.parse(await getItem('contactList'));
@@ -78,6 +84,9 @@ async function loadContactList() {
 }
 
 
+/**
+ * Renders the contact list for tasks.
+ */
 function renderContactListForTask() {
     document.getElementById('add-task-contact').innerHTML = '';
     for (let i = 0; i < contactList.length; i++) {
@@ -103,6 +112,9 @@ function renderContactListForTask() {
 }
 
 
+/**
+ * Filters and renders contacts for adding tasks based on the input value.
+ */
 async function filterContactsForAddTask() {
     document.getElementById('add-task-contact').innerHTML = '';
     let value = document.getElementById('add-task-assignet-to').value.toLowerCase();
@@ -120,27 +132,15 @@ async function filterContactsForAddTask() {
 }
 
 
-// let searchName
-// function filterContactsForAddTask() {
-//     document.getElementById('add-task-contact').innerHTML = '';
-//     searchName = document.getElementById('add-task-assignet-to').value.toLowerCase();
-//     let contacts = contactList.filter(checkContact);
-//     for (let i = 0; i < contacts.length; i++) {
-//         let contact = contacts[i].name;
-//         const name = contact.split(" ");
-//         const firstName = name[0][0];
-//         const secondName = name[1] ? name[1][0] : '';
-//         let initials = firstName + secondName;
-//         document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(contact, i, secondName, initials);
-//     }
-// }
-
-
-// function checkContact(character) {
-//     return (character.name.toLowerCase().includes(searchName));
-// }
-
-
+/**
+ * Generates HTML markup for rendering a contact in the task list.
+ * 
+ * @param {string} contact - The name of the contact.
+ * @param {number} i - The index of the contact.
+ * @param {string} secondName - The second name of the contact.
+ * @param {string} initials - The initials of the contact.
+ * @returns {string} HTML markup for rendering the contact.
+ */
 function renderContactListForTaskHTML(contact, i, secondName, initials) {
     return /*html*/`
     <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
@@ -158,6 +158,12 @@ function renderContactListForTaskHTML(contact, i, secondName, initials) {
 }
 
 
+/**
+ * Toggles the visibility of a dropdown menu.
+ * 
+ * @param {string} divID - The ID of the dropdown menu container.
+ * @param {string} arrow - The ID of the arrow indicating the dropdown state.
+ */
 function dropdownMenuToggle(divID, arrow) {
     let dNone = document.getElementById(`${divID}`).classList.contains('d-none');
     document.getElementById(`${arrow}`);
@@ -169,23 +175,34 @@ function dropdownMenuToggle(divID, arrow) {
 }
 
 
+/**
+ * Opens a dropdown menu and rotates the arrow to indicate the open state.
+ * 
+ * @param {string} divID - The ID of the dropdown menu container.
+ * @param {string} arrow - The ID of the arrow indicating the dropdown state.
+ */
 function openDropdownMenu(divID, arrow) {
     document.getElementById(`${divID}`).classList.remove('d-none');
     document.getElementById(`${arrow}`).style = "transform: rotate(180deg);"
 }
 
-
+/**
+ * Closes a dropdown menu and resets the arrow rotation to its initial state.
+ * 
+ * @param {string} divID - The ID of the dropdown menu container.
+ * @param {string} arrow - The ID of the arrow indicating the dropdown state.
+ */
 function closeDropdownMenu(divID, arrow) {
     document.getElementById(`${divID}`).classList.add('d-none');
     document.getElementById(`${arrow}`).style = "transform: rotate(0);"
 }
 
 
-// function closeContactMenu() {}
-
-// function closeLabelMenu() {}
-
-
+/**
+ * Selects or deselects a contact based on its index and updates the list of selected users.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 function selectContact(i) {
     let get = document.getElementById(`add-task-assignet-checkbox${i}`);
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
@@ -206,6 +223,11 @@ function selectContact(i) {
 }
 
 
+/**
+ * Updates the list of selected users and renders their initials.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 function updateSelectedUsers(i) {
     let contactsDiv = document.getElementById('contacts-div');
     contactsDiv.innerHTML = '';
@@ -223,12 +245,20 @@ function updateSelectedUsers(i) {
 }
 
 
+/**
+ * Sets the minimum date for the due date input field to today's date.
+ */
 function setDueDateInput() {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('add-task-date').setAttribute('min', today);
 }
 
 
+/**
+ * Changes the priority of the task based on the provided priority level.
+ * 
+ * @param {string} prio - The priority level ('urgent', 'medium', or 'low').
+ */
 function changePriority(prio) {
     let urgent = document.getElementById('prio-button-urgent');
     let medium = document.getElementById('prio-button-medium');
@@ -260,18 +290,29 @@ function changePriority(prio) {
     }
 }
 
+/**
+ * Retrieves the label for the task from the input field and closes the label dropdown menu.
+ */
 function typeLabel() {
     currentLabel = document.getElementById('add-task-category').value;
     closeDropdownMenu('add-task-category-list-div', 'category-arrow');
 }
 
+
+/**
+ * Selects a label for the task and updates the current label value. Closes the label dropdown menu.
+ * 
+ * @param {string} label - The label to be selected.
+ */
 function selectLabel(label) {
     document.getElementById('add-task-category').value = `${label}`;
     currentLabel = document.getElementById('add-task-category').value;
     closeDropdownMenu('add-task-category-list-div', 'category-arrow');
 }
 
-
+/**
+ * Renders the list of subtasks in the UI.
+ */
 function renderSubtask() {
     let subtasks = document.getElementById('subtask-container');
     subtasks.innerHTML = '';
@@ -286,7 +327,11 @@ function renderSubtask() {
     }
 }
 
-
+/**
+ * Handles the Enter key event.
+ * 
+ * @param {Event} event - The key event.
+ */
 function handleEnterKey(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
@@ -295,7 +340,9 @@ function handleEnterKey(event) {
     }
 }
 
-
+/**
+ * Adds a subtask to the list of subtasks.
+ */
 function addSubtask() {
     let subtaskInput = document.getElementById('add-task-subtasks')
     let subtaskInputArray = {
@@ -312,7 +359,9 @@ function addSubtask() {
     }
 }
 
-
+/**
+ * Closes the subtask input and clears its value.
+ */
 function closeSubtask() {
     document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
         <button type="button" id="add-subtask-button" formnovalidate onclick="openSubtask()">
@@ -324,7 +373,9 @@ function closeSubtask() {
     document.getElementById('add-task-subtasks').value = '';
 }
 
-
+/**
+ * Opens the subtask input for adding a new subtask.
+ */
 function openSubtask() {
     document.getElementById('subbtask-input-icon').innerHTML = /*html*/`
         <svg class="subtask-icons" onclick="closeSubtask()">
@@ -340,7 +391,11 @@ function openSubtask() {
     document.getElementById("add-task-subtasks").focus();
 }
 
-
+/**
+ * Displays edit and delete buttons for a subtask when hovered over.
+ * 
+ * @param {number} i - The index of the subtask.
+ */
 function subtaskEditButtonsOn(i) {
     document.getElementById(`subtask-edit-buttons${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="focusSubtask(${i})">
@@ -354,11 +409,22 @@ function subtaskEditButtonsOn(i) {
 };
 
 
+/**
+ * Hides edit and delete buttons for a subtask when not hovered over.
+ * 
+ * @param {number} i - The index of the subtask.
+ */
 function subtaskEditButtonsOut(i) {
     document.getElementById(`subtask-edit-buttons${i}`).innerHTML = '';
 };
 
 
+/**
+ * Listens for clicks outside of a specific element and handles the event accordingly.
+ * 
+ * @param {HTMLElement} element - The HTML element to check for clicks outside.
+ * @param {number} i - The index of the subtask.
+ */
 function onClickOutside(element, i) {
     document.addEventListener('click', e => {
         if (!element.contains(e.target)) {
@@ -371,13 +437,21 @@ function onClickOutside(element, i) {
     });
 }
 
-
+/**
+ * Starts listening for clicks outside of a specific subtask element and handles the event accordingly.
+ * 
+ * @param {number} i - The index of the subtask.
+ */
 function startOnClickOutside(i) {
     const myElement = document.getElementById(`single-subtask${i}`);
     onClickOutside(myElement, i);
 }
 
-
+/**
+ * Focuses on a specific subtask for editing.
+ * 
+ * @param {number} i - The index of the subtask to focus on.
+ */
 function focusSubtask(i) {
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
@@ -397,6 +471,11 @@ function focusSubtask(i) {
 }
 
 
+/**
+ * Focuses on a specific subtask from the board for editing.
+ * 
+ * @param {number} i - The index of the subtask to focus on.
+ */
 function focusSubtaskfromBoard() {
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseenter');
     document.getElementById(`single-subtask${i}`).removeAttribute('onmouseleave');
@@ -416,6 +495,11 @@ function focusSubtaskfromBoard() {
 }
 
 
+/**
+ * Edits a subtask by updating its content and re-rendering the subtask.
+ * 
+ * @param {number} i - The index of the subtask to edit.
+ */
 function editSubtask(i) {
     const subtask = subtasksArray[i];
     subtasksArray.splice(i, 1, document.getElementById(`single-subtask-txt${i}`).innerHTML);
@@ -433,12 +517,20 @@ function editSubtask(i) {
     console.log(subtasksArray);
 }
 
-
+/**
+ * Deletes a subtask from the subtask array and re-renders the subtask list.
+ * 
+ * @param {number} i - The index of the subtask to delete.
+ */
 function deleteSubtask(i) {
     subtasksArray.splice(i, 1);
     renderSubtask();
 }
 
+
+/**
+ * Closes all dropdown menus and the subtask input field.
+ */
 
 function closeFunction() {
     closeDropdownMenu('add-task-contact-div', 'assignet-arrow');
@@ -447,6 +539,10 @@ function closeFunction() {
 }
 
 
+/**
+ * Clears the task by unchecking all assigned contacts, resetting priority to medium,
+ * clearing subtasks, and resetting contact list and selected users.
+ */
 function clearTask() {
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
     let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
@@ -480,6 +576,10 @@ async function startCreateTask() {
 }
 
 
+/**
+ * Initiates the creation of a new task by setting the category based on URL parameters,
+ * displaying the overlay, and asynchronously creating the task.
+ */
 async function createTask(category) {
     typeLabel();
     tasks = JSON.parse(await getItem('tasks'));
@@ -498,20 +598,29 @@ async function createTask(category) {
     await setItem('tasks', JSON.stringify(tasks));
 }
 
-
+/**
+ * Redirects the user to the board page after clearing the task and hiding the overlay.
+ */
 function goToBoard() {
     document.getElementById('clear-task-button').click();
     document.getElementById('overlay-div').classList.add('d-none');
     window.location.href = 'board.html';
 }
 
+/**
+ * Pauses for a short duration and then executes the function to redirect the user to the board page.
+ */
 function pauseAndExecute() {
     setTimeout(function () {
         goToBoard();
     }, 1500);
 }
 
-
+/**
+ * Deletes all tasks by clearing the tasks array in the local storage.
+ * This function is intended for emergency use only.
+ * @returns {Promise<void>}
+ */
 async function deleteAllTasksEmergencyFunction() {
     tasks = JSON.parse(await getItem('tasks'));
     console.log(tasks);

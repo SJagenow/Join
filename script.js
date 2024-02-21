@@ -1,13 +1,19 @@
 let userName;
 let userEmail;
 
-
+/**
+ * Initializes the application.
+ */
 async function init() {
     await includeHTML();
     await highlightMenuLink();
     getCurrentUser();
 }
 
+
+/**
+ * Includes HTML files into the current document based on the 'w3-include-html' attribute.
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -22,30 +28,40 @@ async function includeHTML() {
     }
 }
 
+
+/**
+ * Retrieves the current user's name and email from localStorage and updates the header initials accordingly.
+ */
 async function getCurrentUser() {
   userName = JSON.parse(localStorage.getItem("currentUserName"));
   userEmail = JSON.parse(localStorage.getItem("currentUserEmail"));
   if (userName) {
-    console.log(userName);
   } else {
     userName = 'Guest';
     userEmail = 'guest@test.de'
-    console.log(userName, userEmail);
   }
   let { profileinitials } = getInitialsforHeader(userName);
   document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
 }
 
+
+/**
+ * Generates initials for the header based on the provided contact name.
+ * @param {string} contact The contact name for which initials are generated.
+ * @returns {Object} An object containing the generated profile initials.
+ */
 function getInitialsforHeader(contact) {
-    const contactString = String(contact); // Konvertierung des Inputs zu einem String
+    const contactString = String(contact);
     const words = contactString.split(" ");
     const firstName = words[0][0];
     const secondName = words[1] ? words[1][0] : '';
     const profileinitials = firstName + secondName;
-    return { profileinitials }; // Rückgabe von profileinitials und secondName als Objekt
+    return { profileinitials }; 
 }
 
-
+/**
+ * Highlights the menu link based on the current page.
+ */
 async function highlightMenuLink() {
     let currentPage = window.location.pathname;
     if (currentPage === '/summary.html') {
@@ -71,6 +87,9 @@ async function highlightMenuLink() {
     }
 }
 
+/**
+ * Toggles the visibility of a dropdown menu by adding or removing the 'd-none' class from the element with the ID 'dropdown-links'.
+ */
 function toggleDropDown() {
     let dropdownElement = document.getElementById('dropdown-links').classList;
 
@@ -81,10 +100,11 @@ function toggleDropDown() {
     }
 }
 
-// function logOut() {
-//     window.location.href = `index.html?msg=Du hast dich erfolgreich ausgeloggt!`;
-// }
 
+/**
+ * Changes the background color of the clicked link and resets the background color of all other links with the class 'mobile-menu_link_container'.
+ * @param {HTMLElement} clickedLink - The clicked link element whose background color will be changed.
+ */
 function changeColor(clickedLink) {
     var links = document.querySelectorAll('.mobile-menu_link_container');
 
@@ -97,7 +117,9 @@ function changeColor(clickedLink) {
     clickedLink.style.backgroundColor = '#091931';
 }
 
-// Aktualisiere die Farbe basierend auf der aktuellen Seite
+/**
+ * Updates the color of the links in the mobile menu based on the current page.
+ */
 function updateColorOnLoad() {
     var currentPath = window.location.pathname;
     var links = document.querySelectorAll('.mobile-menu_link_container');
@@ -109,15 +131,19 @@ function updateColorOnLoad() {
     });
 }
 
-// Rufe die Funktion bei Seitenaufruf auf
 window.onload = updateColorOnLoad;
 
-
+/**
+ * Navigates back to the previous page in the browsing history.
+ */
 function goBack() {
     window.history.back();
 }
 
-
+/**
+ * Prevents the event from bubbling up the DOM tree, stopping further propagation.
+ * @param {Event} event - The event object.
+ */
 function doNotClose(event) {
     event.stopPropagation();
 }

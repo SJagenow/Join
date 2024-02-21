@@ -1,12 +1,18 @@
 let users = [];
 let newID = 0;
 
-
+/**
+ * Initialisiert das Sign-Up-Modul, indem die Benutzerdaten aus dem lokalen Speicher geladen werden.
+ */
 async function initSignUp() {
   users = JSON.parse(await getItem("users")) || [];  
 }
 
-
+/**
+ * Adds a new user to the list of users.
+ * 
+ * @returns {void}
+ */
 async function addUser() {
   let nameInput = document.getElementById('names').value;
   let emailInput = document.getElementById('emails').value;
@@ -28,7 +34,11 @@ async function addUser() {
   }
   }
   
-
+/**
+ * Checks the validity of the name input field and displays an error message if invalid.
+ * 
+ * @returns {void}
+ */
 function checkName() {
   let input = document.getElementById("names");
   let invalidDiv = document.getElementById("nameInvalid");
@@ -40,6 +50,24 @@ function checkName() {
 }
 
 
+// function togglePasswordIcon() {
+//   const icon = document.querySelector(".pwIcon");
+//   const passwordInput = document.getElementById("password");
+
+//   const updateIcon = () => {
+//     if (passwordInput.value.trim() === "") {
+//       icon.src = "./assets/img/password_input.svg";
+//     } else {
+//       icon.src = passwordInput.type === "text" ? "./assets/img/visibility.png" : "./assets/img/visibility_off.png";
+//     }
+//   };
+//   passwordInput.addEventListener("blur", updateIcon);
+//   passwordInput.addEventListener("input", updateIcon);
+// }
+
+/**
+ * Toggles the visibility icon for a password input field based on user interaction.
+ */
 function togglePasswordIcon() {
   let icon = document.querySelector(".pWIcon");
   let passwordInput = document.getElementById("password");
@@ -70,6 +98,11 @@ function togglePasswordIcon() {
 }
 
 
+/**
+ * Checks the validity of the password and confirmation password inputs.
+ * If both inputs are non-empty, it checks if they match and calls validPwLength if they do, otherwise calls hidePasswordMismatchMessage.
+ * If either input is empty, it calls handlePwMismatch.
+ */
 function checkPasswordValidity() {
   let passwordInput = document.getElementById("password").value;
   let passwordConfirm = document.getElementById("confirmPW").value;
@@ -86,6 +119,10 @@ function checkPasswordValidity() {
 }
 
 
+/**
+ * Handles the case when the password and confirmation password inputs do not match.
+ * Displays an error message indicating password mismatch and adds alert styling to the inputs.
+ */
 function handlePwMismatch() {
   let invalidPW = document.querySelector(".pwInvalid");
   let confirmPasswordInvalid = document.querySelector(".confirmPWInvalid");
@@ -100,6 +137,10 @@ function handlePwMismatch() {
 }
 
 
+/**
+ * Hides the password mismatch error messages.
+ * Removes the "hidden" class from the password mismatch error message elements.
+ */
 function hidePasswordMismatchMessage() {
     let passwordMismatchMessage = document.querySelector(".pwInvalid");     // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
   let confirmPasswordMismatchMessage = document.querySelector(".confirmPWInvalid");
@@ -111,7 +152,11 @@ function hidePasswordMismatchMessage() {
   confirmPasswordInput.classList.remove("alert");
 }
 
-
+/**
+ * Validates the length of the passwords and displays error messages if they are too short.
+ * @param {string} passwordValue - The value of the password input field.
+ * @param {string} confirmPasswordValue - The value of the confirmation password input field.
+ */
 function validPwLength() {
   let passwordInput = document.getElementById("password");
   let passwordInvalidDiv = document.querySelector(".pwInvalid");
@@ -132,7 +177,9 @@ function validPwLength() {
   }
 }
 
-
+/**
+ * Toggles the visibility icon for the confirmation password input field based on its value and type.
+ */
 function togglePasswordIcon() {
   let icon = document.querySelector(".pwInvalid");
   let input = document.getElementById("confirmPW");
@@ -186,7 +233,9 @@ function togglePwTypeConf() {
   }
 }
 
-
+/**
+ * Validates the email input field and displays an error message if the email address is invalid.
+ */
 function checkEmail() {
   const emailInput = document.getElementById("emails");
   const emailError = document.querySelector(".emailInvalid");
@@ -198,7 +247,9 @@ function checkEmail() {
   emailInput.classList.toggle("alert", !isValid);
 }
 
-
+/**
+ * Displays an error message indicating that the provided email is already registered.
+ */
 function userExist() {
   let emailInvalidDiv = document.querySelector(".emailInvalid");
   let emailInput = document.getElementById("emails");
@@ -208,7 +259,9 @@ function userExist() {
   emailInput.classList.add("alert");
 }
 
-
+/**
+ * Displays a success message after successful user registration and hides it after a certain duration.
+ */
 function displaySignUpSuccessMessage() {
   let screen = document.getElementById("signUpScreen");
   screen.classList.remove('hidden'); 
