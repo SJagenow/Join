@@ -15,7 +15,7 @@ width: 388px;
     max-width: 976px;
     position: absolute;
     bottom: 40px;
-    min-width: 396px;
+    min-width: 372px;
 }
 
 .add-task-title-edit {
@@ -68,7 +68,6 @@ width: 388px;
 }
 .conditions-text-edit{
     display: flex;
-    width: 400px;
 }
 
 .conditions-text-edit button{
