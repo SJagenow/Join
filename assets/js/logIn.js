@@ -225,37 +225,39 @@ function checkPasswordValidity() {
     }
   });
 
-  function toggleLoginCheckbox() {
-    let uncheckedCheckbox = document.getElementById("unchecked");
-    let checkedCheckbox = document.getElementById("checked");
   
-    if (uncheckedCheckbox) {
-      uncheckedCheckbox.src = "./assets/img/check.png";
-      uncheckedCheckbox.id = "checked";
-      rememberInput();
-    } else if (checkedCheckbox) {
-      checkedCheckbox.src = "./assets/img/checkbox.png";
-      checkedCheckbox.id = "unchecked";
-      clearStorageInput();
-      clearInput();
-    }
-  }
+
+  // function toggleLoginCheckbox() {
+  //   let uncheckedCheckbox = document.getElementById("unchecked");
+  //   let checkedCheckbox = document.getElementById("checked");
+  
+  //   if (uncheckedCheckbox) {
+  //     uncheckedCheckbox.src = "./assets/img/check.png";
+  //     uncheckedCheckbox.id = "checked";
+  //     rememberInputData();
+  //   } else if (checkedCheckbox) {
+  //     checkedCheckbox.src = "./assets/img/checkbox.png";
+  //     checkedCheckbox.id = "unchecked";
+  //     clearStoredInput();
+  //     clearInputFields();
+  //   }
+  // }
 
   function toggleLoginCheckbox() {
     let uncheckedCheckbox = document.getElementById("unchecked");
     let checkedCheckbox = document.getElementById("checked");
   
     if (uncheckedCheckbox) {
-      uncheckedCheckbox.src = "./assets/img/check.png";
+      uncheckedCheckbox.src = "./assets/img/accept.png";
       uncheckedCheckbox.id = "checked";
       rememberInputData();
     } else if (checkedCheckbox) {
-      checkedCheckbox.src = "./assets/img/checkbox.png";
+      checkedCheckbox.src = "./assets/img/check button.png";
       checkedCheckbox.id = "unchecked";
       clearStoredInput();
       clearInputFields();
     }
-  }
+}
   
   function rememberInputData() {
     let userEmail = document.getElementById("email").value;
@@ -265,10 +267,10 @@ function checkPasswordValidity() {
     localStorage.setItem("password", userPassword);
   }
   
-  function clearStoredInput() {
-    localStorage.removeItem("storedEmail");
-    localStorage.removeItem("storedPassword");
-  }
+  // function clearStoredInput() {
+  //   localStorage.removeItem("storedEmail");
+  //   localStorage.removeItem("storedPassword");
+  // }
   
   function clearInputFields() {
     document.getElementById("email").value = "";

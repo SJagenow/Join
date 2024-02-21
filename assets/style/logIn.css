@@ -360,6 +360,9 @@ body {
 .passwordIcon {
   cursor: pointer;
 }
+.rememberMe img {
+  transform: translateY(-2px);
+}
 /********** ANIMATION **********/
 
 .modal {
