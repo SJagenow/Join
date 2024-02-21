@@ -1,7 +1,7 @@
 /* edit todos */
 
 .main-div-edit {
-    height: calc(80vh - 180px);
+    height: calc(80vh - 140px);
     max-height: 660px;
     overflow: auto;
     overflow-x: hidden;
