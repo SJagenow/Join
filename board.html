@@ -58,8 +58,8 @@
                                     onclick="openAddTaskOverlay('todos')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
-                                <span>no tasks Todo</span>
+                            <div id="noTodo" class="no_task_container d_nones">
+                                <span>no tasks</span>
                             </div>
                             <div class="progress_await_container">
                                 <div class="drag-area" id="task_content_open" ondrop="moveTo('todos')"
@@ -74,8 +74,8 @@
                                     onclick="openAddTaskOverlay('inprogress')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
-                                <span>no tasks in Progress</span>
+                            <div id="noInprogresss" class="no_task_container d_nones">
+                                <span>no tasks</span>
                             </div>
                             <div class="progress_await_done">
                                 <div class="progress_await_container">
@@ -91,8 +91,8 @@
                                     onclick="openAddTaskOverlay('await')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
-                                <span>no tasks await Feedback</span>
+                            <div id="noFeedback" class="no_task_container d_nones">
+                                <span>no tasks</span>
                             </div>
                             <div class="progress_await_done">
                                 <div class="progress_await_container">
@@ -108,8 +108,8 @@
                                     onclick="openAddTaskOverlay('done')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
-                                <span>no tasks Done</span>
+                            <div id="noDoneContent" class="no_task_container d_nones">
+                                <span>no tasks</span>
                             </div>
                             <div class="progress_await_done">
                                 <div class="progress_await_container">
@@ -422,7 +422,8 @@
                                 <svg class="edit-submit">
                                     <use href="assets/img/icons.svg#hook-icon"></use>
                                 </svg>
-                            </button>
+                            </button></div>
+                    
                         </div>
                     </div>
                 </form>
