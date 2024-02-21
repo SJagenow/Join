@@ -67,6 +67,8 @@ function updateBoard() {
 }
 
 
+
+
 /**
  * Sets the current dragged element when starting the drag operation.
  * @param {string} todoId - The ID of the todo being dragged.
@@ -173,8 +175,37 @@ function moveTo(category) {
     todo[currentDraggedElement.split('_')[1]]['category'] = category;
     upload();
     updateBoard();
+    noTaskInContainer();
 }
-
+function noTaskInContainer() {
+    let noTodos = document.getElementById('task_content_open').innerHTML;
+    if(noTodos === ''){
+       document.getElementById('noTodo').classList.remove('d_nones');
+    }else {
+       document.getElementById('noTodo').classList.add('d_nones');
+    } 
+    let noInProgress = document.getElementById('close_one').innerHTML;
+    if(noInProgress === ''){
+       document.getElementById('noInprogresss').classList.remove('d_nones');
+    }else {
+       document.getElementById('noInprogresss').classList.add('d_nones');
+    }
+    
+    let noAwaitFeedback = document.getElementById('await_content').innerHTML;
+    if(noAwaitFeedback === ''){
+       document.getElementById('noFeedback').classList.remove('d_nones');
+    }else {
+       document.getElementById('noFeedback').classList.add('d_nones');
+    }
+   
+    let noDone = document.getElementById('done_content').innerHTML;
+    if(noDone === ''){
+       document.getElementById('noDoneContent').classList.remove('d_nones');
+    }else {
+       document.getElementById('noDoneContent').classList.add('d_nones');
+    }
+    
+   }
 
 /**
  * Adds a CSS class to highlight a todo item when it is being dragged over.
@@ -350,7 +381,6 @@ function moveTodo(todoId, direction, event) {
     event.stopPropagation();
     const todoElement = document.getElementById(todoId);
     const parentElement = todoElement.parentNode;
-    const index = Array.prototype.indexOf.call(parentElement.children, todoElement);
     const category = parentElement.id;
     let nextCategory;
     if (direction === 'up') {

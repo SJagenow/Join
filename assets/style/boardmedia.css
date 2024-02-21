@@ -45,6 +45,10 @@
         max-width: 100vw;
     }
 
+    .no_task_container{
+        margin-left: 4px;
+    }
+
     .board_top {
         width: unset;
         height: unset;
