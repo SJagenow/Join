@@ -208,7 +208,6 @@ function startOnClickOutsideEdit(i, j) {
  */
 function editSubtaskEdit(i, j) {
     const subtask = todo[j].subtasks[i];
-    console.log('ijarnfgn', subtask);
     subtask.splice(i, 1, document.getElementById(`single-subtask-txt-edit${i}`).innerHTML);
     document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
         <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i})">
@@ -415,7 +414,6 @@ function editTodo(event, i) {
     document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
     changePriorityEdit(todo[i].priority);
     selectLabelEdit(todo[i].label);
-    console.log(todo[i].label);
     renderSubtaskEdit(i);
     document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
     document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
@@ -441,7 +439,6 @@ async function createTaskEdit(i) {
     todo[i].priority = currentPrio;
     todo[i].label = currentLabel;
     upload();
-    console.log(todo);
     closeEditTodo();
     closeAddTaskOverlay();
     closeDialog();

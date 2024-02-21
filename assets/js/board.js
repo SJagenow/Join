@@ -24,7 +24,6 @@ async function boardInit() {
  */
 async function getTodosForBoard() {
     todo = JSON.parse(await getItem('tasks'));
-    console.log(todo);
 }
 
 /**
@@ -297,7 +296,6 @@ async function renderMemberList(selectedTodo) {
     for (let i = 0; i < selectedTodo.contacts.length; i++) {
         const member = selectedTodo.contacts[i];
         const { profileinitials, secondName } = getInitials(member);
-        console.log(member);
         document.getElementById('board_member_content').innerHTML += `
    <div class="task_name_container"> <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
     <div>${member}</div></div>

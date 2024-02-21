@@ -56,7 +56,6 @@ function deleteTodo(event, ID) {
  * @param {number} selectedTodoID - The ID of the selected todo.
  */
 async function prioImg(priority, selectedTodoID) {
-    console.log(selectedTodoID);
     document.getElementById(`Image`).innerHTML = '';
     if (priority === 'urgent') {
         document.getElementById(`Image`).src = "../assets/img/icons/Heightprio.png";

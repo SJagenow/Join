@@ -65,7 +65,6 @@ async function initAddTask() {
  */
 async function test() {
     tasks = JSON.parse(await getItem('tasks'));
-    console.log(tasks)
 }
 
 
@@ -523,7 +522,6 @@ function editSubtask(i) {
     document.getElementById(`single-subtask${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOn(${i})`);
     document.getElementById(`single-subtask${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOut(${i})`);
     document.getElementById(`single-subtask${i}`).classList.remove('subbtask-on-focus');
-    console.log(subtasksArray);
 }
 
 
@@ -639,17 +637,14 @@ function pauseAndExecute() {
  */
 async function deleteAllTasksEmergencyFunction() {
     tasks = JSON.parse(await getItem('tasks'));
-    console.log(tasks);
     tasks = [];
     await setItem('tasks', JSON.stringify(tasks));
     let test = JSON.parse(await getItem('tasks'));
-    console.log(test);
 }
 
 
 async function addExampleTasks() {
     tasks = JSON.parse(await getItem('tasks'));
-    console.log(tasks);
     tasks = [
         {
             "id": 0,
@@ -895,5 +890,4 @@ async function addExampleTasks() {
     ];    
     await setItem('tasks', JSON.stringify(tasks));
     let test = JSON.parse(await getItem('tasks'));
-    console.log(test);
 }
