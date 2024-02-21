@@ -54,7 +54,7 @@ function checkName() {
  * Toggles the visibility icon for a password input field based on user interaction.
  */
 function togglePasswordIcon() {
-  let icon = document.querySelector(".pWIcon");
+  let icon = document.getElementById("pWIcon");
   let passwordInput = document.getElementById("password");
 
   passwordInput.addEventListener("blur", function () {
@@ -68,14 +68,16 @@ function togglePasswordIcon() {
       icon.src = "./assets/img/password_input.svg";
     } else {
       if (
-         passwordInput.type === "text" &&
-         !icon.src.includes("visibility.svg")
-      ) {
+         passwordInput.type === "text" )
+        //  &&
+        //  !icon.src.includes("visibility.svg")
+       {
         icon.src = "./assets/img/visibility.png";
       } else if (
-        passwordInput.type === "password" &&
-        !icon.src.includes("visibility_off.png")
-      ) {
+        passwordInput.type === "password")
+        //  &&
+        // !icon.src.includes("visibility_off.png")
+       {
         icon.src = "./assets/img/visibility_off.png";
       }
     }
@@ -89,9 +91,9 @@ function togglePasswordIcon() {
  * If either input is empty, it removes the "alert" class from both inputs.
  */
 function checkPasswordValidity() {
-  let passwordInput = document.getElementById("password").value;
-  let passwordConfirm = document.getElementById("confirmPW").value;
-  if (passwordInput !== "" && passwordConfirm !== "") {
+  let passwordInput = document.getElementById("password");
+  let passwordConfirm = document.getElementById("confirmPW");
+  if (passwordInput.value !== "" && passwordConfirm.value !== "") {
     if (passwordInput === passwordConfirm) {
       hidePasswordMismatchMessage();
     } else {
