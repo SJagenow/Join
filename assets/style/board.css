@@ -350,13 +350,13 @@ body input {
 }
 .updown_buttons {
     display: flex;
-    margin-left: 58px;
     display: none;
 }
 .arrow_flex {
     display: flex;
     justify-content: space-between;
     border: 0;
+    width: -webkit-fill-available;
 }
 .user_story_delete_edit img {
     width: 24px;

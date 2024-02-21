@@ -629,3 +629,182 @@ async function deleteAllTasksEmergencyFunction() {
     let test = JSON.parse(await getItem('tasks'));
     console.log(test);
 }
+
+
+async function addExampleTasks() {
+    tasks = JSON.parse(await getItem('tasks'));
+    console.log(tasks);
+    tasks = [
+        {
+            "id": 0,
+            "title": "Projektbericht schreiben",
+            "description": "Fortschrittsbericht für das Projektteam",
+            "contacts": [],
+            "dueDate": "2024-05-01",
+            "priority": "urgent",
+            "category": "todos",
+            "label": "Technical Task",
+            "subtasks": [
+                {
+                    "task": "Einleitung verfassen",
+                    "done": true
+                },
+                {
+                    "task": "Forschungsdaten analysieren",
+                    "done": true
+                },
+                {
+                    "task": "Schlussfolgerungen ziehen",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "title": "Meetingvorbereitung",
+            "description": "Vorbereitung für das Team-Meeting am Montag",
+            "contacts": [],
+            "dueDate": "2024-05-01",
+            "priority": "urgent",
+            "category": "todos",
+            "label": "Meeting",
+            "subtasks": [
+                {
+                    "task": "Agenda erstellen",
+                    "done": true
+                },
+                {
+                    "task": "Präsentationsmaterial vorbereiten",
+                    "done": false
+                },
+                {
+                    "task": "Teilnehmerliste aktualisieren",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Projektabschlussbericht",
+            "description": "Erstellung des Abschlussberichts für das Kundenprojekt",
+            "contacts": [],
+            "dueDate": "2024-05-01",
+            "priority": "urgent",
+            "category": "todos",
+            "label": "Technical Task",
+            "subtasks": [
+                {
+                    "task": "Projektziele zusammenfassen",
+                    "done": true
+                },
+                {
+                    "task": "Kundenfeedback einbeziehen",
+                    "done": false
+                },
+                {
+                    "task": "Abschlusspräsentation vorbereiten",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Produktentwicklung",
+            "description": "Weiterentwicklung des neuen Produkts",
+            "contacts": [],
+            "dueDate": "2024-05-15",
+            "priority": "medium",
+            "category": "todos",
+            "label": "Technical Task",
+            "subtasks": [
+                {
+                    "task": "Anforderungen überarbeiten",
+                    "done": false
+                },
+                {
+                    "task": "Prototypen testen",
+                    "done": false
+                },
+                {
+                    "task": "Marketingstrategie entwickeln",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Webseiten-Prototyp erstellen",
+            "description": "Entwicklung eines Prototyps für die neue Unternehmenswebsite",
+            "contacts": [],
+            "dueDate": "2024-05-01",
+            "priority": "urgent",
+            "category": "todos",
+            "label": "HTML",
+            "subtasks": [
+                {
+                    "task": "Startseite designen",
+                    "done": true
+                },
+                {
+                    "task": "Über uns Seite erstellen",
+                    "done": false
+                },
+                {
+                    "task": "Kontaktformular implementieren",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Mobile App entwickeln",
+            "description": "Entwicklung einer mobilen Anwendung für das Projekt 'Fit bleiben'",
+            "contacts": [],
+            "dueDate": "2024-05-15",
+            "priority": "medium",
+            "category": "todos",
+            "label": "App-Entwicklung",
+            "subtasks": [
+                {
+                    "task": "Benutzeroberfläche entwerfen",
+                    "done": false
+                },
+                {
+                    "task": "Backend-Integration vorbereiten",
+                    "done": false
+                },
+                {
+                    "task": "Benutzer­authentifizierung implementieren",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "title": "Automatisierte Tests schreiben",
+            "description": "Entwicklung von automatisierten Tests für die vorhandene Software",
+            "contacts": [],
+            "dueDate": "2024-05-10",
+            "priority": "urgent",
+            "category": "todos",
+            "label": "Testing",
+            "subtasks": [
+                {
+                    "task": "Testfälle definieren",
+                    "done": false
+                },
+                {
+                    "task": "Test­umgebung einrichten",
+                    "done": false
+                },
+                {
+                    "task": "Integrationstests durchführen",
+                    "done": false
+                }
+            ]
+        }
+    ];    
+    await setItem('tasks', JSON.stringify(tasks));
+    let test = JSON.parse(await getItem('tasks'));
+    console.log(test);
+}
