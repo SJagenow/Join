@@ -56,7 +56,7 @@
     }
 
     .drag-area {
-        height: 322px;
+        height: 328px;
         display: flex;
         flex-direction: row;
         gap: 12px;
