@@ -17,6 +17,10 @@ h1 {
     margin-bottom: 0;
 }
 
+.side-bar-logOut {
+    display: none;
+}
+
 .parrent-button-dark {
     height: 56px;
     font-size: 21px;
