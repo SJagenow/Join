@@ -15,6 +15,14 @@
   </head>
 
   <body onload="init()">
+    <section id="landing_page" class="landing_page modal">
+      <div class="landing_page_desktop">
+        <img src="./assets/img/join_logo-dark.png" alt="Logo Desktop" />
+      </div>
+      <div class="landing_page_mobile">
+        <img src="./assets/img/join_logo.png" alt="Logo Mobile" />
+      </div>
+    </section>
     <header class="HeaderLogin">
       <img class="headiconJoin" src="./assets/img/join_logo-dark.png" alt="" />
       <div class="UserSignUp">
@@ -53,8 +61,13 @@
           </div>
           
             <div class="rememberMe" id="rememberMe">
-              <input class="checkBox" type="checkbox">
-              <div>Remember me</div>
+              <img
+                id="unchecked"
+                onclick="toggleLoginCheckbox()"
+                src="./assets/img/check button.png"
+                alt="Checkbox"
+              />
+              Remember me
             </div>
           </div>
           <div class="btnLogGuest">

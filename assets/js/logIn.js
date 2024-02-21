@@ -211,3 +211,68 @@ function checkPasswordValidity() {
       passwordInput.classList.remove("alert");
     }
   }
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(startFadeOut, 1000);
+  
+    function startFadeOut() {
+      let modalElement = document.getElementById("landing_page");
+      modalElement.classList.add("fade-out");
+      setTimeout(function () {
+        modalElement.style.display = "none";
+      }, 500);
+    }
+  });
+
+  
+
+  // function toggleLoginCheckbox() {
+  //   let uncheckedCheckbox = document.getElementById("unchecked");
+  //   let checkedCheckbox = document.getElementById("checked");
+  
+  //   if (uncheckedCheckbox) {
+  //     uncheckedCheckbox.src = "./assets/img/check.png";
+  //     uncheckedCheckbox.id = "checked";
+  //     rememberInputData();
+  //   } else if (checkedCheckbox) {
+  //     checkedCheckbox.src = "./assets/img/checkbox.png";
+  //     checkedCheckbox.id = "unchecked";
+  //     clearStoredInput();
+  //     clearInputFields();
+  //   }
+  // }
+
+  function toggleLoginCheckbox() {
+    let uncheckedCheckbox = document.getElementById("unchecked");
+    let checkedCheckbox = document.getElementById("checked");
+  
+    if (uncheckedCheckbox) {
+      uncheckedCheckbox.src = "./assets/img/accept.png";
+      uncheckedCheckbox.id = "checked";
+      rememberInputData();
+    } else if (checkedCheckbox) {
+      checkedCheckbox.src = "./assets/img/check button.png";
+      checkedCheckbox.id = "unchecked";
+      clearStoredInput();
+      clearInputFields();
+    }
+}
+  
+  function rememberInputData() {
+    let userEmail = document.getElementById("email").value;
+    let userPassword = document.getElementById("passwordInput").value;
+
+    localStorage.setItem("email", userEmail);
+    localStorage.setItem("password", userPassword);
+  }
+  
+  // function clearStoredInput() {
+  //   localStorage.removeItem("storedEmail");
+  //   localStorage.removeItem("storedPassword");
+  // }
+  
+  function clearInputFields() {
+    document.getElementById("email").value = "";
+    document.getElementById("passwordInput").value = "";
+  }

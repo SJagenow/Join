@@ -242,6 +242,7 @@ body input {
     background: #FFF;
     z-index: 9;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    overflow-y: auto;
 }
 .user_story_dialog h1 {
     font-size: 44px;
@@ -353,13 +354,13 @@ body input {
 }
 .updown_buttons {
     display: flex;
-    margin-left: 58px;
     display: none;
 }
 .arrow_flex {
     display: flex;
     justify-content: space-between;
     border: 0;
+    width: -webkit-fill-available;
 }
 .user_story_delete_edit img {
     width: 24px;
@@ -395,7 +396,10 @@ body input {
     box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.192);
     margin-left: 13px;
 }
- 
+
+.button_img {
+    margin-right: 5px;
+}
 .d_nones {
     display: none;
 }
