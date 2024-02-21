@@ -5,12 +5,14 @@
     padding-top: 15px;
     margin-left: 12px;
 }
+
 .subtask_center img {
     object-fit: cover;
     width: 16px;
     height: 16px;
     align-self: center;
 }
+
 .postion_mid-bot-container {
     width: calc(100vw - 232px);
     margin-left: 117px;
@@ -19,6 +21,7 @@
     align-items: center;
     flex-direction: column;
 }
+
 .drag-area {
     height: calc(100vh - 334px);
     background-color: rgba(247, 247, 247, 0.1);
@@ -30,6 +33,7 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 207, 239, 0.3) transparent;
 }
+
 .drag-area:hover {
     overflow: auto;
     padding-right: 0px;
@@ -44,15 +48,18 @@
     display: flex;
     align-items: center
 }
+
 .card_title {
     font-weight: bold;
 }
+
 #myProgress {
     width: 100%;
     background-color: rgb(245, 242, 242);
     display: flex;
     align-items: center;
 }
+
 #myBar {
     width: 12%;
     height: 30px;
@@ -60,6 +67,7 @@
     height: 8px;
     border-radius: 28px;
 }
+
 .circle {
     height: 32px;
     width: 32px;
@@ -71,6 +79,7 @@
     margin-left: -2px;
     transition: margin-left 0.5s ease;
 }
+
 .circle_two {
     height: 32px;
     width: 32px;
@@ -83,6 +92,7 @@
     margin-left: -8px;
     transition: margin-left 0.5s ease;
 }
+
 .circle_three {
     height: 32px;
     width: 32px;
@@ -95,6 +105,7 @@
     margin-left: -8px;
     transition: margin-left 0.5s ease;
 }
+
 .circle_four {
     height: 32px;
     width: 32px;
@@ -107,6 +118,7 @@
     margin-left: -8px;
     transition: margin-left 0.5s ease;
 }
+
 .circle_five {
     height: 32px;
     width: 32px;
@@ -119,81 +131,101 @@
     margin-left: -8px;
     transition: margin-left 0.5s ease;
 }
+
 #board_member_content {
     display: flex;
     flex-direction: column;
     padding-left: git a8px;
 }
+
 .member_flex {
     display: flex;
     width: 200px;
 }
+
 #updown_arro img {
     height: 20px;
     border: unset;
 }
+
 .circle_flex {
     display: flex;
     gap: 8px;
     margin-top: 12px;
     margin-bottom: 16px;
 }
+
 .prio_icon_containers {
     margin-top: 6px;
 }
+
 #myProgress {
     display: flex;
     justify-content: space-between;
 }
+
 .circle:hover {
     margin-left: 0px;
 }
+
 .circle_two:hover {
     margin-left: 0px;
 }
+
 .circle_three:hover {
     margin-left: 0px;
 }
+
 .circle_four:hover {
     margin-left: 0px;
 }
+
 .circle_five:hover {
     margin-left: 0px;
 }
+
 .input_button_container button:hover {
     background-color: #29ABE2;
     box-shadow: 0px 4px 0px 0px rgba(157, 157, 157, 0.499);
     border: 1px solid #29ABE2;
 }
+
 .button_img img {
     height: 18px;
     display: flex;
     align-items: center;
     text-align: center;
 }
+
 .button_img button {
     height: 49px;
     margin-top: 12px;
     margin-right: 12px;
 }
+
 .button_img {
     margin-top: 0px;
 }
+
 .drag-area-highlight {
     transform: rotate(357deg);
     background-color: rgba(0, 255, 8, 0.1);
 }
+
 .h1_input_media_flex {
     display: flex;
 }
+
 .background_div {
     display: flex;
-    
-}[id^="todo"] {
+
+}
+
+[id^="todo"] {
     display: flex;
-    height: auto;
+    height: 400px;
+    min-height: 300px;
     width: 252px;
-    height: auto;
     max-height: 300px;
     padding: 16px;
     flex-direction: column;

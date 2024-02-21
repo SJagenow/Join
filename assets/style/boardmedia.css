@@ -45,6 +45,10 @@
         max-width: 100vw;
     }
 
+    .no_task_container {
+        margin-left: 4px;
+    }
+
     .board_top {
         width: unset;
         height: unset;
@@ -52,7 +56,7 @@
     }
 
     .drag-area {
-        height: 322px;
+        height: 328px;
         display: flex;
         flex-direction: row;
         gap: 12px;
