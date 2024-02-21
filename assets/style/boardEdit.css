@@ -1,7 +1,7 @@
 /* edit todos */
 
 .main-div-edit {
-    height: calc(80vh - 180px);
+    height: calc(80vh - 140px);
     max-height: 660px;
     overflow: auto;
     overflow-x: hidden;
@@ -15,7 +15,7 @@
     max-width: 976px;
     position: absolute;
     bottom: 40px;
-    min-width: 396px;
+    min-width: 372px;
 }
 
 .add-task-title-edit {
@@ -69,7 +69,6 @@
 
 .conditions-text-edit {
     display: flex;
-    width: 400px;
 }
 
 .conditions-text-edit button {
