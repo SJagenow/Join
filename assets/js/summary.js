@@ -13,7 +13,6 @@ let todo = [];
  */
 async function getTodosForBoard() {
     todo = JSON.parse(await getItem('tasks'));
-    console.log(todo);
 }
 
 /**
@@ -24,14 +23,11 @@ async function getCurrentUser() {
   let userName = JSON.parse(localStorage.getItem("currentUserName"));
   let summaryUserName = document.getElementById('summary-userName');
   
-
   if (userName) {
     summaryUserName.textContent = userName;
-    console.log(userName);
   } else {
     userName = 'Guest';
     summaryUserName.textContent = `${userName}`;
-    console.log(userName);
   }
   let { profileinitials } = getInitials(userName);
   document.getElementById('header_initials').innerHTML = `${profileinitials.toUpperCase()}`;
