@@ -637,169 +637,242 @@ async function addExampleTasks() {
     tasks = [
         {
             "id": 0,
-            "title": "Projektbericht schreiben",
-            "description": "Fortschrittsbericht für das Projektteam",
-            "contacts": [],
+            "title": "Entwicklung neuer Website-Features",
+            "description": "Implementierung von zusätzlichen Funktionen auf der Unternehmenswebsite",
+            "contacts": [
+                "Emmanuel Mauer",
+                "Tim Testing"
+            ],
             "dueDate": "2024-05-01",
-            "priority": "urgent",
+            "priority": "low",
             "category": "todos",
-            "label": "Technical Task",
+            "label": "HTML",
             "subtasks": [
                 {
-                    "task": "Einleitung verfassen",
-                    "done": true
+                    "task": "Header-Design anpassen",
+                    "done": false
                 },
                 {
-                    "task": "Forschungsdaten analysieren",
-                    "done": true
+                    "task": "Navigation hinzufügen",
+                    "done": false
                 },
                 {
-                    "task": "Schlussfolgerungen ziehen",
+                    "task": "Footer aktualisieren",
                     "done": false
                 }
             ]
         },
         {
             "id": 1,
-            "title": "Meetingvorbereitung",
-            "description": "Vorbereitung für das Team-Meeting am Montag",
-            "contacts": [],
-            "dueDate": "2024-05-01",
-            "priority": "urgent",
-            "category": "todos",
-            "label": "Meeting",
+            "title": "Benutzeroberfläche für Mobile App gestalten",
+            "description": "Design der Benutzeroberfläche für die mobile Anwendung",
+            "contacts": [
+                "Benedikt Ziegler",
+                "Anton Mayer",
+                "David Eisenberg"
+            ],
+            "dueDate": "2024-05-05",
+            "priority": "medium",
+            "category": "inprogress",
+            "label": "User Story",
             "subtasks": [
                 {
-                    "task": "Agenda erstellen",
+                    "task": "Startbildschirm entwerfen",
                     "done": true
                 },
                 {
-                    "task": "Präsentationsmaterial vorbereiten",
-                    "done": false
-                },
-                {
-                    "task": "Teilnehmerliste aktualisieren",
+                    "task": "Anmeldeformular gestalten",
                     "done": false
                 }
             ]
         },
         {
             "id": 2,
-            "title": "Projektabschlussbericht",
-            "description": "Erstellung des Abschlussberichts für das Kundenprojekt",
-            "contacts": [],
-            "dueDate": "2024-05-01",
+            "title": "Integration von Zahlungsgateways",
+            "description": "Implementierung von Zahlungsoptionen in die Anwendung",
+            "contacts": [
+                "Eva Fischer",
+                "Tim Testing",
+                "David Eisenberg",
+                "Benedikt Ziegler"
+            ],
+            "dueDate": "2024-05-10",
             "priority": "urgent",
-            "category": "todos",
+            "category": "inprogress",
             "label": "Technical Task",
             "subtasks": [
                 {
-                    "task": "Projektziele zusammenfassen",
-                    "done": true
-                },
-                {
-                    "task": "Kundenfeedback einbeziehen",
+                    "task": "PayPal-Integration",
                     "done": false
                 },
                 {
-                    "task": "Abschlusspräsentation vorbereiten",
+                    "task": "Kreditkartenzahlung unterstützen",
                     "done": false
                 }
             ]
         },
         {
             "id": 3,
-            "title": "Produktentwicklung",
-            "description": "Weiterentwicklung des neuen Produkts",
-            "contacts": [],
+            "title": "Verbesserung der Suchfunktion",
+            "description": "Optimierung der Suchfunktion auf der Website",
+            "contacts": [
+                "Benedikt Ziegler",
+                "Anton Mayer"
+            ],
             "dueDate": "2024-05-15",
             "priority": "medium",
-            "category": "todos",
-            "label": "Technical Task",
+            "category": "inprogress",
+            "label": "User Story",
             "subtasks": [
                 {
-                    "task": "Anforderungen überarbeiten",
+                    "task": "Autovervollständigung hinzufügen",
                     "done": false
                 },
                 {
-                    "task": "Prototypen testen",
-                    "done": false
-                },
-                {
-                    "task": "Marketingstrategie entwickeln",
+                    "task": "Suchergebnisse filtern",
                     "done": false
                 }
             ]
         },
         {
             "id": 4,
-            "title": "Webseiten-Prototyp erstellen",
-            "description": "Entwicklung eines Prototyps für die neue Unternehmenswebsite",
-            "contacts": [],
-            "dueDate": "2024-05-01",
-            "priority": "urgent",
-            "category": "todos",
-            "label": "HTML",
+            "title": "Entwicklung eines CSS-Frameworks",
+            "description": "Erstellung eines benutzerdefinierten CSS-Frameworks für das Projekt",
+            "contacts": [
+                "David Eisenberg",
+                "Benedikt Ziegler",
+                "Eva Fischer"
+            ],
+            "dueDate": "2024-05-20",
+            "priority": "medium",
+            "category": "await",
+            "label": "CSS",
             "subtasks": [
                 {
-                    "task": "Startseite designen",
-                    "done": true
-                },
-                {
-                    "task": "Über uns Seite erstellen",
+                    "task": "Grid-System entwerfen",
                     "done": false
                 },
                 {
-                    "task": "Kontaktformular implementieren",
+                    "task": "Responsive Design implementieren",
                     "done": false
                 }
             ]
         },
         {
             "id": 5,
-            "title": "Mobile App entwickeln",
-            "description": "Entwicklung einer mobilen Anwendung für das Projekt 'Fit bleiben'",
-            "contacts": [],
-            "dueDate": "2024-05-15",
-            "priority": "medium",
+            "title": "Durchführung von Systemtests",
+            "description": "Tests der Anwendung auf verschiedene Systemkonfigurationen",
+            "contacts": [
+                "Emmanuel Mauer"
+            ],
+            "dueDate": "2024-05-25",
+            "priority": "urgent",
             "category": "todos",
-            "label": "App-Entwicklung",
+            "label": "Testing",
             "subtasks": [
                 {
-                    "task": "Benutzeroberfläche entwerfen",
+                    "task": "Kompatibilität mit verschiedenen Browsern prüfen",
                     "done": false
                 },
                 {
-                    "task": "Backend-Integration vorbereiten",
-                    "done": false
-                },
-                {
-                    "task": "Benutzer­authentifizierung implementieren",
+                    "task": "Performance-Tests durchführen",
                     "done": false
                 }
             ]
         },
         {
             "id": 6,
-            "title": "Automatisierte Tests schreiben",
-            "description": "Entwicklung von automatisierten Tests für die vorhandene Software",
-            "contacts": [],
-            "dueDate": "2024-05-10",
+            "title": "Implementierung von Datenbankmigrationen",
+            "description": "Aktualisierung der Datenbankstruktur gemäß den neuen Anforderungen",
+            "contacts": [
+                "Marcel Bauer",
+                "Anton Mayer",
+                "Benedikt Ziegler"
+            ],
+            "dueDate": "2024-05-30",
             "priority": "urgent",
+            "category": "await",
+            "label": "Technical Task",
+            "subtasks": [
+                {
+                    "task": "Schema-Änderungen vornehmen",
+                    "done": false
+                },
+                {
+                    "task": "Daten migrieren",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Entwicklung einer Dashboard-Ansicht",
+            "description": "Erstellung einer Übersichtsseite für Administratoren",
+            "contacts": [
+                "David Eisenberg",
+                "Anton Mayer",
+                "Marcel Bauer"
+            ],
+            "dueDate": "2024-06-01",
+            "priority": "low",
             "category": "todos",
+            "label": "User Story",
+            "subtasks": [
+                {
+                    "task": "Benutzerstatistiken anzeigen",
+                    "done": false
+                },
+                {
+                    "task": "Grafische Auswertungen erstellen",
+                    "done": false
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "title": "Implementierung von OAuth-Authentifizierung",
+            "description": "Integration von OAuth-Authentifizierung für externe Plattformen",
+            "contacts": [
+                "Tim Testing",
+                "Anton Mayer",
+                "Benedikt Ziegler"
+            ],
+            "dueDate": "2024-06-05",
+            "priority": "medium",
+            "category": "done",
+            "label": "Technical Task",
+            "subtasks": [
+                {
+                    "task": "OAuth-Anbieter auswählen",
+                    "done": true
+                },
+                {
+                    "task": "Authentifizierungsfluss implementieren",
+                    "done": true
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "title": "Erstellung eines Testplans",
+            "description": "Ausarbeitung eines detaillierten Plans für die Anwendungstests",
+            "contacts": [
+                "Marcel Bauer",
+                "Benedikt Ziegler",
+                "Eva Fischer"
+            ],
+            "dueDate": "2024-06-10",
+            "priority": "low",
+            "category": "done",
             "label": "Testing",
             "subtasks": [
                 {
-                    "task": "Testfälle definieren",
-                    "done": false
+                    "task": "Testziele definieren",
+                    "done": true
                 },
                 {
-                    "task": "Test­umgebung einrichten",
-                    "done": false
-                },
-                {
-                    "task": "Integrationstests durchführen",
-                    "done": false
+                    "task": "Testumgebung einrichten",
+                    "done": true
                 }
             ]
         }
