@@ -64,14 +64,15 @@
     color: #FF8190;
     font-size: 20px;
     vertical-align: middle;
-  
+
 }
-.conditions-text-edit{
+
+.conditions-text-edit {
     display: flex;
 }
 
-.conditions-text-edit button{
-   margin-left: 100px;
+.conditions-text-edit button {
+    margin-left: 100px;
 }
 
 
@@ -269,7 +270,7 @@ body {
     position: relative;
     height: calc(90vh - 75px);
     max-height: 900px;
-    
+
 }
 
 .subtask-button-edit {
@@ -291,7 +292,7 @@ body {
     fill: #7AE229;
 }
 
-.edit-button{
+.edit-button {
     width: 90px !important;
 }
 

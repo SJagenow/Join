@@ -18,6 +18,8 @@
     <script src="script.js"></script>
     <script src="./assets/js/board.js"></script>
     <script src="./assets/js/storage.js"></script>
+    <script src="./assets/js/boardAddTask.js"></script>
+    <script src="./assets/js/boardEdit.js"></script>
     <title>Document</title>
 </head>
 
@@ -360,7 +362,8 @@
                                 <h2 class="form-input-titel-edit asterisk-edit"
                                     onclick="dropdownMenuToggle('add-task-category-list-div-edit', 'category-arrow')">
                                     Category</h2>
-                                <input id="add-task-category-edit" class="add-task-input-edit add-task-select-edit arrow-icon"
+                                <input id="add-task-category-edit"
+                                    class="add-task-input-edit add-task-select-edit arrow-icon"
                                     onclick="dropdownMenuToggle('add-task-category-list-div-edit', 'category-arrow')"
                                     type="text" placeholder="Select task category"
                                     pattern="(Technical Task|User Story|HTML|CSS|JS|Testing)"
@@ -376,7 +379,8 @@
                                             onclick="selectLabelEdit('HTML')">HTML</div>
                                         <div id="task-label-css-edit" class="add-task-single"
                                             onclick="selectLabelEdit('CSS')">CSS</div>
-                                        <div id="task-label-js-edit" class="add-task-single" onclick="selectLabelEdit('JS')">
+                                        <div id="task-label-js-edit" class="add-task-single"
+                                            onclick="selectLabelEdit('JS')">
                                             JS</div>
                                         <div id="task-label-tesig-edit" class="add-task-single"
                                             onclick="selectLabelEdit('Testing')">Testing</div>
@@ -386,11 +390,12 @@
                             </div>
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
                                 <label class="form-input-titel-edit" for="add-task-subtasks-edit">Subtasks</label>
-                                <input id="add-task-subtasks-edit" class="add-task-input-edit" onclick="openSubtaskEdit()"
-                                    type="text" minlength="3" name="Subtasks" placeholder="Add new subtask">
+                                <input id="add-task-subtasks-edit" class="add-task-input-edit"
+                                    onclick="openSubtaskEdit()" type="text" minlength="3" name="Subtasks"
+                                    placeholder="Add new subtask">
                                 <div id="subbtask-input-icon-edit">
-                                    <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate
-                                        onclick="openSubtaskEdit()">
+                                    <button type="button" id="add-subtask-button-edit" class="subtask-button-edit"
+                                        formnovalidate onclick="openSubtaskEdit()">
                                         <svg class="subtask-icons">
                                             <use href="assets/img/icons.svg#plus-add-icon"></use>
                                         </svg>
@@ -422,15 +427,17 @@
                                 <svg class="edit-submit">
                                     <use href="assets/img/icons.svg#hook-icon"></use>
                                 </svg>
-                            </button></div>
-                    
+                            </button>
                         </div>
+
                     </div>
-                </form>
             </div>
+            </form>
         </div>
     </div>
+    </div>
     <script src="./assets/js/add_task.js"></script>
+
 </body>
 
 </html>
