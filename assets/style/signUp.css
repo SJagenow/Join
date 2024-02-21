@@ -335,4 +335,7 @@ section {
 .confirmPasswordMsg {
   width: 354px;
 }
+.emailInvalid{
+  width: 222px;
+}
 }
