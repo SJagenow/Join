@@ -186,6 +186,7 @@ function openDropdownMenu(divID, arrow) {
     document.getElementById(`${arrow}`).style = "transform: rotate(180deg);"
 }
 
+
 /**
  * Closes a dropdown menu and resets the arrow rotation to its initial state.
  * 
@@ -235,7 +236,6 @@ function updateSelectedUsers(i) {
         let nameParts = selectedUser.split(" ");
         let initials = nameParts.map(part => part[0]).join('');
         let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : '';
-
         contactsDiv.innerHTML += /*html*/`
             <div class="name-div selected-initials">
                 <span class="initials letter-${secondName}">${initials}</span>
@@ -290,6 +290,7 @@ function changePriority(prio) {
     }
 }
 
+
 /**
  * Retrieves the label for the task from the input field and closes the label dropdown menu.
  */
@@ -310,6 +311,7 @@ function selectLabel(label) {
     closeDropdownMenu('add-task-category-list-div', 'category-arrow');
 }
 
+
 /**
  * Renders the list of subtasks in the UI.
  */
@@ -327,6 +329,7 @@ function renderSubtask() {
     }
 }
 
+
 /**
  * Handles the Enter key event.
  * 
@@ -339,6 +342,7 @@ function handleEnterKey(event) {
         addSubtask();
     }
 }
+
 
 /**
  * Adds a subtask to the list of subtasks.
@@ -359,6 +363,7 @@ function addSubtask() {
     }
 }
 
+
 /**
  * Closes the subtask input and clears its value.
  */
@@ -372,6 +377,7 @@ function closeSubtask() {
     `
     document.getElementById('add-task-subtasks').value = '';
 }
+
 
 /**
  * Opens the subtask input for adding a new subtask.
@@ -390,6 +396,7 @@ function openSubtask() {
     `;
     document.getElementById("add-task-subtasks").focus();
 }
+
 
 /**
  * Displays edit and delete buttons for a subtask when hovered over.
@@ -437,6 +444,7 @@ function onClickOutside(element, i) {
     });
 }
 
+
 /**
  * Starts listening for clicks outside of a specific subtask element and handles the event accordingly.
  * 
@@ -446,6 +454,7 @@ function startOnClickOutside(i) {
     const myElement = document.getElementById(`single-subtask${i}`);
     onClickOutside(myElement, i);
 }
+
 
 /**
  * Focuses on a specific subtask for editing.
@@ -516,6 +525,7 @@ function editSubtask(i) {
     document.getElementById(`single-subtask${i}`).classList.remove('subbtask-on-focus');
     console.log(subtasksArray);
 }
+
 
 /**
  * Deletes a subtask from the subtask array and re-renders the subtask list.
@@ -598,6 +608,7 @@ async function createTask(category) {
     await setItem('tasks', JSON.stringify(tasks));
 }
 
+
 /**
  * Redirects the user to the board page after clearing the task and hiding the overlay.
  */
@@ -607,6 +618,7 @@ function goToBoard() {
     window.location.href = 'board.html';
 }
 
+
 /**
  * Pauses for a short duration and then executes the function to redirect the user to the board page.
  */
@@ -615,6 +627,10 @@ function pauseAndExecute() {
         goToBoard();
     }, 1500);
 }
+
+
+
+// for use in Console
 
 /**
  * Deletes all tasks by clearing the tasks array in the local storage.
