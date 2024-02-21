@@ -245,7 +245,7 @@ function toggleSignUpCheckbox() {
     uncheckedCheckbox.src = "./assets/img/accept.png";
     uncheckedCheckbox.id = "checked"; 
   } else if (checkedCheckbox) {
-    checkedCheckbox.src = "./assets/img/check button.png";
+    checkedCheckbox.src = "./assets/img/checkbutton.png";
     checkedCheckbox.id = "checkbox";
   }
 }
