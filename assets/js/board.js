@@ -87,12 +87,19 @@ function getSubtaskDoneCounter(clean) {
             subTasksDone++;
         }
     });
-    console.log(`Task mit der ID ${clean.id} hat insgesamt ${subTasksTotal} Tasks und ${subTasksDone} davon erledigt.`);
     let progressWidth = (subTasksDone / subTasksTotal) * 100;
     return { progressWidth, subTasksDone, subTasksTotal }; // progressWidth zurückgeben
 }
 
 
+/**
+ * Generates HTML markup for displaying a todo item.
+ * @param {object} clean - The task object containing task details.
+ * @param {number} progressWidth - The width of the progress bar.
+ * @param {number} subTasksDone - The number of subtasks done.
+ * @param {number} subTasksTotal - The total number of subtasks.
+ * @returns {string} HTML markup representing the todo item.
+ */
 /**
  * Generates HTML markup for displaying a todo item.
  * @param {object} clean - The task object containing task details.
@@ -120,30 +127,31 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
         <div class="updown_buttons">
-        <button id="updown_arrow" class="display_none_arrows" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-        <button id="updown_arrow_two" class="display_none_arrows"  onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
-        
+            <button id="updown_arrow" class="display_none_arrows" onclick="moveTodo('${todoId}', 'down', event)"><img src="./assets/img/updown.jpg" alt=""></button>
+            <button id="updown_arrow_two" class="display_none_arrows"  onclick="moveTodo('${todoId}', 'up', event)"><img src="./assets/img/updown.jpg" alt=""></button>
         </div>
     </div>
     <div class="card_title">${clean['title']}</div>
     <div class="card_description">${truncatedDescription}</div>
-    <div id="myProgress${todoId}">
-        <div id="myBar" style="width: ${progressWidth}%;"></div>
+    <div id="myProgress${todoId}" style="${subTasksTotal === 0 ? 'display: none;' : ''}">
+        <div class="myBarContainer">
+            <div id="myBar" style="width: ${progressWidth}%;"></div>
+        </div>
         <div><span>Subtask ${subTasksDone}/${subTasksTotal}</span></div>
     </div>
-        <div class ="space-between w100p">
-            <div class="member_flex" id="members_${todoId}">
-                ${memberHtml}
-            </div>
-            <div class="prio_icon_containers">
-                <svg width="22" height="20">
-        const member = clean.contacts[i];
-                    <use href="assets/img/icons.svg#${clean.priority}-prio-icon-for-board"></use>
-                </svg>
-            </div>
+    <div class ="space-between w100p">
+        <div class="member_flex" id="members_${todoId}">
+            ${memberHtml}
         </div>
-    </div>`;
+        <div class="prio_icon_containers">
+            <svg width="22" height="20">
+                <use href="assets/img/icons.svg#${clean.priority}-prio-icon-for-board"></use>
+            </svg>
+        </div>
+    </div>
+</div>`;
 }
+
 
 /**
  * Uploads the current state of tasks to the storage.
