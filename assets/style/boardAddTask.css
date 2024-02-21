@@ -246,7 +246,7 @@ header {
     fill: white !important;
 }
 
-#add-task-button svg {
+.edit-submit {
     width: 18px;
     margin-left: 6px;
     fill: white;

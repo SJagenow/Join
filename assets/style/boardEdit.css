@@ -12,7 +12,6 @@ width: 388px;
 }
 
 .add-task-submit-container-edit {
-    width: 50vw;
     max-width: 976px;
     position: absolute;
     bottom: 40px;
@@ -20,9 +19,7 @@ width: 388px;
 }
 
 .add-task-title-edit {
-
     margin-bottom: 38px;
-  
 }
 
 .gap48-edit {
@@ -271,7 +268,7 @@ body {
     border-radius: 30px;
     padding: 16px;
     position: relative;
-    height: calc(90vh - 84px);
+    height: calc(90vh - 75px);
     max-height: 900px;
     
 }

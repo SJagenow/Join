@@ -537,7 +537,7 @@ function changePriorityEdit(prio) {
 /**
  * Sets the current label based on the value selected in the edit task form.
  */
-function typeLabel() {
+function typeLabelEdit() {
     currentLabel = document.getElementById('add-task-category-edit').value;
     closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
 }
@@ -763,43 +763,6 @@ function clearTaskEdit() {
 }
 
 /**
- * Starts editing a task by setting the category based on the URL parameters, removing the 'd-none' class from the overlay div, creating the task, and pausing to execute further actions.
- */
-async function startEditTask() {
-    let category = 'todos';
-    let urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('category')) {
-        category = urlParams.get('category');
-    }
-    document.getElementById('overlay-div').classList.remove('d-none');
-    await createTask(category);
-    pauseAndExecute();
-}
-
-/**
- * Edits a task by updating its details in the tasks list based on the provided category.
- * @param {string} category - The category of the task being edited.
- */
-async function editTask(category) {
-    typeLabel();
-    tasks = JSON.parse(await getItem('tasks'));
-    let task = {
-        "id": tasks.length,
-        "title": document.getElementById('add-task-title').value,
-        "description": document.getElementById('add-task-description').value,
-        "contacts": selectedUsers,
-        "dueDate": document.getElementById('add-task-date').value,
-        "priority": currentPrio,
-        "category": category,
-        "label": currentLabel,
-        "subtasks": subtasksArray,
-    };
-    tasks.push(task);
-    await setItem('tasks', JSON.stringify(tasks));
-}
-
-
-/**
  * Loads the contact list from local storage and renders it for tasks.
  * 
  * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
@@ -955,6 +918,7 @@ function updateSelectedUsersEdit(i) {
 function editTodo(event, i) {
     event.stopPropagation();
     loadContactListEdit(i);
+    document.getElementById('add-task-form-edit').setAttribute('onsubmit', `createTaskEdit(${i}); return false`);
     selectedUsers.push(todo[i].contacts);
     document.getElementById('add-task-container-edit').classList.remove('d-none');
     document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
@@ -968,6 +932,7 @@ function editTodo(event, i) {
     document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
 }
 
+
 /**
  * Closes the edit todo overlay.
  */
@@ -977,9 +942,22 @@ function closeEditTodo() {
 
 
 
-function noTaskInContainer() {
-    let wurst = document.getElementById('task_content_open').innerHTML;
-    if (wurst === '') {
-      document.getElementById('task_content_open').classList.remove('d-none');
-    }
-  }
+/**
+ * Initiates the creation of a new task by setting the category based on URL parameters,
+ * displaying the overlay, and asynchronously creating the task.
+ */
+async function createTaskEdit(i) {
+    typeLabelEdit();
+    todo[i].title = document.getElementById('add-task-title-edit').value;
+    todo[i].description = document.getElementById('add-task-description-edit').value;
+    todo[i].contacts = selectedUsers;
+    todo[i].dueDate = document.getElementById('add-task-date-edit').value;
+    todo[i].priority = currentPrio;
+    todo[i].label = currentLabel;
+    upload();
+    console.log(todo);
+    closeEditTodo();
+    closeAddTaskOverlay(); 
+    closeDialog();
+    boardInit();
+}

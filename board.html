@@ -29,7 +29,6 @@
             <main class="main-container">
                 <div class="board_top">
                     <div class="board_h1_button_container">
-                        <button onclick="whiteBlackMode()">tedd</button>
                         <h1>Board</h1>
                         <div class="input_button_container">
                             <input id="filter_input" type="text" placeholder="Filter tasks"
@@ -270,7 +269,7 @@
                             <button id="clear-task-button" class="parrent-button-light" onclick="clearTask()"
                                 type="reset">Clear &#10006;</button>
                             <button id="add-task-button" class="parrent-button-dark" type="submit">Create Task
-                                <svg>
+                                <svg class="edit-submit">
                                     <use href="assets/img/icons.svg#hook-icon"></use>
                                 </svg>
                             </button>
@@ -281,12 +280,12 @@
         </div>
     </div>
     <div id="add-task-container-edit" class="add-task-container center d-none"
-        onclick="closeAddTaskOverlay(); closeEditTodo()">
-        <div id="add-task-div" class="add-task-div-edit" onclick="doNotClose(event)">
-            <div id="main-div" class="main-div-edit overflow" onclick="closeFunction()">
+        onclick="closeAddTaskOverlay(); closeEditTodo(); closeDialog(); boardInit()">
+        <div id="add-task-div-edit" class="add-task-div-edit" onclick="doNotClose(event)">
+            <div id="main-div-edit" class="main-div-edit overflow" onclick="closeFunction()">
                 <h1 class="add-task-title-edit">Add Task</h1>
-                <form id="add-task-form" action="" class="ad-task-form column-space-between"
-                    onsubmit="startCreateTask('todos'); return false">
+                <form id="add-task-form-edit" action="" class="ad-task-form column-space-between"
+                    onsubmit="createTaskEdit(); return false">
                     <div class="gap48-edit">
                         <div class="add-task-input-div-edit">
                             <div class="column add-task-input-div-edit">
@@ -330,7 +329,7 @@
                             </div>
                             <div class="column add-task-input-div-edit">
                                 <h2 class="form-input-titel-edit">Prio</h2>
-                                <div class="flex gap8" id="prio-div">
+                                <div class="flex gap8" id="prio-div-edit">
                                     <div id="prio-button-urgent-edit" class="add-task-prio-button-edit"
                                         onclick="changePriorityEdit('urgent')">
                                         Urgent
@@ -354,7 +353,7 @@
                             </div>
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
                                 <div onclick="dropdownMenuToggle('add-task-category-list-div-edit', 'category-arrow')">
-                                    <svg id="category-arrow" class="input-icon-edit">
+                                    <svg id="category-arrow-edit" class="input-icon-edit">
                                         <use href="assets/img/icons.svg#arrow-dropdown-icon"></use>
                                     </svg>
                                 </div>
@@ -368,7 +367,7 @@
                                     title="Gültige Werte: Technical Task, User Story, HTML, CSS, JS, Testing" required>
                                 <div id="add-task-category-list-div-edit" class="dropdown-menu-div d-none">
                                     <div style="height: 9px;"></div>
-                                    <div id="add-task-category-list" class="dropdown-menu">
+                                    <div id="add-task-category-list-edit" class="dropdown-menu">
                                         <div id="task-label-technical-edit" class="add-task-single"
                                             onclick="selectLabelEdit('Technical Task')">Technical Task</div>
                                         <div id="task-label-user-edit" class="add-task-single"
@@ -417,9 +416,10 @@
                         </div>
                     </div>
                     <div class="space-between add-task-submit-container-edit">
-                        <div class="conditions-text-edit">This field is required     <div class="add-task-buttons-div-edit">
-                            <button id="add-task-button" class="parrent-button-dark" type="submit">Ok
-                                <svg>
+                        <div class="conditions-text-edit">This field is required</div>
+                        <div class="add-task-buttons-div-edit">
+                            <button id="add-task-button-edit" class="parrent-button-dark" type="submit">Ok
+                                <svg class="edit-submit">
                                     <use href="assets/img/icons.svg#hook-icon"></use>
                                 </svg>
                             </button></div>

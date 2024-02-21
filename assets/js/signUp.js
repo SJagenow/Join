@@ -50,26 +50,11 @@ function checkName() {
 }
 
 
-// function togglePasswordIcon() {
-//   const icon = document.querySelector(".pwIcon");
-//   const passwordInput = document.getElementById("password");
-
-//   const updateIcon = () => {
-//     if (passwordInput.value.trim() === "") {
-//       icon.src = "./assets/img/password_input.svg";
-//     } else {
-//       icon.src = passwordInput.type === "text" ? "./assets/img/visibility.png" : "./assets/img/visibility_off.png";
-//     }
-//   };
-//   passwordInput.addEventListener("blur", updateIcon);
-//   passwordInput.addEventListener("input", updateIcon);
-// }
-
 /**
  * Toggles the visibility icon for a password input field based on user interaction.
  */
 function togglePasswordIcon() {
-  let icon = document.querySelector(".pwIcon");
+  let icon = document.querySelector(".pWIcon");
   let passwordInput = document.getElementById("password");
 
   passwordInput.addEventListener("blur", function () {
@@ -97,25 +82,27 @@ function togglePasswordIcon() {
   });
 }
 
+
 /**
  * Checks the validity of the password and confirmation password inputs.
- * If both inputs are non-empty, it checks if they match and calls validPwLength if they do, otherwise calls hidePasswordMismatchMessage.
- * If either input is empty, it calls handlePwMismatch.
+ * If both inputs are non-empty, it checks if they match and calls hidePasswordMismatchMessage if they do, otherwise calls handlePwMismatch.
+ * If either input is empty, it removes the "alert" class from both inputs.
  */
 function checkPasswordValidity() {
   let passwordInput = document.getElementById("password").value;
-  let confirmPWInput = document.getElementById("confirmPW").value;
-
-  if (passwordInput.length > 0 && confirmPWInput.length > 0) {
-    if (passwordInput.value === confirmPWInput.value){
-      validPwLength(passwordInput, confirmPWInput);
-     } else {
+  let passwordConfirm = document.getElementById("confirmPW").value;
+  if (passwordInput !== "" && passwordConfirm !== "") {
+    if (passwordInput === passwordConfirm) {
       hidePasswordMismatchMessage();
+    } else {
+      handlePwMismatch();
     }
   } else {
-    handlePwMismatch();
+    passwordInput.classList.remove("alert");
+    passwordConfirm.classList.remove("alert");
   }
 }
+
 
 /**
  * Handles the case when the password and confirmation password inputs do not match.
@@ -127,13 +114,14 @@ function handlePwMismatch() {
   let passwordInput = document.getElementById("password");
   let confirmPasswordInput = document.getElementById("confirmPW");
 
-  confirmPasswordInvalid.textContent = "Ups! your password don’t match";
-  invalidPW.classList.remove("hidden");
-  confirmPasswordInvalid.classList.remove("hidden");
-  passwordInput.classList.add("alert");
-  confirmPasswordInput.classList.add("alert");
-}
+    confirmPasswordInvalid.textContent = "Ups! your password don’t match";
+    invalidPW.classList.remove("hidden");
+    confirmPasswordInvalid.classList.remove("hidden");
+    passwordInput.classList.add("alert");
+    confirmPasswordInput.classList.add("alert");
+  }
 
+  
 /**
  * Hides the password mismatch error messages.
  * Removes the "hidden" class from the password mismatch error message elements.
@@ -141,64 +129,70 @@ function handlePwMismatch() {
 function hidePasswordMismatchMessage() {
     let passwordMismatchMessage = document.querySelector(".pwInvalid");     // Verweise auf die entsprechenden HTML-Elemente für die Passwort-Missmatch-Meldungen
   let confirmPasswordMismatchMessage = document.querySelector(".confirmPWInvalid");
+  let passwordInput = document.getElementById("password");
+  let confirmPasswordInput = document.getElementById("confirmPW");
   passwordMismatchMessage.classList.add("hidden");             // Fügt den Meldungen die Klasse "hidden" hinzu, um sie auszublenden
   confirmPasswordMismatchMessage.classList.add("hidden");
+  passwordInput.classList.remove("alert");
+  confirmPasswordInput.classList.remove("alert");
 }
 
 /**
- * Validates the length of the passwords and displays error messages if they are too short.
- * @param {string} passwordValue - The value of the password input field.
- * @param {string} confirmPasswordValue - The value of the confirmation password input field.
+ * Validates the length of the password and displays an error message if it is too short.
+ * Clears the error message and styling if the password is empty.
  */
-function validPwLength(passwordValue, confirmPasswordValue) {
+function validPwLength() {
+  let passwordInput = document.getElementById("password");
   let passwordInvalidDiv = document.querySelector(".pwInvalid");
-  let confirmPasswordInvalidDiv = document.querySelector(".confirmPWInvalid");
-  let confirmPWInput = document.getElementById('confirmPW');
 
-  if (passwordValue.length < 4) {
+  if (passwordInput.value.length === 0) {
+    passwordInvalidDiv.textContent = "";
+    passwordInvalidDiv.classList.add("hidden");
+    passwordInput.classList.remove("alert");
+
+  } else if (passwordInput.value.length < 4) {
     passwordInvalidDiv.textContent = "Password must be at least 4 characters long";
     passwordInvalidDiv.classList.remove("hidden");
-    passwordInvalidDiv.classList.add("alert");
+    passwordInput.classList.add("alert");
   } else {
+    passwordInvalidDiv.textContent = "";
     passwordInvalidDiv.classList.add("hidden");
-    passwordInvalidDiv.classList.remove("alert");
-  }
-  if (confirmPasswordValue.length < 4) {
-    confirmPasswordInvalidDiv.textContent = "Password must be at least 4 characters long";
-    confirmPasswordInvalidDiv.classList.remove("hidden");
-    confirmPWInput.classList.add("alert");
-  } else {
-    confirmPasswordInvalidDiv.classList.add("hidden");
-    confirmPWInput.classList.remove("alert");
+    passwordInput.classList.remove("alert");
   }
 }
+
+
+/**
+ * Toggles the visibility icon for the password input field based on its value and type.
+ */
+function togglePwType() {
+  let icon = document.getElementById("pWIcon");
+  let passwordInput = document.getElementById("password");
+
+  if (passwordInput.type === "password") {
+    icon.src = "./assets/img/visibility.png";
+    passwordInput.type = "text";
+  } else {
+    icon.src = "./assets/img/visibility_off.png";
+    passwordInput.type = "password";
+  }
+}
+
 
 /**
  * Toggles the visibility icon for the confirmation password input field based on its value and type.
  */
-function toggleConfirmPasswordInputIcon() {
-  let icon = document.querySelector(".pwInvalid");
-  let input = document.getElementById("confirmPW");
-  input.addEventListener("blur", function () {
-    if (input.value.trim() === "") {
-      icon.src = "./assets/img/password_input.svg";
-    }
-  });
-  input.addEventListener("input", function () {
-    if (input.value.trim() === "") {
-      input.type = "password";
-      icon.src = "./assets/img/password_input.svg";
-    } else {
-      if ( input.type === "text" && !icon.src.includes("visibility.png")
-      ) {
-        icon.src = "./assets/img/visibility.png";
-      } else if ( 
-         input.type === "password"   
-      ) {
-        icon.src = "./assets/img/visibility_off.png";
-      }
-    }
-  });
+function togglePwTypeConf() {
+  let icon = document.getElementById("pwIconConf");
+  let passwordInput = document.getElementById("confirmPW");
+
+  if (passwordInput.type === "password") {
+    icon.src = "./assets/img/visibility.png";
+    passwordInput.type = "text";
+  } else {
+    icon.src = "./assets/img/visibility_off.png";
+    passwordInput.type = "password";
+  }
 }
 
 /**
