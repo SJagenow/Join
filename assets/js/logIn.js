@@ -252,7 +252,7 @@ function checkPasswordValidity() {
       uncheckedCheckbox.id = "checked";
       rememberInputData();
     } else if (checkedCheckbox) {
-      checkedCheckbox.src = "./assets/img/check button.png";
+      checkedCheckbox.src = "./assets/img/checkbutton.png";
       checkedCheckbox.id = "unchecked";
       clearStoredInput();
       clearInputFields();

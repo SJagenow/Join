@@ -519,3 +519,9 @@ body {
       width: 218px;
     }
   }
+
+  #checked,
+  #unchecked{
+    height: 24px;
+    width: 24px;
+  }
