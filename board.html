@@ -29,6 +29,7 @@
             <main class="main-container">
                 <div class="board_top">
                     <div class="board_h1_button_container">
+                        <button onclick="whiteBlackMode()">tedd</button>
                         <h1>Board</h1>
                         <div class="input_button_container">
                             <input id="filter_input" type="text" placeholder="Filter tasks"
@@ -58,7 +59,7 @@
                                     onclick="openAddTaskOverlay('todos')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
+                            <div class="no_task_container d-none">
                                 <span>no tasks Todo</span>
                             </div>
                             <div class="progress_await_container">
@@ -74,7 +75,7 @@
                                     onclick="openAddTaskOverlay('inprogress')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
+                            <div class="no_task_container d-none">
                                 <span>no tasks in Progress</span>
                             </div>
                             <div class="progress_await_done">
@@ -91,7 +92,7 @@
                                     onclick="openAddTaskOverlay('await')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
+                            <div class="no_task_container d-none">
                                 <span>no tasks await Feedback</span>
                             </div>
                             <div class="progress_await_done">
@@ -108,7 +109,7 @@
                                     onclick="openAddTaskOverlay('done')">+</button></div>
                         </div>
                         <div>
-                            <div class="no_task_container, d-none">
+                            <div class="no_task_container d-none">
                                 <span>no tasks Done</span>
                             </div>
                             <div class="progress_await_done">

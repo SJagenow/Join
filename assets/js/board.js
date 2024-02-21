@@ -13,6 +13,7 @@ async function boardInit() {
     await init();
     await getTodosForBoard();
     updateBoard();
+    noTaskInContainer();
     initAddTask();
 }
 
@@ -62,6 +63,7 @@ function updateBoard() {
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
+ 
 }
 
 
@@ -972,3 +974,12 @@ function editTodo(event, i) {
 function closeEditTodo() {
     document.getElementById('add-task-container-edit').classList.add('d-none');
 }
+
+
+
+function noTaskInContainer() {
+    let wurst = document.getElementById('task_content_open').innerHTML;
+    if (wurst === '') {
+      document.getElementById('task_content_open').classList.remove('d-none');
+    }
+  }
