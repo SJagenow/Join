@@ -67,7 +67,7 @@ async function filterContactsForAddTask() {
 function dropdownMenuToggle(divID, arrow) {
     let dNone = document.getElementById(`${divID}`).classList.contains('d-none');
     document.getElementById(`${arrow}`);
-    dropdownMenuToggleIF(divID, arrow)
+    dropdownMenuToggleIF(divID, arrow, dNone)
 }
 
 /**
@@ -102,7 +102,7 @@ function selectContact(i) {
     let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
     let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
     let user = contactList[i].name;
-    selectContactIF(i);
+    selectContactIF(i, get, unchecked, checked, user);
     updateSelectedUsers(i);
 }
 
@@ -143,7 +143,7 @@ function changePriority(prio) {
     let urgent = document.getElementById('prio-button-urgent');
     let medium = document.getElementById('prio-button-medium');
     let low = document.getElementById('prio-button-low');
-    changePriorityIF(prio);
+    changePriorityIF(prio, urgent, medium, low);
 }
 
 /**

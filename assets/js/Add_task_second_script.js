@@ -1,6 +1,6 @@
 // If Statements
 
-function dropdownMenuToggleIF(divID, arrow) {
+function dropdownMenuToggleIF(divID, arrow, dNone) {
     if (dNone) {
         openDropdownMenu(divID, arrow)
     } else {
@@ -9,7 +9,7 @@ function dropdownMenuToggleIF(divID, arrow) {
 }
 
 
-function selectContactIF(i) {
+function selectContactIF(i, get, unchecked, checked, user) {
     if (get.innerHTML == checked) {
         get.innerHTML = unchecked;
         document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
@@ -24,7 +24,7 @@ function selectContactIF(i) {
 }
 
 
-function changePriorityIF(prio) {
+function changePriorityIF(prio, urgent, medium, low) {
     if (prio == 'urgent') {
         if (urgent.classList.contains('urgent')) {
         } else {
