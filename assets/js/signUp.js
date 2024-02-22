@@ -282,6 +282,7 @@ function isButtonEnabled() {
   const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
   const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
   const hasNoWarning = !document.querySelector(".alert");
+  
   const isEnabled =
     checkbox.src.includes("accept.png") && 
     nameField.value.trim() !== "" &&
