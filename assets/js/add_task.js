@@ -54,7 +54,7 @@ async function filterContactsForAddTask() {
     let value = document.getElementById('add-task-assignet-to').value.toLowerCase();
     for (let i = 0; i < contactList.length; i++) {
         let checkContact = contactList[i].name.toLowerCase();
-        filterContactsForAddTaskIF(value,contactList, checkContact);
+        filterContactsForAddTaskIF(i, value,contactList, checkContact);
     }
 }
 
@@ -214,7 +214,7 @@ function closeSubtask() {
  * Opens the subtask input for adding a new subtask.
  */
 function openSubtask() {
-    document.getElementById('subbtask-input-icon').innerHTML = openSubtask();
+    document.getElementById('subbtask-input-icon').innerHTML = openSubtaskHTML();
     document.getElementById("add-task-subtasks").focus();
 }
 
@@ -332,7 +332,7 @@ function clearTask() {
     for (let i = 0; i < contactList.length; i++) {
         let get = document.getElementById(`add-task-assignet-checkbox${i}`);
         let contact = contactList[i];
-        clearTaskIF(get, checked, unchecked);
+        clearTaskIF(i, get, checked, unchecked);
     }
     contactsDiv.innerHTML = '';
     changePriority('medium');

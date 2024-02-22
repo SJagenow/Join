@@ -53,7 +53,7 @@ function changePriorityIF(prio, urgent, medium, low) {
 }
 
 
-function filterContactsForAddTaskIF(value,contactList, checkContact) {
+function filterContactsForAddTaskIF(i, value,contactList, checkContact) {
     if (checkContact.includes(value)) {
         let contact = contactList[i].name;
         const name = contact.split(" ");
@@ -86,7 +86,7 @@ function onClickOutsideIF(element, i, e) {
     };
 }
 
-function clearTaskIF(get, checked, unchecked) {
+function clearTaskIF(i, get, checked, unchecked) {
     if (get.innerHTML == checked) {
         get.innerHTML = unchecked;
         document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
@@ -142,7 +142,7 @@ function closeSubtaskHTML() {
 }
 
 
-function openSubtask() {
+function openSubtaskHTML() {
     return /*html*/`
     <svg class="subtask-icons" onclick="closeSubtask()">
         <use href="assets/img/icons.svg#x-icon"></use>
