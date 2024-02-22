@@ -318,7 +318,6 @@ function deleteSubtask(i) {
 function closeFunction() {
     closeDropdownMenu('add-task-contact-div', 'assignet-arrow');
     closeDropdownMenu('add-task-category-list-div', 'category-arrow');
-    closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow')
     closeSubtask();
 }
 
