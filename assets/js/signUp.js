@@ -237,6 +237,9 @@ function displaySignUpSuccessMessage() {
   }, 3000); 
 }
 
+/**
+ * Toggles the checkbox image between checked and unchecked states based on its current state. Updates the image source accordingly.
+ */
 function toggleSignUpCheckbox() {
   let uncheckedCheckbox = document.getElementById("checkbox");
   let checkedCheckbox = document.getElementById("checked");
@@ -250,7 +253,9 @@ function toggleSignUpCheckbox() {
   }
 }
 
-
+/**
+ * Ensures the sign-up button is enabled/disabled based on validation criteria before adding a user. Utilizes asynchronous validation to control button state and user addition.
+ */
 async function validateSignUpButton() {
   let signUpButton = document.getElementById("signUpBtn");
   const isEnabled = isButtonEnabled();
@@ -263,7 +268,11 @@ async function validateSignUpButton() {
   }
 }
 
-
+/**
+ * 
+ * @returns Checks if the signup button should be enabled based on form inputs and error messages.
+Returns true if all required fields are filled, no errors are displayed, and the privacy policy is accepted; otherwise, returns false.
+ */
 function isButtonEnabled() {
   const checkbox = document.getElementById("checked");
   const nameField = document.getElementById("names");
@@ -273,7 +282,6 @@ function isButtonEnabled() {
   const invalidDivs = document.querySelectorAll(".nameInvalid, .emailInvalid, .pwInvalid, .confirmPWInvalid");
   const hasNoErrors = Array.from(invalidDivs).every(div => div.classList.contains("hidden"));
   const hasNoWarning = !document.querySelector(".alert");
-
   const isEnabled =
     checkbox.src.includes("accept.png") && 
     nameField.value.trim() !== "" &&

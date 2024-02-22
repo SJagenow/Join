@@ -87,15 +87,14 @@
           </div>
           <div class="confirmPWInvalid hidden"></div>
           <div class="form-checkbox">
-            <img
-                required
-                id="checkbox"
-                onclick="toggleSignUpCheckbox()"
-                src="./assets/img/checkbutton.png"
-                alt="Checkbox"
-              />
-            I accept the
-            <a href="./templates/privacy_policy-logOut.html">Privacy policy</a>
+            <input
+              type="checkbox"
+              required
+              id="checkbox"
+              onclick="toggleSignUpCheckbox()"
+              class="checkbox-input"
+            />
+            <label for="checkbox">I accept the <a href="./templates/privacy_policy-logOut.html">Privacy policy</a></label>
           </div>
           <div>
             <!-- <button type="submit" class="signUpBtn" id="signUpBtn" disabled="disabled">Sign up</button> -->
