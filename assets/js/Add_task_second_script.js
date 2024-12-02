@@ -25,32 +25,28 @@ function selectContactIF(i, get, unchecked, checked, user) {
 
 
 function changePriorityIF(prio, urgent, medium, low) {
+  
     if (prio == 'urgent') {
-        if (urgent.classList.contains('urgent')) {
-        } else {
-            urgent.classList.add('urgent');
-            currentPrio = 'urgent';
-            medium.classList.remove('medium');
-            low.classList.remove('low');
-        }
+       
+        urgent.classList.add('urgent');
+        currentPrio = 'urgent';
+        medium.classList.remove('medium');
+        low.classList.remove('low');
     } else if (prio == 'medium') {
-        if (medium.classList.contains('medium')) {
-        } else {
-            medium.classList.add('medium');
-            currentPrio = 'medium';
-            urgent.classList.remove('urgent');
-            low.classList.remove('low');
-        }
+       
+        medium.classList.add('medium');
+        currentPrio = 'medium';  
+        urgent.classList.remove('urgent');
+        low.classList.remove('low');
     } else if (prio == 'low') {
-        if (low.classList.contains('low')) {
-        } else {
-            low.classList.add('low');
-            currentPrio = 'low';
-            urgent.classList.remove('urgent');
-            medium.classList.remove('medium');
-        }
+      
+        low.classList.add('low');
+        currentPrio = 'low'; 
+        urgent.classList.remove('urgent');
+        medium.classList.remove('medium');
     }
 }
+
 
 
 function filterContactsForAddTaskIF(i, value,contactList, checkContact) {
@@ -58,7 +54,7 @@ function filterContactsForAddTaskIF(i, value,contactList, checkContact) {
         let contact = contactList[i].name;
         const name = contact.split(" ");
         const firstName = name[0][0];
-        const secondName = name[1] ? name[1][0] : '';
+        const secondName = name.length > 1 ? name[1][0] : '';
         let initials = firstName + secondName;
         document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(i, secondName, initials, contact);
     }
@@ -106,18 +102,18 @@ function clearTaskIF(i, get, checked, unchecked) {
  */
 function renderContactListForTaskHTML(i, secondName, initials, contact) {
     return /*html*/`
-    <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
-        <div class="name-div">
-            <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
-            <span>${contact}</span>
+        <div id="task-contakt${i}" class="add-task-single" onclick="selectContact(${i})">
+            <div class="name-div">
+                <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
+                <span>${contact}</span>
+            </div>
+            <div>
+                <svg id="add-task-assignet-checkbox${i}" class="add-task-assignet-checkbox">
+                    <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
+                </svg>
+            </div>
         </div>
-        <div>
-            <svg id="add-task-assignet-checkbox${i}" class="add-task-assignet-checkbox">
-                <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
-            </svg>
-        </div>
-    </div>
-`;
+    `;
 }
 
 
@@ -189,263 +185,263 @@ function focusSubtaskHTML(i) {
  * This function is intended for emergency use only.
  * @returns {Promise<void>}
  */
-async function deleteAllTasksEmergencyFunction() {
-    tasks = JSON.parse(await getItem('tasks'));
-    console.log(tasks);
-    tasks = [];
-    await setItem('tasks', JSON.stringify(tasks));
-    let test = JSON.parse(await getItem('tasks'));
-    console.log(test);
-}
+// async function deleteAllTasksEmergencyFunction() {
+//     tasks = JSON.parse(await getItem('tasks'));
+//     console.log(tasks);
+//     tasks = [];
+//     await setItem('tasks', JSON.stringify(tasks));
+//     let test = JSON.parse(await getItem('tasks'));
+//     console.log(test);
+// }
 
 
-async function addExampleTasks() {
-    tasks = JSON.parse(await getItem('tasks'));
-    console.log(tasks);
-    tasks = [
-        {
-            "id": 0,
-            "title": "Entwicklung neuer Website-Features",
-            "description": "Implementierung von zusätzlichen Funktionen auf der Unternehmenswebsite",
-            "contacts": [
-                "Emmanuel Mauer",
-                "Tim Testing"
-            ],
-            "dueDate": "2024-05-01",
-            "priority": "low",
-            "category": "todos",
-            "label": "HTML",
-            "subtasks": [
-                {
-                    "task": "Header-Design anpassen",
-                    "done": false
-                },
-                {
-                    "task": "Navigation hinzufügen",
-                    "done": false
-                },
-                {
-                    "task": "Footer aktualisieren",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "title": "Benutzeroberfläche für Mobile App gestalten",
-            "description": "Design der Benutzeroberfläche für die mobile Anwendung",
-            "contacts": [
-                "Benedikt Ziegler",
-                "Anton Mayer",
-                "David Eisenberg"
-            ],
-            "dueDate": "2024-05-05",
-            "priority": "medium",
-            "category": "inprogress",
-            "label": "User Story",
-            "subtasks": [
-                {
-                    "task": "Startbildschirm entwerfen",
-                    "done": true
-                },
-                {
-                    "task": "Anmeldeformular gestalten",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "title": "Integration von Zahlungsgateways",
-            "description": "Implementierung von Zahlungsoptionen in die Anwendung",
-            "contacts": [
-                "Eva Fischer",
-                "Tim Testing",
-                "David Eisenberg",
-                "Benedikt Ziegler"
-            ],
-            "dueDate": "2024-05-10",
-            "priority": "urgent",
-            "category": "inprogress",
-            "label": "Technical Task",
-            "subtasks": [
-                {
-                    "task": "PayPal-Integration",
-                    "done": false
-                },
-                {
-                    "task": "Kreditkartenzahlung unterstützen",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "title": "Verbesserung der Suchfunktion",
-            "description": "Optimierung der Suchfunktion auf der Website",
-            "contacts": [
-                "Benedikt Ziegler",
-                "Anton Mayer"
-            ],
-            "dueDate": "2024-05-15",
-            "priority": "medium",
-            "category": "inprogress",
-            "label": "User Story",
-            "subtasks": [
-                {
-                    "task": "Autovervollständigung hinzufügen",
-                    "done": false
-                },
-                {
-                    "task": "Suchergebnisse filtern",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 4,
-            "title": "Entwicklung eines CSS-Frameworks",
-            "description": "Erstellung eines benutzerdefinierten CSS-Frameworks für das Projekt",
-            "contacts": [
-                "David Eisenberg",
-                "Benedikt Ziegler",
-                "Eva Fischer"
-            ],
-            "dueDate": "2024-05-20",
-            "priority": "medium",
-            "category": "await",
-            "label": "CSS",
-            "subtasks": [
-                {
-                    "task": "Grid-System entwerfen",
-                    "done": false
-                },
-                {
-                    "task": "Responsive Design implementieren",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 5,
-            "title": "Durchführung von Systemtests",
-            "description": "Tests der Anwendung auf verschiedene Systemkonfigurationen",
-            "contacts": [
-                "Emmanuel Mauer"
-            ],
-            "dueDate": "2024-05-25",
-            "priority": "urgent",
-            "category": "todos",
-            "label": "Testing",
-            "subtasks": [
-                {
-                    "task": "Kompatibilität mit verschiedenen Browsern prüfen",
-                    "done": false
-                },
-                {
-                    "task": "Performance-Tests durchführen",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 6,
-            "title": "Implementierung von Datenbankmigrationen",
-            "description": "Aktualisierung der Datenbankstruktur gemäß den neuen Anforderungen",
-            "contacts": [
-                "Marcel Bauer",
-                "Anton Mayer",
-                "Benedikt Ziegler"
-            ],
-            "dueDate": "2024-05-30",
-            "priority": "urgent",
-            "category": "await",
-            "label": "Technical Task",
-            "subtasks": [
-                {
-                    "task": "Schema-Änderungen vornehmen",
-                    "done": false
-                },
-                {
-                    "task": "Daten migrieren",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 7,
-            "title": "Entwicklung einer Dashboard-Ansicht",
-            "description": "Erstellung einer Übersichtsseite für Administratoren",
-            "contacts": [
-                "David Eisenberg",
-                "Anton Mayer",
-                "Marcel Bauer"
-            ],
-            "dueDate": "2024-06-01",
-            "priority": "low",
-            "category": "todos",
-            "label": "User Story",
-            "subtasks": [
-                {
-                    "task": "Benutzerstatistiken anzeigen",
-                    "done": false
-                },
-                {
-                    "task": "Grafische Auswertungen erstellen",
-                    "done": false
-                }
-            ]
-        },
-        {
-            "id": 8,
-            "title": "Implementierung von OAuth-Authentifizierung",
-            "description": "Integration von OAuth-Authentifizierung für externe Plattformen",
-            "contacts": [
-                "Tim Testing",
-                "Anton Mayer",
-                "Benedikt Ziegler"
-            ],
-            "dueDate": "2024-06-05",
-            "priority": "medium",
-            "category": "done",
-            "label": "Technical Task",
-            "subtasks": [
-                {
-                    "task": "OAuth-Anbieter auswählen",
-                    "done": true
-                },
-                {
-                    "task": "Authentifizierungsfluss implementieren",
-                    "done": true
-                }
-            ]
-        },
-        {
-            "id": 9,
-            "title": "Erstellung eines Testplans",
-            "description": "Ausarbeitung eines detaillierten Plans für die Anwendungstests",
-            "contacts": [
-                "Marcel Bauer",
-                "Benedikt Ziegler",
-                "Eva Fischer"
-            ],
-            "dueDate": "2024-06-10",
-            "priority": "low",
-            "category": "done",
-            "label": "Testing",
-            "subtasks": [
-                {
-                    "task": "Testziele definieren",
-                    "done": true
-                },
-                {
-                    "task": "Testumgebung einrichten",
-                    "done": true
-                }
-            ]
-        }
-    ];    
-    await setItem('tasks', JSON.stringify(tasks));
-    let test = JSON.parse(await getItem('tasks'));
-    console.log(test);
-}
+// async function addExampleTasks() {
+//     tasks = JSON.parse(await getItem('tasks'));
+//     console.log(tasks);
+//     tasks = [
+//         {
+//             "id": 0,
+//             "title": "Entwicklung neuer Website-Features",
+//             "description": "Implementierung von zusätzlichen Funktionen auf der Unternehmenswebsite",
+//             "contacts": [
+//                 "Emmanuel Mauer",
+//                 "Tim Testing"
+//             ],
+//             "dueDate": "2024-05-01",
+//             "priority": "low",
+//             "category": "todos",
+//             "label": "HTML",
+//             "subtasks": [
+//                 {
+//                     "task": "Header-Design anpassen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Navigation hinzufügen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Footer aktualisieren",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 1,
+//             "title": "Benutzeroberfläche für Mobile App gestalten",
+//             "description": "Design der Benutzeroberfläche für die mobile Anwendung",
+//             "contacts": [
+//                 "Benedikt Ziegler",
+//                 "Anton Mayer",
+//                 "David Eisenberg"
+//             ],
+//             "dueDate": "2024-05-05",
+//             "priority": "medium",
+//             "category": "inprogress",
+//             "label": "User Story",
+//             "subtasks": [
+//                 {
+//                     "task": "Startbildschirm entwerfen",
+//                     "done": true
+//                 },
+//                 {
+//                     "task": "Anmeldeformular gestalten",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 2,
+//             "title": "Integration von Zahlungsgateways",
+//             "description": "Implementierung von Zahlungsoptionen in die Anwendung",
+//             "contacts": [
+//                 "Eva Fischer",
+//                 "Tim Testing",
+//                 "David Eisenberg",
+//                 "Benedikt Ziegler"
+//             ],
+//             "dueDate": "2024-05-10",
+//             "priority": "urgent",
+//             "category": "inprogress",
+//             "label": "Technical Task",
+//             "subtasks": [
+//                 {
+//                     "task": "PayPal-Integration",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Kreditkartenzahlung unterstützen",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 3,
+//             "title": "Verbesserung der Suchfunktion",
+//             "description": "Optimierung der Suchfunktion auf der Website",
+//             "contacts": [
+//                 "Benedikt Ziegler",
+//                 "Anton Mayer"
+//             ],
+//             "dueDate": "2024-05-15",
+//             "priority": "medium",
+//             "category": "inprogress",
+//             "label": "User Story",
+//             "subtasks": [
+//                 {
+//                     "task": "Autovervollständigung hinzufügen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Suchergebnisse filtern",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 4,
+//             "title": "Entwicklung eines CSS-Frameworks",
+//             "description": "Erstellung eines benutzerdefinierten CSS-Frameworks für das Projekt",
+//             "contacts": [
+//                 "David Eisenberg",
+//                 "Benedikt Ziegler",
+//                 "Eva Fischer"
+//             ],
+//             "dueDate": "2024-05-20",
+//             "priority": "medium",
+//             "category": "await",
+//             "label": "CSS",
+//             "subtasks": [
+//                 {
+//                     "task": "Grid-System entwerfen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Responsive Design implementieren",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 5,
+//             "title": "Durchführung von Systemtests",
+//             "description": "Tests der Anwendung auf verschiedene Systemkonfigurationen",
+//             "contacts": [
+//                 "Emmanuel Mauer"
+//             ],
+//             "dueDate": "2024-05-25",
+//             "priority": "urgent",
+//             "category": "todos",
+//             "label": "Testing",
+//             "subtasks": [
+//                 {
+//                     "task": "Kompatibilität mit verschiedenen Browsern prüfen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Performance-Tests durchführen",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 6,
+//             "title": "Implementierung von Datenbankmigrationen",
+//             "description": "Aktualisierung der Datenbankstruktur gemäß den neuen Anforderungen",
+//             "contacts": [
+//                 "Marcel Bauer",
+//                 "Anton Mayer",
+//                 "Benedikt Ziegler"
+//             ],
+//             "dueDate": "2024-05-30",
+//             "priority": "urgent",
+//             "category": "await",
+//             "label": "Technical Task",
+//             "subtasks": [
+//                 {
+//                     "task": "Schema-Änderungen vornehmen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Daten migrieren",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 7,
+//             "title": "Entwicklung einer Dashboard-Ansicht",
+//             "description": "Erstellung einer Übersichtsseite für Administratoren",
+//             "contacts": [
+//                 "David Eisenberg",
+//                 "Anton Mayer",
+//                 "Marcel Bauer"
+//             ],
+//             "dueDate": "2024-06-01",
+//             "priority": "low",
+//             "category": "todos",
+//             "label": "User Story",
+//             "subtasks": [
+//                 {
+//                     "task": "Benutzerstatistiken anzeigen",
+//                     "done": false
+//                 },
+//                 {
+//                     "task": "Grafische Auswertungen erstellen",
+//                     "done": false
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 8,
+//             "title": "Implementierung von OAuth-Authentifizierung",
+//             "description": "Integration von OAuth-Authentifizierung für externe Plattformen",
+//             "contacts": [
+//                 "Tim Testing",
+//                 "Anton Mayer",
+//                 "Benedikt Ziegler"
+//             ],
+//             "dueDate": "2024-06-05",
+//             "priority": "medium",
+//             "category": "done",
+//             "label": "Technical Task",
+//             "subtasks": [
+//                 {
+//                     "task": "OAuth-Anbieter auswählen",
+//                     "done": true
+//                 },
+//                 {
+//                     "task": "Authentifizierungsfluss implementieren",
+//                     "done": true
+//                 }
+//             ]
+//         },
+//         {
+//             "id": 9,
+//             "title": "Erstellung eines Testplans",
+//             "description": "Ausarbeitung eines detaillierten Plans für die Anwendungstests",
+//             "contacts": [
+//                 "Marcel Bauer",
+//                 "Benedikt Ziegler",
+//                 "Eva Fischer"
+//             ],
+//             "dueDate": "2024-06-10",
+//             "priority": "low",
+//             "category": "done",
+//             "label": "Testing",
+//             "subtasks": [
+//                 {
+//                     "task": "Testziele definieren",
+//                     "done": true
+//                 },
+//                 {
+//                     "task": "Testumgebung einrichten",
+//                     "done": true
+//                 }
+//             ]
+//         }
+//     ];    
+//     await setItem('tasks', JSON.stringify(tasks));
+//     let test = JSON.parse(await getItem('tasks'));
+//     console.log(test);
+// }

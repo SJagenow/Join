@@ -263,13 +263,19 @@ function clearTaskEdit() {
  */
 async function loadContactListEdit(i) {
     try {
-        contactList = JSON.parse(await getItem('contactList'));
-        renderContactListForTaskEdit(i);
-        updateSelectedUsersEdit();
-    } catch (e) {
-        console.error('Loading error:', e);
+        const response = await fetch('http://127.0.0.1:8000/api/contacts/');
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        contactList = await response.json();
+        renderContactListForTaskEdit(i, contactList); 
+        updateSelectedUsersEdit(contactList); 
+    } catch (error) {
+        console.error('Error loading contacts:', error);
     }
 }
+
 
 /**
  * Renders the contact list for tasks.

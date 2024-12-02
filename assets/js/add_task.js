@@ -1,9 +1,11 @@
+
 let contactList = [];
 let selectedUsers = [];
 let currentPrio = 'medium';
 let currentLabel = '';
 let subtasksArray = [];
 let tasks = [];
+
 
 /**
  * Initializes the process of adding a new task.
@@ -12,7 +14,7 @@ let tasks = [];
  */
 async function initAddTask() {
     await init();
-    loadContactList();
+    await loadContactList();
     renderSubtask();
     setDueDateInput();
 }
@@ -22,12 +24,20 @@ async function initAddTask() {
  * 
  * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
  */
+
 async function loadContactList() {
     try {
-        contactList = JSON.parse(await getItem('contactList'));
+       
+        const response = await fetch('http://127.0.0.1:8000/api/contacts/');
+        
+        if (!response.ok) {
+            throw new Error('Fehler beim Laden der Kontakte');
+        }
+
+        contactList = await response.json();
         renderContactListForTask();
     } catch (e) {
-        console.error('Loading error:', e);
+        console.error('Fehler beim Laden der Kontakte:', e);
     }
 }
 
@@ -42,6 +52,7 @@ function renderContactListForTask() {
         const firstName = name[0][0];
         const secondName = name[1] ? name[1][0] : '';
         let initials = firstName + secondName;
+      
         document.getElementById('add-task-contact').innerHTML += renderContactListForTaskHTML(i, secondName, initials, contact);
     }
 }
@@ -98,13 +109,18 @@ function closeDropdownMenu(divID, arrow) {
  * @param {number} i - The index of the contact.
  */
 function selectContact(i) {
-    let get = document.getElementById(`add-task-assignet-checkbox${i}`);
-    let unchecked = `<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>`;
-    let checked = `<use href="assets/img/icons.svg#checkbox-checked-icon"></use>`;
-    let user = contactList[i].name;
-    selectContactIF(i, get, unchecked, checked, user);
+    let checkbox = document.getElementById(`add-task-assignet-checkbox${i}`);
+    let contact = contactList[i].name;
+    if (checkbox.classList.contains('checked')) {
+        checkbox.classList.remove('checked');
+        selectedUsers = selectedUsers.filter(user => user !== contact);
+    } else {
+        checkbox.classList.add('checked');
+        selectedUsers.push(contact);
+    }
     updateSelectedUsers(i);
 }
+
 
 /**
  * Updates the list of selected users and renders their initials.
@@ -146,6 +162,12 @@ function changePriority(prio) {
     changePriorityIF(prio, urgent, medium, low);
 }
 
+
+
+
+
+
+
 /**
  * Retrieves the label for the task from the input field and closes the label dropdown menu.
  */
@@ -182,25 +204,43 @@ function renderSubtask() {
  * 
  * @param {Event} event - The key event.
  */
-function handleEnterKey(event) {
+async function handleEnterKey(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         event.target.blur();
-        addSubtask();
+        await addSubtask();
     }
 }
+
+
 
 /**
  * Adds a subtask to the list of subtasks.
  */
-function addSubtask() {
-    let subtaskInput = document.getElementById('add-task-subtasks')
-    let subtaskInputArray = {
-        'task': subtaskInput.value,
-        'done': false,
-    };
-    addSubtaskIF(subtaskInput, subtaskInputArray);
+async function addSubtask() {
+    let subtaskInput = document.getElementById('add-task-subtasks');
+    let subtaskTitle = subtaskInput.value.trim(); 
+
+    if (subtaskTitle) {
+        let subtaskInputArray = {
+            'title': subtaskTitle,
+            'done': false
+        };
+
+        subtasksArray.push(subtaskInputArray); 
+        renderSubtask();
+        subtaskInput.value = '';
+    } else {
+        console.warn('Subtask-Titel ist leer und wird ignoriert.');
+    }
 }
+
+
+
+
+
+
+
 
 /**
  * Closes the subtask input and clears its value.
@@ -294,7 +334,7 @@ function focusSubtaskfromBoard() {
  * @param {number} i - The index of the subtask to edit.
  */
 function editSubtask(i) {
-    const subtask = subtasksArray[i];
+    subtask = subtasksArray[i];
     subtasksArray.splice(i, 1, document.getElementById(`single-subtask-txt${i}`).innerHTML);
     document.getElementById(`subtask-edit-buttons${i}`).innerHTML = editSubtaskHTML(i);
     document.getElementById(`single-subtask${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOn(${i})`);
@@ -357,23 +397,79 @@ async function startCreateTask() {
  * Initiates the creation of a new task by setting the category based on URL parameters,
  * displaying the overlay, and asynchronously creating the task.
  */
+
 async function createTask(category) {
-    typeLabel();
-    tasks = JSON.parse(await getItem('tasks'));
     let task = {
-        "id": tasks.length,
         "title": document.getElementById('add-task-title').value,
         "description": document.getElementById('add-task-description').value,
-        "contacts": selectedUsers,
+        "contacts": [], 
         "dueDate": document.getElementById('add-task-date').value,
         "priority": currentPrio,
         "category": category,
-        "label": currentLabel,
-        "subtasks": subtasksArray,
+        "label": currentLabel
     };
-    tasks.push(task);
-    await setItem('tasks', JSON.stringify(tasks));
+
+   
+    for (let i = 0; i < selectedUsers.length; i++) {
+        const contactName = selectedUsers[i];
+        const contact = contactList.find(c => c.name === contactName);
+        if (contact) {
+            task.contacts.push(contact.id); 
+        }
+    }
+
+    
+    if (subtasksArray && subtasksArray.length > 0) {
+        task.subtasks = [];
+        for (let i = 0; i < subtasksArray.length; i++) {
+            task.subtasks.push({
+                title: subtasksArray[i].title,
+                done: subtasksArray[i].done
+            });
+        }
+    }
+
+   
+    let createdTask = await addTaskToBackend(task);
+
+    if (createdTask && createdTask.id) {
+        for (let i = 0; i < createdTask.subtasks.length; i++) {
+            createdTask.subtasks[i].task = createdTask.id;
+        }
+        await addSubtasksToBackend(createdTask.subtasks);
+    }
 }
+
+
+
+
+
+
+
+async function addTaskToBackend(task) {
+    console.log("Daten an das Backend:", task);
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(task)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json(); 
+            console.error('Fehlerdetails:', errorData);
+            throw new Error('Fehler beim Hinzufügen der Aufgabe');
+        }
+
+        const result = await response.json();
+        console.log('Task erstellt:', result);
+    } catch (error) {
+        console.error('Fehler beim Hinzufügen der Aufgabe:', error);
+    }
+}
+
 
 /**
  * Redirects the user to the board page after clearing the task and hiding the overlay.

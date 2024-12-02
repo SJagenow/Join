@@ -108,7 +108,7 @@ function renderContact(alphabetIndex, contactIndex) {
                             <div id="contactlist_edit_icon_container" onclick="openEditContact(${alphabetIndex}, ${contactIndex})">
                                 <span>Edit</span>
                             </div>
-                            <div id="contactlist_delete_icon_container" onclick="deleteContact()">
+                            <div id="contactlist_delete_icon_container" onclick="deleteContact(${contact.id})">
                                 <span>Delete</span>
                             </div>
                         </div>

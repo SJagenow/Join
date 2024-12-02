@@ -23,8 +23,23 @@ async function boardInit() {
  * @returns {Promise<void>} A Promise that resolves when the todos are retrieved and logged.
  */
 async function getTodosForBoard() {
-    todo = JSON.parse(await getItem('tasks'));
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const taskList = await response.json();
+        console.log('Fetched Tasks:', taskList);
+        todo = taskList;
+        updateBoard();
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
 }
+
+
+
+
 
 /**
  * Updates the board with the current list of todos.
@@ -72,6 +87,36 @@ function startDragging(todoId) {
 }
 
 /**
+ * Aktualisiert die Kategorie einer Aufgabe im Backend.
+ * 
+ * @param {number} taskId - Die ID der zu aktualisierenden Aufgabe.
+ * @param {string} newCategory - Die neue Kategorie der Aufgabe.
+ */
+async function updateTaskCategory(taskId, newCategory) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ category: newCategory }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to update task category: ${response.statusText}`);
+        }
+
+        console.log(`Task ${taskId} updated to category ${newCategory}`);
+    } catch (error) {
+        console.error('Error updating task category:', error);
+    }
+}
+
+
+
+
+
+/**
  * Calculates the number of subtasks done and the progress width for a given task.
  * @param {object} clean - The task object containing subtasks.
  * @returns {object} An object containing the progress width, number of subtasks done, and total number of subtasks.
@@ -85,8 +130,10 @@ function getSubtaskDoneCounter(clean) {
         }
     });
     let progressWidth = (subTasksDone / subTasksTotal) * 100;
-    return { progressWidth, subTasksDone, subTasksTotal }; // progressWidth zurückgeben
+    return { progressWidth, subTasksDone, subTasksTotal }; 
 }
+
+
 
 /**
  * Generates HTML markup for displaying a todo item.
@@ -113,12 +160,13 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     }
     let memberHtml = '';
     for (let i = 0; i < clean.contacts.length; i++) {
-        const member = clean.contacts[i];
-        const { profileinitials, secondName } = getInitials(member);
+        const member = clean.contacts[i]; // Hier ist `member` das gesamte Kontaktobjekt
+        const { profileinitials, secondName } = getInitials(member); // Nutzt die `name`-Eigenschaft des Objekts
         memberHtml += `
             <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
         `;
     }
+    
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
     <div class="arrow_flex">
         <div class="card_label">${clean['label']}</div>
@@ -148,6 +196,7 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
 </div>`;
 }
 
+
 /**
  * Uploads the current state of tasks to the storage.
  * @returns {Promise<void>}
@@ -168,12 +217,23 @@ function allowDrop(ev) {
  * Moves a todo item to the specified category and updates the board.
  * @param {string} category - The category to which the todo item will be moved.
  */
+/**
+ * Verschiebt eine Aufgabe in die angegebene Kategorie und aktualisiert die Kategorie im Backend.
+ * 
+ * @param {string} category - Die Zielkategorie.
+ */
 function moveTo(category) {
-    todo[currentDraggedElement.split('_')[1]]['category'] = category;
-    upload();
-    updateBoard();
-    noTaskInContainer();
+    const taskId = currentDraggedElement.split('_')[1];
+    const task = todo.find(t => t.id == taskId);
+    
+    if (task) {
+        task.category = category; // 
+        updateTaskCategory(taskId, category); 
+        updateBoard(); 
+        noTaskInContainer();
+    }
 }
+
 function noTaskInContainer() {
     let noTodos = document.getElementById('task_content_open').innerHTML;
     if (noTodos === '') {
@@ -291,6 +351,8 @@ async function returnDialog(selectedTodo, selectedTodoID) {
  * @param {number} selectedTodoID - The ID of the selected todo item.
  * @returns {string} The HTML content for the dialog box.
  */
+
+
 async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
     for (let i = 0; i < selectedTodo.contacts.length; i++) {
@@ -298,23 +360,39 @@ async function renderMemberList(selectedTodo) {
         const { profileinitials, secondName } = getInitials(member);
         document.getElementById('board_member_content').innerHTML += `
    <div class="task_name_container"> <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
-    <div>${member}</div></div>
+    
     `;
     }
 }
 
+
+
+
+
 /**
  * Extracts the initials from a contact's name.
- * @param {string} contact - The contact's name.
+ * @param {object} contact - The contact object with a name property.
  * @returns {Object} An object containing the profile initials and the second name's initial.
  */
 function getInitials(contact) {
-    const words = contact.split(" ");
+    if (!contact.name) {
+        return { profileinitials: '', secondName: '' }; 
+    }
+    const words = contact.name.split(" ");
     const firstName = words[0][0];
     const secondName = words[1] ? words[1][0] : '';
     const profileinitials = firstName + secondName;
     return { profileinitials, secondName };
 }
+
+
+
+
+
+
+
+
+
 
 /**
  * Opens a dialog box for the selected todo item.

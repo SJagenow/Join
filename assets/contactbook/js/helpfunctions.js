@@ -58,9 +58,26 @@ function getInitialsforUser(contact) {
  * @param {Array} array - The array from which the invalid entry is to be removed.
  */
 async function removeInvalidEntries(array) {
-    array.splice(9, 1);
-    await setItem('contactList', JSON.stringify(contactList));
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/contacts/', {
+            method: 'PUT', // Beispiel: PUT für Bulk-Update (je nach Backend-Implementierung)
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(array),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Fehler beim Entfernen ungültiger Kontakte: ${response.statusText}`);
+        }
+
+        console.log('Ungültige Kontakte erfolgreich entfernt.');
+        renderContactList();
+    } catch (error) {
+        console.error('Fehler beim Entfernen ungültiger Kontakte:', error);
+    }
 }
+
 
 
 /**
@@ -90,18 +107,28 @@ function findAlphabetIndex(contact) {
  * The updated contact list is then stored in the backend storage.
  * Finally, it renders the updated contact list and hides the contact overview section.
  */
-async function deleteContactWithoutConfirm() {
-    const contactName = document.getElementById('contact_overview_name').innerText.trim();
-    const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
-    const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
-    if (indexToDelete !== -1) {
-        contactList.splice(indexToDelete, 1);
-        console.log('Contact deleted successfully.');
-    }
-    await setItem('contactList', JSON.stringify(contactList));
-    renderContactList();
-    document.getElementById('contact_overview').style.transform = 'translateX(200%)';
-}
+// async function deleteContactWithoutConfirm(contactId) {
+//     try {
+//         const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
+//             method: 'DELETE',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`Fehler beim Löschen des Kontakts: ${response.statusText}`);
+//         }
+
+//         console.log('Kontakt erfolgreich gelöscht.');
+//         renderContactList(); // Aktualisiere die Liste im UI
+//     } catch (error) {
+//         console.error('Fehler beim Löschen des Kontakts:', error);
+//         alert('Es gab einen Fehler beim Löschen des Kontakts.');
+//     }
+// }
+
+
 
 
 /**
@@ -113,7 +140,7 @@ async function deleteContactWithoutConfirm() {
  * @param {Event} event - The form submission event.
  * @returns {Promise<void>} A Promise that resolves after adding or updating the contact.
  */
-async function handleSubmit() {
+async function handleSubmit(contactId) {
     const cancelButton = document.getElementById("contact_cancel_button");
     const saveButton = document.getElementById("contact_save_button");
     const editButton = document.getElementById("contact_edit_button");
@@ -124,7 +151,7 @@ async function handleSubmit() {
         await addToContacts();
         showSuccessButton();
     } else if (event.submitter === editButton) {
-        await updateContact();
+        await updateContact(contactId);
         showSuccessButtonEdit();
     }
     cancelButton.disabled = false;

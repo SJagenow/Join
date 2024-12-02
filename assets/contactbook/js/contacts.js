@@ -20,12 +20,25 @@ async function initContactList() {
  * 
  * @param {Array} contactList - This variable receives the parsed JSON data from the backend.
  */
+// async function loadContactList() {
+//     try {
+//         // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
+//         contactList = JSON.parse(await getItem('contactList'));
+//     } catch (e) {
+//         // If an error occurs during parsing or retrieval, log the error to the console
+//         console.error('Loading error:', e);
+//     }
+// }
+
 async function loadContactList() {
     try {
-        // Attempt to parse the JSON data retrieved from the backend storage using 'getItem'
-        contactList = JSON.parse(await getItem('contactList'));
+        const response = await fetch('http://127.0.0.1:8000/api/contacts/');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        contactList = await response.json();
+        console.log(contactList); 
     } catch (e) {
-        // If an error occurs during parsing or retrieval, log the error to the console
         console.error('Loading error:', e);
     }
 }
@@ -42,21 +55,40 @@ async function loadContactList() {
  * @param {HTMLElement[]} divideContainers - An array of HTML elements representing containers for dividing sections.
  */
 function renderContactsToList() {
+    // Gruppiere Kontakte nach ihrem ersten Buchstaben
+    const groupedContacts = alphabet.reduce((acc, letter) => {
+        acc[letter] = contactList.filter(contact =>
+            contact.name && contact.name.charAt(0).toUpperCase() === letter
+        );
+        return acc;
+    }, {});
+
+  
     for (let i = 0; i < alphabet.length; i++) {
         const letter = alphabet[i];
-        const contactsStartingWithLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === letter);
+        const contactsStartingWithLetter = groupedContacts[letter] || [];
+        
         const namesContainer = document.getElementById(`contact_list_names${i}`);
         const alphabetContainer = document.getElementById(`contactlist_alphabet_sorting_container${i}`);
         const divideContainer = document.getElementById(`divide_container_${i}`);
+
+       
+        if (!namesContainer || !alphabetContainer || !divideContainer) {
+            console.warn(`Container für Buchstabe ${letter} nicht gefunden.`);
+            continue;
+        }
+
         if (contactsStartingWithLetter.length === 0) {
             namesContainer.style.display = 'none';
             alphabetContainer.style.display = 'none';
             divideContainer.style.display = 'none';
         } else {
+            
             renderIntoAlphabetContainer(namesContainer, alphabetContainer, contactsStartingWithLetter, i);
         }
     }
 }
+
 
 
 /**
@@ -68,12 +100,68 @@ function renderContactsToList() {
  * @param {number} alphabetIndex - Index of the corresponding alphabetical row.
  * @param {number} contactIndex - Index of the selected contact.
  */
-function openEditContact(alphabetIndex, contactIndex) {
-    const contact = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabet[alphabetIndex])[contactIndex];
+async function openEditContact(alphabetIndex, contactIndex) {
+    const alphabetLetter = alphabet[alphabetIndex];
+    const contactsForLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabetLetter);
+    const contact = contactsForLetter[contactIndex];
+
+    if (!contact) {
+        console.error('Kontakt nicht gefunden:', alphabetLetter, contactIndex);
+        return;
+    }
+
     showAddContactDialog();
     changeAddContactoverlay(contact);
-    getInitialsForOverlay();
+
+    const contactId = contact.id;
+
+    document.getElementById('contact_save_button').onclick = async function () {
+        const updatedContact = {
+            name: document.getElementById('contactlist_name_input').value.trim(),
+            mail: document.getElementById('contactlist_mail_input').value.trim(),
+            phone: document.getElementById('contactlist_phone_input').value.trim(),
+        };
+
+        try {
+           
+            await deleteContact(contactId); 
+
+            
+            const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedContact),
+            });
+
+            if (!response.ok) {
+                throw new Error('Fehler beim Aktualisieren des Kontakts');
+            }
+
+            const savedContact = await response.json(); 
+
+        
+            contactList.push(savedContact);
+
+            renderContactsToList();
+            closeAddContactDialog();
+            showSuccessButtonEdit();
+
+        } catch (error) {
+            console.error('Fehler beim Bearbeiten des Kontakts:', error);
+            alert('Es gab ein Problem beim Bearbeiten des Kontakts.');
+        }
+    };
 }
+
+
+
+
+
+
+
+
 
 
 /**
@@ -86,9 +174,11 @@ function openEditContact(alphabetIndex, contactIndex) {
  * Note: This function does not handle user confirmation for deletion or editing.
  * 
  * @returns {Promise<void>} A Promise that resolves once the contact is updated.
- */
-async function updateContact() {
-    deleteContactWithoutConfirm();
+ */let contactId = contact.id;
+async function updateContact(contactId) {
+
+    
+    await deleteContact(contactId);
     addToContacts();
     showSuccessButtonEdit();
 }
@@ -103,22 +193,68 @@ async function updateContact() {
 async function addToContacts() {
     let saveContactButton = document.getElementById('contact_save_button');
     saveContactButton.disabled = true;
-    let name = document.getElementById('contactlist_name_input');
-    let mail = document.getElementById('contactlist_mail_input');
-    let phone = document.getElementById('contactlist_phone_input');
+
+    let name = document.getElementById('contactlist_name_input').value.trim();
+    let mail = document.getElementById('contactlist_mail_input').value.trim();
+    let phone = document.getElementById('contactlist_phone_input').value.trim();
+
+    if (!name || !mail || !phone) {
+        alert('Bitte fülle alle Felder aus.');
+        saveContactButton.disabled = false;
+        return;
+    }
+
     let contact = {
-        "name": name.value,
-        "mail": mail.value,
-        "phone": phone.value
+        name: name,
+        mail: mail,
+        phone: phone,
     };
-    contactList.push(contact);
-    await setItem('contactList', JSON.stringify(contactList));
-    resetAddContactForm(name, mail, phone);
-    closeAddContactDialog();
-    renderContactList();
-    findAlphabetIndex(contact);
-    saveContactButton.disabled = false;
+
+    try {
+        saveContactButton.innerText = 'Speichern...';
+
+        const response = await fetch('http://127.0.0.1:8000/api/contacts/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(contact),
+        });
+
+        if (!response.ok) {
+            if (response.status === 400) {
+                const errorData = await response.json();
+                alert(`Fehler: ${errorData.message || 'Ungültige Eingaben'}`);
+            } else {
+                alert('Serverfehler beim Hinzufügen des Kontakts.');
+            }
+            throw new Error(`HTTP Fehler: ${response.status}`);
+        }
+
+        const newContact = await response.json();
+        contactList.push(newContact); 
+        
+        renderContactsToList();  // Diese Funktion rendert die Kontakte und gruppiert sie richtig.
+        resetAddContactForm();   
+        closeAddContactDialog(); 
+    } catch (error) {
+        console.error('Fehler:', error);
+        alert('Es gab einen Fehler beim Hinzufügen des Kontakts.');
+    } finally {
+        saveContactButton.disabled = false;
+        saveContactButton.innerText = 'Speichern';
+    }
 }
+
+
+function resetAddContactForm() {
+    document.getElementById('contactlist_name_input').value = '';
+    document.getElementById('contactlist_mail_input').value = '';
+    document.getElementById('contactlist_phone_input').value = '';
+}
+
+
+
 
 
 /**
@@ -141,23 +277,62 @@ function resetAddContactForm() {
  * After deletion, updates the 'contactList' item in the storage and re-renders the contact list.
  * Displays a success button for deleting the contact.
  */
-async function deleteContact() {
-    const contactName = document.getElementById('contact_overview_name').innerText.trim();
-    const contactMail = document.getElementById('contact_overview_mail').innerText.trim();
-    const indexToDelete = contactList.findIndex(contact => contact.name === contactName && contact.mail === contactMail);
-    if (indexToDelete !== -1) {
-        const confirmDelete = confirm('Are you sure you want to edit/delete this contact?');
-        if (confirmDelete) {
-            contactList.splice(indexToDelete, 1);
-        } else {
-            return;
-        }
-        await setItem('contactList', JSON.stringify(contactList));
-        renderContactList();
-        document.getElementById('contact_overview').style.transform = 'translateX(200%)';
+/**
+ * Deletes a contact using the provided ID and updates the UI.
+ * 
+ * @param {number} contactId - The ID of the contact to delete.
+ */
+/**
+ * Bestätigt, ob der Benutzer den Kontakt wirklich löschen möchte.
+ * Wenn ja, wird die Funktion zum Löschen des Kontakts aufgerufen.
+ * 
+ * @param {string} contactId - Die ID des zu löschenden Kontakts.
+ */
+// Funktion zum Bestätigen des Löschvorgangs
+async function confirmDeleteContact(contactId) {
+    const confirmDelete = confirm('Are you sure you want to delete this contact?');
+    if (confirmDelete) {
+        await deleteContact(contactId); 
+    } else {
+        console.log('Kontakt löschen abgebrochen.');
     }
-    showSuccessButtonDelete();
 }
+
+async function deleteContact(contactId) {
+    if (!contactId) {
+        console.error('Contact ID is missing.');
+        alert('Error: Cannot delete the contact without an ID.');
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, { 
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to delete the contact');
+        }
+
+        // Entferne den Kontakt aus der lokalen Liste
+        contactList = contactList.filter(contact => contact.id !== contactId);
+
+     
+        renderContactsToList();  
+        document.getElementById('contact_overview').style.transform = 'translateX(200%)';
+        showSuccessButtonDelete();
+        console.log('Kontakt erfolgreich gelöscht.');
+    } catch (error) {
+        console.error('Error while deleting the contact:', error);
+        alert('An error occurred while deleting the contact.');
+    }
+}
+
+
+
 
 
 /**

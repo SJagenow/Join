@@ -51,12 +51,14 @@
     <div id="dropdown_overlay" onclick="closeAddContactOptionsLowRes()">
         <div class="dropdown_options" id="dropdown_options" onclick="noClose(event)">
             <div class="marginL-24">
-                <div id="contactlist_edit_icon_container_options" onclick="openEditContactLowRes()">
+                <div id="contactlist_edit_icon_container_options" onclick="openEditContactLowRes(contactId)">
                     <span>Edit</span>
                 </div>
-                <div id="contactlist_delete_icon_container_options" onclick="deleteContact()">
+                <div id="contactlist_delete_icon_container_options" onclick="confirmDeleteContact(contactId)">
                     <span>Delete</span>
                 </div>
+               
+                
             </div>
         </div>
     </div>
