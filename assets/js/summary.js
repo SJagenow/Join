@@ -1,7 +1,8 @@
 async function initSummary() {
   await init();
-  await getTodosForBoard();
+  await getTodosForBoard();  // Hole Aufgaben vom Backend
   updateGreeting();
+  await getTaskCounts();  // Hole die Zähler vom Backend
   await renderNumbersOfTasks();
 }
 
@@ -12,8 +13,64 @@ let todo = [];
  * @returns {Promise} - A Promise that resolves with the retrieved todos.
  */
 async function getTodosForBoard() {
-    todo = JSON.parse(await getItem('tasks'));
+  try {
+    const response = await fetch('http://localhost:8000/api/tasks/'); // Deine API-URL für die Tasks
+    if (response.ok) {
+      todo = await response.json(); // Hole die Aufgaben vom Backend
+    } else {
+      console.error('Failed to fetch tasks');
+    }
+  } catch (error) {
+    console.error('Error fetching tasks:', error);
+  }
 }
+
+
+// Funktion zum Abrufen der Zählerdaten aus der API
+// Funktion zum Abrufen der Zählerdaten aus der API
+async function getTaskCounts() {
+  try {
+    const response = await fetch('http://localhost:8000/task-counts/');
+    if (response.ok) {
+      const data = await response.json();
+      updateTaskCounts(data);
+      updateNearestDueDate(data.next_due_date);  // Das nächste DueDate aus der API-Antwort holen
+    } else {
+      console.error('Failed to fetch task counts');
+    }
+  } catch (error) {
+    console.error('Error fetching task counts:', error);
+  }
+}
+
+function updateTaskCounts(data) {
+  // Zähler aktualisieren (wie bereits im bestehenden Code)
+  document.getElementById('task-counter-todo').textContent = data.todo_count || 0;
+  document.getElementById('task-counter-done').textContent = data.done_count || 0;
+  document.getElementById('task-counter-all').textContent = data.todo_count + data.done_count + data.in_progress_count || 0;
+  document.getElementById('urgent-counter').textContent = data.urgent_count || 0;
+  document.getElementById('task-counter-Inprogress').textContent = data.in_progress_count || 0;
+  document.getElementById('task-counter-awaiting').textContent = data.await_count || 0;
+}
+
+function updateNearestDueDate(nextDueDate) {
+  // Das nächste DueDate im DOM aktualisieren
+  const nearestDueDateContainer = document.getElementById('deadline-date');
+  
+  // Wenn kein nächstes DueDate gefunden wurde, zeigt eine Standardnachricht an
+  if (nextDueDate === 'No upcoming deadlines') {
+    nearestDueDateContainer.innerText = 'No upcoming deadlines';
+  } else {
+    nearestDueDateContainer.innerText = nextDueDate;  // Zeigt das Datum an
+  }
+}
+
+
+
+
+
+
+
 
 /**
  * Retrieves the current user's information from the local storage and updates the summary user name and header initials accordingly.

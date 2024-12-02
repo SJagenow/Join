@@ -206,22 +206,40 @@ function startOnClickOutsideEdit(i, j) {
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function editSubtaskEdit(i, j) {
+async function editSubtaskEdit(i, j) {
     const subtask = todo[j].subtasks[i];
-    subtask.splice(i, 1, document.getElementById(`single-subtask-txt-edit${i}`).innerHTML);
-    document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
-        <svg class="subtask-icons-single" onclick="focusSubtaskEdit(${i})">
-            <use href="assets/img/icons.svg#edit-pen"></use>
-        </svg>
-        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
-            <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
-        </svg>
-`;
+    subtask.task = document.getElementById(`single-subtask-txt-edit${i}`).innerHTML; // Aktualisiere den Text der Subtask
+
+    // API-Aufruf zum Aktualisieren der Subtask (falls du dies auch an das Backend senden möchtest)
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/subtasks/${subtask.id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                task: subtask.task,
+                done: subtask.done
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Fehler beim Aktualisieren der Subtask: ${response.status}`);
+        }
+
+        const updatedSubtask = await response.json();
+        // Aktualisiere die Subtask im Frontend
+        todo[j].subtasks[i] = updatedSubtask;
+    } catch (error) {
+        console.error('Fehler beim Bearbeiten der Subtask:', error);
+    }
+
+
     document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOnEdit(${i})`);
     document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOutEdit(${i})`);
     document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-on-focus');
-}
 
+}
 /**
  * Deletes a subtask from the todo item in the edit mode.
  * @param {number} i - The index of the subtask.
@@ -269,12 +287,15 @@ async function loadContactListEdit(i) {
         }
 
         contactList = await response.json();
+        console.log('Kontaktliste:', contactList);
+
         renderContactListForTaskEdit(i, contactList); 
         updateSelectedUsersEdit(contactList); 
     } catch (error) {
         console.error('Error loading contacts:', error);
     }
 }
+
 
 
 /**
@@ -367,7 +388,7 @@ function renderContactListForTaskEditHTML(contact, i, secondName, initials) {
 function selectContactEdit(i) {
     let get = document.getElementById(`add-task-assignet-checkbox-edit${i}`);
     let isChecked = get.querySelector('use').getAttribute('href') === 'assets/img/icons.svg#checkbox-checked-icon';
-    let user = contactList[i].name;
+    let user = contactList[i].name; // 'name' als String verwenden
 
     if (isChecked) {
         get.innerHTML = '<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>';
@@ -377,12 +398,18 @@ function selectContactEdit(i) {
         get.innerHTML = '<use href="assets/img/icons.svg#checkbox-checked-icon"></use>';
         document.getElementById(`task-contakt-edit${i}`).classList.add('dark-background');
         if (!selectedUsers.includes(user)) {
-            selectedUsers.push(user);
+            selectedUsers.push(user);  // Den Namen als String hinzufügen
         }
     }
     updateSelectedUsersEdit(i);
 }
 
+
+/**
+ * Updates the list of selected users and renders their initials.
+ * 
+ * @param {number} i - The index of the contact.
+ */
 /**
  * Updates the list of selected users and renders their initials.
  * 
@@ -391,18 +418,26 @@ function selectContactEdit(i) {
 function updateSelectedUsersEdit(i) {
     let contactsDiv = document.getElementById('contacts-div-edit');
     contactsDiv.innerHTML = '';
-    selectedUsers.forEach((selectedUser, index) => {
-        let nameParts = selectedUser.split(" ");
-        let initials = nameParts.map(part => part[0]).join('');
-        let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : '';
 
-        contactsDiv.innerHTML += /*html*/`
-            <div class="name-div selected-initials">
-                <span class="initials letter-${secondName}">${initials}</span>
-            </div>
-        `;
+    selectedUsers.forEach((selectedUser, index) => {
+        let userName = typeof selectedUser === 'string' ? selectedUser : selectedUser.name; // Extrahiere den Namen als String, wenn es ein Objekt ist
+        if (userName) {
+            let nameParts = userName.split(" ");
+            let initials = nameParts.map(part => part[0]).join('');
+            let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : '';
+
+            contactsDiv.innerHTML += /*html*/`
+                <div class="name-div selected-initials">
+                    <span class="initials letter-${secondName}">${initials}</span>
+                </div>
+            `;
+        } else {
+            console.error('selectedUser is not a valid string or object with a name:', selectedUser);
+        }
     });
 }
+
+
 
 /**
  * Edits a todo item.
@@ -436,6 +471,10 @@ function closeEditTodo() {
  * Initiates the creation of a new task by setting the category based on URL parameters,
  * displaying the overlay, and asynchronously creating the task.
  */
+/**
+ * Initiates the creation of a new task by setting the category based on URL parameters,
+ * displaying the overlay, and asynchronously creating the task.
+ */
 async function createTaskEdit(i) {
     typeLabelEdit();
     todo[i].title = document.getElementById('add-task-title-edit').value;
@@ -444,9 +483,26 @@ async function createTaskEdit(i) {
     todo[i].dueDate = document.getElementById('add-task-date-edit').value;
     todo[i].priority = currentPrio;
     todo[i].label = currentLabel;
-    upload();
-    closeEditTodo();
-    closeAddTaskOverlay();
-    closeDialog();
-    boardInit();
+
+    // Assuming there's a function for submitting the task after editing
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/todos/${todo[i].id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(todo[i])
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error updating task: ${response.status}`);
+        }
+
+        const updatedTask = await response.json();
+        todo[i] = updatedTask; // Update the todo item with the new details
+        closeEditTodo(); // Close the edit overlay after saving
+    } catch (error) {
+        console.error('Error updating task:', error);
+    }
 }
+

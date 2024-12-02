@@ -17,11 +17,21 @@ async function boardInit() {
     initAddTask();
 }
 
-/**
- * Retrieves the list of todos from storage for the board.
- * 
- * @returns {Promise<void>} A Promise that resolves when the todos are retrieved and logged.
- */
+// Fetch subtasks for a specific task
+async function getSubtasksForTask(taskId) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/subtasks/?task=${taskId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch subtasks');
+        }
+        const subtasks = await response.json();
+        return subtasks;
+    } catch (error) {
+        console.error('Error fetching subtasks:', error);
+    }
+}
+
+// Fetch todos and include subtasks
 async function getTodosForBoard() {
     try {
         const response = await fetch('http://127.0.0.1:8000/api/tasks/');
@@ -31,11 +41,19 @@ async function getTodosForBoard() {
         const taskList = await response.json();
         console.log('Fetched Tasks:', taskList);
         todo = taskList;
-        updateBoard();
+        
+        // Fetch subtasks for each task and attach to the task
+        for (let task of todo) {
+            const subtasks = await getSubtasksForTask(task.id);
+            task.subtasks = subtasks;
+        }
+        
+        updateBoard();  // Update board after fetching subtasks
     } catch (e) {
         console.error('Loading error:', e);
     }
 }
+
 
 
 
