@@ -150,8 +150,8 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     }
     let memberHtml = '';
     for (let i = 0; i < clean.contacts.length; i++) {
-        const member = clean.contacts[i]; // Hier ist `member` das gesamte Kontaktobjekt
-        const { profileinitials, secondName } = getInitials(member); // Nutzt die `name`-Eigenschaft des Objekts
+        const member = clean.contacts[i]; 
+        const { profileinitials, secondName } = getInitials(member); 
         memberHtml += `
             <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
         `;
