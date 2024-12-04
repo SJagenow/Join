@@ -34,6 +34,50 @@ function changePriorityEdit(prio) {
     }
 }
 
+async function saveTaskEdit(i) {
+    const task = todo[i]; 
+
+    if (!task) {
+        console.error('Task not found');
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${task.id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: task.title,
+                description: task.description,
+                dueDate: task.dueDate,
+                priority: task.priority,
+                category: task.label,
+                subtasks: task.subtasks,
+                contacts: task.contacts,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to update task: ${response.status}`);
+        }
+
+        const updatedTask = await response.json();
+        console.log('Updated task:', updatedTask);
+
+        // Update the task in the local 'todo' array
+        todo[i] = updatedTask;
+
+    } catch (error) {
+        console.error('Error updating task:', error);
+    }
+}
+
+
+
+
+
 /**
  * Sets the current label based on the value selected in the edit task form.
  */
@@ -405,11 +449,7 @@ function selectContactEdit(i) {
 }
 
 
-/**
- * Updates the list of selected users and renders their initials.
- * 
- * @param {number} i - The index of the contact.
- */
+
 /**
  * Updates the list of selected users and renders their initials.
  * 
@@ -467,42 +507,46 @@ function closeEditTodo() {
     document.getElementById('add-task-container-edit').classList.add('d-none');
 }
 
-/**
- * Initiates the creation of a new task by setting the category based on URL parameters,
- * displaying the overlay, and asynchronously creating the task.
- */
+
 /**
  * Initiates the creation of a new task by setting the category based on URL parameters,
  * displaying the overlay, and asynchronously creating the task.
  */
 async function createTaskEdit(i) {
     typeLabelEdit();
-    todo[i].title = document.getElementById('add-task-title-edit').value;
-    todo[i].description = document.getElementById('add-task-description-edit').value;
-    todo[i].contacts = selectedUsers;
-    todo[i].dueDate = document.getElementById('add-task-date-edit').value;
-    todo[i].priority = currentPrio;
-    todo[i].label = currentLabel;
+    
+    // Die Änderungen im Frontend-Objekt (todo) übernehmen
+    const taskData = {
+        title: todo[i].title,
+        description: todo[i].description,
+        priority: todo[i].priority,
+        category: todo[i].category,
+        label: todo[i].label,
+        dueDate: todo[i].dueDate, 
+        contacts: todo[i].contacts, 
+        subtasks: todo[i].subtasks, 
+    };
 
-    // Assuming there's a function for submitting the task after editing
+
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/todos/${todo[i].id}/`, {
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${todo[i].id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(todo[i])
+            body: JSON.stringify(taskData)  
         });
 
         if (!response.ok) {
             throw new Error(`Error updating task: ${response.status}`);
         }
 
-        const updatedTask = await response.json();
-        todo[i] = updatedTask; // Update the todo item with the new details
-        closeEditTodo(); // Close the edit overlay after saving
+        const updatedTask = await response.json();  // Antwort vom Backend
+        todo[i] = updatedTask;  // Aktualisiere das Frontend-Objekt (todo)
+        closeEditTodo();  // Schließe das Editieren im Frontend
     } catch (error) {
         console.error('Error updating task:', error);
     }
 }
+
 

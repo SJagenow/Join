@@ -18,6 +18,8 @@
     <script src="script.js"></script>
     <script src="./assets/js/board.js"></script>
     <script src="./assets/js/storage.js"></script>
+    <script src="./assets/js/Add_task_second_script.js"></script>
+    <script src="./assets/js/add_task.js"></script> 
     <script src="./assets/js/boardAddTask.js"></script>
     <script src="./assets/js/boardEdit.js"></script>
     <title>Document</title>
@@ -424,11 +426,13 @@
                     <div class="space-between add-task-submit-container-edit">
                         <div class="conditions-text-edit">This field is required</div>
                         <div class="add-task-buttons-div-edit">
-                            <button id="add-task-button-edit" class="parrent-button-dark" type="submit">Ok
+                            <button id="add-task-button-edit" class="parrent-button-dark" type="button" onclick="saveTaskEdit(i)">
+                                Ok
                                 <svg class="edit-submit">
                                     <use href="assets/img/icons.svg#hook-icon"></use>
                                 </svg>
                             </button>
+                            
                         </div>
 
                     </div>
@@ -437,8 +441,8 @@
         </div>
     </div>
     </div>
-    <script src="./assets/js/add_task.js"></script>
-    <script src="./assets/js/add_task_second_script.js"></script>
+
 </body>
+
 
 </html>

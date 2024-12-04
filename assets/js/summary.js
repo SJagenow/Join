@@ -30,7 +30,7 @@ async function getTodosForBoard() {
 // Funktion zum Abrufen der Zählerdaten aus der API
 async function getTaskCounts() {
   try {
-    const response = await fetch('http://localhost:8000/task-counts/');
+    const response = await fetch('http://localhost:8000/api/task-counts/');
     if (response.ok) {
       const data = await response.json();
       updateTaskCounts(data);

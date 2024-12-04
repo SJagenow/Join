@@ -17,21 +17,11 @@ async function boardInit() {
     initAddTask();
 }
 
-// Fetch subtasks for a specific task
-async function getSubtasksForTask(taskId) {
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/api/subtasks/?task=${taskId}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch subtasks');
-        }
-        const subtasks = await response.json();
-        return subtasks;
-    } catch (error) {
-        console.error('Error fetching subtasks:', error);
-    }
-}
-
-// Fetch todos and include subtasks
+/**
+ * Retrieves the list of todos from storage for the board.
+ * 
+ * @returns {Promise<void>} A Promise that resolves when the todos are retrieved and logged.
+ */
 async function getTodosForBoard() {
     try {
         const response = await fetch('http://127.0.0.1:8000/api/tasks/');
@@ -41,19 +31,11 @@ async function getTodosForBoard() {
         const taskList = await response.json();
         console.log('Fetched Tasks:', taskList);
         todo = taskList;
-        
-        // Fetch subtasks for each task and attach to the task
-        for (let task of todo) {
-            const subtasks = await getSubtasksForTask(task.id);
-            task.subtasks = subtasks;
-        }
-        
-        updateBoard();  // Update board after fetching subtasks
+        updateBoard();
     } catch (e) {
         console.error('Loading error:', e);
     }
 }
-
 
 
 
@@ -151,16 +133,6 @@ function getSubtaskDoneCounter(clean) {
     return { progressWidth, subTasksDone, subTasksTotal }; 
 }
 
-
-
-/**
- * Generates HTML markup for displaying a todo item.
- * @param {object} clean - The task object containing task details.
- * @param {number} progressWidth - The width of the progress bar.
- * @param {number} subTasksDone - The number of subtasks done.
- * @param {number} subTasksTotal - The total number of subtasks.
- * @returns {string} HTML markup representing the todo item.
- */
 /**
  * Generates HTML markup for displaying a todo item.
  * @param {object} clean - The task object containing task details.
@@ -377,14 +349,12 @@ async function renderMemberList(selectedTodo) {
         const member = selectedTodo.contacts[i];
         const { profileinitials, secondName } = getInitials(member);
         document.getElementById('board_member_content').innerHTML += `
-   <div class="task_name_container"> <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
-    
-    `;
+            <div class="task_name_container"> 
+                <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+            </div>
+        `;
     }
 }
-
-
-
 
 
 /**
@@ -394,6 +364,7 @@ async function renderMemberList(selectedTodo) {
  */
 function getInitials(contact) {
     if (!contact.name) {
+        console.log('No name for contact:', contact);
         return { profileinitials: '', secondName: '' }; 
     }
     const words = contact.name.split(" ");
@@ -402,14 +373,6 @@ function getInitials(contact) {
     const profileinitials = firstName + secondName;
     return { profileinitials, secondName };
 }
-
-
-
-
-
-
-
-
 
 
 /**
