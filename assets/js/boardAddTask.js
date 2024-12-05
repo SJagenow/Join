@@ -70,17 +70,29 @@ async function prioImg(priority, selectedTodoID) {
  * Renders the subtask dialog for the selected todo.
  * @param {object} selectedTodo - The selected todo object.
  */
+/**
+ * Render the subtasks inside the dialog for the selected todo item.
+ * @param {object} selectedTodo - The selected todo object.
+ */
 async function renderSubtaskDialog(selectedTodo) {
-    document.getElementById('subtaskContainer').innerHTML = '';
-    for (let i = 0; i < selectedTodo.subtasks.length; i++) {
-        const subtask = selectedTodo.subtasks[i].task;
-        if (selectedTodo.subtasks[i].done == false) {
-            document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, ${selectedTodo.id})" src="./assets/img/checkbox.png" alt=""> ${subtask} </div>`;
-        } else {
-            document.getElementById('subtaskContainer').innerHTML += `  <div class="subbtask_subspan"><img id="checkBoxDialogImg${i}" onclick="checkBoxSwitchImg(${i}, ${selectedTodo.id})" src="./assets/img/checkedButtondialog.png" alt=""> ${subtask} </div>`;
-        }
+    let subtaskContainer = document.getElementById('subtaskContainer');
+    subtaskContainer.innerHTML = ''; // Clear previous content
+
+    if (selectedTodo.subtasks && selectedTodo.subtasks.length > 0) {
+        selectedTodo.subtasks.forEach(subtask => {
+            const subtaskStatus = subtask.done ? 'done' : 'not-done';
+            subtaskContainer.innerHTML += `
+                <div class="subtask-item ${subtaskStatus}">
+                    <input type="checkbox" ${subtask.done ? 'checked' : ''} disabled />
+                    <span>${subtask.title}</span>
+                </div>
+            `;
+        });
+    } else {
+        subtaskContainer.innerHTML = '<div>No subtasks available.</div>';
     }
 }
+
 
 /**
  * Switches the checkbox image and updates the todo's subtask status.
