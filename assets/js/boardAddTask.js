@@ -37,18 +37,36 @@ function closeAddTaskOverlay() {
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
+
 /**
  * Deletes a todo item from the list.
  * @param {Event} event - The event object.
  * @param {number} ID - The ID of the todo item to be deleted.
  */
-function deleteTodo(event, ID) {
+async function deleteTodo(event, ID) {
     event.stopPropagation();
-    todo.splice(ID, 1);
-    upload();
-    closeDialog();
-    updateBoard();
+    try {
+        // Stelle sicher, dass die Task-ID korrekt in die URL eingefügt wird
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${ID}/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            console.log('Task deleted successfully');
+            updateBoard();  // Aktualisiere das Board nach dem Löschen
+            closeDialog();  // Schließe das Dialogfenster
+        } else {
+            console.error('Failed to delete task');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
+
+
 
 /**
  * Sets the priority image based on the priority value of the selected todo.
@@ -58,11 +76,11 @@ function deleteTodo(event, ID) {
 async function prioImg(priority, selectedTodoID) {
     document.getElementById(`Image`).innerHTML = '';
     if (priority === 'urgent') {
-        document.getElementById(`Image`).src = "../assets/img/icons/Heightprio.png";
+        document.getElementById(`Image`).src = "./assets/img/icons/Heightprio.png";
     } else if (priority === 'medium') {
-        document.getElementById(`Image`).src = "../assets/img/icons/Mediumprio.png";
+        document.getElementById(`Image`).src = "./assets/img/icons/Mediumprio.png";
     } else if (priority === 'low') {
-        document.getElementById(`Image`).src = "../assets/img/icons/Lowprio.png";
+        document.getElementById(`Image`).src = "./assets/img/icons/Lowprio.png";
     }
 }
 
