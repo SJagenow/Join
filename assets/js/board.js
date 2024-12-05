@@ -148,13 +148,27 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     if (descriptionWords.length > 5) {
         truncatedDescription += '...';
     }
+    
+    // Für jedes Mitglied in 'contacts' den Namen anzeigen
     let memberHtml = '';
-    for (let i = 0; i < clean.contacts.length; i++) {
-        const member = clean.contacts[i]; 
-        const { profileinitials, secondName } = getInitials(member); 
-        memberHtml += `
-            <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
-        `;
+    if (clean.contacts && clean.contacts.length > 0) {
+        // Gehe alle Kontakt-IDs durch
+        for (let i = 0; i < clean.contacts.length; i++) {
+            const contactId = clean.contacts[i];
+
+            // Hier holst du die Kontaktdetails des jeweiligen Kontakts aus 'contacts_details'
+            const contact = clean.contacts_details.find(contact => contact.id === contactId);
+
+            if (contact) {
+                const { profileinitials, secondName } = getInitials(contact); // hole Initialen
+                memberHtml += `
+                    <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+                   
+                `;
+            }
+        }
+    } else {
+        memberHtml = '<div>No members assigned.</div>'; // Falls keine Mitglieder zugewiesen sind
     }
     
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
@@ -175,7 +189,7 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     </div>
     <div class ="space-between w100p">
         <div class="member_flex" id="members_${todoId}">
-            ${memberHtml}
+            ${memberHtml} <!-- Die Mitglieder (inkl. Namen) werden hier angezeigt -->
         </div>
         <div class="prio_icon_containers">
             <svg width="22" height="20">
@@ -185,6 +199,8 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     </div>
 </div>`;
 }
+
+
 
 
 /**
@@ -345,16 +361,30 @@ async function returnDialog(selectedTodo, selectedTodoID) {
 
 async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
-    for (let i = 0; i < selectedTodo.contacts.length; i++) {
-        const member = selectedTodo.contacts[i];
-        const { profileinitials, secondName } = getInitials(member);
-        document.getElementById('board_member_content').innerHTML += `
-            <div class="task_name_container"> 
-                <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
-            </div>
-        `;
+
+    if (selectedTodo.contacts && selectedTodo.contacts.length > 0) {
+        // Gehe alle Kontakt-IDs durch
+        for (let i = 0; i < selectedTodo.contacts.length; i++) {
+            const contactId = selectedTodo.contacts[i];
+
+            // Suche den Kontakt in den contacts_details
+            const contact = selectedTodo.contacts_details.find(contact => contact.id === contactId);
+
+            if (contact) {
+                const { profileinitials, secondName } = getInitials(contact); // hole Initialen
+                document.getElementById('board_member_content').innerHTML += `
+                    <div class="task_name_container"> 
+                        <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
+                        <div>${contact.name}</div> <!-- Anzeige des Namens -->
+                    </div>
+                `;
+            }
+        }
+    } else {
+        document.getElementById('board_member_content').innerHTML = '<div>No members assigned.</div>';
     }
 }
+
 
 
 /**

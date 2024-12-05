@@ -441,11 +441,6 @@ async function createTask(category) {
 }
 
 
-
-
-
-
-
 async function addTaskToBackend(task) {
     console.log("Daten an das Backend:", task);
     try {
