@@ -43,7 +43,6 @@ async function loadContactList() {
     }
 }
 
-
 /**
  * Renders contacts into their corresponding alphabetical rows within the contact list.
  * If no contacts start with a certain letter, hides the corresponding containers.
@@ -62,7 +61,6 @@ function renderContactsToList() {
         );
         return acc;
     }, {});
-
   
     for (let i = 0; i < alphabet.length; i++) {
         const letter = alphabet[i];
@@ -89,8 +87,6 @@ function renderContactsToList() {
     }
 }
 
-
-
 /**
  * Opens the edit contact dialog.
  * This function is triggered when the user wants to edit a contact from the contact list.
@@ -102,20 +98,33 @@ function renderContactsToList() {
  */
 async function openEditContact(alphabetIndex, contactIndex) {
     const alphabetLetter = alphabet[alphabetIndex];
-    const contactsForLetter = contactList.filter(contact => contact.name.charAt(0).toUpperCase() === alphabetLetter);
-    const contact = contactsForLetter[contactIndex];
+    console.log("Alphabet Letter:", alphabetLetter);
 
-    if (!contact) {
+ 
+    const contactsForLetter = contactList.filter(contact => 
+        contact.name && contact.name.charAt(0).toUpperCase() === alphabetLetter
+    );
+    console.log("Contacts for Letter:", contactsForLetter);
+
+
+    const selectedContact = contactsForLetter[contactIndex];
+    console.log("Selected Contact:", selectedContact);
+
+    if (!selectedContact) {
         console.error('Kontakt nicht gefunden:', alphabetLetter, contactIndex);
-        return;
+        alert("Kontakt konnte nicht gefunden werden.");
+        return; 
     }
 
-    showAddContactDialog();
-    changeAddContactoverlay(contact);
 
-    const contactId = contact.id;
+    showAddContactDialog();
+    changeAddContactoverlay(selectedContact);
+
 
     document.getElementById('contact_save_button').onclick = async function () {
+        const contactId = selectedContact.id; 
+        console.log("Contact ID:", contactId);
+
         const updatedContact = {
             name: document.getElementById('contactlist_name_input').value.trim(),
             mail: document.getElementById('contactlist_mail_input').value.trim(),
@@ -123,10 +132,7 @@ async function openEditContact(alphabetIndex, contactIndex) {
         };
 
         try {
-           
-            await deleteContact(contactId); 
-
-            
+       
             const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
                 method: 'PUT',
                 headers: {
@@ -139,10 +145,12 @@ async function openEditContact(alphabetIndex, contactIndex) {
                 throw new Error('Fehler beim Aktualisieren des Kontakts');
             }
 
-            const savedContact = await response.json(); 
+            const savedContact = await response.json();
+            console.log("Saved Contact:", savedContact);
 
-        
-            contactList.push(savedContact);
+            contactList = contactList.map(contact =>
+                contact.id === contactId ? savedContact : contact
+            );
 
             renderContactsToList();
             closeAddContactDialog();
@@ -154,15 +162,6 @@ async function openEditContact(alphabetIndex, contactIndex) {
         }
     };
 }
-
-
-
-
-
-
-
-
-
 
 /**
  * Updates a contact after editing.
@@ -234,7 +233,7 @@ async function addToContacts() {
         const newContact = await response.json();
         contactList.push(newContact); 
         
-        renderContactsToList();  // Diese Funktion rendert die Kontakte und gruppiert sie richtig.
+        renderContactsToList(); 
         resetAddContactForm();   
         closeAddContactDialog(); 
     } catch (error) {
@@ -246,16 +245,11 @@ async function addToContacts() {
     }
 }
 
-
 function resetAddContactForm() {
     document.getElementById('contactlist_name_input').value = '';
     document.getElementById('contactlist_mail_input').value = '';
     document.getElementById('contactlist_phone_input').value = '';
 }
-
-
-
-
 
 /**
  * This function is just to reset the inputfields of the 'add contact' overlay.
@@ -270,7 +264,6 @@ function resetAddContactForm() {
     document.getElementById('contactlist_phone_input').value = '';
 }
 
-
 /**
  * Deletes a contact from the 'contactList' array.
  * Prompts the user for confirmation before deleting.
@@ -282,12 +275,7 @@ function resetAddContactForm() {
  * 
  * @param {number} contactId - The ID of the contact to delete.
  */
-/**
- * Bestätigt, ob der Benutzer den Kontakt wirklich löschen möchte.
- * Wenn ja, wird die Funktion zum Löschen des Kontakts aufgerufen.
- * 
- * @param {string} contactId - Die ID des zu löschenden Kontakts.
- */
+
 // Funktion zum Bestätigen des Löschvorgangs
 async function confirmDeleteContact(contactId) {
     const confirmDelete = confirm('Are you sure you want to delete this contact?');
@@ -299,41 +287,26 @@ async function confirmDeleteContact(contactId) {
 }
 
 async function deleteContact(contactId) {
-    if (!contactId) {
-        console.error('Contact ID is missing.');
-        alert('Error: Cannot delete the contact without an ID.');
-        return;
-    }
-
     try {
         const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, { 
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
         });
 
         if (!response.ok) {
             throw new Error('Failed to delete the contact');
         }
 
-        // Entferne den Kontakt aus der lokalen Liste
+        // Entferne den Kontakt aus der Liste
         contactList = contactList.filter(contact => contact.id !== contactId);
 
-     
-        renderContactsToList();  
-        document.getElementById('contact_overview').style.transform = 'translateX(200%)';
-        showSuccessButtonDelete();
-        console.log('Kontakt erfolgreich gelöscht.');
+        // Rende die Kontaktliste neu
+        renderContactsToList();
+        console.log(`Kontakt mit ID ${contactId} erfolgreich gelöscht.`);
     } catch (error) {
-        console.error('Error while deleting the contact:', error);
-        alert('An error occurred while deleting the contact.');
+        console.error('Fehler beim Löschen:', error);
+        alert('Es gab ein Problem beim Löschen des Kontakts.');
     }
 }
-
-
-
-
 
 /**
  * Asynchronously opens the edit contact dialog in low-resolution screens.

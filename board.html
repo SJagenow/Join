@@ -290,7 +290,7 @@
             <div id="main-div-edit" class="main-div-edit overflow" onclick="closeFunction()">
                 <h1 class="add-task-title-edit">Add Task</h1>
                 <form id="add-task-form-edit" action="" class="ad-task-form column-space-between"
-                    onsubmit="createTaskEdit(); return false">
+                    onsubmit="createTaskEdit(i); return false">
                     <div class="gap48-edit">
                         <div class="add-task-input-div-edit">
                             <div class="column add-task-input-div-edit">
@@ -330,7 +330,7 @@
                             <div class="column add-task-input-div-edit">
                                 <label class="form-input-titel-edit asterisk-edit" for="add-task-date">Due date</label>
                                 <input id="add-task-date-edit" class="add-task-input-edit mb28" type="date"
-                                    name="Due date" min="" required placeholder="dd//mm//yyyy">
+                                    name="Due date" min="" required placeholder="yyyy//mm//dd">
                             </div>
                             <div class="column add-task-input-div-edit">
                                 <h2 class="form-input-titel-edit">Prio</h2>
@@ -393,9 +393,13 @@
                             </div>
                             <div class="column add-task-input-div-edit" onclick="doNotClose(event)">
                                 <label class="form-input-titel-edit" for="add-task-subtasks-edit">Subtasks</label>
-                                <input id="add-task-subtasks-edit" class="add-task-input-edit"
-                                    onkeydown="handleEnterKey(event)" onclick="openSubtaskEdit()" type="text"
-                                    minlength="3" name="Subtasks" placeholder="Add new subtask">
+                                <input id="add-task-subtasks-edit" class="add-task-input-edit" 
+                                 onkeydown="handleEnterKey(event)" 
+                                 onclick="openSubtaskEdit(31)" 
+                                 type="text" minlength="3" 
+                                 name="Subtasks" 
+                                 placeholder="Add new subtask">
+
                                 <div id="subbtask-input-icon-edit">
                                     <button type="button" id="add-subtask-button-edit" class="subtask-button-edit"
                                         formnovalidate onclick="openSubtaskEdit()">
@@ -406,17 +410,15 @@
                                 </div>
                                 <ul id="subtask-container-edit">
                                     <li class="subbtask" contenteditable="true">
-                                        <span>das ist ein subtask</span>
+                                        <span></span>
                                     </li>
                                     <li class="subbtask" contenteditable="true">
-                                        das hier ist auch ein subtask wer weis denn sowas moin moin
+                            
                                         <div>
-                                            <svg class="subtask-icons">
-                                                <use href="assets/img/icons.svg#x-icon"></use>
-                                            </svg>
-                                            <svg class="subtask-icons">
-                                                <use href="assets/img/icons.svg#hook-icon"></use>
-                                            </svg>
+                                    </li>
+                                </ul>
+                                        <div>
+                                          
                                         </div>
                                     </li>
                                 </ul>
@@ -426,7 +428,7 @@
                     <div class="space-between add-task-submit-container-edit">
                         <div class="conditions-text-edit">This field is required</div>
                         <div class="add-task-buttons-div-edit">
-                            <button id="add-task-button-edit" class="parrent-button-dark" type="button" onclick="saveTaskEdit(i)">
+                            <button id="add-task-button-edit" class="parrent-button-dark" type="button">
                                 Ok
                                 <svg class="edit-submit">
                                     <use href="assets/img/icons.svg#hook-icon"></use>

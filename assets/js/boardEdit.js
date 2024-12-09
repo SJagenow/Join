@@ -1,4 +1,4 @@
-
+let currentTaskId;
 /**
  * Changes the priority of the todo being edited and updates the UI accordingly.
  * @param {string} prio - The priority value ('urgent', 'medium', or 'low').
@@ -34,49 +34,42 @@ function changePriorityEdit(prio) {
     }
 }
 
-async function saveTaskEdit(i) {
-    const task = todo[i]; 
-
-    if (!task) {
-        console.error('Task not found');
-        return;
+function getPriorityFromForm() {
+    const priorityElement = document.querySelector('input[name="task-priority-edit"]:checked');
+    if (!priorityElement) {
+        console.error('Keine Priorität ausgewählt!');
+        return null;
     }
-
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${task.id}/`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                title: task.title,
-                description: task.description,
-                dueDate: task.dueDate,
-                priority: task.priority,
-                category: task.label,
-                subtasks: task.subtasks,
-                contacts: task.contacts,
-            }),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to update task: ${response.status}`);
-        }
-
-        const updatedTask = await response.json();
-        console.log('Updated task:', updatedTask);
-
-        // Update the task in the local 'todo' array
-        todo[i] = updatedTask;
-
-    } catch (error) {
-        console.error('Error updating task:', error);
-    }
+    return priorityElement.value;
 }
 
+function getUpdatedSubtasks(taskId) {
+    const task = getTaskById(taskId);
+    if (!task) {
+        console.error('Task nicht gefunden!');
+        return [];
+    }
 
+    const subtaskContainer = document.getElementById('subtask-container-edit');
+    if (!subtaskContainer) {
+        console.error('Subtask-Container nicht gefunden!');
+        return [];
+    }
 
+    const subtasks = [];
+    subtaskContainer.querySelectorAll('li.subbtask').forEach((subtaskElement, index) => {
+        const titleElement = subtaskElement.querySelector('span[contenteditable="true"]');
+        const title = titleElement ? titleElement.textContent.trim() : '';
+        if (title) {
+            subtasks.push({
+                title: title,
+                done: task.subtasks[index]?.done || false,
+            });
+        }
+    });
 
+    return subtasks;
+}
 
 /**
  * Sets the current label based on the value selected in the edit task form.
@@ -96,43 +89,83 @@ function selectLabelEdit(label) {
     closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
 }
 
+
 /**
  * Renders the subtask edit section in the task edit form.
  * @param {number} j - The index of the todo item.
  */
-function renderSubtaskEdit(j) {
-    let subtasks = document.getElementById('subtask-container-edit');
-    subtasks.innerHTML = '';
-    for (let i = 0; i < todo[j].subtasks.length; i++) {
-        const subtask = todo[j].subtasks[i].task;
-        subtasks.innerHTML += /*html*/`
-        <li id="single-subtask-edit${i}" class="subbtask subbtask-hover" onmouseenter="subtaskEditButtonsOnEdit(${i})" onmouseleave="subtaskEditButtonsOutEdit(${i})" onclick="focusSubtaskEdit(${i}, ${j})">
-            <span id="single-subtask-txt-edit${i}" contenteditable="true" class="subbtask-span" value="${subtask}">${subtask}</span>
-            <div id="subtask-edit-buttons-edit${i}" class="subtask-icons-single-div" onclick="doNotClose(event)"></div>
-        </li>
-    `;
+function renderSubtaskEdit(taskId) {
+    const task = todo.find(t => t.id === taskId);
+    const subtaskContainer = document.getElementById('subtask-container-edit');
+
+    if (task && task.subtasks) {
+        subtaskContainer.innerHTML = '';
+
+        task.subtasks.forEach((subtask, index) => {
+            const subtaskElement = document.createElement('li');
+            subtaskElement.classList.add('subbtask');
+            subtaskElement.innerHTML = /*html*/`
+                <span contenteditable="true" onblur="saveSubtaskTitle(${taskId}, ${index}, this)">${subtask.title}</span>
+                <div id="subtask-edit-buttons-edit${index}" class="subtask-edit-buttons">
+                    <svg class="subtask-icons-single" onclick="editSubtask(${taskId}, ${index})">
+                        <use href="assets/img/icons.svg#edit-pen"></use>
+                    </svg>
+                    <div class="mini-seperator"></div>
+                    <svg class="subtask-icons-single" onclick="deleteSubtask(${subtask.id}, ${taskId})">
+                        <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+                    </svg>
+                </div>
+            `;
+            subtaskContainer.appendChild(subtaskElement);
+        });
     }
 }
 
-/**
- * Adds a subtask to the todo item being edited.
- * @param {number} i - The index of the todo item.
- */
-function addSubtaskEdit(i) {
-    let subtaskInput = document.getElementById('add-task-subtasks-edit');
-    let subtaskInputArray = {
-        'task': subtaskInput.value,
-        'done': false,
-    };
-    if (subtaskInput.value.length >= 3) {
-        todo[i].subtasks.push(subtaskInputArray);
-        renderSubtaskEdit(i);
-        subtaskInput.value = "";
-        closeSubtask();
-    } else {
-        subtaskInput.reportValidity();
+function saveSubtaskTitle(taskId, subtaskIndex, element) {
+    const task = todo.find(t => t.id === taskId);
+    if (task && task.subtasks && task.subtasks[subtaskIndex]) {
+        task.subtasks[subtaskIndex].title = element.textContent;
+        console.log('Subtask title updated:', task.subtasks[subtaskIndex]);
+
     }
 }
+
+
+async function loadTodos() {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/');
+        if (!response.ok) throw new Error('Fehler beim Laden der Aufgaben');
+        todo = await response.json();
+        console.log('Todos erfolgreich geladen:', todo);
+    } catch (error) {
+        console.error('Fehler beim Laden der Todos:', error);
+    }
+}
+
+
+function addSubtask(taskId) {
+    const subtaskInput = document.getElementById('add-task-subtasks-edit');
+    const subtaskTitle = subtaskInput.value.trim();
+    if (!subtaskTitle) {
+        console.error('Subtask-Titel ist leer');
+        return;
+    }
+    const task = todo.find(t => t.id === taskId);
+    if (task) {
+        const newSubtask = {
+            title: subtaskTitle,
+            done: false
+        };
+        task.subtasks.push(newSubtask);
+        subtasksArray.push(newSubtask); 
+        renderSubtaskEdit(taskId);  
+        subtaskInput.value = '';  
+    } else {
+        console.error('Aufgabe nicht gefunden');
+    }
+}
+
+
 
 /**
  * Opens the subtask edit dialog for the specified todo item.
@@ -144,7 +177,7 @@ function openSubtaskEdit(i) {
             <use href="assets/img/icons.svg#x-icon"></use>
         </svg>
         <div class="mini-seperator"></div>
-        <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate onclick="addSubtaskEdit(${i})">
+        <button type="button" id="add-subtask-button-edit" class="subtask-button-edit" formnovalidate onclick="addSubtask(${i})">
             <svg class="subtask-icons">
                 <use href="assets/img/icons.svg#hook-icon"></use>
             </svg>
@@ -179,7 +212,7 @@ function subtaskEditButtonsOnEdit(i, j) {
             <use href="assets/img/icons.svg#edit-pen"></use>
         </svg>
         <div class="mini-seperator"></div>
-        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="deleteSubtask(subtask.id, taskId)">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
     `;
@@ -204,7 +237,7 @@ function focusSubtaskEdit(i, j) {
     document.getElementById(`single-subtask-edit${i}`).removeAttribute('onmouseleave');
     document.getElementById('body').setAttribute('onclick', `closeFunctionEdit(); startOnClickOutsideEdit(${i}, ${j})`)
     document.getElementById(`subtask-edit-buttons-edit${i}`).innerHTML = /*html*/`
-        <svg class="subtask-icons-single" onclick="deleteSubtaskEdit(${i}, ${j})">
+        <svg class="subtask-icons-single" onclick="deleteSubtask(subtask.id, taskId)">
             <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
         </svg>
         <div class="mini-seperator"></div>
@@ -250,50 +283,124 @@ function startOnClickOutsideEdit(i, j) {
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-async function editSubtaskEdit(i, j) {
-    const subtask = todo[j].subtasks[i];
-    subtask.task = document.getElementById(`single-subtask-txt-edit${i}`).innerHTML; // Aktualisiere den Text der Subtask
+function editTask(taskId) {
+    const task = todo[taskId];
+    if (!task) {
+        console.error('Task nicht gefunden!');
+        return;
+    }
 
-    // API-Aufruf zum Aktualisieren der Subtask (falls du dies auch an das Backend senden möchtest)
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/api/subtasks/${subtask.id}/`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                task: subtask.task,
-                done: subtask.done
-            })
-        });
+    document.getElementById('add-task-title-edit').value = task.title;
+    document.getElementById('add-task-description-edit').value = task.description;
+    document.getElementById('add-task-date-edit').value = task.dueDate;
+    document.getElementById('add-task-priority-edit').value = task.priority;
 
-        if (!response.ok) {
-            throw new Error(`Fehler beim Aktualisieren der Subtask: ${response.status}`);
-        }
 
-        const updatedSubtask = await response.json();
-        // Aktualisiere die Subtask im Frontend
-        todo[j].subtasks[i] = updatedSubtask;
-    } catch (error) {
-        console.error('Fehler beim Bearbeiten der Subtask:', error);
+    if (task.subtasks && task.subtasks.length > 0) {
+        console.log(task.subtasks);
+    } else {
+        console.log('Keine Subtasks für diesen Task.');
     }
 
 
-    document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseenter', `subtaskEditButtonsOnEdit(${i})`);
-    document.getElementById(`single-subtask-edit${i}`).setAttribute('onmouseleave', `subtaskEditButtonsOutEdit(${i})`);
-    document.getElementById(`single-subtask-edit${i}`).classList.remove('subbtask-on-focus');
-
+    document.getElementById('add-task-button-edit').onclick = function() {
+        saveTaskEdit(taskId);
+    };
 }
+
+
 /**
  * Deletes a subtask from the todo item in the edit mode.
  * @param {number} i - The index of the subtask.
  * @param {number} j - The index of the todo item.
  */
-function deleteSubtaskEdit(i, j) {
-    todo[j].subtasks.splice(i, 1);
-    upload();
-    renderSubtaskEdit(j);
+function deleteSubtask(subtaskId, taskId) {
+    const task = todo.find(t => t.id === taskId);
+    if (task) {
+   
+        task.subtasks = task.subtasks.filter(subtask => subtask.id !== subtaskId);
+        renderSubtaskEdit(taskId);  
+    } else {
+        console.error('Aufgabe nicht gefunden');
+    }
 }
+
+
+async function saveTaskEdit(taskId) {
+    let title = document.getElementById('add-task-title-edit').value.trim();
+    let description = document.getElementById('add-task-description-edit').value.trim();
+    let dueDate = document.getElementById('add-task-date-edit').value.trim();
+
+ 
+    if (!title || !description || !dueDate) {
+        console.error('Ein oder mehrere Felder sind leer oder ungültig!');
+        return;
+    }
+
+    let task = {
+        "title": title,
+        "description": description,
+        "contacts": selectedUsers.filter(contactId => contactId),
+        "dueDate": dueDate,  
+        "priority": currentPrio,
+        "label": currentLabel,
+        // "subtasks": subtasksArray,
+    };
+
+
+    console.log('selectedUsers:', selectedUsers);
+    console.log('subtasksArray:', subtasksArray);
+    
+    
+      if (selectedUsers.length > 0) {
+  
+        const uniqueContacts = [...new Set(selectedUsers)].filter(contact => contact !== undefined && contact !== null);
+
+        task.contacts = uniqueContacts;
+    } else {
+        console.log('Keine Kontakte ausgewählt.');
+    }
+
+ 
+    if (subtasksArray && subtasksArray.length > 0) {
+        task.subtasks = subtasksArray.map(subtask => ({
+            title: subtask.title,
+            done: subtask.done
+        }));
+    } else {
+        console.log('Keine Subtasks hinzugefügt oder bearbeitet.');
+    }
+
+
+    console.log('Finales Task-Objekt vor dem Senden:', task);
+
+    await updateTaskInBackend(taskId, task);
+}
+
+async function updateTaskInBackend(taskId, task) {
+    console.log("Daten an das Backend zum Update:", task);
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(task)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Fehlerdetails:', errorData);
+            throw new Error('Fehler beim Aktualisieren der Aufgabe');
+        }
+
+        const result = await response.json();
+        console.log('Task erfolgreich aktualisiert:', result);
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Aufgabe:', error);
+    }
+}
+
 
 /**
  * Clears the task edit form by resetting checkboxes, contact list, priority, and subtasks array.
@@ -311,11 +418,28 @@ function clearTaskEdit() {
         }
     }
     contactsDiv.innerHTML = '';
-    changePriority('medium');
+    changePriorityEdit('medium');
     subtasksArray = [];
     contactList = [];
     selectedUsers = [];
     initAddTask();
+}
+
+async function fetchTasks() {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/'); // Beispiel-API
+        if (!response.ok) {
+            throw new Error('Failed to fetch tasks');
+        }
+        
+        const tasks = await response.json(); // Das Array der Tasks, das vom Backend zurückgegeben wird
+        todo = tasks; // Das todo-Array wird mit den fetchten Tasks überschrieben
+        
+        console.log('Fetched tasks:', todo); // Ausgabe der Tasks im todo-Array
+
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+    }
 }
 
 /**
@@ -323,40 +447,146 @@ function clearTaskEdit() {
  * 
  * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
  */
-async function loadContactListEdit(i) {
+// Beispiel für loadContactListEdit, um sicherzustellen, dass die Kontakte vorhanden sind
+// Diese Funktion lädt die Kontaktdetails vom Backend
+async function loadContactListEdit(taskId) {
     try {
+        // Hole alle Kontakte aus dem Backend
         const response = await fetch('http://127.0.0.1:8000/api/contacts/');
+
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            throw new Error('Fehler beim Laden der Kontakte');
         }
 
-        contactList = await response.json();
-        console.log('Kontaktliste:', contactList);
-
-        renderContactListForTaskEdit(i, contactList); 
-        updateSelectedUsersEdit(contactList); 
-    } catch (error) {
-        console.error('Error loading contacts:', error);
+        const contactList = await response.json();
+        renderContactListForTaskEdit(contactList, taskId);  // Übergib die Kontaktliste an die Render-Funktion
+    } catch (e) {
+        console.error('Fehler beim Laden der Kontakte:', e);
     }
 }
 
 
 
+let selectedContactIds = [];  // Array, das die IDs der ausgewählten Kontakte speichert
+
+function selectContactEdit(contactIndex, taskId) {
+    const task = todo.find(t => t.id === taskId); // Aufgabe basierend auf ID finden
+
+    if (!task) {
+        console.error(`Aufgabe mit der ID ${taskId} nicht gefunden.`);
+        return;
+    }
+
+    const selectedContact = contactList[contactIndex];
+    const isAlreadyAssigned = task.contacts.some(contact => contact.id === selectedContact.id);
+
+    if (isAlreadyAssigned) {
+        // Kontakt entfernen (nur ID wird entfernt)
+        task.contacts = task.contacts.filter(contact => contact.id !== selectedContact.id);
+    } else {
+        // Kontakt hinzufügen (nur ID wird hinzugefügt)
+        task.contacts.push(selectedContact.id);
+    }
+
+    // UI aktualisieren
+    renderContactListForTaskEdit(contactList, taskId);
+}
+
+
+function selectContactEdit(contactIndex, taskId) {
+    const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
+
+    if (!task) {
+        console.error(`Aufgabe mit der ID ${taskId} nicht gefunden.`);
+        return;
+    }
+
+    const selectedContact = contactList[contactIndex];
+    const isAlreadyAssigned = task.contacts.some(contact => contact.id === selectedContact.id);
+
+    if (isAlreadyAssigned) {
+        // Kontakt entfernen
+        task.contacts = task.contacts.filter(contact => contact.id !== selectedContact.id);
+        selectedUsers = selectedUsers.filter(userId => userId !== selectedContact.id);
+    } else {
+        // Kontakt hinzufügen
+        task.contacts.push(selectedContact);
+        selectedUsers.push(selectedContact.id);
+    }
+
+    // UI sofort aktualisieren
+    updateSelectedUsersEdit(); // UI mit den aktuellen ausgewählten Kontakten aktualisieren
+    renderContactListForTaskEdit(contactList, taskId); // Kontaktliste neu rendern
+
+    // UI mit der richtigen Auswahl aktualisieren
+    const contactDiv = document.getElementById(`task-contakt-edit${contactIndex}`);
+    contactDiv.classList.toggle('dark-background', !isAlreadyAssigned); // Toggle Hintergrundfarbe
+}
+
+
+
+
+
+function getSelectedContacts() {
+    const selectedContactElements = document.querySelectorAll('.contact-checkbox:checked');
+    return Array.from(selectedContactElements).map(el => ({
+        id: el.value,
+     
+    }));
+}
+
+
+
+
+async function loadSubtasksForTask(taskId) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`);
+        if (!response.ok) throw new Error('Fehler beim Laden der Aufgabe');
+        const taskData = await response.json();
+        return taskData.subtasks || []; // Rückgabe der Subtasks
+    } catch (error) {
+        console.error('Fehler beim Laden der Subtasks:', error);
+        return [];
+    }
+}
+
+
 /**
  * Renders the contact list for tasks.
  */
-function renderContactListForTaskEdit(j) {
-    selectedUsers = todo[j].contacts;
-    document.getElementById('add-task-contact-edit').innerHTML = '';
-    for (let i = 0; i < contactList.length; i++) {
-        let contact = contactList[i].name;
-        const name = contact.split(" ");
-        const firstName = name[0][0];
-        const secondName = name[1] ? name[1][0] : '';
-        let initials = firstName + secondName;
-        let isChecked = selectedUsers.includes(contact);
-        let checkboxSVGId = `add-task-assignet-checkbox-edit${i}`;
-        let checkboxSVG = isChecked ?
+/**
+ * Renders the contact list for editing tasks.
+ * @param {Array} contactList - List of contacts
+ * @param {number} taskId - The ID of the task being edited
+ */
+function renderContactListForTaskEdit(contactList, taskId) {
+    const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
+
+    if (!task || !task.contacts) {
+        console.error("Aufgabe oder Kontakte nicht gefunden.");
+        return;
+    }
+
+    const contactListContainer = document.getElementById('add-task-contact-edit');
+    contactListContainer.innerHTML = ''; // Clear existing list
+
+    if (!contactList || contactList.length === 0) {
+        console.log("Keine Kontakte verfügbar.");
+        return;
+    }
+
+    // Füge alle Kontakte der Kontaktliste hinzu
+    contactList.forEach((contact, i) => {
+        const nameParts = contact.name.split(" ");
+        const firstName = nameParts[0][0];  // Erstes Zeichen des Vornamens
+        const secondName = nameParts[1] ? nameParts[1][0] : '';  // Erstes Zeichen des Nachnamens
+        const initials = firstName + secondName;
+
+        // Überprüfe, ob der Kontakt bereits zugewiesen ist (aus task.contacts oder selectedUsers)
+        const isChecked = task.contacts.some(contactInTask => contactInTask.id === contact.id) || selectedUsers.includes(contact.id);
+
+        const checkboxSVGId = `add-task-assignet-checkbox-edit${i}`;
+        const checkboxSVG = isChecked ? 
             `<svg id="${checkboxSVGId}" class="add-task-assignet-checkbox">
                 <use href="assets/img/icons.svg#checkbox-checked-icon"></use>
             </svg>` :
@@ -364,40 +594,45 @@ function renderContactListForTaskEdit(j) {
                 <use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>
             </svg>`;
 
-        let backgroundClass = isChecked ? 'dark-background' : '';
+        const backgroundClass = isChecked ? 'dark-background' : '';
 
-        document.getElementById('add-task-contact-edit').innerHTML += /*html*/`
-            <div id="task-contakt-edit${i}" class="add-task-single ${backgroundClass}" onclick="selectContactEdit(${i})">
+        // Füge den Kontakt zur Liste hinzu
+        contactListContainer.innerHTML += /*html*/`
+            <div id="task-contakt-edit${i}" class="add-task-single ${backgroundClass}" onclick="selectContactEdit(${i}, ${taskId})">
                 <div class="name-div">
                     <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
-                    <span>${contact}</span>
+                    <span>${contact.name}</span>
                 </div>
                 <div>
                     ${checkboxSVG}
                 </div>
             </div>
         `;
-    }
+    });
 }
+
+
 
 /**
  * Filters and renders contacts for adding tasks based on the input value.
  */
-async function filterContactsForAddTaskEdit() {
-    document.getElementById('add-task-contact-edit').innerHTML = '';
-    let value = document.getElementById('add-task-assignet-to-edit').value.toLowerCase();
-    for (let i = 0; i < contactList.length; i++) {
-        let checkContact = contactList[i].name.toLowerCase();
-        if (checkContact.includes(value)) {
-            let contact = contactList[i].name;
-            const name = contact.split(" ");
-            const firstName = name[0][0];
-            const secondName = name[1] ? name[1][0] : '';
-            let initials = firstName + secondName;
-            document.getElementById('add-task-contact-edit').innerHTML += renderContactListForTaskEditHTML(contact, i, secondName, initials);
+function filterContactsForAddTaskEdit() {
+    const input = document.getElementById('add-task-assignet-to-edit');
+    const filter = input.value.toUpperCase();  // Großbuchstaben für die Suche
+    const contactList = document.getElementById('contact-list-edit');  // Der Container für die Kontakte
+    const contacts = contactList.getElementsByTagName('li');  // Alle Kontakt-Elemente
+
+    // Durchlaufe alle Kontakte und blende diejenigen aus, die nicht mit dem Filter übereinstimmen
+    Array.from(contacts).forEach(contact => {
+        const name = contact.textContent || contact.innerText;
+        if (name.toUpperCase().indexOf(filter) > -1) {
+            contact.style.display = '';  // Kontakt anzeigen
+        } else {
+            contact.style.display = 'none';  // Kontakt ausblenden
         }
-    }
+    });
 }
+
 
 /**
  * Generates HTML markup for rendering a contact in the task list.
@@ -413,7 +648,7 @@ function renderContactListForTaskEditHTML(contact, i, secondName, initials) {
     <div id="task-contakt-edit${i}" class="add-task-single" onclick="selectContactEdit(${i})">
         <div class="name-div">
             <span class="initials letter-${secondName.toLowerCase()}">${initials}</span>
-            <span>${contact}</span>
+           
         </div>
         <div>
             <svg id="add-task-assignet-checkbox-edit${i}" class="add-task-assignet-checkbox">
@@ -429,40 +664,22 @@ function renderContactListForTaskEditHTML(contact, i, secondName, initials) {
  * 
  * @param {number} i - The index of the contact.
  */
-function selectContactEdit(i) {
-    let get = document.getElementById(`add-task-assignet-checkbox-edit${i}`);
-    let isChecked = get.querySelector('use').getAttribute('href') === 'assets/img/icons.svg#checkbox-checked-icon';
-    let user = contactList[i].name; // 'name' als String verwenden
-
-    if (isChecked) {
-        get.innerHTML = '<use href="assets/img/icons.svg#checkbox-unchecked-icon"></use>';
-        document.getElementById(`task-contakt-edit${i}`).classList.remove('dark-background');
-        selectedUsers = selectedUsers.filter(selectedUser => selectedUser !== user);
-    } else {
-        get.innerHTML = '<use href="assets/img/icons.svg#checkbox-checked-icon"></use>';
-        document.getElementById(`task-contakt-edit${i}`).classList.add('dark-background');
-        if (!selectedUsers.includes(user)) {
-            selectedUsers.push(user);  // Den Namen als String hinzufügen
-        }
-    }
-    updateSelectedUsersEdit(i);
-}
-
-
-
-/**
- * Updates the list of selected users and renders their initials.
- * 
- * @param {number} i - The index of the contact.
- */
-function updateSelectedUsersEdit(i) {
+function updateSelectedUsersEdit() {
     let contactsDiv = document.getElementById('contacts-div-edit');
-    contactsDiv.innerHTML = '';
+    contactsDiv.innerHTML = '';  // Leere die Liste der Kontakte
 
-    selectedUsers.forEach((selectedUser, index) => {
-        let userName = typeof selectedUser === 'string' ? selectedUser : selectedUser.name; // Extrahiere den Namen als String, wenn es ein Objekt ist
-        if (userName) {
-            let nameParts = userName.split(" ");
+    if (selectedUsers.length === 0) {
+        console.log('Keine ausgewählten Benutzer');
+        return;
+    }
+
+    selectedUsers.forEach((userId) => {
+        // Prüfe, ob der Kontakt in der contactList existiert
+        const user = contactList.find(c => c.id === userId);
+
+        // Sicherstellen, dass der Benutzer existiert
+        if (user) {
+            let nameParts = user.name.split(" ");
             let initials = nameParts.map(part => part[0]).join('');
             let secondName = nameParts[1] ? nameParts[1][0].toLowerCase() : '';
 
@@ -472,33 +689,145 @@ function updateSelectedUsersEdit(i) {
                 </div>
             `;
         } else {
-            console.error('selectedUser is not a valid string or object with a name:', selectedUser);
+            console.error('Kein Benutzer mit ID gefunden:', userId);
         }
     });
 }
 
 
 
+
+
+function selectContactEdit(contactIndex, taskId) {
+    const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
+
+    if (!task) {
+        console.error(`Aufgabe mit der ID ${taskId} nicht gefunden.`);
+        return;
+    }
+
+    // Kontakt aus der Liste auswählen
+    const selectedContact = contactList[contactIndex];
+    const isAlreadyAssigned = task.contacts.some(contact => contact.id === selectedContact.id);
+
+    if (isAlreadyAssigned) {
+        // Kontakt entfernen
+        task.contacts = task.contacts.filter(contact => contact.id !== selectedContact.id);
+        // Auch aus selectedUsers entfernen (nur die ID)
+        selectedUsers = selectedUsers.filter(userId => userId !== selectedContact.id);
+    } else {
+        // Kontakt hinzufügen (nur die ID speichern)
+        task.contacts.push(selectedContact);
+        selectedUsers.push(selectedContact.id); // Nur die ID speichern
+    }
+
+    // UI aktualisieren
+    updateSelectedUsersEdit(); // UI mit den aktuellen ausgewählten Kontakten aktualisieren
+    renderContactListForTaskEdit(contactList, taskId); // Optional, um die Kontaktliste neu zu rendern
+}
+
+
+
+
+// Funktion zum Speichern des bearbeiteten Tasks mit Subtasks
+// Funktion zum Speichern des bearbeiteten Tasks mit Subtasks
+async function updateTaskWithSubtasks(taskId) {
+    const task = todo.find(t => t.id === taskId);
+    const taskData = {
+        title: task.title,
+        description: task.description,
+        priority: task.priority,
+        category: task.category,
+        label: task.label,
+        dueDate: task.dueDate,
+        contacts: task.contacts,
+        subtasks: task.subtasks,  // Alle Subtasks werden mit gesendet
+    };
+
+    const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(taskData)
+    });
+
+    if (!response.ok) {
+        console.error('Fehler beim Aktualisieren des Tasks');
+        return;
+    }
+
+    const updatedTask = await response.json();
+    todo[taskId] = updatedTask;
+    closeEditTodo();  // Schließt das Bearbeitungsformular
+}
+
+
+
+// Funktion, die eine Aufgabe anhand ihrer ID sucht
+function getTaskById(taskId) {
+    return todo.find(task => task.id === taskId);  // Sucht nach der Aufgabe mit der entsprechenden ID
+}
+
 /**
  * Edits a todo item.
  * @param {Event} event - The event object.
  * @param {number} i - The index of the todo item to be edited.
  */
-function editTodo(event, i) {
+async function editTodo(event, taskId) {
     event.stopPropagation();
-    loadContactListEdit(i);
-    document.getElementById('add-task-form-edit').setAttribute('onsubmit', `createTaskEdit(${i}); return false`);
-    selectedUsers.push(todo[i].contacts);
+
+    // Logge die aktuelle Aufgaben-ID und das todo-Array zur Debugging-Zwecken
+    console.log('Current todo array:', todo);
+    console.log('Task ID provided:', taskId);
+
+    // Hole die Aufgabe anhand der ID
+    const task = getTaskById(taskId);  // Hole die Aufgabe aus dem Array oder Backend
+    if (!task) {
+        console.error('Task nicht gefunden!');
+        return; // Exit, wenn die Aufgabe nicht gefunden wurde
+    }
+
+    console.log('Found task:', task);
+   
+    selectedUsers = [...task.contacts];
+
+    // Lade die Kontakte der Aufgabe
+    loadContactListEdit(taskId);  // Funktion zum Laden der Kontakte, die für den Bearbeitungsmodus verwendet wird
+
+    // Bereite das Formular mit den aktuellen Aufgabendetails vor
+    document.getElementById('add-task-form-edit').setAttribute('onsubmit', `updateTask(${taskId}); return false`);
+    selectedUsers.push(...task.contacts.map(contact => contact.id));
+    // Kontakte in das Array von selectedUsers einfügen
+
+    // Zeige das Bearbeitungsformular
     document.getElementById('add-task-container-edit').classList.remove('d-none');
-    document.getElementById('add-task-title-edit').value = `${todo[i].title}`;
-    document.getElementById('add-task-description-edit').value = `${todo[i].description}`;
-    document.getElementById('add-task-date-edit').value = `${todo[i].dueDate}`;
-    changePriorityEdit(todo[i].priority);
-    selectLabelEdit(todo[i].label);
-    renderSubtaskEdit(i);
-    document.getElementById('add-task-subtasks-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
-    document.getElementById('add-subtask-button-edit').setAttribute('onclick', `openSubtaskEdit(${i})`);
+    document.getElementById('add-task-title-edit').value = task.title;
+    document.getElementById('add-task-description-edit').value = task.description;
+    document.getElementById('add-task-date-edit').value = task.dueDate;
+    changePriorityEdit(task.priority);  // Setzt die Priorität für die Aufgabe
+    selectLabelEdit(task.label);  // Wählt das Label für die Aufgabe aus
+    renderSubtaskEdit(taskId);  // Lädt die Subtasks für die Bearbeitung
+
+    // Setze EventListener für die Subtask-Buttons, um die taskId zu übergeben
+    const subtaskButton = document.getElementById('add-task-subtasks-edit');
+    const addSubtaskButton = document.getElementById('add-subtask-button-edit');
+    if (subtaskButton && addSubtaskButton) {
+        subtaskButton.removeEventListener('click', openSubtaskEdit);  // Entferne alte Listener
+        addSubtaskButton.removeEventListener('click', openSubtaskEdit);
+        
+        // Füge die EventListener hinzu und übergebe die taskId
+        subtaskButton.addEventListener('click', () => openSubtaskEdit(taskId));
+        addSubtaskButton.addEventListener('click', () => openSubtaskEdit(taskId));
+
+        document.getElementById('add-task-button-edit').setAttribute('onclick', `saveTaskEdit(${taskId})`);
+    }
 }
+
+
+
+
+
 
 /**
  * Closes the edit todo overlay.
@@ -515,7 +844,7 @@ function closeEditTodo() {
 async function createTaskEdit(i) {
     typeLabelEdit();
     
-    // Die Änderungen im Frontend-Objekt (todo) übernehmen
+   
     const taskData = {
         title: todo[i].title,
         description: todo[i].description,
@@ -541,9 +870,9 @@ async function createTaskEdit(i) {
             throw new Error(`Error updating task: ${response.status}`);
         }
 
-        const updatedTask = await response.json();  // Antwort vom Backend
-        todo[i] = updatedTask;  // Aktualisiere das Frontend-Objekt (todo)
-        closeEditTodo();  // Schließe das Editieren im Frontend
+        const updatedTask = await response.json(); 
+        todo[i] = updatedTask;  
+        closeEditTodo(); 
     } catch (error) {
         console.error('Error updating task:', error);
     }

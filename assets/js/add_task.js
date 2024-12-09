@@ -194,7 +194,7 @@ function renderSubtask() {
     let subtasks = document.getElementById('subtask-container');
     subtasks.innerHTML = '';
     for (let i = 0; i < subtasksArray.length; i++) {
-        const subtask = subtasksArray[i].task;
+        const subtask = subtasksArray[i].title;
         subtasks.innerHTML += renderSubtaskHTML(i, subtask);
     }
 }
@@ -439,6 +439,11 @@ async function createTask(category) {
         await addSubtasksToBackend(createdTask.subtasks);
     }
 }
+
+
+
+
+
 
 
 async function addTaskToBackend(task) {

@@ -118,13 +118,18 @@ function renderContactListForTaskHTML(i, secondName, initials, contact) {
 
 
 function renderSubtaskHTML(i, subtask) {
-    return /*html*/`
-    <li id="single-subtask${i}" class="subbtask subbtask-hover" onmouseenter="subtaskEditButtonsOn(${i})" onmouseleave="subtaskEditButtonsOut(${i})" onclick="focusSubtask(${i})">
-        <span id="single-subtask-txt${i}" contenteditable="true" class="subbtask-span" value="${subtask}">${subtask}</span>
-        <div id="subtask-edit-buttons${i}" class="subtask-icons-single-div" onclick="doNotClose(event)"></div>
-    </li>
-`;
+    // Stelle sicher, dass subtask.title vorhanden ist
+    if (!subtask.title) {
+        console.warn(`Subtask at index ${i} has no title.`);
+    }
+
+    return `
+        <div id="single-subtask${i}" class="subtask">
+            <span id="single-subtask-txt${i}" class="subtask-text">${subtask.title || 'Unbenannter Subtask'}</span>
+        </div>
+    `;
 }
+
 
 
 function closeSubtaskHTML() {

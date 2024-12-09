@@ -363,11 +363,11 @@ async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
 
     if (selectedTodo.contacts && selectedTodo.contacts.length > 0) {
-        // Gehe alle Kontakt-IDs durch
+    
         for (let i = 0; i < selectedTodo.contacts.length; i++) {
             const contactId = selectedTodo.contacts[i];
 
-            // Suche den Kontakt in den contacts_details
+         
             const contact = selectedTodo.contacts_details.find(contact => contact.id === contactId);
 
             if (contact) {

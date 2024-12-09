@@ -1,8 +1,8 @@
 async function initSummary() {
   await init();
-  await getTodosForBoard();  // Hole Aufgaben vom Backend
+  await getTodosForBoard(); 
   updateGreeting();
-  await getTaskCounts();  // Hole die Zähler vom Backend
+  await getTaskCounts();  
   await renderNumbersOfTasks();
 }
 
@@ -16,7 +16,7 @@ async function getTodosForBoard() {
   try {
     const response = await fetch('http://localhost:8000/api/tasks/'); // Deine API-URL für die Tasks
     if (response.ok) {
-      todo = await response.json(); // Hole die Aufgaben vom Backend
+      todo = await response.json(); 
     } else {
       console.error('Failed to fetch tasks');
     }
@@ -25,8 +25,6 @@ async function getTodosForBoard() {
   }
 }
 
-
-// Funktion zum Abrufen der Zählerdaten aus der API
 // Funktion zum Abrufen der Zählerdaten aus der API
 async function getTaskCounts() {
   try {
@@ -34,7 +32,7 @@ async function getTaskCounts() {
     if (response.ok) {
       const data = await response.json();
       updateTaskCounts(data);
-      updateNearestDueDate(data.next_due_date);  // Das nächste DueDate aus der API-Antwort holen
+      updateNearestDueDate(data.next_due_date);  
     } else {
       console.error('Failed to fetch task counts');
     }
@@ -61,7 +59,7 @@ function updateNearestDueDate(nextDueDate) {
   if (nextDueDate === 'No upcoming deadlines') {
     nearestDueDateContainer.innerText = 'No upcoming deadlines';
   } else {
-    nearestDueDateContainer.innerText = nextDueDate;  // Zeigt das Datum an
+    nearestDueDateContainer.innerText = nextDueDate; 
   }
 }
 
@@ -96,12 +94,12 @@ async function getCurrentUser() {
  * @returns {Object} - An object containing the profile initials.
  */
 function getInitials(contact) {
-  const contactString = String(contact); // Konvertierung des Inputs zu einem String
+  const contactString = String(contact); 
   const words = contactString.split(" ");
   const firstName = words[0][0];
   const secondName = words[1] ? words[1][0] : '';
   const profileinitials = firstName + secondName;
-  return { profileinitials }; // Rückgabe von profileinitials und secondName als Objekt
+  return { profileinitials }; 
 }
 
 /**
