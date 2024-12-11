@@ -92,24 +92,70 @@ async function prioImg(priority, selectedTodoID) {
  * Render the subtasks inside the dialog for the selected todo item.
  * @param {object} selectedTodo - The selected todo object.
  */
+/**
+ * Renders subtasks with checkboxes in the dialog.
+ * @param {Object} selectedTodo - The selected todo object containing subtasks.
+ */
 async function renderSubtaskDialog(selectedTodo) {
-    let subtaskContainer = document.getElementById('subtaskContainer');
-    subtaskContainer.innerHTML = ''; // Clear previous content
+    const subtaskContainer = document.getElementById('subtaskContainer');
+    subtaskContainer.innerHTML = ''; // Reset container
+    
+    selectedTodo.subtasks.forEach((subtask, index) => {
+        subtaskContainer.innerHTML += `
+            <div class="subtask-item">
+                <input type="checkbox" id="subtask-${index}" 
+                       ${subtask.done ? 'checked' : ''} 
+                       onchange="toggleSubtaskStatus(${selectedTodo.id}, ${index}, this.checked)">
+                <label for="subtask-${index}">${subtask.title}</label>
+            </div>
+        `;
+    });
+}
+async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
+    try {
+        // Find the task and subtask
+        const task = todo.find(t => t.id === taskId);
+        if (!task) {
+            console.error('Task not found');
+            return;
+        }
 
-    if (selectedTodo.subtasks && selectedTodo.subtasks.length > 0) {
-        selectedTodo.subtasks.forEach(subtask => {
-            const subtaskStatus = subtask.done ? 'done' : 'not-done';
-            subtaskContainer.innerHTML += `
-                <div class="subtask-item ${subtaskStatus}">
-                    <input type="checkbox" ${subtask.done ? 'checked' : ''} disabled />
-                    <span>${subtask.title}</span>
-                </div>
-            `;
+        const subtask = task.subtasks[subtaskIndex];
+        if (!subtask) {
+            console.error('Subtask not found');
+            return;
+        }
+
+        // Update the local state
+        subtask.done = isDone;
+
+        // Send the update to the backend
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: task.title,   // Title shouldn't be forgotten
+                description: task.description, // Description shouldn't be forgotten
+                dueDate: task.dueDate,  // Same for dueDate
+                priority: task.priority,  // Same for priority
+                label: currentLabel,   // Use currentLabel here
+                subtasks: task.subtasks.map(st => ({ title: st.title, done: st.done })),
+                contacts: task.contacts,  // Ensure contacts are included
+            }),
         });
-    } else {
-        subtaskContainer.innerHTML = '<div>No subtasks available.</div>';
+
+        if (!response.ok) {
+            throw new Error(`Failed to update subtask: ${response.statusText}`);
+        }
+
+        console.log(`Subtask ${subtaskIndex} of task ${taskId} updated to done=${isDone}`);
+    } catch (error) {
+        console.error('Error updating subtask status:', error);
     }
 }
+
 
 
 /**

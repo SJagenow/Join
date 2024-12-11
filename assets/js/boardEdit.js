@@ -98,28 +98,44 @@ function renderSubtaskEdit(taskId) {
     const task = todo.find(t => t.id === taskId);
     const subtaskContainer = document.getElementById('subtask-container-edit');
 
-    if (task && task.subtasks) {
-        subtaskContainer.innerHTML = '';
-
-        task.subtasks.forEach((subtask, index) => {
-            const subtaskElement = document.createElement('li');
-            subtaskElement.classList.add('subbtask');
-            subtaskElement.innerHTML = /*html*/`
-                <span contenteditable="true" onblur="saveSubtaskTitle(${taskId}, ${index}, this)">${subtask.title}</span>
-                <div id="subtask-edit-buttons-edit${index}" class="subtask-edit-buttons">
-                    <svg class="subtask-icons-single" onclick="editSubtask(${taskId}, ${index})">
-                        <use href="assets/img/icons.svg#edit-pen"></use>
-                    </svg>
-                    <div class="mini-seperator"></div>
-                    <svg class="subtask-icons-single" onclick="deleteSubtask(${subtask.id}, ${taskId})">
-                        <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
-                    </svg>
-                </div>
-            `;
-            subtaskContainer.appendChild(subtaskElement);
-        });
+    if (!task || !subtaskContainer) {
+        console.error('Task oder Subtask-Container nicht gefunden.');
+        return;
     }
+
+    // Leere den Container vor dem Neurendern
+    subtaskContainer.innerHTML = '';
+
+    // Gehe durch alle Subtasks des Tasks
+    task.subtasks.forEach((subtask, index) => {
+        const subtaskElement = document.createElement('li');
+        subtaskElement.classList.add('subbtask');
+        subtaskElement.setAttribute('data-id', subtask.id || `temp-${index}`); // Fallback-ID, falls keine vorhanden
+
+        subtaskElement.innerHTML = /*html*/ `
+            <span 
+                contenteditable="true" 
+                onblur="saveSubtaskTitle(${taskId}, ${index}, this)">
+                ${subtask.title}
+            </span>
+            <div class="subtask-edit-buttons">
+                <svg 
+                    class="subtask-icons-single" 
+                    onclick="editSubtask(${taskId}, ${index})">
+                    <use href="assets/img/icons.svg#edit-pen"></use>
+                </svg>
+                <div class="mini-seperator"></div>
+                <svg 
+                    class="subtask-icons-single" 
+                    onclick="deleteSubtask(${subtask.id || `'temp-${index}'`}, ${taskId})">
+                    <use href="assets/img/icons.svg#trashcan-delete-icon"></use>
+                </svg>
+            </div>
+        `;
+        subtaskContainer.appendChild(subtaskElement);
+    });
 }
+
 
 function saveSubtaskTitle(taskId, subtaskIndex, element) {
     const task = todo.find(t => t.id === taskId);
@@ -146,25 +162,45 @@ async function loadTodos() {
 function addSubtask(taskId) {
     const subtaskInput = document.getElementById('add-task-subtasks-edit');
     const subtaskTitle = subtaskInput.value.trim();
+
     if (!subtaskTitle) {
         console.error('Subtask-Titel ist leer');
         return;
     }
+
+    // Aufgabe finden
     const task = todo.find(t => t.id === taskId);
     if (task) {
         const newSubtask = {
             title: subtaskTitle,
-            done: false
+            done: false,
+            id: `temp-${Date.now()}` // Temporäre ID für neuen Subtask
         };
+
+        // Subtask zum Task und zum globalen Array hinzufügen
         task.subtasks.push(newSubtask);
-        subtasksArray.push(newSubtask); 
-        renderSubtaskEdit(taskId);  
-        subtaskInput.value = '';  
+
+        // Optional: Aktualisierung der lokalen Kopie (falls nötig)
+        subtasksArray.push(newSubtask);
+
+        // Subtasks neu rendern
+        renderSubtaskEdit(taskId);
+
+        // Eingabefeld leeren
+        subtaskInput.value = '';
     } else {
         console.error('Aufgabe nicht gefunden');
     }
 }
-
+async function loadUpdatedTask(taskId) {
+    const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`);
+    const updatedTask = await response.json();
+    const taskIndex = todo.findIndex(t => t.id === taskId);
+    if (taskIndex !== -1) {
+        todo[taskIndex] = updatedTask;
+    }
+    renderSubtaskEdit(taskId);
+}
 
 
 /**
@@ -315,15 +351,72 @@ function editTask(taskId) {
  * @param {number} j - The index of the todo item.
  */
 function deleteSubtask(subtaskId, taskId) {
+    console.log(`deleteSubtask aufgerufen mit: subtaskId=${subtaskId}, taskId=${taskId}`);
+
+    // Die Aufgabe (Task) finden
     const task = todo.find(t => t.id === taskId);
-    if (task) {
-   
-        task.subtasks = task.subtasks.filter(subtask => subtask.id !== subtaskId);
-        renderSubtaskEdit(taskId);  
+    if (!task) {
+        console.error('Task nicht gefunden.');
+        return;
+    }
+
+    // Debugging: Alle Subtasks der Task anzeigen
+    console.log('Subtasks der Task:', task.subtasks);
+
+    // Überprüfen, ob es sich um einen temporären Subtask handelt (der eine temp-ID hat)
+    let subtaskIndex;
+    if (subtaskId.startsWith('temp-')) {
+        console.log(`Temporärer Subtask mit ID ${subtaskId} erkannt`);
+
+        // Suche nach dem Subtask mit der temporären ID
+        subtaskIndex = task.subtasks.findIndex(sub => sub.id === subtaskId);
+        if (subtaskIndex !== -1) {
+            console.log(`Temporärer Subtask gefunden:`, task.subtasks[subtaskIndex]);
+        }
     } else {
-        console.error('Aufgabe nicht gefunden');
+        console.log(`Gespeicherter Subtask mit ID ${subtaskId} erkannt`);
+
+        // Gespeicherte Subtasks werden anhand ihrer echten ID gelöscht
+        subtaskIndex = task.subtasks.findIndex(sub => sub.id === parseInt(subtaskId));
+        if (subtaskIndex !== -1) {
+            console.log(`Gespeicherter Subtask gefunden:`, task.subtasks[subtaskIndex]);
+        }
+    }
+
+    if (subtaskIndex !== -1) {
+  
+        const subtask = task.subtasks[subtaskIndex];
+        task.subtasks.splice(subtaskIndex, 1);
+
+        if (!subtaskId.startsWith('temp-')) {
+         
+            fetch(`/api/subtasks/${subtask.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Fehler beim Löschen des Subtasks im Backend');
+                }
+                console.log('Subtask erfolgreich aus dem Backend gelöscht:', subtask.id);
+            })
+            .catch(err => {
+                console.error('Fehler beim Backend-Löschen:', err);
+            });
+        }
+
+      
+        renderSubtaskEdit(taskId);
+    } else {
+        console.error('Subtask nicht gefunden.');
     }
 }
+
+
+
+
 
 
 async function saveTaskEdit(taskId) {
@@ -331,51 +424,53 @@ async function saveTaskEdit(taskId) {
     let description = document.getElementById('add-task-description-edit').value.trim();
     let dueDate = document.getElementById('add-task-date-edit').value.trim();
 
- 
     if (!title || !description || !dueDate) {
         console.error('Ein oder mehrere Felder sind leer oder ungültig!');
         return;
     }
 
-    let task = {
-        "title": title,
-        "description": description,
-        "contacts": selectedUsers.filter(contactId => contactId),
-        "dueDate": dueDate,  
-        "priority": currentPrio,
-        "label": currentLabel,
-        // "subtasks": subtasksArray,
+    // Die Aufgabe aus der bestehenden Liste finden
+    const task = todo.find(t => t.id === taskId);
+    if (!task) {
+        console.error('Task nicht gefunden');
+        return;
+    }
+
+    // Subtasks synchronisieren (bestehende + neue)
+    const updatedSubtasks = [
+        ...(task.subtasks || []),
+        ...subtasksArray.filter(subtask => !subtask.id) // Nur neue Subtasks hinzufügen
+    ];
+
+    // Kontakte sicherstellen (Entfernen von Duplikaten und undefinierten Werten)
+    let contacts = selectedUsers.filter(contactId => contactId);
+    const uniqueContacts = [...new Set(contacts)].filter(contact => contact !== undefined && contact !== null);
+
+    // Finales Task-Objekt zusammenstellen
+    const updatedTask = {
+        title,
+        description,
+        contacts: uniqueContacts, // Die Kontakte sicherstellen
+        dueDate,
+        priority: currentPrio,
+        label: currentLabel,
+        subtasks: updatedSubtasks.map(subtask => ({
+            title: subtask.title,
+            done: subtask.done // Behalte den "checked"-Status der Subtasks bei
+        }))
     };
 
+    console.log('Finales Task-Objekt vor dem Senden:', updatedTask);
 
-    console.log('selectedUsers:', selectedUsers);
-    console.log('subtasksArray:', subtasksArray);
-    
-    
-      if (selectedUsers.length > 0) {
-  
-        const uniqueContacts = [...new Set(selectedUsers)].filter(contact => contact !== undefined && contact !== null);
+    // API-Call zum Backend
+    await updateTaskInBackend(taskId, updatedTask);
 
-        task.contacts = uniqueContacts;
-    } else {
-        console.log('Keine Kontakte ausgewählt.');
-    }
-
- 
-    if (subtasksArray && subtasksArray.length > 0) {
-        task.subtasks = subtasksArray.map(subtask => ({
-            title: subtask.title,
-            done: subtask.done
-        }));
-    } else {
-        console.log('Keine Subtasks hinzugefügt oder bearbeitet.');
-    }
-
-
-    console.log('Finales Task-Objekt vor dem Senden:', task);
-
-    await updateTaskInBackend(taskId, task);
+    // Dialog schließen
+    closeEditTodo();
 }
+
+
+
 
 async function updateTaskInBackend(taskId, task) {
     console.log("Daten an das Backend zum Update:", task);
@@ -427,7 +522,7 @@ function clearTaskEdit() {
 
 async function fetchTasks() {
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/tasks/'); // Beispiel-API
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/'); 
         if (!response.ok) {
             throw new Error('Failed to fetch tasks');
         }
@@ -435,7 +530,7 @@ async function fetchTasks() {
         const tasks = await response.json(); // Das Array der Tasks, das vom Backend zurückgegeben wird
         todo = tasks; // Das todo-Array wird mit den fetchten Tasks überschrieben
         
-        console.log('Fetched tasks:', todo); // Ausgabe der Tasks im todo-Array
+        console.log('Fetched tasks:', todo);
 
     } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -447,8 +542,7 @@ async function fetchTasks() {
  * 
  * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
  */
-// Beispiel für loadContactListEdit, um sicherzustellen, dass die Kontakte vorhanden sind
-// Diese Funktion lädt die Kontaktdetails vom Backend
+
 async function loadContactListEdit(taskId) {
     try {
         // Hole alle Kontakte aus dem Backend
@@ -459,18 +553,16 @@ async function loadContactListEdit(taskId) {
         }
 
         const contactList = await response.json();
-        renderContactListForTaskEdit(contactList, taskId);  // Übergib die Kontaktliste an die Render-Funktion
+        renderContactListForTaskEdit(contactList, taskId);  
     } catch (e) {
         console.error('Fehler beim Laden der Kontakte:', e);
     }
 }
 
-
-
-let selectedContactIds = [];  // Array, das die IDs der ausgewählten Kontakte speichert
+let selectedContactIds = []; 
 
 function selectContactEdit(contactIndex, taskId) {
-    const task = todo.find(t => t.id === taskId); // Aufgabe basierend auf ID finden
+    const task = todo.find(t => t.id === taskId); 
 
     if (!task) {
         console.error(`Aufgabe mit der ID ${taskId} nicht gefunden.`);
@@ -491,7 +583,6 @@ function selectContactEdit(contactIndex, taskId) {
     // UI aktualisieren
     renderContactListForTaskEdit(contactList, taskId);
 }
-
 
 function selectContactEdit(contactIndex, taskId) {
     const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
@@ -514,18 +605,14 @@ function selectContactEdit(contactIndex, taskId) {
         selectedUsers.push(selectedContact.id);
     }
 
-    // UI sofort aktualisieren
+   
     updateSelectedUsersEdit(); // UI mit den aktuellen ausgewählten Kontakten aktualisieren
     renderContactListForTaskEdit(contactList, taskId); // Kontaktliste neu rendern
 
-    // UI mit der richtigen Auswahl aktualisieren
+    
     const contactDiv = document.getElementById(`task-contakt-edit${contactIndex}`);
     contactDiv.classList.toggle('dark-background', !isAlreadyAssigned); // Toggle Hintergrundfarbe
 }
-
-
-
-
 
 function getSelectedContacts() {
     const selectedContactElements = document.querySelectorAll('.contact-checkbox:checked');
@@ -534,9 +621,6 @@ function getSelectedContacts() {
      
     }));
 }
-
-
-
 
 async function loadSubtasksForTask(taskId) {
     try {
@@ -694,10 +778,6 @@ function updateSelectedUsersEdit() {
     });
 }
 
-
-
-
-
 function selectContactEdit(contactIndex, taskId) {
     const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
 
@@ -725,8 +805,6 @@ function selectContactEdit(contactIndex, taskId) {
     updateSelectedUsersEdit(); // UI mit den aktuellen ausgewählten Kontakten aktualisieren
     renderContactListForTaskEdit(contactList, taskId); // Optional, um die Kontaktliste neu zu rendern
 }
-
-
 
 
 // Funktion zum Speichern des bearbeiteten Tasks mit Subtasks
@@ -761,8 +839,6 @@ async function updateTaskWithSubtasks(taskId) {
     todo[taskId] = updatedTask;
     closeEditTodo();  // Schließt das Bearbeitungsformular
 }
-
-
 
 // Funktion, die eine Aufgabe anhand ihrer ID sucht
 function getTaskById(taskId) {
@@ -824,18 +900,12 @@ async function editTodo(event, taskId) {
     }
 }
 
-
-
-
-
-
 /**
  * Closes the edit todo overlay.
  */
 function closeEditTodo() {
     document.getElementById('add-task-container-edit').classList.add('d-none');
 }
-
 
 /**
  * Initiates the creation of a new task by setting the category based on URL parameters,

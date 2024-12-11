@@ -384,9 +384,6 @@ async function renderMemberList(selectedTodo) {
         document.getElementById('board_member_content').innerHTML = '<div>No members assigned.</div>';
     }
 }
-
-
-
 /**
  * Extracts the initials from a contact's name.
  * @param {object} contact - The contact object with a name property.
