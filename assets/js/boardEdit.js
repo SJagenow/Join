@@ -237,6 +237,7 @@ function closeSubtaskEdit(i) {
     document.getElementById('add-task-subtasks-edit').value = '';
 }
 
+
 /**
  * Handles the mouseenter event for subtask edit buttons.
  * @param {number} i - The index of the subtask.

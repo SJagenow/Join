@@ -136,11 +136,7 @@ async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                title: task.title,   // Title shouldn't be forgotten
-                description: task.description, // Description shouldn't be forgotten
-                dueDate: task.dueDate,  // Same for dueDate
-                priority: task.priority,  // Same for priority
-                label: currentLabel,   // Use currentLabel here
+                // Include subtasks and contacts in the update
                 subtasks: task.subtasks.map(st => ({ title: st.title, done: st.done })),
                 contacts: task.contacts,  // Ensure contacts are included
             }),
@@ -155,6 +151,7 @@ async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
         console.error('Error updating subtask status:', error);
     }
 }
+
 
 
 
