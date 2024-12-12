@@ -54,7 +54,7 @@ async function loadContactList() {
  * @param {HTMLElement[]} divideContainers - An array of HTML elements representing containers for dividing sections.
  */
 function renderContactsToList() {
-   
+    // Gruppiere Kontakte nach ihrem ersten Buchstaben
     const groupedContacts = alphabet.reduce((acc, letter) => {
         acc[letter] = contactList.filter(contact =>
             contact.name && contact.name.charAt(0).toUpperCase() === letter
@@ -143,12 +143,12 @@ async function openEditContact(alphabetIndex, contactIndex) {
             const savedContact = await response.json();
             console.log("Saved Contact:", savedContact);
 
-         
+            // Kontakt in der Liste ersetzen (anstatt einen neuen hinzuzufügen)
             contactList = contactList.map(contact =>
                 contact.id === contactId ? savedContact : contact
             );
 
-        
+            // Die Kontaktliste neu rendern
             renderContactsToList();
             closeAddContactDialog();
             showSuccessButtonEdit();
@@ -171,11 +171,11 @@ async function openEditContact(alphabetIndex, contactIndex) {
  * Note: This function does not handle user confirmation for deletion or editing.
  * 
  * @returns {Promise<void>} A Promise that resolves once the contact is updated.
- */
-async function updateContact() {
+ */let contactId = contact.id;
+async function updateContact(contactId) {
 
     
- 
+    await deleteContact(contactId);
     addToContacts();
     showSuccessButtonEdit();
 }

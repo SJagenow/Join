@@ -566,7 +566,7 @@ let selectedContactIds = [];
 
 
 function selectContactEdit(contactIndex, taskId) {
-    const task = todo.find(t => t.id === taskId); 
+    const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
 
     if (!task) {
         console.error(`Aufgabe mit der ID ${taskId} nicht gefunden.`);
@@ -575,6 +575,7 @@ function selectContactEdit(contactIndex, taskId) {
 
     const selectedContact = contactList[contactIndex];
 
+
     if (!selectedContact || !selectedContact.id) {
         console.error('Ungültiger Kontakt:', selectedContact);
         return;
@@ -582,20 +583,25 @@ function selectContactEdit(contactIndex, taskId) {
 
     const isAlreadyAssigned = task.contacts.some(contact => contact.id === selectedContact.id);
 
-
+    
     if (isAlreadyAssigned) {
+     
         task.contacts = task.contacts.filter(contact => contact.id !== selectedContact.id);
+    
         selectedUsers = selectedUsers.filter(userId => userId !== selectedContact.id);
     } else {
+     
         task.contacts.push(selectedContact);
         selectedUsers.push(selectedContact.id);
     }
+
 
     updateSelectedContactsEdit();
     renderContactListForTaskEdit(contactList, taskId);
 
     console.log('Aktualisierte Liste der ausgewählten Kontakte:', selectedUsers);
 }
+
 
 
 function getSelectedContacts() {
