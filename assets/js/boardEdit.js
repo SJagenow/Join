@@ -526,8 +526,8 @@ async function fetchTasks() {
             throw new Error('Failed to fetch tasks');
         }
         
-        const tasks = await response.json(); // Das Array der Tasks, das vom Backend zurückgegeben wird
-        todo = tasks; // Das todo-Array wird mit den fetchten Tasks überschrieben
+        const tasks = await response.json(); 
+        todo = tasks;
         
         console.log('Fetched tasks:', todo);
 
@@ -566,7 +566,7 @@ let selectedContactIds = [];
 
 
 function selectContactEdit(contactIndex, taskId) {
-    const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
+    const task = todo.find(t => t.id === taskId); 
 
     if (!task) {
         console.error(`Aufgabe mit der ID ${taskId} nicht gefunden.`);
@@ -601,7 +601,6 @@ function selectContactEdit(contactIndex, taskId) {
 
     console.log('Aktualisierte Liste der ausgewählten Kontakte:', selectedUsers);
 }
-
 
 
 function getSelectedContacts() {
