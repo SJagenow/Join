@@ -150,6 +150,7 @@ async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
     } catch (error) {
         console.error('Error updating subtask status:', error);
     }
+    
 }
 
 

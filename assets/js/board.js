@@ -419,6 +419,7 @@ function openDialog(todoId) {
  */
 function closeDialog() {
     document.getElementById('dialog_bg').classList.add('d-none');
+    location.reload();
 }
 
 /**

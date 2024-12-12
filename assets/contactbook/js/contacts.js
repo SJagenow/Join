@@ -100,12 +100,10 @@ async function openEditContact(alphabetIndex, contactIndex) {
     const alphabetLetter = alphabet[alphabetIndex];
     console.log("Alphabet Letter:", alphabetLetter);
 
- 
     const contactsForLetter = contactList.filter(contact => 
         contact.name && contact.name.charAt(0).toUpperCase() === alphabetLetter
     );
     console.log("Contacts for Letter:", contactsForLetter);
-
 
     const selectedContact = contactsForLetter[contactIndex];
     console.log("Selected Contact:", selectedContact);
@@ -116,10 +114,8 @@ async function openEditContact(alphabetIndex, contactIndex) {
         return; 
     }
 
-
     showAddContactDialog();
     changeAddContactoverlay(selectedContact);
-
 
     document.getElementById('contact_save_button').onclick = async function () {
         const contactId = selectedContact.id; 
@@ -132,7 +128,6 @@ async function openEditContact(alphabetIndex, contactIndex) {
         };
 
         try {
-       
             const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
                 method: 'PUT',
                 headers: {
@@ -148,10 +143,12 @@ async function openEditContact(alphabetIndex, contactIndex) {
             const savedContact = await response.json();
             console.log("Saved Contact:", savedContact);
 
+            // Kontakt in der Liste ersetzen (anstatt einen neuen hinzuzufügen)
             contactList = contactList.map(contact =>
                 contact.id === contactId ? savedContact : contact
             );
 
+            // Die Kontaktliste neu rendern
             renderContactsToList();
             closeAddContactDialog();
             showSuccessButtonEdit();
@@ -163,6 +160,7 @@ async function openEditContact(alphabetIndex, contactIndex) {
     };
 }
 
+
 /**
  * Updates a contact after editing.
  * 
@@ -173,11 +171,11 @@ async function openEditContact(alphabetIndex, contactIndex) {
  * Note: This function does not handle user confirmation for deletion or editing.
  * 
  * @returns {Promise<void>} A Promise that resolves once the contact is updated.
- */let contactId = contact.id;
-async function updateContact(contactId) {
+ */
+async function updateContact() {
 
     
-    await deleteContact(contactId);
+ 
     addToContacts();
     showSuccessButtonEdit();
 }
