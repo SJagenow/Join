@@ -89,7 +89,6 @@ function selectLabelEdit(label) {
     closeDropdownMenu('add-task-category-list-div-edit', 'category-arrow');
 }
 
-
 /**
  * Renders the subtask edit section in the task edit form.
  * @param {number} j - The index of the todo item.
@@ -103,14 +102,14 @@ function renderSubtaskEdit(taskId) {
         return;
     }
 
-    // Leere den Container vor dem Neurendern
+
     subtaskContainer.innerHTML = '';
 
-    // Gehe durch alle Subtasks des Tasks
+  
     task.subtasks.forEach((subtask, index) => {
         const subtaskElement = document.createElement('li');
         subtaskElement.classList.add('subbtask');
-        subtaskElement.setAttribute('data-id', subtask.id || `temp-${index}`); // Fallback-ID, falls keine vorhanden
+        subtaskElement.setAttribute('data-id', subtask.id || `temp-${index}`);
 
         subtaskElement.innerHTML = /*html*/ `
             <span 
@@ -146,7 +145,6 @@ function saveSubtaskTitle(taskId, subtaskIndex, element) {
     }
 }
 
-
 async function loadTodos() {
     try {
         const response = await fetch('http://127.0.0.1:8000/api/tasks/');
@@ -158,7 +156,6 @@ async function loadTodos() {
     }
 }
 
-
 function addSubtask(taskId) {
     const subtaskInput = document.getElementById('add-task-subtasks-edit');
     const subtaskTitle = subtaskInput.value.trim();
@@ -168,7 +165,6 @@ function addSubtask(taskId) {
         return;
     }
 
-   
     const task = todo.find(t => t.id === taskId);
     if (task) {
         const newSubtask = {
@@ -178,13 +174,8 @@ function addSubtask(taskId) {
         };
 
         task.subtasks.push(newSubtask);
-
-     
         subtasksArray.push(newSubtask);
-
-      
         renderSubtaskEdit(taskId);
-
 
         subtaskInput.value = '';
     } else {
@@ -311,7 +302,6 @@ function onClickOutsideEdit(element, i, j) {
 function startOnClickOutsideEdit(i, j) {
     const myElement = document.getElementById(`single-subtask-edit${i}, ${j}`);
     onClickOutsideEdit(myElement, i, j);
- 
 }
 
 /**
@@ -331,7 +321,6 @@ function editTask(taskId) {
     document.getElementById('add-task-date-edit').value = task.dueDate;
     document.getElementById('add-task-priority-edit').value = task.priority;
 
-
     if (task.subtasks && task.subtasks.length > 0) {
         console.log(task.subtasks);
     } else {
@@ -343,7 +332,6 @@ function editTask(taskId) {
         saveTaskEdit(taskId);
     };
 }
-
 
 /**
  * Deletes a subtask from the todo item in the edit mode.
@@ -360,7 +348,6 @@ function deleteSubtask(subtaskId, taskId) {
         return;
     }
 
-  
     console.log('Subtasks der Task:', task.subtasks);
 
     let subtaskIndex = -1;
@@ -391,7 +378,6 @@ function deleteSubtask(subtaskId, taskId) {
         const subtask = task.subtasks[subtaskIndex];
         task.subtasks.splice(subtaskIndex, 1);
 
-  
         if (!subtaskId.startsWith('temp-')) {
             fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/subtasks/${subtask.id}/`, {
                 method: 'DELETE',
@@ -410,13 +396,11 @@ function deleteSubtask(subtaskId, taskId) {
             });
         }
 
-     
         renderSubtaskEdit(taskId);
     } else {
         console.error('Subtask nicht gefunden.');
     }
 }
-
 
 async function saveTaskEdit(taskId) {
     let title = document.getElementById('add-task-title-edit').value.trim();
@@ -428,7 +412,6 @@ async function saveTaskEdit(taskId) {
         return;
     }
 
-   
     const task = todo.find(t => t.id === taskId);
     if (!task) {
         console.error('Task nicht gefunden');
@@ -440,11 +423,9 @@ async function saveTaskEdit(taskId) {
         ...subtasksArray.filter(subtask => !subtask.id) 
     ];
 
-  
     let contacts = selectedUsers.filter(contactId => contactId);
     const uniqueContacts = [...new Set(contacts)].filter(contact => contact !== undefined && contact !== null);
 
-  
     const updatedTask = {
         title,
         description,
@@ -460,16 +441,12 @@ async function saveTaskEdit(taskId) {
 
     console.log('Finales Task-Objekt vor dem Senden:', updatedTask);
 
-    
     await updateTaskInBackend(taskId, updatedTask);
 
     closeEditTodo();
     closeDialog();
     location.reload();
 }
-
-
-
 
 async function updateTaskInBackend(taskId, task) {
     console.log("Daten an das Backend zum Update:", task);
@@ -494,7 +471,6 @@ async function updateTaskInBackend(taskId, task) {
         console.error('Fehler beim Aktualisieren der Aufgabe:', error);
     }
 }
-
 
 /**
  * Clears the task edit form by resetting checkboxes, contact list, priority, and subtasks array.
@@ -542,17 +518,20 @@ async function fetchTasks() {
  * @returns {Promise<void>} A Promise that resolves after loading and rendering the contact list.
  */
 
+let isLoaded = false; // Verhindert mehrfache Ladeversuche
+
 async function loadContactListEdit(taskId) {
+    if (isLoaded) return; // Verhindert, dass es mehrmals ausgeführt wird
+    isLoaded = true;
+
     try {
         const response = await fetch('http://127.0.0.1:8000/api/contacts/');
-
         if (!response.ok) {
             throw new Error('Fehler beim Laden der Kontakte');
         }
 
         const rawContacts = await response.json();
-
-        const filteredContacts = rawContacts.filter(contact => contact && contact.id);
+        const filteredContacts = rawContacts.filter(contact => contact && contact.id && contact.name);
 
         renderContactListForTaskEdit(filteredContacts, taskId);  
     } catch (e) {
@@ -560,10 +539,7 @@ async function loadContactListEdit(taskId) {
     }
 }
 
-
 let selectedContactIds = []; 
-
-
 
 function selectContactEdit(contactIndex, taskId) {
     const task = todo.find(t => t.id === taskId); 
@@ -574,27 +550,20 @@ function selectContactEdit(contactIndex, taskId) {
     }
 
     const selectedContact = contactList[contactIndex];
-
-
     if (!selectedContact || !selectedContact.id) {
         console.error('Ungültiger Kontakt:', selectedContact);
         return;
     }
 
-    const isAlreadyAssigned = task.contacts.some(contact => contact.id === selectedContact.id);
+    const isAlreadyAssigned = selectedUsers.includes(selectedContact.id);
 
-    
     if (isAlreadyAssigned) {
-     
-        task.contacts = task.contacts.filter(contact => contact.id !== selectedContact.id);
-    
         selectedUsers = selectedUsers.filter(userId => userId !== selectedContact.id);
     } else {
-     
-        task.contacts.push(selectedContact);
         selectedUsers.push(selectedContact.id);
     }
 
+    selectedUsers = selectedUsers.filter(userId => userId !== undefined);
 
     updateSelectedContactsEdit();
     renderContactListForTaskEdit(contactList, taskId);
@@ -602,12 +571,11 @@ function selectContactEdit(contactIndex, taskId) {
     console.log('Aktualisierte Liste der ausgewählten Kontakte:', selectedUsers);
 }
 
-
 function getSelectedContacts() {
     const selectedContactElements = document.querySelectorAll('.contact-checkbox:checked');
     return Array.from(selectedContactElements).map(el => ({
         id: el.value,
-     
+       
     }));
 }
 
@@ -629,7 +597,7 @@ async function loadSubtasksForTask(taskId) {
  * @param {number} taskId - The ID of the task being edited
  */
 function renderContactListForTaskEdit(contactList, taskId) {
-    const task = todo.find(t => t.id === taskId); // Hole die Aufgabe anhand der ID
+    const task = todo.find(t => t.id === taskId); 
 
     if (!task || !task.contacts) {
         console.error("Aufgabe oder Kontakte nicht gefunden.");
@@ -644,15 +612,22 @@ function renderContactListForTaskEdit(contactList, taskId) {
         return;
     }
 
-    
-    contactList.forEach((contact, i) => {
+    // Filtern der ungültigen Kontakte, die keine 'id' haben
+    const validContacts = contactList.filter(contact => contact.id && contact.name);
+
+    // Verhindere doppelte Kontakte in der Liste
+    const uniqueContacts = validContacts.filter((contact, index, self) => 
+        index === self.findIndex((c) => c.id === contact.id)
+    );
+
+    uniqueContacts.forEach((contact, i) => {
         const nameParts = contact.name.split(" ");
         const firstName = nameParts[0][0]; 
         const secondName = nameParts[1] ? nameParts[1][0] : ''; 
         const initials = firstName + secondName;
 
-       
-        const isChecked = task.contacts.some(contactInTask => contactInTask.id === contact.id) || selectedUsers.includes(contact.id);
+        // Überprüfen, ob der Kontakt bereits in selectedUsers markiert ist
+        const isChecked = selectedUsers.includes(contact.id);
 
         const checkboxSVGId = `add-task-assignet-checkbox-edit${i}`;
         const checkboxSVG = isChecked ? 
@@ -665,7 +640,6 @@ function renderContactListForTaskEdit(contactList, taskId) {
 
         const backgroundClass = isChecked ? 'dark-background' : '';
 
-      
         contactListContainer.innerHTML += /*html*/`
             <div id="task-contakt-edit${i}" class="add-task-single ${backgroundClass}" onclick="selectContactEdit(${i}, ${taskId})">
                 <div class="name-div">
@@ -730,7 +704,7 @@ function renderContactListForTaskEditHTML(contact, i, secondName, initials) {
  * @param {number} i - The index of the contact.
  */let selectedContacts = selectedUsers;  
 
-function updateSelectedContactsEdit() {
+ function updateSelectedContactsEdit() {
     let contactsDiv = document.getElementById('contacts-div-edit');
     contactsDiv.innerHTML = ''; 
 
@@ -739,8 +713,9 @@ function updateSelectedContactsEdit() {
         return;
     }
 
+    selectedContacts = selectedContacts.filter(contact => contact !== undefined);
+
     selectedContactIds.forEach((contactId) => {
-       
         const contact = contactList.find(c => c.id === contactId);
 
         if (contact) {
@@ -759,11 +734,6 @@ function updateSelectedContactsEdit() {
     });
 }
 
-
-
-
-
-// Funktion zum Speichern des bearbeiteten Tasks mit Subtasks
 async function updateTaskWithSubtasks(taskId) {
     const task = todo.find(t => t.id === taskId);
     const taskData = {
@@ -861,7 +831,6 @@ function closeEditTodo() {
 async function createTaskEdit(i) {
     typeLabelEdit();
     
-   
     const taskData = {
         title: todo[i].title,
         description: todo[i].description,

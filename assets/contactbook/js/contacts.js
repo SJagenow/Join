@@ -129,7 +129,7 @@ async function openEditContact(alphabetIndex, contactIndex) {
 
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
-                method: 'PUT',
+                method: 'PUT',  
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -159,6 +159,7 @@ async function openEditContact(alphabetIndex, contactIndex) {
         }
     };
 }
+
 
 
 /**
