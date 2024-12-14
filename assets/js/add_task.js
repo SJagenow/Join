@@ -110,17 +110,24 @@ function closeDropdownMenu(divID, arrow) {
  */
 function selectContact(i) {
     let checkbox = document.getElementById(`add-task-assignet-checkbox${i}`);
+    let checkboxIcon = checkbox.querySelector('use');
     let contact = contactList[i].name;
+    let taskContactDiv = document.getElementById(`task-contakt${i}`);
+
     if (checkbox.classList.contains('checked')) {
         checkbox.classList.remove('checked');
+        checkboxIcon.setAttribute('href', 'assets/img/icons.svg#checkbox-unchecked-icon');
+        taskContactDiv.classList.remove('dark-background'); 
         selectedUsers = selectedUsers.filter(user => user !== contact);
     } else {
         checkbox.classList.add('checked');
+        checkboxIcon.setAttribute('href', 'assets/img/icons.svg#checkbox-checked-icon'); 
+        taskContactDiv.classList.add('dark-background');
         selectedUsers.push(contact);
     }
+
     updateSelectedUsers(i);
 }
-
 
 /**
  * Updates the list of selected users and renders their initials.
@@ -439,12 +446,6 @@ async function createTask(category) {
         await addSubtasksToBackend(createdTask.subtasks);
     }
 }
-
-
-
-
-
-
 
 async function addTaskToBackend(task) {
   

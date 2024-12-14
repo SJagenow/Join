@@ -9,6 +9,15 @@
 header {
     box-shadow: -2px 4px 4px 0px rgba(0, 0, 0, 0.10), inset -1px 0px 4px 0px rgba(0, 0, 0, 0.05);
 }
+.dark-background {
+    background-color: #2A3647;
+    color: white;
+    border-radius: 10px;
+}
+
+.dark-background:hover {
+    background-color: #091931;
+}
 
 .main-container {
     /* padding-top: 110px; */
@@ -21,6 +30,7 @@ header {
     position: relative;
     /* overflow: auto; */
 }
+
 
 .main-div {
     padding-top: 110px;
