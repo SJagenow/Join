@@ -130,7 +130,14 @@ function findAlphabetIndex(contact) {
  * @param {Event} event - The form submission event.
  * @returns {Promise<void>} A Promise that resolves after adding or updating the contact.
  */
-async function handleSubmit(event, contactId) {
+let isEditMode = false; // Variable, um den Modus (Hinzufügen oder Bearbeiten) zu verfolgen
+let currentContactId = null; // Falls Bearbeiten, speichere die ID des zu bearbeitenden Kontakts
+
+/**
+ * Funktion für das Absenden des Formulars.
+ * Unterscheidet zwischen Hinzufügen und Bearbeiten eines Kontakts.
+ */
+async function handleSubmit(event) {
     const cancelButton = document.getElementById("contact_cancel_button");
     const saveButton = document.getElementById("contact_save_button");
     const editButton = document.getElementById("contact_edit_button");
@@ -140,12 +147,14 @@ async function handleSubmit(event, contactId) {
     editButton.disabled = true;
 
     try {
-        if (event.submitter === saveButton) {
+        if (isEditMode) {
+            // Bearbeiten-Modus: Aktualisiere den Kontakt
+            await updateContact(currentContactId);
+            showSuccessButtonEdit();
+        } else {
+            // Hinzufügen-Modus: Füge einen neuen Kontakt hinzu
             await addToContacts();
             showSuccessButton();
-        } else if (event.submitter === editButton) {
-            await updateContact(contactId);
-            showSuccessButtonEdit();
         }
     } catch (error) {
         console.error("Fehler beim Verarbeiten der Anfrage:", error);

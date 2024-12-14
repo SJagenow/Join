@@ -184,12 +184,40 @@ async function openEditContact(alphabetIndex, contactIndex) {
  * 
  * @returns {Promise<void>} A Promise that resolves once the contact is updated.
  */let contactId = contact.id;
-async function updateContact(contactId) {
+ async function updateContact(contactId) {
+    const updatedContact = {
+        name: document.getElementById('contactlist_name_input').value.trim(),
+        mail: document.getElementById('contactlist_mail_input').value.trim(),
+        phone: document.getElementById('contactlist_phone_input').value.trim(),
+    };
 
-    
-    await deleteContact(contactId);
-    addToContacts();
-    showSuccessButtonEdit();
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedContact),
+        });
+
+        if (!response.ok) {
+            throw new Error('Fehler beim Aktualisieren des Kontakts');
+        }
+
+        const savedContact = await response.json();
+        
+        contactList = contactList.map(contact =>
+            contact.id === contactId ? savedContact : contact
+        );
+
+        renderContactsToList();
+        closeAddContactDialog();
+        showSuccessButtonEdit();
+
+    } catch (error) {
+        console.error('Fehler beim Bearbeiten des Kontakts:', error);
+        alert('Es gab ein Problem beim Bearbeiten des Kontakts.');
+    }
 }
 
 
