@@ -116,12 +116,8 @@ function renderSubtaskEdit(taskId) {
                 ${subtask.title}
             </span>
             <div class="subtask-edit-buttons">
-                <svg 
-                    class="subtask-icons-single" 
-                    onclick="editSubtask(${taskId}, ${index})">
-                    <use href="assets/img/icons.svg#edit-pen"></use>
-                </svg>
-                <div class="mini-seperator"></div>
+             
+              
                 <svg 
                     class="subtask-icons-single" 
                     onclick="deleteSubtask(${subtask.id || `'temp-${index}'`}, ${taskId})">
