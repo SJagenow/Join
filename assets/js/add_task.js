@@ -447,7 +447,7 @@ async function createTask(category) {
 
 
 async function addTaskToBackend(task) {
-    console.log("Daten an das Backend:", task);
+  
     try {
         const response = await fetch('http://127.0.0.1:8000/api/tasks/', {
             method: 'POST',
@@ -464,7 +464,7 @@ async function addTaskToBackend(task) {
         }
 
         const result = await response.json();
-        console.log('Task erstellt:', result);
+
     } catch (error) {
         console.error('Fehler beim Hinzufügen der Aufgabe:', error);
     }

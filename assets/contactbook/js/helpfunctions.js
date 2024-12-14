@@ -7,7 +7,6 @@ function noClose(event) {
     event.stopPropagation();
 }
 
-
 /**
  * Retrieves initials for a given contact's name.
  * 
@@ -37,7 +36,6 @@ function getInitialsForOverlay() {
     initialsContainer.innerHTML = `${firstLetter + secondLetter}`;
 }
 
-
 /**
  * Renders contacts into their corresponding alphabetical rows within the contact list.
  * If no contacts start with a certain letter, hides the corresponding containers.
@@ -49,7 +47,6 @@ function getInitialsforUser(contact) {
     const profileinitials = firstName + secondName;
     return { profileinitials, secondName };
 }
-
 
 /**
  * Removes an invalid entry from the given array at index 9.
@@ -71,14 +68,11 @@ async function removeInvalidEntries(array) {
             throw new Error(`Fehler beim Entfernen ungültiger Kontakte: ${response.statusText}`);
         }
 
-        console.log('Ungültige Kontakte erfolgreich entfernt.');
         renderContactList();
     } catch (error) {
         console.error('Fehler beim Entfernen ungültiger Kontakte:', error);
     }
 }
-
-
 
 /**
  * Finds the alphabet index and contact index for a given contact in the contact list.
@@ -96,7 +90,6 @@ function findAlphabetIndex(contact) {
     const contactIndex = contactsStartingWithLetter.indexOf(contact);
     renderContact(alphabetIndex, contactIndex);
 }
-
 
 /**
  * Deletes a contact from the contact list without confirmation.
@@ -128,9 +121,6 @@ function findAlphabetIndex(contact) {
 //     }
 // }
 
-
-
-
 /**
  * Handles the form submission for adding or editing a contact.
  * Disables the form buttons during submission to prevent multiple submissions.
@@ -140,21 +130,29 @@ function findAlphabetIndex(contact) {
  * @param {Event} event - The form submission event.
  * @returns {Promise<void>} A Promise that resolves after adding or updating the contact.
  */
-async function handleSubmit(contactId) {
+async function handleSubmit(event, contactId) {
     const cancelButton = document.getElementById("contact_cancel_button");
     const saveButton = document.getElementById("contact_save_button");
     const editButton = document.getElementById("contact_edit_button");
+
     cancelButton.disabled = true;
     saveButton.disabled = true;
     editButton.disabled = true;
-    if (event.submitter === saveButton) {
-        await addToContacts();
-        showSuccessButton();
-    } else if (event.submitter === editButton) {
-        await updateContact(contactId);
-        showSuccessButtonEdit();
+
+    try {
+        if (event.submitter === saveButton) {
+            await addToContacts();
+            showSuccessButton();
+        } else if (event.submitter === editButton) {
+            await updateContact(contactId);
+            showSuccessButtonEdit();
+        }
+    } catch (error) {
+        console.error("Fehler beim Verarbeiten der Anfrage:", error);
+    } finally {
+        cancelButton.disabled = false;
+        saveButton.disabled = false;
+        editButton.disabled = false;
     }
-    cancelButton.disabled = false;
-    saveButton.disabled = false;
-    editButton.disabled = false;
 }
+

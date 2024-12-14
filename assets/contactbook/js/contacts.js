@@ -13,7 +13,6 @@ async function initContactList() {
     renderContactList();
 }
 
-
 /**
  * Asynchronously loads the contact list from the backend storage.
  * If successful, updates the global variable 'contactList' with the parsed JSON data.
@@ -37,7 +36,6 @@ async function loadContactList() {
             throw new Error('Network response was not ok');
         }
         contactList = await response.json();
-        console.log(contactList); 
     } catch (e) {
         console.error('Loading error:', e);
     }
@@ -54,7 +52,6 @@ async function loadContactList() {
  * @param {HTMLElement[]} divideContainers - An array of HTML elements representing containers for dividing sections.
  */
 function renderContactsToList() {
-    // Gruppiere Kontakte nach ihrem ersten Buchstaben
     const groupedContacts = alphabet.reduce((acc, letter) => {
         acc[letter] = contactList.filter(contact =>
             contact.name && contact.name.charAt(0).toUpperCase() === letter
@@ -98,16 +95,13 @@ function renderContactsToList() {
  */
 async function openEditContact(alphabetIndex, contactIndex) {
     const alphabetLetter = alphabet[alphabetIndex];
-    console.log("Alphabet Letter:", alphabetLetter);
-
+    
     const contactsForLetter = contactList.filter(contact => 
         contact.name && contact.name.charAt(0).toUpperCase() === alphabetLetter
     );
-    console.log("Contacts for Letter:", contactsForLetter);
-
+    
     const selectedContact = contactsForLetter[contactIndex];
-    console.log("Selected Contact:", selectedContact);
-
+    
     if (!selectedContact) {
         console.error('Kontakt nicht gefunden:', alphabetLetter, contactIndex);
         alert("Kontakt konnte nicht gefunden werden.");
@@ -117,9 +111,14 @@ async function openEditContact(alphabetIndex, contactIndex) {
     showAddContactDialog();
     changeAddContactoverlay(selectedContact);
 
-    document.getElementById('contact_save_button').onclick = async function () {
+    const editButton = document.getElementById('contact_edit_button');
+    editButton.innerHTML = 'Save <img src="./assets/contactbook/icons_contactbook/check.svg" alt="">';
+    
+    editButton.onclick = async function (event) {
+        event.preventDefault(); 
+
         const contactId = selectedContact.id; 
-        console.log("Contact ID:", contactId);
+       
 
         const updatedContact = {
             name: document.getElementById('contactlist_name_input').value.trim(),
@@ -129,7 +128,7 @@ async function openEditContact(alphabetIndex, contactIndex) {
 
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/contacts/${contactId}/`, {
-                method: 'PUT',  
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -141,15 +140,24 @@ async function openEditContact(alphabetIndex, contactIndex) {
             }
 
             const savedContact = await response.json();
-            console.log("Saved Contact:", savedContact);
+            
 
-            // Kontakt in der Liste ersetzen (anstatt einen neuen hinzuzufügen)
             contactList = contactList.map(contact =>
                 contact.id === contactId ? savedContact : contact
             );
 
-            // Die Kontaktliste neu rendern
             renderContactsToList();
+
+           
+            document.getElementById('contactlist_name_input').value = savedContact.name;
+            document.getElementById('contactlist_mail_input').value = savedContact.mail;
+            document.getElementById('contactlist_phone_input').value = savedContact.phone;
+
+          
+            document.getElementById('contact_overview_name').textContent = savedContact.name;
+            document.getElementById('contact_overview_mail').textContent = savedContact.mail;
+            document.getElementById('contact_overview_phone').textContent = savedContact.phone;
+
             closeAddContactDialog();
             showSuccessButtonEdit();
 
@@ -159,6 +167,9 @@ async function openEditContact(alphabetIndex, contactIndex) {
         }
     };
 }
+
+
+
 
 
 
@@ -281,7 +292,7 @@ async function confirmDeleteContact(contactId) {
     if (confirmDelete) {
         await deleteContact(contactId); 
     } else {
-        console.log('Kontakt löschen abgebrochen.');
+   
     }
 }
 
@@ -300,7 +311,7 @@ async function deleteContact(contactId) {
 
         // Rende die Kontaktliste neu
         renderContactsToList();
-        console.log(`Kontakt mit ID ${contactId} erfolgreich gelöscht.`);
+   
     } catch (error) {
         console.error('Fehler beim Löschen:', error);
         alert('Es gab ein Problem beim Löschen des Kontakts.');

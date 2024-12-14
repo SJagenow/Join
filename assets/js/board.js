@@ -29,17 +29,12 @@ async function getTodosForBoard() {
             throw new Error('Network response was not ok');
         }
         const taskList = await response.json();
-        console.log('Fetched Tasks:', taskList);
         todo = taskList;
         updateBoard();
     } catch (e) {
         console.error('Loading error:', e);
     }
 }
-
-
-
-
 
 /**
  * Updates the board with the current list of todos.
@@ -75,7 +70,6 @@ function updateBoard() {
         let { progressWidth, subTasksDone, subTasksTotal } = getSubtaskDoneCounter(clean);
         document.getElementById('done_content').innerHTML += generateTodo(clean, progressWidth, subTasksDone, subTasksTotal);
     }
-
 }
 
 /**
@@ -106,15 +100,10 @@ async function updateTaskCategory(taskId, newCategory) {
             throw new Error(`Failed to update task category: ${response.statusText}`);
         }
 
-        console.log(`Task ${taskId} updated to category ${newCategory}`);
     } catch (error) {
         console.error('Error updating task category:', error);
     }
 }
-
-
-
-
 
 /**
  * Calculates the number of subtasks done and the progress width for a given task.
@@ -149,18 +138,15 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
         truncatedDescription += '...';
     }
     
-    // Für jedes Mitglied in 'contacts' den Namen anzeigen
     let memberHtml = '';
     if (clean.contacts && clean.contacts.length > 0) {
-        // Gehe alle Kontakt-IDs durch
+    
         for (let i = 0; i < clean.contacts.length; i++) {
             const contactId = clean.contacts[i];
-
-            // Hier holst du die Kontaktdetails des jeweiligen Kontakts aus 'contacts_details'
             const contact = clean.contacts_details.find(contact => contact.id === contactId);
 
             if (contact) {
-                const { profileinitials, secondName } = getInitials(contact); // hole Initialen
+                const { profileinitials, secondName } = getInitials(contact); 
                 memberHtml += `
                     <div class="circle letter-${secondName.toLowerCase()}">${profileinitials}</div>
                    
@@ -168,7 +154,7 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
             }
         }
     } else {
-        memberHtml = '<div>No members assigned.</div>'; // Falls keine Mitglieder zugewiesen sind
+        memberHtml = '<div>No members assigned.</div>';
     }
     
     return `<div draggable="true" ondragstart="startDragging('${todoId}')" ondragover="highlight('${todoId}')" id="${todoId}" onclick="openDialog('${todoId}')">
@@ -199,9 +185,6 @@ function generateTodo(clean, progressWidth, subTasksDone, subTasksTotal) {
     </div>
 </div>`;
 }
-
-
-
 
 /**
  * Uploads the current state of tasks to the storage.
@@ -267,7 +250,6 @@ function noTaskInContainer() {
     } else {
         document.getElementById('noDoneContent').classList.add('d_nones');
     }
-
 }
 
 /**
@@ -358,7 +340,6 @@ async function returnDialog(selectedTodo, selectedTodoID) {
  * @returns {string} The HTML content for the dialog box.
  */
 
-
 async function renderMemberList(selectedTodo) {
     document.getElementById('board_member_content').innerHTML = '';
 
@@ -391,7 +372,6 @@ async function renderMemberList(selectedTodo) {
  */
 function getInitials(contact) {
     if (!contact.name) {
-        console.log('No name for contact:', contact);
         return { profileinitials: '', secondName: '' }; 
     }
     const words = contact.name.split(" ");
@@ -400,7 +380,6 @@ function getInitials(contact) {
     const profileinitials = firstName + secondName;
     return { profileinitials, secondName };
 }
-
 
 /**
  * Opens a dialog box for the selected todo item.

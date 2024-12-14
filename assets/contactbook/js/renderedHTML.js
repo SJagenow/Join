@@ -216,7 +216,6 @@ function renderContactOverlay() {
     `;
 }
 
-
 /**
  * Renders the initials of the current user in the contact list.
  */

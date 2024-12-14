@@ -37,7 +37,6 @@ function closeAddTaskOverlay() {
     document.getElementById('add-task-form').removeAttribute('onsubmit');
 }
 
-
 /**
  * Deletes a todo item from the list.
  * @param {Event} event - The event object.
@@ -46,7 +45,7 @@ function closeAddTaskOverlay() {
 async function deleteTodo(event, ID) {
     event.stopPropagation();
     try {
-        // Stelle sicher, dass die Task-ID korrekt in die URL eingefügt wird
+     
         const response = await fetch(`http://127.0.0.1:8000/api/tasks/${ID}/`, {
             method: 'DELETE',
             headers: {
@@ -55,9 +54,9 @@ async function deleteTodo(event, ID) {
         });
 
         if (response.ok) {
-            console.log('Task deleted successfully');
-            updateBoard();  // Aktualisiere das Board nach dem Löschen
-            closeDialog();  // Schließe das Dialogfenster
+         
+            updateBoard();
+            closeDialog();  
         } else {
             console.error('Failed to delete task');
         }
@@ -65,8 +64,6 @@ async function deleteTodo(event, ID) {
         console.error('Error:', error);
     }
 }
-
-
 
 /**
  * Sets the priority image based on the priority value of the selected todo.
@@ -98,7 +95,7 @@ async function prioImg(priority, selectedTodoID) {
  */
 async function renderSubtaskDialog(selectedTodo) {
     const subtaskContainer = document.getElementById('subtaskContainer');
-    subtaskContainer.innerHTML = ''; // Reset container
+    subtaskContainer.innerHTML = ''; 
     
     selectedTodo.subtasks.forEach((subtask, index) => {
         subtaskContainer.innerHTML += `
@@ -111,9 +108,10 @@ async function renderSubtaskDialog(selectedTodo) {
         `;
     });
 }
+
 async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
     try {
-        // Find the task and subtask
+    
         const task = todo.find(t => t.id === taskId);
         if (!task) {
             console.error('Task not found');
@@ -126,19 +124,18 @@ async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
             return;
         }
 
-        // Update the local state
+
         subtask.done = isDone;
 
-        // Send the update to the backend
         const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                // Include subtasks and contacts in the update
+               
                 subtasks: task.subtasks.map(st => ({ title: st.title, done: st.done })),
-                contacts: task.contacts,  // Ensure contacts are included
+                contacts: task.contacts,  
             }),
         });
 
@@ -146,15 +143,11 @@ async function toggleSubtaskStatus(taskId, subtaskIndex, isDone) {
             throw new Error(`Failed to update subtask: ${response.statusText}`);
         }
 
-        console.log(`Subtask ${subtaskIndex} of task ${taskId} updated to done=${isDone}`);
+       
     } catch (error) {
         console.error('Error updating subtask status:', error);
-    }
-    
+    } 
 }
-
-
-
 
 /**
  * Switches the checkbox image and updates the todo's subtask status.
@@ -177,7 +170,6 @@ function checkBoxSwitchImg(i, ID) {
         updateBoard();
     }
 }
-
 
 function closeFunctionEdit() {
     closeDropdownMenu('add-task-contact-div-edit', 'assignet-arrow');
