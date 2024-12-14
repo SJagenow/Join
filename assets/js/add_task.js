@@ -198,13 +198,14 @@ function selectLabel(label) {
  * Renders the list of subtasks in the UI.
  */
 function renderSubtask() {
-    let subtasks = document.getElementById('subtask-container');
-    subtasks.innerHTML = '';
-    for (let i = 0; i < subtasksArray.length; i++) {
-        const subtask = subtasksArray[i].title;
-        subtasks.innerHTML += renderSubtaskHTML(i, subtask);
-    }
+    let subtaskContainer = document.getElementById('subtask-container'); // Container im HTML
+    subtaskContainer.innerHTML = ''; // Vorherige Inhalte entfernen
+
+    subtasksArray.forEach((subtask, index) => {
+        subtaskContainer.innerHTML += renderSubtaskHTML(index, subtask);
+    });
 }
+
 
 /**
  * Handles the Enter key event.
@@ -224,7 +225,7 @@ async function handleEnterKey(event) {
 /**
  * Adds a subtask to the list of subtasks.
  */
-async function addSubtask() {
+function addSubtask() {
     let subtaskInput = document.getElementById('add-task-subtasks');
     let subtaskTitle = subtaskInput.value.trim(); 
 
@@ -235,7 +236,7 @@ async function addSubtask() {
         };
 
         subtasksArray.push(subtaskInputArray); 
-        renderSubtask();
+        renderSubtask();  // Hier sicherstellen, dass die Subtasks aktualisiert werden
         subtaskInput.value = '';
     } else {
         console.warn('Subtask-Titel ist leer und wird ignoriert.');
