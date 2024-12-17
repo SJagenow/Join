@@ -308,7 +308,6 @@ function editTask(taskId) {
         console.error('Task nicht gefunden!');
         return;
     }
-
     document.getElementById('add-task-title-edit').value = task.title;
     document.getElementById('add-task-description-edit').value = task.description;
     document.getElementById('add-task-date-edit').value = task.dueDate;
@@ -319,7 +318,6 @@ function editTask(taskId) {
     } else {
     
     }
-
 
     document.getElementById('add-task-button-edit').onclick = function() {
         saveTaskEdit(taskId);
@@ -339,14 +337,10 @@ function deleteSubtask(subtaskId, taskId) {
         return;
     }
 
-    
-
     let subtaskIndex = -1;
 
     if (subtaskId.startsWith('temp-')) {
        
-
-
         subtaskIndex = task.subtasks.findIndex((sub, index) => `temp-${index}` === subtaskId);
         if (subtaskIndex !== -1) {
             
@@ -355,8 +349,6 @@ function deleteSubtask(subtaskId, taskId) {
         }
     } else {
       
-
-     
         subtaskIndex = task.subtasks.findIndex(sub => sub.id === parseInt(subtaskId));
         if (subtaskIndex !== -1) {
          
@@ -364,7 +356,6 @@ function deleteSubtask(subtaskId, taskId) {
       
         }
     }
-
     if (subtaskIndex !== -1) {
         const subtask = task.subtasks[subtaskIndex];
         task.subtasks.splice(subtaskIndex, 1);
@@ -438,6 +429,10 @@ async function saveTaskEdit(taskId) {
     closeDialog();
     location.reload();
 }
+
+
+
+
 
 async function updateTaskInBackend(taskId, task) {
    

@@ -80,30 +80,7 @@ function startDragging(todoId) {
     currentDraggedElement = todoId;
 }
 
-/**
- * Aktualisiert die Kategorie einer Aufgabe im Backend.
- * 
- * @param {number} taskId - Die ID der zu aktualisierenden Aufgabe.
- * @param {string} newCategory - Die neue Kategorie der Aufgabe.
- */
-async function updateTaskCategory(taskId, newCategory) {
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ category: newCategory }),
-        });
 
-        if (!response.ok) {
-            throw new Error(`Failed to update task category: ${response.statusText}`);
-        }
-
-    } catch (error) {
-        console.error('Error updating task category:', error);
-    }
-}
 
 /**
  * Calculates the number of subtasks done and the progress width for a given task.
@@ -211,17 +188,53 @@ function allowDrop(ev) {
  * 
  * @param {string} category - Die Zielkategorie.
  */
-function moveTo(category) {
-    const taskId = currentDraggedElement.split('_')[1];
-    const task = todo.find(t => t.id == taskId);
-    
+async function moveTo(category) {
+    const taskId = currentDraggedElement.split('_')[1]; // Hole die ID des Tasks
+    const task = todo.find(t => t.id == taskId); // Finde den Task in der Liste
+
     if (task) {
-        task.category = category; // 
-        updateTaskCategory(taskId, category); 
-        updateBoard(); 
-        noTaskInContainer();
+        task.category = category; // Setze die neue Kategorie im Frontend
+        
+        // Hier sicherstellen, dass Subtasks und Kontakte mitgesendet werden
+        const updatedTask = {
+            ...task,
+            category: category,
+            contacts: task.contacts, // Stelle sicher, dass Kontakte auch mitgeschickt werden
+            subtasks: task.subtasks // Stelle sicher, dass Subtasks mitgeschickt werden
+        };
+
+        // Update die Kategorie im Backend
+        await updateTaskCategory(taskId, updatedTask); 
+        
+        updateBoard(); // Board neu rendern, um Änderungen im Frontend widerzuspiegeln
+        noTaskInContainer(); // Überprüfen, ob noch Aufgaben im Container sind
+    } else {
+        console.error('Task nicht gefunden');
     }
 }
+
+
+async function updateTaskCategory(taskId, updatedTask) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}/`, {
+            method: 'PATCH', // Verwende PATCH, um nur die Kategorie und andere Felder zu aktualisieren
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedTask), // Sende alle relevanten Daten mit
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to update task category: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('Task erfolgreich aktualisiert:', result);
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Task-Kategorie:', error);
+    }
+}
+
 
 function noTaskInContainer() {
     let noTodos = document.getElementById('task_content_open').innerHTML;

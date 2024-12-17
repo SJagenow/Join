@@ -198,8 +198,8 @@ function selectLabel(label) {
  * Renders the list of subtasks in the UI.
  */
 function renderSubtask() {
-    let subtaskContainer = document.getElementById('subtask-container'); // Container im HTML
-    subtaskContainer.innerHTML = ''; // Vorherige Inhalte entfernen
+    let subtaskContainer = document.getElementById('subtask-container'); 
+    subtaskContainer.innerHTML = ''; 
 
     subtasksArray.forEach((subtask, index) => {
         subtaskContainer.innerHTML += renderSubtaskHTML(index, subtask);
@@ -216,7 +216,7 @@ async function handleEnterKey(event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         event.target.blur();
-        await addSubtask();
+        addSubtask();
     }
 }
 
@@ -225,7 +225,7 @@ async function handleEnterKey(event) {
 /**
  * Adds a subtask to the list of subtasks.
  */
-function addSubtask() {
+    function addSubtask() {
     let subtaskInput = document.getElementById('add-task-subtasks');
     let subtaskTitle = subtaskInput.value.trim(); 
 
@@ -236,19 +236,12 @@ function addSubtask() {
         };
 
         subtasksArray.push(subtaskInputArray); 
-        renderSubtask();  // Hier sicherstellen, dass die Subtasks aktualisiert werden
+        renderSubtask(); 
         subtaskInput.value = '';
     } else {
         console.warn('Subtask-Titel ist leer und wird ignoriert.');
     }
 }
-
-
-
-
-
-
-
 
 /**
  * Closes the subtask input and clears its value.
@@ -417,7 +410,7 @@ async function createTask(category) {
         "label": currentLabel
     };
 
-   
+    // Füge die Kontakte hinzu
     for (let i = 0; i < selectedUsers.length; i++) {
         const contactName = selectedUsers[i];
         const contact = contactList.find(c => c.name === contactName);
@@ -426,7 +419,7 @@ async function createTask(category) {
         }
     }
 
-    
+    // Füge die Subtasks hinzu
     if (subtasksArray && subtasksArray.length > 0) {
         task.subtasks = [];
         for (let i = 0; i < subtasksArray.length; i++) {
@@ -437,19 +430,17 @@ async function createTask(category) {
         }
     }
 
-   
+    // Sende den Task an das Backend
     let createdTask = await addTaskToBackend(task);
 
+    // Wenn der Task erfolgreich erstellt wurde, aktualisiere die Subtasks mit der Task-ID
     if (createdTask && createdTask.id) {
-        for (let i = 0; i < createdTask.subtasks.length; i++) {
-            createdTask.subtasks[i].task = createdTask.id;
-        }
-        await addSubtasksToBackend(createdTask.subtasks);
+        // Hier brauchst du keine Subtask-IDs mehr zu setzen, das Backend kümmert sich darum
+        console.log('Task erfolgreich erstellt:', createdTask);
     }
 }
 
 async function addTaskToBackend(task) {
-  
     try {
         const response = await fetch('http://127.0.0.1:8000/api/tasks/', {
             method: 'POST',
@@ -460,17 +451,20 @@ async function addTaskToBackend(task) {
         });
 
         if (!response.ok) {
-            const errorData = await response.json(); 
+            const errorData = await response.json();
             console.error('Fehlerdetails:', errorData);
             throw new Error('Fehler beim Hinzufügen der Aufgabe');
         }
 
         const result = await response.json();
-
+        console.log('Task erfolgreich erstellt:', result);
+        return result;
     } catch (error) {
         console.error('Fehler beim Hinzufügen der Aufgabe:', error);
     }
 }
+
+
 
 
 /**

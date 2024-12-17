@@ -10,18 +10,30 @@ function dropdownMenuToggleIF(divID, arrow, dNone) {
 
 
 function selectContactIF(i, get, unchecked, checked, user) {
+    let contactDiv = document.getElementById(`task-contakt${i}`);
+    let checkbox = document.getElementById(`add-task-assignet-checkbox${i}`);
+    let checkboxIcon = checkbox.querySelector('use');
+
+ 
     if (get.innerHTML == checked) {
         get.innerHTML = unchecked;
-        document.getElementById(`task-contakt${i}`).classList.remove('dark-background');
+        contactDiv.classList.remove('dark-background');
         selectedUsers = selectedUsers.filter(selectedUser => selectedUser !== user);
+        checkboxIcon.setAttribute('href', 'assets/img/icons.svg#checkbox-unchecked-icon');
     } else {
+      
         get.innerHTML = checked;
-        document.getElementById(`task-contakt${i}`).classList.add('dark-background');
+        contactDiv.classList.add('dark-background');
         if (!selectedUsers.includes(user)) {
             selectedUsers.push(user);
         }
+        checkboxIcon.setAttribute('href', 'assets/img/icons.svg#checkbox-checked-icon');
     }
+
+  
+    updateSelectedUsers(i);
 }
+
 
 
 function changePriorityIF(prio, urgent, medium, low) {
@@ -64,7 +76,7 @@ function filterContactsForAddTaskIF(i, value,contactList, checkContact) {
 function addSubtaskIF(subtaskInput, subtaskInputArray) {
     if (subtaskInput.value.length >= 3) {
         subtasksArray.push(subtaskInputArray);
-        initAddTask();
+
         subtaskInput.value = "";
         closeSubtask();
     } else {
