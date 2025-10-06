@@ -430,10 +430,6 @@ async function saveTaskEdit(taskId) {
     location.reload();
 }
 
-
-
-
-
 async function updateTaskInBackend(taskId, task) {
    
     try {

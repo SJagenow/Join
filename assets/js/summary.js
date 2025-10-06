@@ -161,18 +161,35 @@ async function renderNumbersOfTasks() {
 /**
  * Renders the nearest due date among the tasks.
  */
-function renderNearestDueDate() {
-  let nearestDueDateContainer = document.getElementById('deadline-date');
-  let currentDate = new Date();
+async function renderNearestDueDate() {
+  const nearestDueDateContainer = document.getElementById('deadline-date');
+  const currentDate = new Date();
   let nearestDueDate = new Date('9999-12-31');
-  for (let i = 0; i < todo.length; i++) {
-    if (todo[i].dueDate) {
 
-      let todoDueDate = new Date(todo[i].dueDate);
-      if (todoDueDate > currentDate && todoDueDate < nearestDueDate) {
-        nearestDueDate = todoDueDate;
+  try {
+    const response = await fetch('http://localhost:8000/api/tasks/');
+    const tasks = await response.json();
+
+    tasks.forEach(task => {
+      if (task.dueDate) {
+        const taskDueDate = new Date(task.dueDate);
+        console.log('Gefundenes Datum:', taskDueDate.toISOString());
+
+        if (taskDueDate > currentDate && taskDueDate < nearestDueDate) {
+          nearestDueDate = taskDueDate;
+        }
       }
+    });
+
+    if (nearestDueDate.getFullYear() === 9999) {
+      nearestDueDateContainer.innerText = 'Keine bevorstehende Fälligkeit';
+    } else {
+      nearestDueDateContainer.innerText = nearestDueDate.toLocaleDateString('de-DE');
     }
+  } catch (error) {
+    console.error('Fehler beim Laden der Tasks:', error);
+    nearestDueDateContainer.innerText = 'Fehler beim Laden';
   }
-  nearestDueDateContainer.innerText = nearestDueDate.toLocaleDateString(); 
 }
+
+
